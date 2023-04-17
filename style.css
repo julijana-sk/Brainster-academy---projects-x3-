@@ -43,7 +43,13 @@
     .logo {
         display: none;
     }
+}
 
+@media (max-width: 768px) {
+    .justify-left {
+        text-align: left !important;
+        padding-left: 25px;
+    }
 }
 
     .bg-banner {
@@ -71,12 +77,25 @@
     .card {
         border: none;
         border-radius: 15px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+
+    .card:hover {
+        z-index: 1;
+        transform: scale(1.1);
     }
 
     .card-img-top {
         border: none;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
+    }
+
+    .card img {
+        width: 100%;
+        display: block;
+        height: 35vh !important;
     }
 
     .fa-heart {
