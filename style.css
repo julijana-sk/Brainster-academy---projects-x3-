@@ -15,9 +15,9 @@
         text-align: left;
         background-color: rgb(0, 0, 0);
         top: 0;
-        left: 0;
+        left: 0 !important;
         justify-content: left !important;
-        padding: 0;
+        padding: 0 !important;
 
     }
 
@@ -30,13 +30,13 @@
     .container-fluid {
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
+        justify-content: left !important;
+        padding: 0 !important;
     }
 
     .x-button {
         display: flex;
-        justify-content: right;
+        right: 0 !important;
         margin-bottom: 30px;
     }
 
@@ -103,5 +103,8 @@
         color: red;
     }
     
+    .bg-warning2 {
+        background-color: #f0bf4e;
+    }
 
 
