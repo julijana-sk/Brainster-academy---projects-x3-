@@ -119,8 +119,8 @@
     </nav>
     <!-- navbar end -->
 
-    <!-- vraboti-student-form    -->
-    <div class="container-fluid bg-warning2 pb-5">
+    <!-- vraboti-student-form  -->
+    <div class="container-fluid bg-warning2 pb-5 small">
       <div class="row d-flex justify-content-center">
         <div class="col-12">
           <h2 class="display-4 text-dark text-center my-5 font-weight-bold">
@@ -128,66 +128,102 @@
           </h2>
         </div>
       </div>
-      <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-center font-weight-bold py-5">
         <div class="col-10 col-md-4">
           <form>
             <div class="form-group mb-4">
-              <label for="message" class="mb-2">Message</label>
-              <input type="text" class="form-control" placeholder="Username" />
+              <label for="validationServer01">Име и презиме</label>
+              <input
+                type="text"
+                class="form-control is-valid font-italic font-weight-light p-3 box-shadow"
+                id="validationServer01"
+                placeholder="Вашето име и презиме"
+                value=""
+                required
+              />
+              <div class="valid-feedback small">Соодветни податоци!</div>
             </div>
 
             <div class="form-group mb-4">
-              <label for="message" class="mb-2">Message</label>
+              <label for="validationServerEmail">Контакт имејл</label>
               <input
                 type="email"
-                class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Email"
+                class="form-control is-valid font-italic font-weight-light p-3 box-shadow"
+                id="validationServerEmail"
+                placeholder="Контакт имејл на вашата компанија"
+                required
               />
+              <div class="invalid-feedback small">
+                Ве молиме внесете валидна имејл адреса
+              </div>
             </div>
             <div class="form-group">
-              <label for="inputState">State</label>
-              <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
+              <label for="disabledSelect">Тип на студенти</label>
+              <select
+                id="disabledSelect"
+                class="form-control font-weight-bold small"
+                required
+              >
+                <option value="" selected disabled>
+                  Изберете тип на студент
+                </option>
+                <option value="1">Студенти од маркетинг</option>
+                <option value="2">Студенти од програмирање</option>
+                <option value="3">Студенти од data science</option>
+                <option value="3">Студенти од дизајн</option>
               </select>
+              <div class="invalid-feedback small">
+                Невалидно избрана опција.
+              </div>
             </div>
           </form>
         </div>
+
         <div class="col-10 col-md-4">
           <form>
             <div class="form-group mb-4">
-              <label for="message" class="mb-2">Message</label>
-              <input type="text" class="form-control" placeholder="Username" />
-            </div>
-
-            <div class="form-group mb-4">
-              <label for="message" class="mb-2">Message</label>
+              <label for="validationServer02">Име на компанија</label>
               <input
+                type="text"
+                class="form-control is-valid font-italic font-weight-light p-3 box-shadow"
+                id="validationServer02"
+                placeholder="Име на вашата компанија"
+                value=""
+                required
+              />
+              <div class="valid-feedback small">Соодветни податоци!</div>
+            </div>
+            <div class="form-group mb-4">
+              <label for="validationServer03" class="mb-2"
+                >Контакт телефон</label
+              >
+              <input
+                branch
                 type="tel"
-                class="form-control"
-                id="exampleInputEmail1"
+                class="form-control is-valid font-italic font-weight-light p-3 box-shadow"
+                id="validationServer03"
                 aria-describedby="emailHelp"
                 placeholder="Контакт телефон на вашата компанија"
+                required
               />
+              <div class="invalid-feedback small">
+                Ве молиме внесете валидни податоци.
+              </div>
             </div>
-            <div class="form-group">
-              <label for="message" class="mb-2"></label>
 
+            <div class="form-group">
+              <label for="" class="mb-4 small"></label>
               <button
+                class="btn btn-danger text-center text-white text-uppercase small py-2 form-control box-shadow"
                 type="submit"
-                class="btn btn-danger text-center text-white text-capitalize form-control mt-2"
               >
-                испрати
+                Испрати
               </button>
             </div>
           </form>
         </div>
       </div>
     </div>
-
-    <!-- vraboti-student-form  -end -->
 
     <!-- footer    -->
     <footer>
