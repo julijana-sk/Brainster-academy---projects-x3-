@@ -19,11 +19,12 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="./style.css" />
+    <script defer src="./main.js"></script>
   </head>
 
   <body>
     <!-- navbar -->
-    <nav class="navbar navbar-expand-sm navbar-light bg-warning p-2">
+    <nav class="navbar navbar-expand-sm navbar-light bg-warning p-2 shadow">
       <div class="container-fluid px-5">
         <a
           href="index.html"
@@ -122,47 +123,47 @@
     <!-- vraboti-student-form  -->
     <div class="container-fluid bg-warning2 pb-5 small">
       <div class="row d-flex justify-content-center">
-        <div class="col-12">
-          <h2 class="display-4 text-dark text-center my-5 font-weight-bold">
-            Вработи студенти
-          </h2>
+        <div class="col-12 text-center py-5 mr-auto">
+          <h1 class="font-weight-bold">Вработи студенти</h1>
         </div>
       </div>
-      <div class="row d-flex justify-content-center font-weight-bold py-5">
-        <div class="col-10 col-md-4">
-          <form>
-            <div class="form-group mb-4">
-              <label for="validationServer01">Име и презиме</label>
+      <form
+        id="form"
+        action="/"
+        class="col-12 m-0 bg-transparent justify-content-center w-100"
+      >
+        <div class="row d-flex justify-content-center font-weight-bold py-5">
+          <div class="col-11 col-md-5 col-lg-4">
+            <div class="input-control mb-4">
+              <label for="username">Име и презиме</label>
               <input
+                id="username"
+                name="username"
                 type="text"
-                class="form-control is-valid font-italic font-weight-light p-3 box-shadow"
-                id="validationServer01"
+                class="font-italic font-weight-light p-3"
                 placeholder="Вашето име и презиме"
-                value=""
-                required
               />
-              <div class="valid-feedback small">Соодветни податоци!</div>
+              <div class="error"></div>
+            </div>
+            <div class="input-control mb-4">
+              <label for="email">Контакт имејл</label>
+              <input
+                id="email"
+                name="email"
+                type="text"
+                class="font-italic font-weight-light p-3"
+                placeholder="Контакт имејл на вашата компанија"
+              />
+              <div class="error"></div>
             </div>
 
-            <div class="form-group mb-4">
-              <label for="validationServerEmail">Контакт имејл</label>
-              <input
-                type="email"
-                class="form-control is-valid font-italic font-weight-light p-3 box-shadow"
-                id="validationServerEmail"
-                placeholder="Контакт имејл на вашата компанија"
-                required
-              />
-              <div class="invalid-feedback small">
-                Ве молиме внесете валидна имејл адреса
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="disabledSelect">Тип на студенти</label>
+            <div class="input-control mb-4">
+              <label for="student">Тип на студенти</label>
               <select
-                id="disabledSelect"
-                class="form-control font-weight-bold small"
-                required
+                id="student"
+                name="student"
+                type="text"
+                class="font-weight-bold p-3 box-shadow"
               >
                 <option value="" selected disabled>
                   Изберете тип на студент
@@ -172,57 +173,44 @@
                 <option value="3">Студенти од data science</option>
                 <option value="3">Студенти од дизајн</option>
               </select>
-              <div class="invalid-feedback small">
-                Невалидно избрана опција.
-              </div>
-            </div>
-          </form>
-        </div>
 
-        <div class="col-10 col-md-4">
-          <form>
-            <div class="form-group mb-4">
-              <label for="validationServer02">Име на компанија</label>
+              <div class="error"></div>
+            </div>
+          </div>
+
+          <div class="col-11 col-md-5 col-lg-4">
+            <div class="input-control mb-4">
+              <label for="compania">Име на компанија</label>
               <input
+                id="compania"
+                name="compania"
                 type="text"
-                class="form-control is-valid font-italic font-weight-light p-3 box-shadow"
-                id="validationServer02"
+                class="font-italic font-weight-light small p-3"
                 placeholder="Име на вашата компанија"
-                value=""
-                required
               />
-              <div class="valid-feedback small">Соодветни податоци!</div>
-            </div>
-            <div class="form-group mb-4">
-              <label for="validationServer03" class="mb-2"
-                >Контакт телефон</label
-              >
-              <input
-                branch
-                type="tel"
-                class="form-control is-valid font-italic font-weight-light p-3 box-shadow"
-                id="validationServer03"
-                aria-describedby="emailHelp"
-                placeholder="Контакт телефон на вашата компанија"
-                required
-              />
-              <div class="invalid-feedback small">
-                Ве молиме внесете валидни податоци.
-              </div>
+              <div class="error"></div>
             </div>
 
-            <div class="form-group">
-              <label for="" class="mb-4 small"></label>
-              <button
-                class="btn btn-danger text-center text-white text-uppercase small py-2 form-control box-shadow"
-                type="submit"
-              >
-                Испрати
-              </button>
+            <div class="input-control mb-4">
+              <label for="telefon">Контакт телефон</label>
+              <input
+                id="telefon"
+                name="telefon"
+                type="text"
+                class="font-italic font-weight-light p-3"
+                placeholder="Контакт телефон на вашата компанија"
+              />
+              <div class="error mb-4"></div>
             </div>
-          </form>
+            <button
+              type="submit"
+              class="btn btn-danger btn-lg text-center align-self-center text-white small form-control box-shadow summary"
+            >
+              испрати
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
 
     <!-- footer    -->
