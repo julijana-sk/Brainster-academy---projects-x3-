@@ -107,4 +107,11 @@
         background-color: #fbc940
     }
 
+    .shadow {
+        box-shadow: 0 .25rem .25rem rgba(0, 0, 0, .075) !important;
+    }  
+
+    .pointer {
+        cursor: pointer;
+    }
 
