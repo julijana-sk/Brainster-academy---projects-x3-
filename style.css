@@ -16,7 +16,6 @@
     color: red !important;
 }
 
-
 .bg-banner {
     position: relative;
     background-image: linear-gradient(rgba(65, 65, 65, 0.391), rgba(65, 65, 65, 0.391)), url('./images/stairs.jpg');
@@ -59,7 +58,7 @@
 .card img {
     width: 100%;
     display: block;
-    height: 35vh !important;
+    height: 30vh !important;
 }
 
 .fa-heart {
@@ -70,7 +69,6 @@
 .bg-warning2 {
     background-color: #fbc940;
 }
-
 
 .shadow {
     box-shadow: 0 .25rem .25rem rgba(0, 0, 0, .075) !important;
@@ -85,43 +83,99 @@
 }
 
 
-/* валидација на податоци */
+/* validation data-form */
+.input-control {
+    display: flex;
+    flex-direction: column;
+}
 
-    .input-control {
-        display: flex;
-        flex-direction: column;
+.input-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-size: 12px;
+    padding: 10px;
+    width: 100%;
+}
+
+.input-control input:focus {
+    outline: 0;
+}
+
+.input-control.success input {
+    border-color: #09c372;
+}
+
+.input-control.error input {
+    border-color: #ff3860;
+}
+
+.input-control .error {
+    color: #ff3860;
+    font-size: 9px;
+    height: 13px;
+}
+/* validation data-form */
+
+
+/* responsive navbar  */
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    background-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+    z-index: 9998;
+    color: white;
+}
+
+.overlay-content {
+    position: relative;
+    top: 17%;
+    width: 100%;
+    text-align: left;
+    margin-left: 50px;
+    color: white !important;
+}
+
+.overlay a {
+    padding-bottom: 35px;
+    text-decoration: none;
+    font-size: large;
+    font-weight: bold;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover,
+.overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+
+@media screen and (max-height: 450px) {
+    .overlay a {
+        font-size: 20px;
     }
 
-    .input-control input {
-        border: 2px solid #f0f0f0;
-        border-radius: 4px;
-        display: block;
-        font-size: 12px;
-        padding: 10px;
-        width: 100%;
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
     }
+}
 
-    .input-control input:focus {
-        outline: 0;
-    }
 
-    .input-control.success input {
-        border-color: #09c372;
-    }
-
-    .input-control.error input {
-        border-color: #ff3860;
-    }
-
-    .input-control .error {
-        color: #ff3860;
-        font-size: 9px;
-        height: 13px;
-    }
-/* валидација на податоци */
-
-/* redponsive za tablet */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .justify-left {
         text-align: left !important;
         padding-left: 25px;
@@ -131,8 +185,8 @@
         justify-content: center !important;
     }
 
+    .menu-collapse {
+        display: none;
+        overflow: hidden;
+    } 
 }
-/* redponsive za tablet - end  */
-
-/* responsive for hamburger  */
-/* responsive for hamburger - end */
