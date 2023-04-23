@@ -17,126 +17,72 @@
 }
 
 
-/* responsive for hamburger menu */
-@media (max-width: 576px) {
-
-    .responsive {
-        width: 100%;
-        height: 100vh !important;
-        z-index: 1;
-        text-align: left;
-        background-color: rgba(0, 0, 0, 0.41) !important;
-        top: 0 !important;
-        padding-top: 20px !important;
-        justify-content: right !important;
-        align-items: flex-start !important;
-        color: rgb(255, 255, 255) !important;
-        font-weight: 900;
-    }
-
-    .logo {
-        display: none;
-    }
-
-    .navbar.container-fluid {
-        display: flex;
-        flex-wrap: wrap;
-        top: 0 !important;
-        right: 0 !important;
-        justify-content: right!important;
-    }
-
-    .x-button {
-        display: flex;
-        right: 0 !important;
-        margin-bottom: 30px;
-    }
-
+.bg-banner {
+    position: relative;
+    background-image: linear-gradient(rgba(65, 65, 65, 0.391), rgba(65, 65, 65, 0.391)), url('./images/stairs.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80vh;
 }
 
-/* responsive for hamburger menu */
+.absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
+.activefilter:hover {
+    background-color: red;
+    color: #343a40 !important;
+}
 
-@media (max-width: 768px) {
-    .justify-left {
-        text-align: left !important;
-        padding-left: 25px;
-    }
-    
-    .cards-center {
-        justify-content: center !important;
-    }
+.card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
 
+.card:hover {
+    z-index: 1;
+    transform: scale(1.1);
+}
+
+.card-img-top {
+    border: none;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.card img {
+    width: 100%;
+    display: block;
+    height: 35vh !important;
+}
+
+.fa-heart {
+    margin: 5px;
+    color: red;
+}
+
+.bg-warning2 {
+    background-color: #fbc940;
 }
 
 
+.shadow {
+    box-shadow: 0 .25rem .25rem rgba(0, 0, 0, .075) !important;
+}
 
-    .bg-banner {
-        position: relative;
-        background-image: linear-gradient(rgba(65, 65, 65, 0.391), rgba(65, 65, 65, 0.391)), url('./images/stairs.jpg');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 80vh;
-    }
+.summary {
+    padding-bottom: 46px !important;
+}
 
-    .absolute {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .activefilter:hover {
-        background-color: red;
-        color: #343a40 !important;
-    }
-
-    .card {
-        border: none;
-        border-radius: 15px;
-        transition: all 0.2s ease;
-        cursor: pointer;
-    }
-
-    .card:hover {
-        z-index: 1;
-        transform: scale(1.1);
-    }
-
-    .card-img-top {
-        border: none;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
-
-    .card img {
-        width: 100%;
-        display: block;
-        height: 35vh !important;
-    }
-
-    .fa-heart {
-        margin: 5px;
-        color: red;
-    }
-    
-    .bg-warning2 {
-        background-color: #fbc940;
-    }
-
-
-    .shadow {
-        box-shadow: 0 .25rem .25rem rgba(0, 0, 0, .075) !important;
-    }
-
-    .summary {
-        padding-bottom: 46px !important;
-    }
-
-    .pointer {
-        cursor: pointer;
-    }
+.pointer {
+    cursor: pointer;
+}
 
 
 /* валидација на податоци */
@@ -173,3 +119,20 @@
         height: 13px;
     }
 /* валидација на податоци */
+
+/* redponsive za tablet */
+@media (max-width: 768px) {
+    .justify-left {
+        text-align: left !important;
+        padding-left: 25px;
+    }
+
+    .cards-center {
+        justify-content: center !important;
+    }
+
+}
+/* redponsive za tablet - end  */
+
+/* responsive for hamburger  */
+/* responsive for hamburger - end */
