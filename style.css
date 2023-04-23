@@ -1,6 +1,21 @@
-.x-button {
-    display: none;
+.navbar-brand img {
+    height: 50px;
+    width: 50px;
 }
+
+.navbar-light .navbar-nav .nav-link {
+    color: black;
+    size: 100%;
+}
+
+.nav-link {
+    transition: 0.7s ease;
+}
+
+.nav-link:hover {
+    color: red !important;
+}
+
 
 /* responsive for hamburger menu */
 @media (max-width: 576px) {
@@ -39,12 +54,22 @@
 
 }
 
+/* responsive for hamburger menu */
+
+
 @media (max-width: 768px) {
     .justify-left {
         text-align: left !important;
         padding-left: 25px;
     }
+    
+    .cards-center {
+        justify-content: center !important;
+    }
+
 }
+
+
 
     .bg-banner {
         position: relative;
@@ -65,7 +90,6 @@
     .activefilter:hover {
         background-color: red;
         color: #343a40 !important;
-
     }
 
     .card {
