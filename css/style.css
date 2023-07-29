@@ -21,20 +21,16 @@ h4 {
     color: #A16A5E;
 }
 
-.position-absoluteA {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.position-relative {
+    position: relative;
 }
 
-.position-absoluteV {
+.position-absolute {
     position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 19%;
+    left: 0%;
+    width: 100%;
 }
-
 
 .heading-layout {
     width: 100%;
@@ -91,13 +87,48 @@ h4 {
     color: #A16A5E;
 }
 
-.joinAs {
-    height: 100%;
-    padding-top: 40px;
-    padding-bottom: 200px;
+.pointer {
+    cursor: pointer;
 }
 
-.joinAs h1 {
-    font-size: 50px;
-    word-spacing: 10px;
+.polygon1 {
+    height: 100vh;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 0% 20%, 0% 0%);
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.polygon2 {
+    height: 100vh;
+    clip-path: polygon(0% 0%, 0% 1%, 100% 41%, 100% 60%, 0% 60%);
+    transition: all 0.2s ease;
+}
+
+.content1 {
+    position: absolute;
+    top: 10%;
+    left: 0%;
+}
+
+.content2 {
+    position: absolute;
+    top: 37%;
+    right: 0%;
+}
+
+.content1 h1, .content2 h1 {
+    font-size: 60px;
+    word-spacing: 7px;
+}
+
+.polygon1:hover{
+    z-index: 1;
+    transform: scale(1.05);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.75) !important;
+}
+
+.polygon2:hover {
+    z-index: 1;
+    transform: scale(1.05);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.75) !important;
 }
