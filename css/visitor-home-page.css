@@ -179,6 +179,7 @@ h2 {
 #carouselExampleIndicators {
     height: 100%;
     background-color: #EDD5BB;
+    overflow: hidden;
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {

@@ -25,13 +25,6 @@ h4 {
     position: relative;
 }
 
-.position-absolute {
-    position: absolute;
-    top: 19%;
-    left: 0%;
-    width: 100%;
-}
-
 .heading-layout {
     width: 100%;
     height: 69px;
@@ -108,12 +101,14 @@ h4 {
     position: absolute;
     top: 10%;
     left: 0%;
+    padding-top: 60px;
 }
 
 .content2 {
     position: absolute;
-    top: 37%;
+    top: 60%;
     right: 0%;
+    padding-top: 230px;
 }
 
 .content1 h1, .content2 h1 {

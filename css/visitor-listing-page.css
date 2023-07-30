@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EDD5BB;
+    color: #A16A5E;
+}
+
+h1 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-family: 'Reenie Beanie';
+    font-size: 40px;
+    font-style: italic;
+    line-height: 30px;
+    color: #A16A5E;
+}
+
+p {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* header */
+.master-heading {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bolder;
+    width: 60%;
+    font-size: 50px;
+}
+
+.heading-layout {
+    width: 100%;
+    height: 100px;
+    background-color: #FCEBD5;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#logo {
+    width: 150px;
+    height: 150px;
+    margin-top: 30px;
+}
+
+#auctionSymbol {
+    width: 100%;
+    height: 40px;
+}
+/* header */
+
+.card img {
+    width: 100%;
+    height: 30vh;
+    display: inline-block;
+}
+
+.card-beige {
+    background-color:#FCEBD5;
+    color: #A16A5E;
+}
+
+.price-brown {
+    width: 13%;
+    height: 3%;
+    padding: 3px 5px;
+    border: #A16A5E;
+    border-radius: 5px;
+    background-color: #A16A5E;
+    color: #FCEBD5;
+    font-weight: bold;
+    font-size: small;
+    text-align: center;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card-brown {
+    color: #FCEBD5;
+    background-color: #A16A5E;
+}
+
+.price-beige {
+    width: 13%;
+    height: 3%;
+    padding: 3px 5px;
+    border: #FCEBD5;
+    border-radius: 5px;
+    background-color: #FCEBD5;
+    color: #A16A5E;
+    font-weight: bold;
+    font-size: small;
+    text-align: center;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
