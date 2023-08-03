@@ -72,6 +72,7 @@ h2 {
     width: 150px;
     height: 150px;
     margin-top: 30px;
+    z-index: 9999999;
 }
 
 #auctionSymbol {

@@ -44,6 +44,7 @@ h4 {
 #logo {
     width: 104px;
     height: 104px;
+    z-index: 9999999;
     flex-shrink: 0;
 }
 

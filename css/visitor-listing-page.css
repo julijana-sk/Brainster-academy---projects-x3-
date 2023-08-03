@@ -45,6 +45,7 @@ p {
     width: 150px;
     height: 150px;
     margin-top: 30px;
+    z-index: 9999999;
 }
 
 #auctionSymbol {
@@ -95,4 +96,151 @@ p {
     font-size: small;
     text-align: center;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+/* filter button */
+.filter-button {
+    background-color: #D44C2E;
+    color: #FCEBD5;
+    width: 80px;
+    height: 80px;
+    top: 1130px;
+    right: 30px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.25);
+}
+
+.filter-button i {
+    font-size: 60px;
+    padding: 15px 10px;
+}
+
+.filter-button:hover {
+    color: #FCEBD5;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: black;
+    size: 100%;
+}
+
+.nav-link {
+    transition: 0.7s ease;
+}
+
+/* responsive navbar  */
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    background-color: rgba(161, 106, 94, 1);
+    overflow-x: hidden;
+    transition: 0.5s;
+    z-index: 9998;
+    color: #FCEBD5;
+}
+
+.overlay-content {
+    position: relative;
+    top: 17%;
+    text-align: left;
+    color: #FCEBD5 !important;
+    font-family: 'Roboto';
+}
+
+.overlay a {
+    padding-bottom: 35px;
+    text-decoration: none;
+    font-size: large;
+    font-weight: bold;
+    color: #FCEBD5;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover,
+.overlay a:focus {
+    color: #FCEBD5;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    padding-top: 20px;
+    padding-bottom: 0;
+    font-size: 40px;
+    font-weight: normal;
+}
+
+.overlay h2 {
+    position: absolute;
+    top: 20px;
+    left: 45px;
+    font-size: 50px;
+    font-weight: normal;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.overlay-content h3 {
+    color: #EDD5BB;
+}
+
+.button-label {
+    width: 100px;
+    height: 30px;
+    padding: 0 10px;
+    color: #EDD5BB;
+    text-align: left;
+    border: 1px solid #EDD5BB;
+}
+
+.overlay-content .nav-item {
+    border-bottom: 2px solid #FCEBD5;
+}
+
+.dropdown::after {
+    margin-left: 20px;
+    color: #A16A5E;
+    background-color: #EDD5BB;
+}
+
+.dropdown a {
+    color: #EDD5BB;
+    font-weight: normal;
+    font-size: 300;
+}
+
+.button-label:hover {
+    color: #FCEBD5;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.filter-button-Y {
+    background-color: #D44C2E;
+    color: #FCEBD5;
+    width: 80px;
+    height: 80px;
+    top: 1130px;
+    right: 30px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.25);
+}
+
+.filter-button-Y i {
+    font-size: 60px;
+    padding: 15px 10px;
+}
+
+.filter-button-Y:hover {
+    color: #FCEBD5;
 }
