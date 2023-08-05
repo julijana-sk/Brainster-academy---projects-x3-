@@ -23,14 +23,6 @@ p {
 }
 
 /* header */
-.master-heading {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: bolder;
-    width: 60%;
-    font-size: 50px;
-}
-
 .heading-layout {
     width: 100%;
     height: 100px;
@@ -47,12 +39,6 @@ p {
     margin-top: 30px;
     z-index: 9999999;
 }
-
-#auctionSymbol {
-    width: 100%;
-    height: 40px;
-}
-/* header */
 
 .card img {
     width: 100%;
@@ -98,46 +84,6 @@ p {
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 }
 
-
-/* filter button */
-.filter-button {
-    background-color: #D44C2E;
-    color: #FCEBD5;
-    width: 80px;
-    height: 80px;
-    right: 30px;
-    bottom: 30px;
-    padding: 0;
-    margin: 0;
-    position: fixed;
-    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.25);
-}
-
-.filter-button i {
-    font-size: 60px;
-    padding: 15px 10px;
-}
-
-.filter-button:hover {
-    color: #FCEBD5;
-}
-
-.filter-button-checked {
-    background-color: #D44C2E;
-    color: #FCEBD5;
-    width: 80px;
-    height: 80px;
-    right: 25px;
-    bottom: 30px;
-    padding: 0;
-    margin: 0;
-    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.25);
-}
-
-.filter-button-checked:hover {
-    color: #FCEBD5;
-}
-
 .navbar-light .navbar-nav .nav-link {
     color: black;
     size: 100%;
@@ -147,7 +93,104 @@ p {
     transition: 0.7s ease;
 }
 
-/* responsive navbar  */
+.icon i {
+    display: flex;
+    color: #A16A5E;
+    text-decoration: none;
+    background-color: transparent;
+    font-size: xx-large;
+}
+
+.icon:hover, .icon a:hover {
+    color: #A16A5E;
+    text-decoration: none;
+}
+
+#myLinks {
+    display: none;
+    position: absolute;
+    z-index: 988888;
+    width: 100%;
+    top: 100px;
+}
+
+.myLinksDisplay a {
+    color: #FCEBD5;
+    background-color: rgba(161, 106, 94, 1);
+    font-family: 'Roboto';
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 50px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#addItemCard p {
+    height: 20vh;
+    border: 2px dashed #a16a5e;
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.btnAuction {
+    padding: 8px 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 2px;
+    font-family: 'Roboto';
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+div .btnAuction:last-child {
+    margin-right: 0;
+}
+
+.bg-blue {
+    background-color: #1B59AC;
+    width: 121px;
+    height: 27px;
+    color: white;
+}
+.bg-green {
+    background-color: #1BAC6F;
+    width: 90;
+    height: 27px;
+    color: white;
+}
+.bg-red {
+    background-color: #D44C2E;
+    color: #FCEBD5;
+    width: 79px;
+    height: 27px;
+}
+.bg-beige {
+    background-color: #FCEBD5;
+    color: #A16A5E;
+    width: 56px;
+    height: 27px;
+}
+.bg-white {
+    background-color: #E5E5E5;
+    color: #5A5A5A;
+    width: 76px;
+    height: 27px;
+}
+
+
+/* overlay details */
+
 .overlay {
     top: 100px;
     width: 0;
