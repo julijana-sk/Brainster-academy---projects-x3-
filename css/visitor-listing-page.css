@@ -105,11 +105,11 @@ p {
     color: #FCEBD5;
     width: 80px;
     height: 80px;
-    top: 1130px;
     right: 30px;
+    bottom: 30px;
     padding: 0;
     margin: 0;
-    position: absolute;
+    position: fixed;
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -119,6 +119,22 @@ p {
 }
 
 .filter-button:hover {
+    color: #FCEBD5;
+}
+
+.filter-button-checked {
+    background-color: #D44C2E;
+    color: #FCEBD5;
+    width: 80px;
+    height: 80px;
+    right: 30px;
+    bottom: 30px;
+    padding: 0;
+    margin: 0;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.25);
+}
+
+.filter-button-checked:hover {
     color: #FCEBD5;
 }
 
@@ -133,9 +149,9 @@ p {
 
 /* responsive navbar  */
 .overlay {
-    height: 100%;
+    top: 100px;
     width: 0;
-    position: fixed;
+    position: absolute;
     background-color: rgba(161, 106, 94, 1);
     overflow-x: hidden;
     transition: 0.5s;
@@ -145,7 +161,6 @@ p {
 
 .overlay-content {
     position: relative;
-    top: 17%;
     text-align: left;
     color: #FCEBD5 !important;
     font-family: 'Roboto';
@@ -167,23 +182,18 @@ p {
 }
 
 .overlay .closebtn {
-    position: absolute;
     top: 20px;
-    right: 45px;
-    padding-top: 20px;
-    padding-bottom: 0;
+    right: 5px;
+    padding: 0;
     font-size: 40px;
     font-weight: normal;
 }
 
 .overlay h2 {
-    position: absolute;
     top: 20px;
-    left: 45px;
+    left: 5px;
     font-size: 50px;
     font-weight: normal;
-    margin-top: 20px;
-    margin-bottom: 0px;
 }
 
 .overlay-content h3 {
@@ -221,26 +231,4 @@ p {
 
 .pointer {
     cursor: pointer;
-}
-
-.filter-button-Y {
-    background-color: #D44C2E;
-    color: #FCEBD5;
-    width: 80px;
-    height: 80px;
-    top: 1130px;
-    right: 30px;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.25);
-}
-
-.filter-button-Y i {
-    font-size: 60px;
-    padding: 15px 10px;
-}
-
-.filter-button-Y:hover {
-    color: #FCEBD5;
 }

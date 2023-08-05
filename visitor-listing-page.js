@@ -24,13 +24,23 @@
 //    }
 // }
 
-// navbar responsive
+
+// filter layer display
+const filterBtnBasic = document.getElementById("filter-button-basic");
+const filterBtnChecked = document.getElementById("filter-button-checked");
+
 function openNav() {
-    document.getElementById("myNav").style.width = "100%";
-    }
+    document.getElementById("filter-layer").style.width = "100%";
+    filterBtnBasic.style.display = "none";
+    filterBtnChecked.style.display = "flex";
+    filterBtnChecked.style.justifyContent = "end";
 
-    function closeNav() {
-    document.getElementById("myNav").style.width = "0%";
-    }
+        
+}
 
-// navbar responsive - end
+function closeNav() {
+    document.getElementById("filter-layer").style.width = "0%";
+    filterBtnBasic.style.display = "flex";
+    filterBtnChecked.style.display = "none";
+}
+
