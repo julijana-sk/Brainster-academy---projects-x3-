@@ -9,12 +9,15 @@ body {
 
 h1 {
     margin-bottom: 0;
+    margin-top: 20px;
     padding-bottom: 0;
     font-family: 'Reenie Beanie';
-    font-size: 40px;
     font-style: italic;
+    font-size: 30px;
+    font-weight: 500;
     line-height: 30px;
-    color: #A16A5E;
+    letter-spacing: 0em;
+    text-align: left;
 }
 
 p {
@@ -23,17 +26,9 @@ p {
 }
 
 /* header */
-.master-heading {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: bolder;
-    width: 60%;
-    font-size: 50px;
-}
-
 .heading-layout {
     width: 100%;
-    height: 100px;
+    height: 70px;
     background-color: #FCEBD5;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
     display: flex;
@@ -42,18 +37,26 @@ p {
 }
 
 #logo {
-    width: 150px;
-    height: 150px;
-    margin-top: 30px;
+    width: 104px;
+    height: 104px;
+    margin-top: 25px;
     z-index: 9999999;
 }
 
 #auctionSymbol {
     width: 100%;
-    height: 40px;
+    height: 35px;
 }
-/* header */
+/* header end*/
 
+h4 {
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0em;
+    text-align: left;
+}
 .card img {
     width: 100%;
     height: 30vh;
@@ -105,8 +108,8 @@ p {
     color: #FCEBD5;
     width: 80px;
     height: 80px;
-    right: 30px;
-    bottom: 30px;
+    right: 25px;
+    bottom: 25px;
     padding: 0;
     margin: 0;
     position: fixed;
@@ -138,18 +141,13 @@ p {
     color: #FCEBD5;
 }
 
-.navbar-light .navbar-nav .nav-link {
-    color: black;
-    size: 100%;
-}
-
 .nav-link {
     transition: 0.7s ease;
 }
 
-/* responsive navbar  */
+/*overlay */
 .overlay {
-    top: 100px;
+    top: 70px;
     width: 0;
     position: absolute;
     background-color: rgba(161, 106, 94, 1);

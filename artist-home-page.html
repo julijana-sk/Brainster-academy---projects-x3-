@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Project-02_Street Artists</title>
+    <title>Artist - Home Page</title>
     <meta charset="utf-8" />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
@@ -16,7 +16,7 @@
     />
 
     <!-- Local CSS -->
-    <link rel="stylesheet" href="./css/landing-page.css" />
+    <link rel="stylesheet" href="./css/artist-home-page.css" />
 
     <!-- custom font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,59 +43,64 @@
 
   <body>
     <header>
-      <nav class="heading-layout text-center px-3">
-        <h1 class="mr-auto ml-auto">Street ARTists</h1>
-      </nav>
-    </header>
-    <div class="container-fluid p-0">
-      <div
-        class="row d-flex flex-row justify-content-center text-center mr-auto"
-      >
-        <div class="col-12 px-5">
+      <nav class="heading-layout py-2 px-3">
+        <div
+          class="d-flex flex-row justify-content-between align-self-center align-item-center"
+        >
           <img
             src="./images/logo.png"
             alt="logo centered"
-            class="logo-layout my-3 ml-3 align-self-center align-item-center"
+            class="align-self-center align-item-center"
+            id="logo"
           />
+          <h1 class="align-self-center">LeanneGraham</h1>
+        </div>
+        <a
+          href="javascript:void(0);"
+          class="icon mt-3 mr-3 align-self-center"
+          onclick="myFunction()"
+        >
+          <i class="fa fa-bars"></i>
+        </a>
+      </nav>
+      <div id="myLinks" class="text-center myLinksDisplay">
+        <a href="#">Home</a>
+        <a href="#">Items</a>
+        <a href="#">Auction</a>
+      </div>
+    </header>
+    <div class="container-fluid p-4 h-100">
+      <div
+        class="row d-flex flex-row justify-content-between mr-auto ml-auto text-capitalize"
+      >
+        <div
+          class="col-5 card card-brown pointer p-3 mb-3 mr-2 text-center align-item-center align-self-center"
+          id="addItemCard"
+        >
+          <p>total items sold</p>
+          <p class="price">12/35</p>
+        </div>
+        <div
+          class="col-5 card card-brown pointer p-3 mb-3 text-center align-item-center align-self-center"
+          id="addItemCard"
+        >
+          <p>total income</p>
+          <p class="price">$1700</p>
         </div>
       </div>
-      <div class="col-8 pointer mr-auto ml-auto">
+      <div class="row mr-auto ml-auto text-capitalize">
         <div
-          class="col-12 d-flex flex-column align-self-center align-item-center polygon1 content1"
-          style="background-color: #edd5bb"
+          class="col-12 card card-brick pointer p-3 text-center align-item-center align-self-center"
+          id="addItemCard"
         >
-          <h1>Join as Artist</h1>
-          <div class="dropdown col-4 offset-6">
-            <a
-              class="btn btn-transparent dropdown-toggle dropdown-btn shadow-none align-item-right"
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Choose
-            </a>
-
-            <div class="dropdown-menu bg-transparent">
-              <a class="dropdown-item" href="#">Artist 1</a>
-              <a class="dropdown-item" href="#">Another artist 2</a>
-              <a class="dropdown-item" href="#">Another artist 3</a>
-              <a class="dropdown-item" href="#">Another artist 4</a>
-              <a class="dropdown-item" href="#">Another artist 5</a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-12 d-flex flex-column align-self-center align-item-center polygon2 m-0 content2"
-          style="background-color: #a16a5e"
-        >
-          <h1 style="color: #fcebd5" class="head">Join as Visitor</h1>
+          <p>live auctioning item</p>
+          <p class="price">$12000</p>
+          <p>current bid</p>
         </div>
       </div>
     </div>
-
     <!-- jQuery library -->
-    <script src="./js/jquery-3.5.1.min.js"></script>
+    <!-- <script src="./js/jquery-3.5.1.min.js"></script> -->
 
     <!-- Latest Compiled Bootstrap 4.6.2 JavaScript -->
     <script
@@ -113,9 +118,9 @@
       integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
       crossorigin="anonymous"
     ></script>
-    <script src="./js/popper.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./landing-page.js"></script>
+    <!-- <script src="./js/popper.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script> -->
+    <script src="./artist-home-page.js"></script>
     <script src="./main.js"></script>
   </body>
 </html>
