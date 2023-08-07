@@ -74,6 +74,7 @@
         <div
           class="col-12 p-0 mt-4 mb-2 card card-beige pointer w-100 text-center"
           id="addItemCard"
+          onclick="addItem()"
         >
           <p class="p-5 my-3 mx-4">+ Add new Item</p>
         </div>
@@ -143,97 +144,91 @@
     </div>
 
     <!-- filter layer -->
-    <!-- <div class="overlay" id="filter-layer">
+    <div class="overlay" id="filter-layer">
       <div class="overlay-content m-5">
-        <div class="d-flex flex-row justify-content-between">
-          <h2>Filter by</h2>
-          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-            >X</a
-          >
+        <div
+          class="d-flex flex-row justify-content-between align-item-center mb-3"
+        >
+          <h1>Add new Item</h1>
+          <div class="form-check pt-1">
+            <label class="form-check-label" for="defaultCheck1">
+              Is published
+            </label>
+            <input
+              class="m-0 p-0"
+              type="checkbox"
+              value=""
+              id="defaultCheck1"
+            />
+          </div>
         </div>
-        <ul class="navbar-nav mt-3 mb-5">
-          <li class="nav-item pb-4">
-            <h3 class="text-capitalize mb-3">by item title</h3>
-            <button class="button-label bg-transparent">Label</button>
-          </li>
-          <li class="nav-item py-4">
-            <h3 class="text-capitalize mb-3">by artist</h3>
-            <div class="dropdown">
-              <a
-                class="btn-transparent dropdown-toggle button-label shadow-none align-item-right p-0 pl-2"
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Choose
-              </a>
-
-              <div class="dropdown-menu bg-transparent">
-                <a class="dropdown-item" href="#">Artist 1</a>
-                <a class="dropdown-item" href="#">Another artist 2</a>
-                <a class="dropdown-item" href="#">Another artist 3</a>
-                <a class="dropdown-item" href="#">Another artist 4</a>
-                <a class="dropdown-item" href="#">Another artist 5</a>
-              </div>
-            </div>
-          </li>
-          <li class="nav-item py-4">
-            <h3 class="text-capitalize mb-3">by price</h3>
-            <div
-              class="d-flex flex-row justify-content-between align-item-center"
+        <div class="form-group">
+          <label for="formGroupExampleInput">Title</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Type</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            aria-label="Amount (to the nearest dollar)"
+          />
+          <div class="input-group-append">
+            <span class="input-group-text">.00</span>
+          </div>
+        </div>
+        <label for="basic-url">Image URL</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3"
+              >https://example.com/users/</span
             >
-              <span
-                >Min:
-                <button class="button-label bg-transparent">Label</button></span
-              >
-              <span
-                >Max:
-                <button class="button-label bg-transparent">Label</button></span
-              >
-            </div>
-          </li>
-          <li class="nav-item pt-4 pb-5 mb-5">
-            <h3 class="text-capitalize mb-3">by type</h3>
-            <div class="dropdown">
-              <a
-                class="btn-transparent dropdown-toggle button-label shadow-none align-item-right p-0 pl-2"
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Choose
-              </a>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            id="basic-url"
+            aria-describedby="basic-addon3"
+          />
+        </div>
+        <p>or</p>
+        <div
+          class="col-12 p-0 mt-4 mb-2 card card-beige pointer w-100 text-center"
+          id="addItemCard"
+          onclick="takeSnapShot()"
+        >
+          <p class="p-5 my-3 mx-4">
+            <i class="fa-solid fa-camera"></i>Take a snapshot
+          </p>
+        </div>
 
-              <div class="dropdown-menu bg-transparent">
-                <a class="dropdown-item" href="#">Type 1</a>
-                <a class="dropdown-item" href="#">Another Type 2</a>
-                <a class="dropdown-item" href="#">Another Type 3</a>
-                <a class="dropdown-item" href="#">Another Type 4</a>
-                <a class="dropdown-item" href="#">Another Type 5</a>
-              </div>
+        <div class="container-fluid p-4">
+          <div class="row d-flex flex-row flex-nowrap text-center">
+            <div class="col-6 p-3 mr-auto ml-auto">
+              <button class="bg-brick text-capitalize">add new item</button>
             </div>
-          </li>
-        </ul> -->
-    <!-- filter button  -->
-    <!-- <div id="filter-button-checked" style="display: none">
-          <button
-            class="navbar-toggler btn btn-large filter-button-checked"
-            type="submit"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-            onclick="openNav()"
-          >
-            <i class="fa-solid fa-check fa-xl"></i>
-          </button>
-        </div> -->
-    <!-- filter button  end-->
-    <!-- </div>
-    </div> -->
+            <div class="col-6 mr-auto ml-auto p-3">
+              <button class="bg-gray">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- filter layer end -->
 
     <!-- jQuery library -->

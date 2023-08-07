@@ -30,7 +30,7 @@ p {
     line-height: 21px;
 }
 
-.card p:last-child {
+* p:last-child {
     margin-bottom: 0;
 }
 
@@ -115,16 +115,12 @@ p {
 }
 
 .btnDays {
-    padding: 7px;
+    padding: 7px 15px;
     margin-right: 5px;
-    margin-bottom: 5px;
     border: none;
     border-radius: 2px;
-    font-family: 'Roboto';
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 14px;
-    letter-spacing: 0em;
+    font-family: 'Roboto';  
+    color: #FCEBD5;
     text-align: center;
 }
 
@@ -134,26 +130,8 @@ div .btnDays:last-child {
 
 .bg-brown {
     background-color: #A16A5E;
-    width: 90;
-    height: 27px;
-    color: #FCEBD5;
 }
 .bg-brick {
     background-color: #D44C2E;
-    color: #FCEBD5;
-    width: 90px;
-    height: 27px;
 }
 
-.bg-beige {
-    background-color: #FCEBD5;
-    color: #A16A5E;
-    width: 56px;
-    height: 27px;
-}
-.bg-white {
-    background-color: #E5E5E5;
-    color: #5A5A5A;
-    width: 76px;
-    height: 27px;
-}

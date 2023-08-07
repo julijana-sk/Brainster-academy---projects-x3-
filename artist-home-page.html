@@ -69,34 +69,39 @@
         <a href="#">Auction</a>
       </div>
     </header>
-    <div class="container-fluid p-4 h-100">
-      <div
-        class="row d-flex flex-row justify-content-between mr-auto ml-auto text-capitalize"
-      >
-        <div
-          class="col-5 card card-brown pointer p-3 mb-3 mr-2 text-center align-item-center align-self-center"
-          id="addItemCard"
-        >
+    <div class="container-fluid p-4">
+      <div class="row d-flex flex-row flex-nowrap text-center">
+        <div class="col-5 mb-3 card-brown p-3 mr-auto ml-auto">
           <p>total items sold</p>
           <p class="price">12/35</p>
         </div>
-        <div
-          class="col-5 card card-brown pointer p-3 mb-3 text-center align-item-center align-self-center"
-          id="addItemCard"
-        >
+        <div class="col-5 mb-3 card-brown mr-auto ml-auto p-3">
           <p>total income</p>
           <p class="price">$1700</p>
         </div>
       </div>
-      <div class="row mr-auto ml-auto text-capitalize">
-        <div
-          class="col-12 card card-brick pointer p-3 text-center align-item-center align-self-center"
-          id="addItemCard"
-        >
+      <div class="row text-center">
+        <div class="col-11 mr-auto ml-auto card-brick p-3">
           <p>live auctioning item</p>
           <p class="price">$12000</p>
           <p>current bid</p>
         </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row p-4">
+        <div class="col-12 p-0">
+          <p>Display my income for last</p>
+          <div
+            class="d-flex flex-row flex-wrap justify-content-between align-item-center align-self-center"
+          >
+            <button class="btnDays bg-brown">7 days</button>
+            <button class="btnDays bg-brick">14 days</button>
+            <button class="btnDays bg-brown">1 month</button>
+            <button class="btnDays bg-brown">1 year</button>
+          </div>
+        </div>
+        <div class="col-12"></div>
       </div>
     </div>
     <!-- jQuery library -->

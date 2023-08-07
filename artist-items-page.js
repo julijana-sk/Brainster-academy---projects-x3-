@@ -18,14 +18,24 @@
 
 // navbar responsive - end
 
-function myFunction() {
-  const x = document.getElementById("myLinks");
+function addItem() {
+  const x = document.getElementById("filter-layer");
   if (x.style.display === "block") {
     x.style.display = "none";
   } else {
-    x.style.display = "block";
+    x.style.width = "100%";
   }
 }
+
+function takeSnapShot() {
+  // const x = document.getElementById("filter-layer");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.width = "100%";
+  }
+}
+
 
 // filter layer display
 // const filterBtnBasic = document.getElementById("filter-button-basic");
