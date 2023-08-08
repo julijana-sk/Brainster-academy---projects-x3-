@@ -27,7 +27,7 @@ function addItem() {
   }
 }
 
-function takeSnapShot() {
+function takeSnapshot() {
   // const x = document.getElementById("filter-layer");
   if (x.style.display === "block") {
     x.style.display = "none";

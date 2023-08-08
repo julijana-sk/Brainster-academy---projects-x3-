@@ -131,6 +131,18 @@ p {
 #addItemCard p, .form-check-label p {
     height: 20vh;
     border: 2px dashed #a16a5e;
+    border-radius: 2px;
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+#takeSnapshot {
+    border: 2px dashed #FCEBD5;
+    border-radius: 2px;
     font-family: 'Roboto';
     font-size: 18px;
     font-weight: 300;
@@ -151,6 +163,7 @@ p {
     line-height: 14px;
     letter-spacing: 0em;
     text-align: center;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 }
 
 div .btnAuction:last-child {
@@ -196,6 +209,7 @@ div .btnAuction:last-child {
     width: 0;
     position: absolute;
     background-color: rgba(161, 106, 94, 1);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
     overflow-x: hidden;
     transition: 0.5s;
     z-index: 9998;
@@ -207,7 +221,7 @@ div .btnAuction:last-child {
     padding-bottom: 0;
     font-family: 'Roboto';
     font-size: 30px;
-    font-weight: 500;
+    font-weight: bolder;
     line-height: 30px;
     text-align: left;
 }
@@ -218,6 +232,14 @@ div .btnAuction:last-child {
     text-align: left;
     color: #FCEBD5 !important;
     font-family: 'Roboto';
+}
+
+.overlay-content input {
+    color: #FCEBD5;
+}
+
+.checkbox:checked {
+    background-color: #FCEBD5;
 }
 
 .overlay a {
@@ -287,22 +309,26 @@ div .btnAuction:last-child {
     cursor: pointer;
 }
 
-.btnAddItem {
-    padding: 10px;
+.bg-gray {
+    background-color: #e5e5e5;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    color: #5a5a5a;
+    padding: 10px 50px;
     font-family: 'Roboto';
     font-size: 18px;
-    font-weight: 700;
-    line-height: 21px;
-    letter-spacing: 0em;
-    text-align: center;
-}
-
-.bg-gray {
-    background-color:#e5e5e5;
-    color: #5a5a5a;
+    font-weight: bolder;
+    border: none;
+    border-radius: 2px solid #e5e5e5;
 }
 
 .bg-brick {
     background-color: #d44c2e;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
     color: #fcebd5;
+    padding: 10px 25px;
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-weight: bolder;
+    border: none;
+    border-radius: 2px solid #d44c2e;
 }

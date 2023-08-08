@@ -145,7 +145,7 @@
 
     <!-- filter layer -->
     <div class="overlay" id="filter-layer">
-      <div class="overlay-content m-5">
+      <div class="overlay-content my-5 mx-4">
         <div
           class="d-flex flex-row justify-content-between align-item-center mb-3"
         >
@@ -155,7 +155,7 @@
               Is published
             </label>
             <input
-              class="m-0 p-0"
+              class="checkbox m-0 p-0"
               type="checkbox"
               value=""
               id="defaultCheck1"
@@ -164,64 +164,76 @@
         </div>
         <div class="form-group">
           <label for="formGroupExampleInput">Title</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" />
+          <input
+            type="text"
+            class="form-control bg-transparent shadow-none"
+            id="formGroupExampleInput"
+          />
         </div>
         <div class="form-group">
           <label for="exampleFormControlTextarea1">Description</label>
           <textarea
-            class="form-control"
+            class="form-control shadow-none bg-transparent"
             id="exampleFormControlTextarea1"
             rows="3"
           ></textarea>
         </div>
-        <div class="form-group">
-          <label for="formGroupExampleInput">Type</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" />
-        </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
+
+        <div
+          class="row d-flex flex-row justify-content-between align-item-center"
+        >
+          <div class="col-6">
+            <div class="form-group">
+              <label for="formGroupExampleInput">Type</label>
+              <input
+                type="text"
+                class="form-control shadow-none bg-transparent"
+                id="formGroupExampleInput"
+              />
+            </div>
           </div>
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Amount (to the nearest dollar)"
-          />
-          <div class="input-group-append">
-            <span class="input-group-text">.00</span>
+          <div class="col-6">
+            <label for="formGroupExampleInput">Price</label>
+            <input
+              id="postfix"
+              value="$"
+              type="text"
+              id="form2"
+              class="form-control shadow-none bg-transparent"
+            />
           </div>
         </div>
+
         <label for="basic-url">Image URL</label>
         <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3"
-              >https://example.com/users/</span
-            >
-          </div>
           <input
             type="text"
-            class="form-control"
+            class="form-control shadow-none bg-transparent"
             id="basic-url"
             aria-describedby="basic-addon3"
           />
         </div>
-        <p>or</p>
-        <div
-          class="col-12 p-0 mt-4 mb-2 card card-beige pointer w-100 text-center"
-          id="addItemCard"
-          onclick="takeSnapShot()"
-        >
-          <p class="p-5 my-3 mx-4">
-            <i class="fa-solid fa-camera"></i>Take a snapshot
-          </p>
+        <p class="text-center">or</p>
+        <div class="container-fluid">
+          <div
+            class="row d-flex flex-column pointer text-center mt-3 py-5"
+            id="takeSnapshot"
+            onclick="takeSnapshot()"
+          >
+            <div class="col-12 mt-5 p-0">
+              <i class="fa-solid fa-3x mb-3 fa-camera"></i>
+            </div>
+            <div class="col-12 mb-5 p-0">
+              <p>Take a snapshot</p>
+            </div>
+          </div>
         </div>
-
-        <div class="container-fluid p-4">
+        <div class="container-fluid p-0 my-5">
           <div class="row d-flex flex-row flex-nowrap text-center">
-            <div class="col-6 p-3 mr-auto ml-auto">
+            <div class="col-6 p-0 mr-auto ml-auto">
               <button class="bg-brick text-capitalize">add new item</button>
             </div>
-            <div class="col-6 mr-auto ml-auto p-3">
+            <div class="col-6 p-0 mr-auto ml-auto">
               <button class="bg-gray">Cancel</button>
             </div>
           </div>
