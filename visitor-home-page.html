@@ -65,7 +65,7 @@
         </a>
       </nav>
     </header>
-    <div class="container-fluid py-3">
+    <div class="container-fluid pt-3">
       <div
         class="row d-flex flex-column ml-auto mr-auto w-100 justify-content-center overflow-hidden flex-nowrap position-relative"
       >
@@ -123,16 +123,6 @@
           <div class="brick"></div>
           <div class="brick"></div>
         </div>
-        <div class="row d-flex flex-row flex-nowrap overflow-hidden px-3">
-          <div class="brick"></div>
-          <div class="brick"></div>
-          <div class="brick"></div>
-          <div class="brick"></div>
-          <div class="brick"></div>
-          <div class="brick"></div>
-          <div class="brick"></div>
-          <div class="brick"></div>
-        </div>
         <div class="row d-flex flex-row flex-nowrap overflow-hidden px-5">
           <div class="brick"></div>
           <div class="brick"></div>
@@ -160,6 +150,7 @@
         <h1 class="master-heading">Looking for masterpiece?</h1>
         <button
           class="btn-brown btn-large align-self-center align-item-center shadow-none"
+          id="findMasterpieceBtn"
         >
           Find one now!
         </button>
@@ -167,81 +158,256 @@
     </div>
     <!-- carousel first line  -->
     <div
-      id="carouselExampleIndicators"
-      class="carousel slide carousel-fade d-flex flex-row justify-content-between align-item-center align-self-center py-5"
-      data-interval="1500"
-      data-ride="carousel"
+      id="carousel1"
+      class="d-flex flex-row justify-content-between align-item-center py-3"
     >
-      <div class="carousel-inner carousel-slide1 col-5">
-        <div class="carousel-item active">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
-            class="shadow carousel-img img-float"
-            alt="image"
-          />
-        </div>
-      </div>
-      <div class="carousel-inner carousel-slide1 col-5">
-        <div class="carousel-item active">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
-            class="shadow carousel-img img-float"
-            alt="image"
-          />
-        </div>
-      </div>
-      <div class="carousel-inner carousel-slide1 col-5">
-        <div class="carousel-item active">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(3).webp"
-            class="shadow carousel-img img-float"
-            alt="image"
-          />
-        </div>
+      <div class="slider1">
+        <ul class="slide-track1 m-0">
+          <li class="slide1" data-number="0">
+            <img
+              src="https://picsum.photos/id/23/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1" data-number="1">
+            <img
+              src="https://picsum.photos/id/24/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/25/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/26/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/27/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/28/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/29/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/30/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/31/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/32/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/33/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/34/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/35/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/36/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1">
+            <img
+              src="https://picsum.photos/id/37/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide1" data-number="16">
+            <img
+              src="https://picsum.photos/id/38/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+        </ul>
       </div>
     </div>
     <!-- carusel first line end -->
+
     <!-- carousel second line -->
     <div
-      id="carouselExampleIndicators"
-      class="carousel slide carousel-fade d-flex flex-row justify-content-between align-item-center align-self-center pb-5"
-      data-interval="1500"
-      data-ride="carousel"
+      id="carousel2"
+      class="d-flex flex-row justify-content-between align-item-center pb-3"
     >
-      <div class="carousel-inner carousel-slide2 col-5">
-        <div class="carousel-item active">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-            class="shadow carousel-img img-float"
-            alt="image"
-          />
-        </div>
-      </div>
-      <div class="carousel-inner carousel-slide2 col-5">
-        <div class="carousel-item active">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(5).webp"
-            class="shadow carousel-img img-float"
-            alt="image"
-          />
-        </div>
-      </div>
-      <div class="carousel-inner carousel-slide2 col-5">
-        <div class="carousel-item active">
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(6).webp"
-            class="shadow carousel-img img-float"
-            alt="image"
-          />
-        </div>
+      <div class="slider2">
+        <ul class="slide-track2 m-0">
+          <li class="slide2" data-number="0">
+            <img
+              src="https://picsum.photos/id/57/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2" data-number="1">
+            <img
+              src="https://picsum.photos/id/58/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/59/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/70/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/71/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/72/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/73/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/74/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/75/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/76/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/77/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/78/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/79/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/80/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2">
+            <img
+              src="https://picsum.photos/id/81/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+          <li class="slide2" data-number="16">
+            <img
+              src="https://picsum.photos/id/82/250/150"
+              class="shadow carousel-img img-float"
+              alt="image"
+            />
+          </li>
+        </ul>
       </div>
     </div>
     <!-- carusel second line end -->
-    <!-- Carousel wrapper -->
+    <!-- Carousel blockqoute wrapper -->
     <div
       id="carouselDarkVariant"
       class="carousel slide carousel-fade"
-      data-interval="1500"
+      data-interval="2000"
       data-ride="carousel"
       style="height: 50vh"
     >
@@ -260,10 +426,8 @@
                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
                     class="rounded-circle image-border mt-4 position-absolute-image"
                     alt="image"
-                    width="90"
-                    height="90"
                   />-3
-                  <blockquote class="pt-4" style="background-color: #e09686">
+                  <blockquote class="blockquote-peach">
                     <p class="text-center p-2">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit ut
                       aliquam, purus sit amet luctus venenatis.
@@ -276,7 +440,7 @@
                   <blockquote
                     class="blockquote m-0 align-self-center align-item-center"
                   >
-                    <p class="text-center mb-0 small">
+                    <p class="text-center mb-0 right-text small">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Pariatur sint nesciunt ad itaque aperiam expedita officiis
                       inventore.
@@ -301,10 +465,8 @@
                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(3).webp"
                     class="rounded-circle image-border mt-4 position-absolute-image"
                     alt="image"
-                    width="90"
-                    height="90"
                   />-3
-                  <blockquote class="pt-4" style="background-color: #e09686">
+                  <blockquote class="blockquote-peach">
                     <p class="text-center p-2">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit ut
                       aliquam, purus sit amet luctus venenatis.
@@ -317,7 +479,85 @@
                   <blockquote
                     class="blockquote m-0 align-self-center align-item-center"
                   >
-                    <p class="text-center mb-0 small">
+                    <p class="text-center mb-0 right-text small">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Pariatur sint nesciunt ad itaque aperiam expedita officiis
+                      inventore.
+                    </p>
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="row d-flex justify-content-between p-0">
+            <div
+              class="col-9 mr-auto ml-auto align-self-center align-item-center p-0"
+            >
+              <div class="d-flex flex-row text-center py-3">
+                <div
+                  class="col-6 p-2 position-relative"
+                  style="border-right: 2px solid #a16a5e"
+                >
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(5).webp"
+                    class="rounded-circle image-border mt-4 position-absolute-image"
+                    alt="image"
+                  />-3
+                  <blockquote class="blockquote-peach">
+                    <p class="text-center p-2">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit ut
+                      aliquam, purus sit amet luctus venenatis.
+                    </p>
+                  </blockquote>
+                </div>
+                <div
+                  class="col-6 pl-2 py-2 align-self-center align-item-center"
+                >
+                  <blockquote
+                    class="blockquote m-0 align-self-center align-item-center"
+                  >
+                    <p class="text-center mb-0 right-text small">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Pariatur sint nesciunt ad itaque aperiam expedita officiis
+                      inventore.
+                    </p>
+                  </blockquote>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="row d-flex justify-content-between p-0">
+            <div
+              class="col-9 mr-auto ml-auto align-self-center align-item-center p-0"
+            >
+              <div class="d-flex flex-row text-center py-3">
+                <div
+                  class="col-6 p-2 position-relative"
+                  style="border-right: 2px solid #a16a5e"
+                >
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(7).webp"
+                    class="rounded-circle image-border mt-4 position-absolute-image"
+                    alt="image"
+                  />-3
+                  <blockquote class="blockquote-peach">
+                    <p class="text-center p-2">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit ut
+                      aliquam, purus sit amet luctus venenatis.
+                    </p>
+                  </blockquote>
+                </div>
+                <div
+                  class="col-6 pl-2 py-2 align-self-center align-item-center"
+                >
+                  <blockquote
+                    class="blockquote m-0 align-self-center align-item-center"
+                  >
+                    <p class="text-center mb-0 right-text small">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Pariatur sint nesciunt ad itaque aperiam expedita officiis
                       inventore.
@@ -333,6 +573,7 @@
           type="button"
           data-mdb-target="#carouselDarkVariant"
           data-mdb-slide="prev"
+          id="#carouselDarkVariantIndicatorL"
         >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
@@ -342,13 +583,13 @@
           type="button"
           data-mdb-target="#carouselDarkVariant"
           data-mdb-slide="next"
+          id="#carouselDarkVariantIndicatorR"
         >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </button>
       </div>
     </div>
-    <!-- Carousel wrapper -->
     <!-- jQuery library -->
     <!-- <script src="./js/jquery-3.5.1.min.js"></script> -->
 
@@ -370,7 +611,7 @@
     ></script>
     <!-- <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script> -->
-    <script src="./visitor-home-page.js"></script>
-    <script src="./main.js"></script>
+    <script src="./js/visitor-home-page.js"></script>
+    <script type="module" src="./main.js"></script>
   </body>
 </html>

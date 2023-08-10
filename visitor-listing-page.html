@@ -66,8 +66,11 @@
       </nav>
     </header>
     <div class="container-fluid px-0 h-100">
-      <div class="row d-flex flex-column ml-auto mr-auto">
-        <div class="col-12 p-0 mt-4 mb-2 card card-beige">
+      <div
+        class="row d-flex flex-column ml-auto mr-auto"
+        id="artistItemContainer"
+      >
+        <!-- <div class="col-12 p-0 mt-4 mb-2 card card-beige">
           <img
             src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(22).webp"
             class="card-img-top"
@@ -87,8 +90,8 @@
               expedita nostrum.
             </p>
           </div>
-        </div>
-        <div class="col-12 p-0 my-2 card card-brown">
+        </div> -->
+        <!-- <div class="col-12 p-0 my-2 card card-brown">
           <img
             src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp"
             class="card-img-top"
@@ -129,7 +132,7 @@
               expedita nostrum.
             </p>
           </div>
-        </div>
+        </div> -->
 
         <!-- filter button  -->
         <div id="filter-button-basic" style="display: block">
@@ -235,7 +238,7 @@
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
-            onclick="openNav()"
+            onclick="closeNav()"
           >
             <i class="fa-solid fa-check fa-2x"></i>
           </button>
@@ -266,7 +269,7 @@
     ></script>
     <!-- <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script> -->
-    <script src="./visitor-listing-page.js"></script>
-    <script src="./main.js"></script>
+    <script src="./js/visitor-listing-page.js"></script>
+    <script type="module" src="./main.js"></script>
   </body>
 </html>
