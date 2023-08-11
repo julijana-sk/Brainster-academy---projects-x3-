@@ -1,8 +1,7 @@
-import {renderingVisitorListingPage} from './visitor-listing-page.js';
+import {renderingVisitorListingPage} from './pages/visitor-listing-page.js';
 
-const findMasterpieceBtn = document.querySelector('#findMasterpieceBtn');
-
-findMasterpieceBtn.addEventListener('click', function () {
+document.addEventListener('load', function () {
     renderingVisitorListingPage();
-    return;
+    
 })
+
