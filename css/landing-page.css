@@ -23,6 +23,10 @@ h1 {
     position: relative;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 nav h1 {
     margin-bottom: 0;
     margin-top: 20px;
@@ -80,50 +84,86 @@ nav h1 {
     color: #A16A5E;
 }
 
+.dropdown-menu {
+    position: absolute !important;
+    background-color: #FCEBD5;
+}
+
+.dropdown-menu a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 300;
+    color: #A16A5E;
+}
+
+.dropdown-menu a:hover {
+    color: #A16A5E;
+    background-color: #edd5bb;
+}
+
 .pointer {
     cursor: pointer;
 }
 
 .polygon1 {
-    height: 100vh;
+    height: 500px;
     clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 0% 20%, 0% 0%);
     position: relative;
-    transition: all 0.2s ease;
 }
 
 .polygon2 {
-    height: 100vh;
+    height: 500px;
     clip-path: polygon(0% 0%, 0% 1%, 100% 41%, 100% 60%, 0% 60%);
-    transition: all 0.2s ease;
 }
 
 .content1 {
     position: absolute;
-    left: 0%;
-    padding-top: 70px;
+    left: 17%;
+    padding-top: 50px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.75);
+    background-color: #edd5bb;
 }
 
 .content2 {
-    position: absolute;
-    top: 115px;
-    right: 0%;
-    padding-top: 250px;
+    top: 90px;
+    left: 1px;
+    padding-top: 200px;
+    background-color: #a16a5e;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.75);
 }
 
 .polygon1:hover{
     z-index: 1;
     transform: scale(1.05);
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.75) !important;
+    transition: all 0.2s ease;
 }
 
 .polygon2:hover {
     z-index: 1;
     transform: scale(1.05);
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.75) !important;
+    transition: all 0.2s ease;
 }
 
+#navigateVisitorHomePage a, #navigateVisitorHomePage h1{
+    color: #FCEBD5;
+    list-style: none;
+    text-decoration: none !important;
+}
+
+#navigateVisitorHomePage a:hover, #navigateVisitorHomePage h1:hover {
+    text-decoration: none !important;
+    color: #FCEBD5;
+    list-style: none;
+}
 
 /* responsive */
+@media (max-width: 390px) and (min-width: 357px) {
+    .content1 h1,
+    .content2 h1 {
+        font-size: 43px;
+    }
+}
 
 @media (max-width: 356px) and (min-width: 320px) {
     .content1 h1,
@@ -135,15 +175,12 @@ nav h1 {
     }
 }
 
-@media (max-width: 390px) and (min-width: 356px) {
+@media (min-width: 391px) {
     .content1 h1,
     .content2 h1 {
-        font-size: 45px;
+        font-size: 49px;
     }
-}
-
-@media (min-width: 391px) {
     .offset-6 {
-        margin-left: 55%;
+        margin-left: 52%;
     }
 }
