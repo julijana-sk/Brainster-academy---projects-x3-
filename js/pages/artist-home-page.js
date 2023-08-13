@@ -1,22 +1,20 @@
-// function showAllCards() {
-//     const allCards = document.querySelectorAll(".card");
+// const currentURLArtistHomePage = window.location.href;
 
-//     allCards.forEach(card => {
-//         card.style.display = "inline-block";
-//     });
+
+// export const currentURLAHP = () => {
+//   location.href = currentURLArtistHomePage;
 // }
-// filtering cards - end
 
-// navbar responsive
-// function openNav() {
-//     document.getElementById("myNav").style.width = "100%";
-//     }
 
-//     function closeNav() {
-//     document.getElementById("myNav").style.width = "0%";
-//     }
 
-// navbar responsive - end
+
+
+
+
+
+
+
+
 
 function myFunction() {
   const x = document.getElementById("myLinks");
@@ -26,6 +24,10 @@ function myFunction() {
     x.style.display = "block";
   }
 }
+
+myFunction();
+
+
 
 /* horizontal bar chart */
  var options = {

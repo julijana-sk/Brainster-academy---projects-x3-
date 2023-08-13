@@ -41,55 +41,49 @@
     />
   </head>
 
-  <body>
+  <body class="page-section">
     <header>
       <nav class="heading-layout text-center px-3">
         <h1 class="mr-auto ml-auto">Street ARTists</h1>
       </nav>
     </header>
-    <div class="container-fluid p-0">
-      <div
-        class="row d-flex flex-row justify-content-center text-center mr-auto"
-      >
-        <div class="col-12 px-5">
-          <img
-            src="./images/logo.png"
-            alt="logo centered"
-            class="logo-layout my-3 ml-3 align-self-center align-item-center"
-          />
-        </div>
-      </div>
-      <div
-        class="col-8 d-flex flex-column mr-auto ml-auto pointer align-item-center polygon1 content1"
-      >
-        <h1>Join as Artist</h1>
-        <div class="dropdown col-4 offset-6">
-          <a
-            class="btn btn-transparent dropdown-toggle dropdown-btn shadow-none align-item-right"
-            href="#"
-            role="button"
-            data-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Choose
-          </a>
-
-          <div class="dropdown-menu">
-            <a class="dropdown-item px-3" href="#">Artist 1</a>
-            <a class="dropdown-item px-3" href="#">Another artist 2</a>
-            <a class="dropdown-item px-3" href="#">Another artist 3</a>
-            <a class="dropdown-item px-3" href="#">Another artist 4</a>
-            <a class="dropdown-item px-3" href="#">Another artist 5</a>
+    <a href="#landingPage" id="landingPageContent">
+      <div class="container-fluid p-0">
+        <div
+          class="row d-flex flex-row justify-content-center text-center mr-auto"
+        >
+          <div class="col-12 px-5">
+            <img
+              src="./images/logo.png"
+              alt="logo centered"
+              class="logo-layout my-3 ml-3 align-self-center align-item-center"
+            />
           </div>
         </div>
-      </div>
-      <a href="./visitor-home-page.html" id="navigateVisitorHomePage">
         <div
-          class="col-8 d-flex flex-column align-self-center mr-auto ml-auto align-item-center pointer polygon2 content2"
+          class="col-8 d-flex flex-column mr-auto ml-auto pointer align-item-center polygon1 content1"
         >
-          <h1>Join as Visitor</h1>
+          <h1>Join as Artist</h1>
+          <div class="form-group">
+            <select
+              class="form-control col-4 offset-6 dropdown-artist-list bg-transparent shadow-none"
+              id="dropdown-menu"
+            >
+              <option>Choose</option>
+            </select>
+          </div>
         </div>
-      </a>
+        <a href="./visitor-home-page.html" id="navigateVisitorHomePage">
+          <div
+            class="col-8 d-flex flex-column align-self-center mr-auto ml-auto align-item-center pointer polygon2 content2"
+          >
+            <h1>Join as Visitor</h1>
+          </div>
+        </a>
+      </div>
+    </a>
+    <div id="loader" style="display: none">
+      <span class="loader"></span>
     </div>
 
     <!-- jQuery library -->
