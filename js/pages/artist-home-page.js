@@ -1,4 +1,3 @@
-
 function myFunction() {
   const menuBtn = document.querySelector("#menuBtn");
   const x = document.querySelector('#myLinks');
@@ -105,17 +104,17 @@ function createChart(groupedData) {
   const labels = Object.keys(groupedData);
   const data = Object.values(groupedData);
 
-  // Get the existing chart by id
-  const existingChart = Chart.getChart('myChart');
+  // // Get the existing chart by id
+  // const existingChart = Chart.getChart('myChart');
 
-  // Destroy the existing chart if it exists
-  if (existingChart) {
-    existingChart.destroy();
-  }
+  // // Destroy the existing chart if it exists
+  // if (existingChart) {
+  //   existingChart.destroy();
+  // }
 
 // Create a new chart using the canvas with id 'myChart'
 const canvas = document.getElementById('myChart').getContext('2d');
-const newChart = new Chart(canvas, {
+new Chart(canvas, {
     type: "bar",
     data: {
       labels: labels,

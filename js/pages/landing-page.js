@@ -41,32 +41,26 @@ function fetchArtists () {
         //   }, 1000);
         // }
         // )
-
-
-
       });
-     
-
 }
 
 fetchArtists();
 
 
-
-
-
-function startCountdown() {
-  let i = 3;
-  const interval = setInterval(function() {
-    if (i > 0) {
-      loader.style.display = 'flex';
-      loader.classList.add('centered-and-darken');
-      i--;
-    } else {
-      clearInterval(interval);
-      loader.style.display = 'none';
-      landingPageContent.style.display = 'flex';
+    function startCountdown() {
+    let i = 3;
+    const interval = setInterval(function() {
+        if (i > 0) {
+        loader.style.display = 'flex';
+        loader.classList.add('centered-and-darken');
+        i--;
+        } else {
+        clearInterval(interval);
+        loader.style.display = 'none';
+        landingPageContent.style.display = 'flex';
+        }
+    }, 1000);
     }
-  }, 1000);
-}
 
+
+    

@@ -53,20 +53,22 @@
             class="align-self-center align-item-center"
             id="logo"
           />
-          <h1 class="align-self-center">[Artist Name]</h1>
+          <h1 class="align-self-center" id="chosen-artist-name">
+            [Artist Name]
+          </h1>
         </div>
         <a
           href="javascript:void(0);"
           class="icon mt-3 mr-3 align-self-center"
-          onclick="myFunction()"
+          id="menuBtn"
         >
           <i class="fa fa-bars"></i>
         </a>
       </nav>
       <div id="myLinks" class="text-center myLinksDisplay">
-        <a href="#">Home</a>
-        <a href="#">Items</a>
-        <a href="#">Auction</a>
+        <a href="./artist-home-page.html">Home</a>
+        <a href="./artist-items-page.html">Items</a>
+        <a href="./auction-page.html">Auction</a>
       </div>
     </header>
     <div class="container-fluid px-0 h-100">
@@ -168,6 +170,7 @@
             type="text"
             class="form-control bg-transparent shadow-none"
             id="formGroupExampleInput"
+            required
           />
         </div>
         <div class="form-group">
@@ -184,12 +187,14 @@
         >
           <div class="col-6">
             <div class="form-group">
-              <label for="formGroupExampleInput">Type</label>
-              <input
-                type="text"
-                class="form-control shadow-none bg-transparent"
-                id="formGroupExampleInput"
-              />
+              <div class="col-12 mb-0 p-0">
+                <label for="chooseByType" class="text-capitalize mb-2"
+                  >Type</label
+                >
+                <select class="form-control" id="chooseByType" required>
+                  <option class="option"></option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="col-6">
@@ -200,6 +205,7 @@
               type="text"
               id="form2"
               class="form-control shadow-none bg-transparent"
+              required
             />
           </div>
         </div>
@@ -264,7 +270,9 @@
     ></script>
     <!-- <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script> -->
-    <script src="./js/pages/artist-items-page.js"></script>
+    <script src="./js/Data/data.js"></script>
     <script type="module" src="./js/main.js"></script>
+    <script src="./js/pages/artist-home-page.js"></script>
+    <script src="./js/pages/artist-items-page.js"></script>
   </body>
 </html>

@@ -1,23 +1,3 @@
-// function showAllCards() {
-//     const allCards = document.querySelectorAll(".card");
-
-//     allCards.forEach(card => {
-//         card.style.display = "inline-block";
-//     });
-// }
-// filtering cards - end
-
-// navbar responsive
-// function openNav() {
-//     document.getElementById("myNav").style.width = "100%";
-//     }
-
-//     function closeNav() {
-//     document.getElementById("myNav").style.width = "0%";
-//     }
-
-// navbar responsive - end
-
 function addItem() {
   const x = document.getElementById("filter-layer");
   if (x.style.display === "block") {

@@ -21,10 +21,6 @@ const ALLOWED_ROUTES = [
 const landingPageContent = document.querySelector('#landingPageContent');
 const loader = document.querySelector('#loader');
 
-
-
-
-
 const handleRoute = () => {
 // function handleRoute(event) {
     // event.preventDefault();
@@ -71,8 +67,7 @@ const handleRoute = () => {
         // }
 
     }
-    // handleRoute();
-
+    handleRoute();
 }
 
 
