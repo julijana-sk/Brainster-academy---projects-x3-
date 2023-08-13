@@ -149,12 +149,14 @@ h4 {
 .overlay {
     top: 70px;
     width: 0;
+    right: 0;
     position: absolute;
     background-color: rgba(161, 106, 94, 1);
     overflow-x: hidden;
     transition: 0.5s;
     z-index: 9998;
     color: #FCEBD5;
+    /* direction: rtl; */
 }
 
 .overlay-content {
@@ -190,11 +192,21 @@ h4 {
 .overlay h2 {
     top: 20px;
     left: 5px;
-    font-size: 50px;
-    font-weight: normal;
+    font-size: 30px;
+    font-family: 'Roboto';
+    font-weight: 500;
+    line-height: 35px;
+    letter-spacing: 0em;
+    text-align: left;
 }
 
-.overlay-content h3 {
+.overlay-content  {
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 21px;
+    letter-spacing: 0em;
+    text-align: left;
     color: #EDD5BB;
 }
 
@@ -211,22 +223,43 @@ h4 {
     border-bottom: 2px solid #FCEBD5;
 }
 
-.dropdown::after {
-    margin-left: 20px;
-    color: #A16A5E;
-    background-color: #EDD5BB;
-}
-
-.dropdown a {
-    color: #EDD5BB;
-    font-weight: normal;
-    font-size: 300;
-}
-
-.button-label:hover {
-    color: #FCEBD5;
-}
-
 .pointer {
     cursor: pointer;
 }
+
+.overlay ul li input {
+    box-shadow: none;
+    background-color: transparent;
+    color: #EDD5BB;
+    border-radius: 2px;
+    Width: 97px;
+    Height: 27px;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.overlay ul li select {
+    color: #EDD5BB;
+    background-color: transparent;
+    box-shadow: none;
+    Width: 97px;
+    Height: 30px;
+}
+
+.option {
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 300;
+    color: #A16A5E;
+    background-color: transparent;
+}
+
+.option:hover {
+    color: #A16A5E;
+    background-color: #edd5bb;
+}
+
+

@@ -24,6 +24,7 @@ const loader = document.querySelector('#loader');
 
 
 
+
 const handleRoute = () => {
 // function handleRoute(event) {
     // event.preventDefault();

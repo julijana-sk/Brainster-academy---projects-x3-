@@ -25,9 +25,9 @@ p {
     margin-bottom: 10px;
     padding-bottom: 0;
     font-family: 'Roboto';
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 21px;
+    font-size: 17px;
+    font-weight: 200;
+    line-height: 20px;
 }
 
 * p:last-child {
@@ -92,11 +92,11 @@ p {
 }
 
 #myLinks {
-    display: none;
     position: absolute;
     z-index: 988888;
     width: 100%;
     top: 70px;
+    display: none;
 }
 
 .myLinksDisplay a {
@@ -122,6 +122,8 @@ p {
     font-family: 'Roboto';  
     color: #FCEBD5;
     text-align: center;
+    font-weight: bold;
+    text-transform: capitalize;
 }
 
 div .btnDays:last-child {
@@ -136,14 +138,7 @@ div .btnDays:last-child {
 }
 
 
-
-/* horizontal bar chart */
-body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    padding: 20px;
-}
-
-/* Bar Graph Horizontal */
+/* Horizontal Bar Chart*/
 .bar-graph .year {
     -webkit-animation: fade-in-text 2.2s 0.1s forwards;
     -moz-animation: fade-in-text 2.2s 0.1s forwards;
@@ -216,53 +211,9 @@ body {
     animation: show-bar-four 1.2s 0.4s forwards;
 }
 
-/* Bar Graph Horizontal Animations */
-@-webkit-keyframes show-bar-one {
-    0% {
-        width: 0;
-    }
-
-    100% {
-        width: 69.6%;
-    }
-}
-
-@-webkit-keyframes show-bar-two {
-    0% {
-        width: 0;
-    }
-
-    100% {
-        width: 71%;
-    }
-}
-
-@-webkit-keyframes show-bar-three {
-    0% {
-        width: 0;
-    }
-
-    100% {
-        width: 74.7%;
-    }
-}
-
-@-webkit-keyframes show-bar-four {
-    0% {
-        width: 0;
-    }
-
-    100% {
-        width: 76.8%;
-    }
-}
-
-@-webkit-keyframes fade-in-text {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
+/* Horizontal Bar Chart*/
+#myChart {
+    width: 90% !important;
+    margin-right: auto;
+    margin-left: auto
 }

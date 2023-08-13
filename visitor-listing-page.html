@@ -159,72 +159,82 @@
       <div class="overlay-content m-4">
         <div class="d-flex flex-row justify-content-between">
           <h2>Filter by</h2>
-          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+          <a
+            href="javascript:void(0)"
+            class="closebtn pt-1"
+            onclick="closeNav()"
             >X</a
           >
         </div>
         <ul class="navbar-nav mt-3 mb-5">
           <li class="nav-item pb-4">
-            <h3 class="text-capitalize mb-3">by item title</h3>
-            <button class="button-label bg-transparent">Label</button>
-          </li>
-          <li class="nav-item py-4">
-            <h3 class="text-capitalize mb-3">by artist</h3>
-            <div class="dropdown">
-              <a
-                class="btn-transparent dropdown-toggle button-label shadow-none align-item-right p-0 pl-2"
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-                aria-expanded="false"
+            <div
+              class="col-6 form-group d-flex flex-column p-0 justify-content-start"
+            >
+              <label for="chooseTitle" class="text-capitalize mb-3"
+                >by item title</label
               >
-                Choose
-              </a>
-
-              <div class="dropdown-menu bg-transparent">
-                <a class="dropdown-item" href="#">Artist 1</a>
-                <a class="dropdown-item" href="#">Another artist 2</a>
-                <a class="dropdown-item" href="#">Another artist 3</a>
-                <a class="dropdown-item" href="#">Another artist 4</a>
-                <a class="dropdown-item" href="#">Another artist 5</a>
-              </div>
+              <input
+                type="text"
+                class="button-label bg-transparent"
+                placeholder="Label"
+                id="chooseTitle"
+              />
             </div>
           </li>
           <li class="nav-item py-4">
-            <h3 class="text-capitalize mb-3">by price</h3>
             <div
-              class="d-flex flex-row justify-content-between align-item-center"
+              class="col-6 form-group d-flex flex-column p-0 justify-content-start"
             >
-              <span
-                >Min:
-                <button class="button-label bg-transparent">Label</button></span
+              <label for="chooseArtist" class="text-capitalize mb-3"
+                >by artist</label
               >
-              <span
-                >Max:
-                <button class="button-label bg-transparent">Label</button></span
+              <select class="form-control" id="chooseArtist">
+                <option class="option">Choose</option>
+              </select>
+            </div>
+          </li>
+          <li class="nav-item py-4">
+            <div class="col-12 form-group d-flex flex-column p-0">
+              <label for="choosePrice" class="text-capitalize mb-3"
+                >by price</label
               >
+              <div
+                class="d-flex flex-row justify-content-between align-item-center"
+              >
+                <span
+                  >Min:
+                  <input
+                    type="number"
+                    class="button-label bg-transparent ml-2"
+                    placeholder="Label"
+                    id="chooseMinPrice"
+                    min="1"
+                  />
+                </span>
+                <span
+                  >Max:
+                  <input
+                    type="number"
+                    class="button-label bg-transparent ml-2"
+                    placeholder="Label"
+                    id="chooseMaxPrice"
+                    min="1"
+                  />
+                </span>
+              </div>
             </div>
           </li>
           <li class="nav-item pt-4 pb-5 mb-5">
-            <h3 class="text-capitalize mb-3">by type</h3>
-            <div class="dropdown">
-              <a
-                class="btn-transparent dropdown-toggle button-label shadow-none align-item-right p-0 pl-2"
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-                aria-expanded="false"
+            <div
+              class="col-6 form-group d-flex flex-column p-0 justify-content-start"
+            >
+              <label for="chooseType" class="text-capitalize mb-3"
+                >by type</label
               >
-                Choose
-              </a>
-
-              <div class="dropdown-menu bg-transparent">
-                <a class="dropdown-item" href="#">Type 1</a>
-                <a class="dropdown-item" href="#">Another Type 2</a>
-                <a class="dropdown-item" href="#">Another Type 3</a>
-                <a class="dropdown-item" href="#">Another Type 4</a>
-                <a class="dropdown-item" href="#">Another Type 5</a>
-              </div>
+              <select class="form-control" id="chooseType">
+                <option class="option">Choose</option>
+              </select>
             </div>
           </li>
         </ul>

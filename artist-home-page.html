@@ -46,6 +46,7 @@
       <nav class="heading-layout py-2 px-3">
         <div
           class="d-flex flex-row justify-content-between align-self-center align-item-center"
+          id="choosenArtistNav"
         >
           <img
             src="./images/logo.png"
@@ -53,25 +54,27 @@
             class="align-self-center align-item-center"
             id="logo"
           />
-          <h1 class="align-self-center">LeanneGraham</h1>
+          <h1 class="align-self-center" id="chosen-artist-name"></h1>
         </div>
         <a
           href="javascript:void(0);"
           class="icon mt-3 mr-3 align-self-center"
-          onclick="myFunction()"
+          id="menuBtn"
         >
           <i class="fa fa-bars"></i>
         </a>
       </nav>
       <div id="myLinks" class="text-center myLinksDisplay">
-        <a href="#">Home</a>
-        <a href="#">Items</a>
-        <a href="#">Auction</a>
+        <a href="./artist-home-page.html">Home</a>
+        <a href="./artist-items-page.html">Items</a>
+        <a href="./auction-page.html">Auction</a>
       </div>
     </header>
     <div class="page-section">
       <div class="container-fluid p-4">
-        <div class="row d-flex flex-row flex-nowrap text-center">
+        <div
+          class="row d-flex flex-row flex-nowrap text-capitalize text-center"
+        >
           <div class="col-5 mb-3 card-brown p-3 mr-auto ml-auto">
             <p>total items sold</p>
             <p class="price">12/35</p>
@@ -81,13 +84,17 @@
             <p class="price">$1700</p>
           </div>
         </div>
-        <div class="row text-center">
-          <div class="col-11 mr-auto ml-auto card-brick p-3">
-            <p>live auctioning item</p>
+        <a
+          href="./auction-page.html"
+          id="navigateAuctionPageDiv"
+          style="text-decoration: none; margin: 0"
+        >
+          <div class="col-12 m-0 card-brick p-3 text-center">
+            <p class="text-capitalize">live auctioning item</p>
             <p class="price">$12000</p>
             <p>current bid</p>
           </div>
-        </div>
+        </a>
       </div>
       <div class="container-fluid">
         <div class="row p-4">
@@ -96,45 +103,26 @@
             <div
               class="d-flex flex-row flex-wrap justify-content-between align-item-center align-self-center"
             >
-              <button class="btnDays bg-brown">7 days</button>
-              <button class="btnDays bg-brick">14 days</button>
-              <button class="btnDays bg-brown">1 month</button>
-              <button class="btnDays bg-brown">1 year</button>
+              <button class="btnDays bg-brown" data-option="last7days">
+                7 days
+              </button>
+              <button class="btnDays bg-brick" data-option="last14days">
+                14 days
+              </button>
+              <button class="btnDays bg-brown" data-option="lastmonth">
+                1 month
+              </button>
+              <button class="btnDays bg-brown" data-option="lastyear">
+                1 year
+              </button>
             </div>
           </div>
           <div class="col-12"></div>
         </div>
       </div>
-
-      <!-- horizontal chart bar -->
-      <div
-        class="d-flex flex-row justify-content-center align-item-center mb-3"
-      >
-        <p
-          class="bg-brown mt-1 mb-0 mr-2"
-          style="height: 13px; width: 40px"
-        ></p>
-        <p class="small">Amount</p>
+      <div>
+        <canvas id="myChart"></canvas>
       </div>
-
-      <section class="bar-graph bar-graph-horizontal bar-graph-one">
-        <div class="bar-one">
-          <span class="year">2019</span>
-          <div class="bar" data-percentage="69.6%"></div>
-        </div>
-        <div class="bar-two">
-          <span class="year">2018</span>
-          <div class="bar" data-percentage="71%"></div>
-        </div>
-        <div class="bar-three">
-          <span class="year">2017</span>
-          <div class="bar" data-percentage="74.7%"></div>
-        </div>
-        <div class="bar-four">
-          <span class="year">2019</span>
-          <div class="bar" data-percentage="76.8%"></div>
-        </div>
-      </section>
     </div>
     <!-- jQuery library -->
     <!-- <script src="./js/jquery-3.5.1.min.js"></script> -->
@@ -155,8 +143,12 @@
       integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script> -->
+    <script src="./js/Data/data.js"></script>
+    <script src="./js/pages/landing-page.js"></script>
     <script src="./js/pages/artist-home-page.js"></script>
     <script type="module" src="./js/main.js"></script>
   </body>

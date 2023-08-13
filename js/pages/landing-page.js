@@ -17,7 +17,7 @@ function fetchArtists () {
     const artistNamesArray = artistNames.split(",");
 
     artistNamesArray.forEach((artistName) => {
-        artistNamesDropdown.innerHTML += `<option value="${artistName}">${artistName}</option>`;
+    artistNamesDropdown.innerHTML += `<option value="${artistName}">${artistName}</option>`;
     });
 
     artistNamesDropdown.addEventListener('change', (event) => {
@@ -25,13 +25,34 @@ function fetchArtists () {
         startCountdown();
 
         const chosenArtistName = event.target.value;
-        localStorage.setItem(CHOSEN_ARTIST_NAME, chosenArtistName);
-        location.hash = "#artistHomePage";
-    });
+        localStorage.setItem('CHOSEN_ARTIST_NAME', chosenArtistName);
+          
+        // event.target.addEventListener('click', () => {
+        //   window.location.href = "./artist-home-page.html";
+        // })
+
+        // event.target.addEventListener('click', function navigateToArtistHomePage() {
+        //   let i = 3;
+        //   const interval = setInterval(function() {
+        //     if (i > 0) {
+        //     window.location.href = "./artist-home-page.html";
+        //       i--;
+        //     }
+        //   }, 1000);
+        // }
+        // )
+
+
+
+      });
+     
 
 }
 
 fetchArtists();
+
+
+
 
 
 function startCountdown() {
@@ -48,3 +69,4 @@ function startCountdown() {
     }
   }, 1000);
 }
+
