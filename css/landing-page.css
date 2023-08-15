@@ -7,12 +7,15 @@ body {
     color: #A16A5E;
 }
 
+.page-section {
+    height: 100vh;
+}
+
 h1 {
     margin-bottom: 0;
     padding-bottom: 0;
     font-family: 'Reenie Beanie';
     font-style: italic;
-    color: #A16A5E;
     font-size: 50px;
     font-weight: 500;
     line-height: 45px;
@@ -138,18 +141,6 @@ nav h1 {
     z-index: 1;
     transform: scale(1.05);
     transition: all 0.2s ease;
-}
-
-#navigateVisitorHomePage a, #navigateVisitorHomePage h1{
-    color: #FCEBD5;
-    list-style: none;
-    text-decoration: none !important;
-}
-
-#navigateVisitorHomePage a:hover, #navigateVisitorHomePage h1:hover {
-    text-decoration: none !important;
-    color: #FCEBD5;
-    list-style: none;
 }
 
 /* loader design */
