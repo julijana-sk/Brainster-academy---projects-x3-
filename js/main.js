@@ -1,7 +1,7 @@
 // import { fetchArtists } from './pages/landing-page.js';
 // import {backToHomePage} from './pages/visitor-home-page.js';
 // import { populateContentArtistHomePage } from './pages/artist-home-page.js';
-// import { populateContentVisitorListingPage } from './pages/visitor-listing-page.js';
+// import { renderingVisitorListingPage } from './pages/visitor-listing-page.js';
 // import { populateContentVistiorListingFiltersPage } from './pages/visitor-listing-page.js';
 
 const LANDING_HOME_PAGE_ID = '#landingPage';
@@ -20,6 +20,14 @@ const ALLOWED_ROUTES = [
 // const SECTION_PAGE_CLASS_NAME = '.page-section';
 const landingPageContent = document.querySelector('#landingPageContent');
 const loader = document.querySelector('#loader');
+
+
+renderingVisitorListingPage();
+
+
+
+
+
 
 const handleRoute = () => {
 // function handleRoute(event) {

@@ -56,7 +56,7 @@ p {
 }
 
 .price-brown {
-    width: 13%;
+    max-width: 30%;
     height: 3%;
     padding: 3px 5px;
     border: #A16A5E;
@@ -75,7 +75,7 @@ p {
 }
 
 .price-beige {
-    width: 13%;
+    max-width: 30%;
     height: 3%;
     padding: 3px 5px;
     border: #FCEBD5;
