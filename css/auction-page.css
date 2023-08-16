@@ -61,9 +61,11 @@ nav h1 {
     z-index: 9999999;
 }
 
-#auctionSymbol {
-    width: 100%;
+.auctionSymbol {
+    width: 35px;
     height: 35px;
+    margin-top: 16px;
+    margin-right: 8px;
 }
 
 .master-heading {
