@@ -65,11 +65,6 @@ h4 {
     display: inline-block;
 }
 
-.card-beige {
-    background-color:#FCEBD5;
-    color: #A16A5E;
-}
-
 .price-brown {
     max-width: 30%;
     height: 3%;
@@ -82,11 +77,6 @@ h4 {
     font-size: small;
     text-align: center;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
-}
-
-.card-brown {
-    color: #FCEBD5;
-    background-color: #A16A5E;
 }
 
 .price-beige {
@@ -102,6 +92,27 @@ h4 {
     text-align: center;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 }
+
+#visitorListingPage {
+    background-color: #EDD5BB;
+}
+
+.card-brown {
+    color: #FCEBD5;
+    background-color: #A16A5E;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card-brown h1 {
+    color: #FCEBD5 !important;
+}
+
+.card-beige {
+    background-color: #FCEBD5;
+    color: #A16A5E;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
 
 
 /* filter button */

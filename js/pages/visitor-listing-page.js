@@ -4,45 +4,49 @@ const artistItemContainer = document.querySelector('#artistItemContainer');
 
 fetchArtists();
 
+artistItemContainer.innerHTML = "";
 
 function renderVisitorListingPage () {
 
-  // artistItemContainer.innerHTML = "";
   const chosenArtistFilter = localStorage.getItem(CHOSEN_ARTIST_FILTER);
 
   // TODO: Filtering of items according to saved filter values.
-  items.filter(({ artist }) => artist === chosenArtistFilter)
-       .forEach((artistItem) => {
-       artistItemContainer.innerHTML += `
-          <div class="col-12 p-0 mt-4 mb-2 item-wrapper">
-            <img
-              src="${artistItem.image}"
-              class="card-img-top"
-              alt="picture of artist"
-            />
-            <div class="card-body py-3 px-4">
-              <div class="d-flex flex-row justify-content-between align-item-center align-self-center">
-                <h1 class="card-title font-italic m-0">${artistItem.artist}</h1>
-                <p class="price-brown">$${artistItem.price}</p>
-              </div>
-              <h4 class="card-subtitle my-2">${artistItem.title}</h4>
-              <p class="card-text">
-                ${artistItem.description}
-              </p>
-            </div>
+  items
+  // .filter(({ artist }) => artist === chosenArtistFilter)
+  .forEach((artistItem, index) => {
+    if (artistItem.isPublished === true) {
+      const itemWrapperDiv = document.createElement("div");
+      itemWrapperDiv.classList.add("col-12", "p-0", "mt-4", "mb-2");
+
+      itemWrapperDiv.innerHTML = `
+        <img
+          src="${artistItem.image}"
+          class="card-img-top"
+          alt="picture of artist"
+        />
+        <div class="card-body py-3 px-4">
+          <div class="d-flex flex-row justify-content-between align-item-center align-self-center">
+            <h1 class="card-title font-italic m-0">${artistItem.artist}</h1>
+            <p class="priceBtn">$${artistItem.price}</p>
           </div>
-        `;
-        //selecting bg color and style depending on index
-        const itemWrapper = document.querySelectorAll('.item-wrapper');
-        itemWrapper.forEach((div, index) => {
-          if (index % 2 === 0) {
-            div.classList.add('.card-beige');
-          } else {
-            div.classList.add('.card-brown');
-          }
-        });
-      });
+          <h4 class="card-subtitle my-2">${artistItem.title}</h4>
+          <p class="card-text">
+            ${artistItem.description}
+          </p>
+        </div>
+      `;
+
+      artistItemContainer.appendChild(itemWrapperDiv);
+
+      itemWrapperDiv.classList.add(index % 2 === 0 ? "card-beige" : "card-brown");
+
+      const priceBtn = itemWrapperDiv.querySelector(".priceBtn");
+      priceBtn.classList.add(index % 2 === 0 ? "price-brown" : "price-beige");
+    }
+  });
+
 }
+
 
 // filter layer display
 const filterBtnBasic = document.getElementById("filter-button-basic");
@@ -83,13 +87,13 @@ function renderVistiorListingFiltersPage() {
      filterBtnChecked.addEventListener('click', () => {
           const chosenArtistFilter = artistNamesDropdown.value;
           localStorage.setItem(CHOSEN_ARTIST_FILTER, chosenArtistFilter);
-          location.hash = '#visitorListingPage';
+          // location.hash = '#visitorListingPage';
      })
 }
 
 
  function navigateAuctionPage () {
-    const auctionSymbol = document.querySelector('.auctionSymbol');
+    const auctionSymbol = document.querySelector('#auctionSymboll');
 
     auctionSymbol.addEventListener('click', () => {
         location.hash = "#auctiongPage";

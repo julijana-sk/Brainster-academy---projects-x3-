@@ -529,30 +529,27 @@
           </nav>
         </header>
         <div class="container-fluid px-0 h-100">
+          <!-- filter button  -->
+          <div id="filter-button-basic" style="display: block">
+            <button
+              class="navbar-toggler btn btn-large filter-button"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              onclick="openNav()"
+            >
+              <i class="fa-solid fa-sliders fa-rotate-90 fa-xl"></i>
+            </button>
+          </div>
+          <!-- filter button  end-->
           <div
             class="row d-flex flex-column ml-auto mr-auto"
             id="artistItemContainer"
-          >
-            <!-- filter button  -->
-            <div id="filter-button-basic" style="display: block">
-              <button
-                class="navbar-toggler btn btn-large filter-button"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-                onclick="openNav()"
-              >
-                <i class="fa-solid fa-sliders fa-rotate-90 fa-xl"></i>
-              </button>
-            </div>
-            <!-- filter button  end-->
-          </div>
+          ></div>
         </div>
-        <!-- Carousel wrapper -->
-
         <!-- filter layer -->
         <div class="overlay" id="filter-layer">
           <div class="overlay-content m-4">

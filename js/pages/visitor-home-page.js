@@ -10,9 +10,13 @@ carouselImg.addEventListener('click', () => {
     location.hash = "#visitorListingPage";
 });
 
-// document.querySelector('#auctionSymbol').addEventListener('click', () => {
-//     location.hash = "#auctiongPage";
-// })
+function navigateAuctionPage () {
+const auctionSymbol = document.querySelector('#auctionSymbol');
+
+auctionSymbol.addEventListener('click', () => {
+    location.hash = "#auctiongPage";
+});
+}
 
 document.querySelector('#navigateVisitorListingPage').addEventListener('click', () => {
     location.hash = "#visitorListingPage";
