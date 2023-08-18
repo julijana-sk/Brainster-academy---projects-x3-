@@ -8,16 +8,13 @@ artistItemContainer.innerHTML = "";
 
 function renderVisitorListingPage () {
 
-  const chosenArtistFilter = localStorage.getItem(CHOSEN_ARTIST_FILTER);
 
   // TODO: Filtering of items according to saved filter values.
   items
-  // .filter(({ artist }) => artist === chosenArtistFilter)
   .forEach((artistItem, index) => {
     if (artistItem.isPublished === true) {
       const itemWrapperDiv = document.createElement("div");
       itemWrapperDiv.classList.add("col-12", "p-0", "mt-4", "mb-2");
-
       itemWrapperDiv.innerHTML = `
         <img
           src="${artistItem.image}"
@@ -71,24 +68,69 @@ const filterBtnChecked = document.getElementById("filter-button-checked");
 
 
 function renderVistiorListingFiltersPage() {
+
      const artistNamesDropdown = document.querySelector('#chooseArtist');
      const artistNames = localStorage.getItem('artistNames').split(',');
+          artistNamesDropdown.innerHTML = "";
+
      artistNames.forEach((artistName) => {
           artistNamesDropdown.innerHTML += `<option value="${artistName}">${artistName}</option>`;
      });
 
-     // NOTE: Set as selected the previously picked value.
      const chosenArtistFilter = localStorage.getItem(CHOSEN_ARTIST_FILTER);
      if (chosenArtistFilter) {
           artistNamesDropdown.value = chosenArtistFilter;
      }
 
-    //  const filterBtnChecked = document.querySelector('#filters-apply');
      filterBtnChecked.addEventListener('click', () => {
-          const chosenArtistFilter = artistNamesDropdown.value;
-          localStorage.setItem(CHOSEN_ARTIST_FILTER, chosenArtistFilter);
-          // location.hash = '#visitorListingPage';
-     })
+        let chosenArtistFilter = artistNamesDropdown.value;
+        localStorage.setItem(CHOSEN_ARTIST_FILTER, chosenArtistFilter);
+        document.querySelector('#chosenArtistNameFilters').innerText = localStorage.getItem(CHOSEN_ARTIST_FILTER);
+        
+        function renderVisitorListingPage () {
+          artistItemContainer.innerHTML = "";
+
+          items
+            .filter(({ artist }) => artist === chosenArtistFilter)
+            .forEach((artistItem, index) => {
+              if (artistItem.isPublished === true) {
+              const itemWrapperDiv = document.createElement("div");
+              itemWrapperDiv.classList.add("col-12", "p-0", "mt-4", "mb-2");
+
+              itemWrapperDiv.innerHTML = `
+                <img
+                  src="${artistItem.image}"
+                  class="card-img-top"
+                  alt="picture of artist"
+                />
+                <div class="card-body py-3 px-4">
+                  <div class="d-flex flex-row justify-content-between align-item-center align-self-center">
+                    <h1 class="card-title font-italic m-0">${artistItem.artist}</h1>
+                    <p class="priceBtn">$${artistItem.price}</p>
+                  </div>
+                  <h4 class="card-subtitle my-2">${artistItem.title}</h4>
+                  <p class="card-text">
+                    ${artistItem.description}
+                  </p>
+                </div>
+              `;
+              
+              artistItemContainer.appendChild(itemWrapperDiv);
+
+              itemWrapperDiv.classList.add(index % 2 === 0 ? "card-beige" : "card-brown");
+
+              const priceBtn = itemWrapperDiv.querySelector(".priceBtn");
+              priceBtn.classList.add(index % 2 === 0 ? "price-brown" : "price-beige");
+              }
+            });
+
+            location.hash = '#visitorListingPage';
+         } 
+
+          renderVisitorListingPage();
+          window.scrollTo(0, 0);
+      });
+
 }
 
 
@@ -113,4 +155,5 @@ window.addEventListener('scroll', function() {
     fixedDiv.style.top = '70px';
   }
 });
+
 

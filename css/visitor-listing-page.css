@@ -7,7 +7,7 @@ body {
     color: #A16A5E;
 }
 
-h1 {
+nav h1 {
     margin-bottom: 0;
     margin-top: 20px;
     padding-bottom: 0;
@@ -105,12 +105,18 @@ h4 {
 
 .card-brown h1 {
     color: #FCEBD5 !important;
+    font-size: 35px;
+    text-align: left;
 }
 
 .card-beige {
     background-color: #FCEBD5;
     color: #A16A5E;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+.card-beige h1 {
+    font-size: 35px;
+    text-align: left;
 }
 
 

@@ -46,7 +46,7 @@ nav h1 {
 
 .position-absolute-masterpiece {
     position: absolute;
-    top: 27%;
+    top: 20%;
     left: 50%;
     width: 100%;
     transform: translate(-50%, -50%);
@@ -142,7 +142,7 @@ blockquote p {
 .slide-track1 {
     display: flex;
     justify-content: start;
-    width: calc(250px * 24);
+    width: calc(250px * 8);
     animation: scroll1 40s linear infinite;
 }
 
@@ -175,7 +175,7 @@ blockquote p {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(-250px * 24));
+        transform: translateX(calc(-250px * 4));
     }
 }
 
@@ -190,9 +190,9 @@ blockquote p {
 
 .slide-track2 {
     display: flex;
-    justify-content: center;
-    width: calc(250px * 24);
-    animation: scroll2 40s linear infinite;
+    justify-content: left;
+    width: calc(250px * 8);
+    animation: scroll2 50s linear infinite;
 }
 
 .slide-track2:hover {
@@ -215,16 +215,16 @@ blockquote p {
 }
 
 .slide2 img:hover {
-    transform: translateZ(30px);
+    transform: translateX(10px);
     opacity: 0.5;
 }
 
 @keyframes scroll2 {
     0% {
-        transform: translateX(calc(250px * 24));
+        transform: translateX(calc(-250px * 6));
     }
 
     100% {
-        transform: translateX(0);
+        transform: translateX(calc(250px * 1));
     }
 }
