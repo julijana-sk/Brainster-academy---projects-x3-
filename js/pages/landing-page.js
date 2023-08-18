@@ -5,6 +5,7 @@ const CHOSEN_ARTIST = 'chosenArtistName';
 function fetchArtists () {
     const artistNamesDropdown = document.querySelector("#dropdown-menu");
     let artistNames = localStorage.getItem(ARTIST);
+
     if (!artistNames) {
         fetch('https://jsonplaceholder.typicode.com/users')
         .then(result => result.json())

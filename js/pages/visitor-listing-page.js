@@ -1,5 +1,7 @@
 const CHOSEN_ARTIST_FILTER = 'chosenArtistFilter';
-
+const CHOSEN_PRICE_FILTER_MIN = 'chosenPriceFilterMin';
+const CHOSEN_PRICE_FILTER_MAX = 'chosenPriceFilterMax';
+const CHOSEN_TYPE_FILTER = 'chosenTypeFilter';
 const artistItemContainer = document.querySelector('#artistItemContainer');
 
 fetchArtists();
@@ -7,9 +9,6 @@ fetchArtists();
 artistItemContainer.innerHTML = "";
 
 function renderVisitorListingPage () {
-
-
-  // TODO: Filtering of items according to saved filter values.
   items
   .forEach((artistItem, index) => {
     if (artistItem.isPublished === true) {
@@ -44,7 +43,6 @@ function renderVisitorListingPage () {
 
 }
 
-
 // filter layer display
 const filterBtnBasic = document.getElementById("filter-button-basic");
 const filterBtnChecked = document.getElementById("filter-button-checked");
@@ -55,7 +53,6 @@ const filterBtnChecked = document.getElementById("filter-button-checked");
       filterBtnChecked.style.display = "flex";
       filterBtnChecked.style.justifyContent = "end";
       window.scrollTo(0, 0);
-
   }
 
   function closeNav() {
@@ -82,18 +79,33 @@ function renderVistiorListingFiltersPage() {
           artistNamesDropdown.value = chosenArtistFilter;
      }
 
+     
+
      filterBtnChecked.addEventListener('click', () => {
         let chosenArtistFilter = artistNamesDropdown.value;
         localStorage.setItem(CHOSEN_ARTIST_FILTER, chosenArtistFilter);
         document.querySelector('#chosenArtistNameFilters').innerText = localStorage.getItem(CHOSEN_ARTIST_FILTER);
         
-        function renderVisitorListingPage () {
-          artistItemContainer.innerHTML = "";
+       // filter za price
+      let chosenPriceFilterMin = chooseMinPrice.value;
+      let chosenPriceFilterMax = chooseMaxPrice.value;
+      localStorage.setItem(CHOSEN_PRICE_FILTER_MIN, chosenPriceFilterMin);
+      localStorage.setItem(CHOSEN_PRICE_FILTER_MAX, chosenPriceFilterMax);
 
-          items
-            .filter(({ artist }) => artist === chosenArtistFilter)
+        // filter za type
+      let chosenTypeFilter = chooseMinPrice.value;
+      localStorage.setItem(CHOSEN_TYPE_FILTER, chosenTypeFilter);
+
+
+        //nadolu ne cepkaj nisto!!!
+        function renderVisitorListingPage () {
+          artistItemContainer.innerHTML = "";                   
+
+          items            
+            .filter(({ artist, price }) => (artist === chosenArtistFilter && price >= chosenPriceFilterMin && price <= chosenPriceFilterMax))           
             .forEach((artistItem, index) => {
-              if (artistItem.isPublished === true) {
+
+              if ((artistItem.isPublished === true)) {
               const itemWrapperDiv = document.createElement("div");
               itemWrapperDiv.classList.add("col-12", "p-0", "mt-4", "mb-2");
 
@@ -129,12 +141,14 @@ function renderVistiorListingFiltersPage() {
 
           renderVisitorListingPage();
           window.scrollTo(0, 0);
+          chosenPriceFilterMin.reset;
+          chosenPriceFilterMax.reset;
       });
 
 }
 
 
- function navigateAuctionPage () {
+function navigateAuctionPage () {
     const auctionSymbol = document.querySelector('#auctionSymboll');
 
     auctionSymbol.addEventListener('click', () => {
