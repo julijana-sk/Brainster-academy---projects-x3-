@@ -657,7 +657,267 @@
 
       <!-- Visitor page END -->
       <!-- Artist Home page START -->
+
       <section id="artistHomePage" class="page-section">
+        <header>
+          <nav class="heading-layout py-2 px-3">
+            <div
+              class="d-flex flex-row justify-content-between align-self-center align-item-center"
+              id="choosenArtistNav"
+            >
+              <img
+                src="./images/logo.png"
+                alt="logo centered"
+                class="align-self-center align-item-center"
+                id="logo"
+              />
+              <h1 class="align-self-center" id="chosen-artist-name"></h1>
+            </div>
+            <a
+              href="javascript:void(0);"
+              class="icon mt-3 mr-3 align-self-center"
+              id="menuBtn"
+            >
+              <i class="fa fa-bars"></i>
+            </a>
+          </nav>
+          <div class="myLinksDisplay">
+            <div id="myLinks">
+              <button class="myBtn" id="navBtnHome">Home</button>
+              <button class="myBtn" id="navBtnItem">Items</button>
+              <button class="myBtn" id="navBtnAuction">Auction</button>
+            </div>
+          </div>
+        </header>
+        <div class="container-fluid p-4" style="background-color: #edd5bb">
+          <div
+            class="row d-flex flex-row flex-nowrap text-capitalize text-center"
+          >
+            <div class="col-5 mb-3 card-brown p-3 mr-auto ml-auto">
+              <p>total items sold</p>
+              <p class="price">12/35</p>
+            </div>
+            <div class="col-5 mb-3 card-brown mr-auto ml-auto p-3">
+              <p>total income</p>
+              <p class="price">$1700</p>
+            </div>
+          </div>
+          <a
+            href="./auction-page.html"
+            id="navigateAuctionPageDiv"
+            style="text-decoration: none; margin: 0"
+          >
+            <div class="col-12 m-0 card-brick p-3 text-center">
+              <p class="text-capitalize">live auctioning item</p>
+              <p class="price">$12000</p>
+              <p>current bid</p>
+            </div>
+          </a>
+        </div>
+        <div class="container-fluid p-4">
+          <p class="mb-2" style="font-size: larger">
+            Display my income for last
+          </p>
+          <div
+            class="d-flex flex-row flex-nowrap mr-auto ml-auto justify-content-center"
+          >
+            <div class="px-0 align-item-center align-self-center">
+              <button class="btnDays bg-brown" id="last7days">7 days</button>
+              <button class="btnDays bg-brown" id="last14days">14 days</button>
+              <button class="btnDays bg-brown" id="lastmonth">1 month</button>
+              <button class="btnDays bg-brown" id="lastyear">1 year</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 pt-3 mr-auto ml-auto">
+          <canvas id="itemChart"></canvas>
+        </div>
+      </section>
+
+      <!-- Artist Home page END -->
+      <!-- Artist Item page START -->
+
+      <section id="artistItemPage" class="page-section">
+        <header>
+          <nav class="heading-layout py-2 px-3">
+            <div
+              class="d-flex flex-row justify-content-between align-self-center align-item-center"
+            >
+              <img
+                src="./images/logo.png"
+                alt="logo centered"
+                class="align-self-center align-item-center"
+                id="logo"
+              />
+              <h1 class="align-self-center" id="chosen-artist-name1"></h1>
+            </div>
+            <a
+              href="javascript:void(0);"
+              class="icon mt-3 mr-3 align-self-center"
+              id="menuBtn1"
+            >
+              <i class="fa fa-bars"></i>
+            </a>
+          </nav>
+          <div class="myLinksDisplay1">
+            <div id="myLinks1">
+              <button class="myBtn1" id="navBtnHome1">Home</button>
+              <button class="myBtn1" id="navBtnItem1">Items</button>
+              <button class="myBtn1" id="navBtnAuction1">Auction</button>
+            </div>
+          </div>
+        </header>
+        <div class="container-fluid px-0 h-100">
+          <div class="row d-flex flex-column ml-auto mr-auto">
+            <div
+              class="col-12 p-0 mt-4 mb-2 card-beige pointer w-100 text-center"
+              id="addItemCard"
+              onclick="addItem()"
+            >
+              <p class="p-5 my-3 mx-4 align-self-center">+ Add new Item</p>
+            </div>
+            <!-- <div class="col-12 p-0 my-2 card card-beige">
+              <img
+                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp"
+                class="card-img-top"
+                alt="picture of artist"
+              />
+              <div class="card-body py-3 px-4">
+                <div
+                  class="d-flex flex-row justify-content-between align-item-center align-self-center"
+                >
+                  <div>
+                    <h4 class="card-subtitle my-2">Item title</h4>
+                    <div class="data-target" style="color: #e09686">Date</div>
+                  </div>
+                  <p class="price-brown mt-2">$</p>
+                </div>
+                <p class="card-text">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
+                  cupiditate corporis ex nulla velit quibusdam, corrupti quidem
+                  rem expedita nostrum.
+                </p>
+              </div>
+              <div
+                class="d-flex flex-row flex-wrap justify-content-between align-self-center w-100 py-3 px-4 card-brown"
+              >
+                <button class="btnAuction bg-blue">Send to Auction</button>
+                <button class="btnAuction bg-green">Publish</button>
+                <button class="btnAuction bg-red">Remove</button>
+                <button class="btnAuction bg-beige">Edit</button>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <!-- filter layer -->
+        <div class="overlay" id="filter-layer">
+          <div class="overlay-content my-5 mx-4">
+            <div
+              class="d-flex flex-row justify-content-between align-item-center mb-3"
+            >
+              <h1>Add new Item</h1>
+              <div class="form-check pt-1">
+                <label class="form-check-label" for="defaultCheck1">
+                  Is published
+                </label>
+                <input
+                  class="checkbox m-0 p-0"
+                  type="checkbox"
+                  value=""
+                  id="defaultCheck1"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput">Title</label>
+              <input
+                type="text"
+                class="form-control bg-transparent shadow-none"
+                id="formGroupExampleInput"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Description</label>
+              <textarea
+                class="form-control shadow-none bg-transparent"
+                id="exampleFormControlTextarea1"
+                rows="3"
+              ></textarea>
+            </div>
+
+            <div
+              class="row d-flex flex-row justify-content-between align-item-center"
+            >
+              <div class="col-6">
+                <div class="form-group">
+                  <div class="col-12 mb-0 p-0">
+                    <label for="chooseByType" class="text-capitalize mb-2"
+                      >Type</label
+                    >
+                    <select class="form-control" id="chooseByType" required>
+                      <option class="option"></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <label for="formGroupExampleInput">Price</label>
+                <input
+                  id="postfix"
+                  value="$"
+                  type="text"
+                  id="form2"
+                  class="form-control shadow-none bg-transparent"
+                  required
+                />
+              </div>
+            </div>
+
+            <label for="basic-url">Image URL</label>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control shadow-none bg-transparent"
+                id="basic-url"
+                aria-describedby="basic-addon3"
+              />
+            </div>
+            <p class="text-center">or</p>
+            <div class="container-fluid">
+              <div
+                class="row d-flex flex-column pointer text-center mt-3 py-5"
+                id="takeSnapshot"
+                onclick="takeSnapshot()"
+              >
+                <div class="col-12 mt-5 p-0">
+                  <i class="fa-solid fa-3x mb-3 fa-camera"></i>
+                </div>
+                <div class="col-12 mb-5 p-0">
+                  <p>Take a snapshot</p>
+                </div>
+              </div>
+            </div>
+            <div class="container-fluid p-0 my-5">
+              <div class="row d-flex flex-row flex-nowrap text-center">
+                <div class="col-6 p-0 mr-auto ml-auto">
+                  <button class="bg-brick text-capitalize">add new item</button>
+                </div>
+                <div class="col-6 p-0 mr-auto ml-auto">
+                  <button class="bg-gray">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- filter layer end -->
+      </section>
+
+      <!-- Artist Item page END -->
+      <!-- Auction page START -->
+
+      <section id="auctionPage" class="page-section">
         <header>
           <nav class="heading-layout py-2 px-3">
             <div
@@ -686,7 +946,7 @@
             <a href="./auction-page.html">Auction</a>
           </div>
         </header>
-        <div class="page-section">
+        <!-- <div class="page-section">
           <div class="container-fluid p-4">
             <div
               class="row d-flex flex-row flex-nowrap text-capitalize text-center"
@@ -739,22 +999,15 @@
           <div>
             <canvas id="myChart"></canvas>
           </div>
-        </div>
+        </div> -->
       </section>
-
-      <!-- Artist Home page END -->
-
-      <!-- Artist Item page START -->
-      <!-- Artist Item page END -->
-
-      <!-- Auction page START -->
-
       <!-- Auction page END -->
 
       <div id="loader">
         <span class="loader"></span>
       </div>
     </div>
+
     <!-- jQuery library -->
     <!-- <script src="./js/jquery-3.5.1.min.js"></script> -->
 
@@ -776,10 +1029,9 @@
     ></script>
     <!-- <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/Data/data.js"></script>
     <script src="./js/pages/landing-page.js"></script>
-    <!-- <script src="./js/pages/artist-home-page.js"></script> -->
-
     <script src="./js/pages/visitor-home-page.js"></script>
     <script src="./js/pages/visitor-listing-page.js"></script>
     <script src="./js/pages/artist-home-page.js"></script>

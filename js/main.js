@@ -50,13 +50,22 @@ function handleRoute () {
             break;
         case ARTIST_HOME_PAGE:
             mainMenu();
+            redirectingMenu();
+            renderArtistHomePage ();
+            break;
+        case ARTIST_ITEM_PAGE:
+            // addItem();
+            // takeSnapshot();
+            renderChosenArtist1();
+            redirectingMenu1();
+            mainMenu1();
+            break;
+        case AUCTION_PAGE:
+            // mainMenu();
             break;
         default:
             break;
-        }
-
-
-       
+        }       
 };
 
 

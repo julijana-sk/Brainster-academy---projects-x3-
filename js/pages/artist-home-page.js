@@ -1,6 +1,7 @@
+const menuBtn = document.querySelector("#menuBtn");
+const x = document.querySelector('.myLinksDisplay');
+
 function mainMenu() {
-  const menuBtn = document.querySelector("#menuBtn");
-  const x = document.querySelector('#myLinks');
   menuBtn.addEventListener('click', () => {
     if (x.style.display === "block") {
       x.style.display = "none";
@@ -10,126 +11,220 @@ function mainMenu() {
   });
 }
 
+const navBtnHome = document.querySelector('#navBtnHome');
+const navBtnItem = document.querySelector('#navBtnItem');
+const navBtnAuction = document.querySelector('#navBtnAuction');
 
-function renderChosenArtist () {
+
+function redirectingMenu () {
+  navBtnHome.addEventListener('click', () => {
+      location.hash = "#artistHomePage";
+      x.style.display = "none";
+    });
+
+  navBtnItem.addEventListener('click', () => {
+      location.hash = "#artistItemPage";
+    });
+
+  navBtnAuction.addEventListener('click', () => {
+      location.hash = "#auctiongPage";
+    });
+}
+
+const ITEMS_CHART = '#itemChart';
+
+function renderArtistHomePage () {
     let chosenArtistName = localStorage.getItem('CHOSEN_ARTIST');
-    document.getElementById('chosen-artist-name').innerText = chosenArtistName;
+    document.querySelector('#chosen-artist-name').innerText = chosenArtistName;
+
+    const itemChart = document.querySelector(ITEMS_CHART);
+    const renderItemsJson = localStorage.getItem(RENDER_ITEMS_STORED);
+    const storedItems = JSON.parse(renderItemsJson);
+    const filteredArtistItems = storedItems.filter((artistItem) => artistItem.artist === chosenArtistName && Boolean(artistItem.priceSold));
+
+    document.querySelector('#last14days').addEventListener('click', () => {
+        const labels = generateDateLabels(14);
+        const chartData = labels.map((label) => {
+            let sum = 0;
+            filteredArtistItems.forEach((artistItem) => {
+                const artistItemDateSold = formatDate(artistItem.dateSold);
+
+                if (label === artistItemDateSold) {
+                    sum += artistItem.priceSold;
+                }
+            });
+
+            return sum;
+        });
+      
+      // Getting the existing chart
+        const existingChart = Chart.getChart('itemChart');
+
+      // Destroing the existing chart
+        if (existingChart) {
+          existingChart.destroy();
+          }
+
+        const displayChart = new Chart (itemChart, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Amount",
+                    backgroundColor: "rgba(161, 106, 94, 1)",
+                    hoverBackgroundColor: "rgba(212, 76, 46, 1)",
+                    borderColor: "transparent",
+                    data: chartData,
+                }],
+            },
+            options: {
+                indexAxis: 'y',
+            },
+          });
+
+          displayChart.update();
+    });
+
+    document.querySelector('#last7days').addEventListener('click', () => {
+        const labels = generateDateLabels(7);
+        const chartData = labels.map((label) => {
+            let sum = 0;
+            filteredArtistItems.forEach((artistItem) => {
+                const artistItemDateSold = formatDate(artistItem.dateSold);
+
+                if (label === artistItemDateSold) {
+                    sum += artistItem.priceSold;
+                }
+            });
+
+            return sum;
+        });
+
+        const existingChart = Chart.getChart('itemChart');
+        if (existingChart) {
+          existingChart.destroy();
+          }
+
+        const displayChart = new Chart (itemChart, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Amount",
+                    backgroundColor: "rgba(161, 106, 94, 1)",
+                    hoverBackgroundColor: "rgba(212, 76, 46, 1)",
+                    borderColor: "transparent",
+                    data: chartData,
+                }],
+            },
+            options: {
+                indexAxis: 'y',
+            },
+          });
+
+          displayChart.update();
+    });
+
+    document.querySelector('#lastmonth').addEventListener('click', () => {
+        const labels = generateDateLabels(31);
+        const chartData = labels.map((label) => {
+            let sum = 0;
+            filteredArtistItems.forEach((artistItem) => {
+                const artistItemDateSold = formatDate(artistItem.dateSold);
+
+                if (label === artistItemDateSold) {
+                    sum += artistItem.priceSold;
+                }
+            });
+
+            return sum;
+        });
+
+        const existingChart = Chart.getChart('itemChart');
+        if (existingChart) {
+          existingChart.destroy();
+          }
+
+        const displayChart = new Chart (itemChart, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Amount",
+                    backgroundColor: "rgba(161, 106, 94, 1)",
+                    hoverBackgroundColor: "rgba(212, 76, 46, 1)",
+                    borderColor: "transparent",
+                    data: chartData,
+                }],
+            },
+            options: {
+                indexAxis: 'y',
+            },
+          });
+
+          displayChart.update();
+    });
+
+    document.querySelector('#lastyear').addEventListener('click', () => {
+        const labels = generateDateLabels(365);
+        const chartData = labels.map((label) => {
+            let sum = 0;
+            filteredArtistItems.forEach((artistItem) => {
+                const artistItemDateSold = formatDate(artistItem.dateSold);
+
+                if (label === artistItemDateSold) {
+                    sum += artistItem.priceSold;
+                }
+            });
+
+            return sum;
+        });
+
+        const existingChart = Chart.getChart('itemChart');
+        if (existingChart) {
+          existingChart.destroy();
+          }
+
+        const displayChart = new Chart (itemChart, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Amount",
+                    backgroundColor: "rgba(161, 106, 94, 1)",
+                    hoverBackgroundColor: "rgba(212, 76, 46, 1)",
+                    borderColor: "transparent",
+                    data: chartData,
+                }],
+            },
+            options: {
+                indexAxis: 'y',
+            },
+          });
+
+          displayChart.update();
+    });
+
 }
 
 
-/* horizontal bar chart */
+function formatDate(dateNumber) {
+    const date = new Date(dateNumber);
+    return date.toLocaleDateString('en-gb', { day: 'numeric' });
+}
 
-// Function to calculate the date range based on the selected option
-// function getDateRange(option) {
-//   const today = new Date();
-//   const startDate = new Date(today);
-//   const endDate = new Date(today);
+function generateDateLabels(daysAgo) {
 
-//   if (option === "last7days") {
-//       startDate.setDate(today.getDate() - 7);
-//   } else if (option === "last14days") {
-//       startDate.setDate(today.getDate() - 14);
-//   } else if (option === "lastmonth") {
-//       startDate.setMonth(today.getMonth() - 1);
-//   } else if (option === "lastyear") {
-//       startDate.setFullYear(today.getFullYear() - 1);
-//       startDate.setMonth(0); // Set to January of last year
-//       startDate.setDate(1); // Set to the first day of January
-//       endDate.setMonth(11); // Set to December of last year
-//       endDate.setDate(31); // Set to the last day of December
-//   }
+      const arr = []
 
-//   return { startDate, endDate };
-// }
+      for (let i = 0; i < daysAgo; i++) {
+          const now = new Date()
+          const startDate = now.getDate()
+          const relevantDate = now.setDate(startDate - i)
+          const formattedDate = formatDate(relevantDate)
+          arr.push(formattedDate)
+      }
+      return arr;
+  }
 
-// // Function to filter the items based on the selected option
-//  function filterItems(option) {
-//     const { startDate, endDate } = getDateRange(option);
 
-//     return items.filter((item) => {
-//         const itemDate = new Date(item.dateSold);
-//         return itemDate >= startDate && itemDate <= endDate;
-//     });
-
-//   }
-
-// // Function to group the items by date and accumulate the amounts
-// function groupItemsByDateAndAccumulate(items) {
-//   const groupedData = {};
-
-//   items.forEach((item) => {
-//     const date = item.dateSold;
-//     if (!groupedData[date]) {
-//       groupedData[date] = item.priceSold;
-//     } else {
-//       groupedData[date] += item.priceSold;
-//     }
-//   });
-
-//   return groupedData;
-// }
-
-// // Function to handle the option change event
-// function handleOptionChange(option) {
-//   const filteredItems = filterItems(option);
-//   const groupedData = groupItemsByDateAndAccumulate(filteredItems);
-//   createChart(groupedData);
-// }
-
-// handleOptionChange()
-
-// // Example usage:
-// // const option = document.querySelector('');
-// // handleOptionChange(option);
-
-// function configureButtonHandlers() {
-//   const buttons = document.getElementsByClassName("btnDays");
-
-//   Array.from(buttons).forEach((button) => {
-//     button.addEventListener("click", (event) => {
-//       const option = event.target.getAttribute("data-option");
-//       handleOptionChange(option);
-//     });
-//   });
-// }
-
-// configureButtonHandlers();
-
-// // Function to create the chart based on the grouped data
-// function createChart(groupedData) {
-//   const labels = Object.keys(groupedData);
-//   const data = Object.values(groupedData);
-
-//   // // Get the existing chart by id
-//   // const existingChart = Chart.getChart('myChart');
-
-//   // // Destroy the existing chart if it exists
-//   // if (existingChart) {
-//   //   existingChart.destroy();
-//   // }
-
-// // Create a new chart using the canvas with id 'myChart'
-// const canvas = document.getElementById('myChart').getContext('2d');
-// new Chart(canvas, {
-//     type: "bar",
-//     data: {
-//       labels: labels,
-//       datasets: [
-//         {
-//           label: "Amount",
-//           data: data,
-//           backgroundColor: "rgba(161, 106, 94, 1)",
-//           borderColor: "transparent",
-//           borderWidth: 1,
-//         },
-//       ],
-//     },
-//     options: {
-//       scales: {
-//         y: {
-//           beginAtZero: true,
-//         },
-//       },
-//     },
-//   });
-// }

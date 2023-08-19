@@ -1,10 +1,16 @@
 const ARTIST = 'artistNames';
 const CHOSEN_ARTIST = 'chosenArtistName';
+const RENDER_ITEMS_STORED = 'artistItem';
 
 
 function fetchArtists () {
     const artistNamesDropdown = document.querySelector("#dropdown-menu");
     let artistNames = localStorage.getItem(ARTIST);
+    
+    if (!localStorage.getItem(RENDER_ITEMS_STORED)) {
+        const renderedItemsInSession = JSON.stringify(items);
+        localStorage.setItem(RENDER_ITEMS_STORED, renderedItemsInSession);
+    }
 
     if (!artistNames) {
         fetch('https://jsonplaceholder.typicode.com/users')
@@ -28,7 +34,8 @@ function fetchArtists () {
         const chosenArtistName = event.target.value;
         localStorage.setItem('CHOSEN_ARTIST', chosenArtistName);
         location.hash = "#artistHomePage";
-        renderChosenArtist();
+        // let chosenArtistName = localStorage.getItem('CHOSEN_ARTIST');
+        document.getElementById('chosen-artist-name').innerText = chosenArtistName;
       });
         
 }

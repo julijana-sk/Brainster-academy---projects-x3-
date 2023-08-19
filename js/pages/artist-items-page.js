@@ -1,3 +1,9 @@
+function renderChosenArtist1 () {
+    let chosenArtistName = localStorage.getItem('CHOSEN_ARTIST');
+    document.getElementById('chosen-artist-name1').innerText = chosenArtistName;
+}
+
+
 function addItem() {
   const x = document.getElementById("filter-layer");
   if (x.style.display === "block") {
@@ -17,21 +23,42 @@ function takeSnapshot() {
 }
 
 
-// filter layer display
-// const filterBtnBasic = document.getElementById("filter-button-basic");
-// const filterBtnChecked = document.getElementById("filter-button-checked");
 
-// function openNav() {
-//     document.getElementById("filter-layer").style.width = "100%";
-//     filterBtnBasic.style.display = "none";
-//     filterBtnChecked.style.display = "flex";
-//     filterBtnChecked.style.justifyContent = "end";
 
-        
-// }
 
-// function closeNav() {
-//     document.getElementById("filter-layer").style.width = "0%";
-//     filterBtnBasic.style.display = "flex";
-//     filterBtnChecked.style.display = "none";
-// }
+
+
+//nadolu ne cepkaj
+
+const menuBtn1 = document.querySelector("#menuBtn1");
+const x1 = document.querySelector('.myLinksDisplay1');
+
+function mainMenu1() {
+  menuBtn1.addEventListener('click', () => {
+    if (x1.style.display === "block") {
+      x1.style.display = "none";
+    } else {
+      x1.style.display = "block";
+    }
+  });
+}
+
+const navBtnHome1 = document.querySelector('#navBtnHome1');
+const navBtnItem1 = document.querySelector('#navBtnItem1');
+const navBtnAuction1 = document.querySelector('#navBtnAuction1');
+
+function redirectingMenu1 () {
+    navBtnHome1.addEventListener('click', () => {
+        location.hash = "#artistHomePage";
+        });
+
+    navBtnItem1.addEventListener('click', () => {
+        location.hash = "#artistItemPage";
+         x1.style.display = "none";
+      });
+     x1.style.display = "block";
+
+    navBtnAuction1.addEventListener('click', () => {
+        location.hash = "#auctiongPage";
+      });
+}

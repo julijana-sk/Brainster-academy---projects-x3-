@@ -3,9 +3,12 @@
 }
 
 body {
-    background-color: #EDD5BB;
     color: #A16A5E;
 }
+
+.page-section {
+    background-color: #EDD5BB;
+} 
 
 nav h1 {
     margin-bottom: 0;
@@ -26,7 +29,6 @@ p {
     padding-bottom: 0;
 }
 
-/* header */
 .heading-layout {
     width: 100%;
     height: 70px;
@@ -105,31 +107,43 @@ p {
     text-decoration: none;
 }
 
-#myLinks {
-    display: none;
+#myLinks1 {
     position: absolute;
     z-index: 988888;
     width: 100%;
     top: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(161, 106, 94, 1);
 }
 
-.myLinksDisplay a {
+.myLinksDisplay1 {
     color: #FCEBD5;
     background-color: rgba(161, 106, 94, 1);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    display: none;
+}
+
+.myLinksDisplay1 .myBtn1 {
+    color: #FCEBD5;
+    background-color: rgba(161, 106, 94, 1);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    color: #FCEBD5;
     font-family: 'Roboto';
     font-size: 32px;
     font-weight: 300;
     line-height: 50px;
     letter-spacing: 0.1em;
     text-align: center;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    border: none;
+}
+
+.myLinksDisplay1 .myBtn1:hover {
+    color: #EDD5BB;
 }
 
 #addItemCard p, .form-check-label p {
-    height: 20vh;
     border: 2px dashed #a16a5e;
     border-radius: 2px;
     font-family: 'Roboto';
