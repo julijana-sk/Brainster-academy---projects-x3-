@@ -23,11 +23,6 @@ function takeSnapshot() {
 }
 
 
-
-
-
-
-
 //nadolu ne cepkaj
 
 const menuBtn1 = document.querySelector("#menuBtn1");

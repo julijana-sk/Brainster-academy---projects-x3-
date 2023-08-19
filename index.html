@@ -49,13 +49,6 @@
 
   <body>
     <div id="main-page">
-      <!-- <nav>
-        <a href="#landingPage">Landing page</a>
-        <a href="#visitorHomePage">Visitor home page</a>
-        <a href="#visitorListingPage">Visitor listing page</a>
-        <a href="#artistHomePage">Artist home page</a>
-      </nav> -->
-
       <!--Landing page START -->
       <section id="landingPage" class="page-section">
         <header>
@@ -693,13 +686,13 @@
           <div
             class="row d-flex flex-row flex-nowrap text-capitalize text-center"
           >
-            <div class="col-5 mb-3 card-brown p-3 mr-auto ml-auto">
+            <div class="mb-3 card-brown p-3 mr-1 ml-auto">
               <p>total items sold</p>
-              <p class="price">12/35</p>
+              <p class="price" id="totalSoldItem"></p>
             </div>
-            <div class="col-5 mb-3 card-brown mr-auto ml-auto p-3">
+            <div class="mb-3 card-brown mr-auto ml-auto p-3">
               <p>total income</p>
-              <p class="price">$1700</p>
+              <p class="price" id="totalIncome">$</p>
             </div>
           </div>
           <a
@@ -707,15 +700,18 @@
             id="navigateAuctionPageDiv"
             style="text-decoration: none; margin: 0"
           >
-            <div class="col-12 m-0 card-brick p-3 text-center">
+            <div
+              class="col-12 m-0 card-brick p-3 text-center"
+              id="liveAuctioningNav"
+            >
               <p class="text-capitalize">live auctioning item</p>
-              <p class="price">$12000</p>
+              <p class="price" id="liveAuctioningPrice"></p>
               <p>current bid</p>
             </div>
           </a>
         </div>
-        <div class="container-fluid p-4">
-          <p class="mb-2" style="font-size: larger">
+        <div class="container-fluid p-4 h-50">
+          <p class="mb-3" style="font-size: larger">
             Display my income for last
           </p>
           <div
@@ -728,9 +724,7 @@
               <button class="btnDays bg-brown" id="lastyear">1 year</button>
             </div>
           </div>
-        </div>
-        <div class="col-12 pt-3 mr-auto ml-auto">
-          <canvas id="itemChart"></canvas>
+          <canvas class="designChart" id="itemChart"></canvas>
         </div>
       </section>
 

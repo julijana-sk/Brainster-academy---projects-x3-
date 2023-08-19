@@ -23,18 +23,16 @@ function fetchArtists () {
 
     const artistNamesArray = artistNames.split(",");
 
-    artistNamesArray.forEach((artistName) => {
+    artistNamesArray.forEach((artistName) => {    
     artistNamesDropdown.innerHTML += `<option value="${artistName}">${artistName}</option>`;
     });
 
     artistNamesDropdown.addEventListener('change', (event) => {
-
         startCountdown();
 
         const chosenArtistName = event.target.value;
         localStorage.setItem('CHOSEN_ARTIST', chosenArtistName);
         location.hash = "#artistHomePage";
-        // let chosenArtistName = localStorage.getItem('CHOSEN_ARTIST');
         document.getElementById('chosen-artist-name').innerText = chosenArtistName;
       });
         

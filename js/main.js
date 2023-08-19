@@ -38,7 +38,7 @@ function handleRoute () {
     switch (currentHash) {
         case LANDING_HOME_PAGE:
             fetchArtists();
-            navigateVisitorHomePage()
+            navigateVisitorHomePage();
             break;
         case VISITOR_HOME_PAGE:
             navigateAuctionPage1();
@@ -49,9 +49,11 @@ function handleRoute () {
             navigateAuctionPage2();
             break;
         case ARTIST_HOME_PAGE:
+            renderArtistItemChart();
+            handleArtistNameChange();
+            liveAuctioningItemCurrentBid ();
             mainMenu();
             redirectingMenu();
-            renderArtistHomePage ();
             break;
         case ARTIST_ITEM_PAGE:
             // addItem();

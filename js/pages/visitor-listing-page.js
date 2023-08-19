@@ -66,9 +66,9 @@ const filterBtnChecked = document.getElementById("filter-button-checked");
 
 function renderVistiorListingFiltersPage() {
 
-     const artistNamesDropdown = document.querySelector('#chooseArtist');
-     const artistNames = localStorage.getItem('artistNames').split(',');
-          artistNamesDropdown.innerHTML = "";
+    const artistNamesDropdown = document.querySelector('#chooseArtist');
+    const artistNames = localStorage.getItem('artistNames').split(',');
+    artistNamesDropdown.innerHTML = "";
 
      artistNames.forEach((artistName) => {
           artistNamesDropdown.innerHTML += `<option value="${artistName}">${artistName}</option>`;
@@ -97,12 +97,14 @@ function renderVistiorListingFiltersPage() {
       localStorage.setItem(CHOSEN_TYPE_FILTER, chosenTypeFilter);
 
 
-        //nadolu ne cepkaj nisto!!!
-        function renderVisitorListingPage () {
-          artistItemContainer.innerHTML = "";                   
+      function renderVisitorListingPage () {
+        artistItemContainer.innerHTML = ""; 
+        chosenPriceFilterMin.innerText = "";
+        chosenPriceFilterMax.innerText = "";                  
 
           items            
-            .filter(({ artist, price }) => (artist === chosenArtistFilter && price >= chosenPriceFilterMin && price <= chosenPriceFilterMax))           
+            // .filter(({ artist, priceMin, priceMax }) => (artist === chosenArtistFilter && priceMin >= chosenPriceFilterMin && priceMax <= chosenPriceFilterMax))   
+            .filter(({ artist}) => (artist === chosenArtistFilter))           
             .forEach((artistItem, index) => {
 
               if ((artistItem.isPublished === true)) {
@@ -141,8 +143,7 @@ function renderVistiorListingFiltersPage() {
 
           renderVisitorListingPage();
           window.scrollTo(0, 0);
-          chosenPriceFilterMin.reset;
-          chosenPriceFilterMax.reset;
+          
       });
 
 }

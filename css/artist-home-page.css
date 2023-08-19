@@ -6,6 +6,10 @@ body {
     color: #A16A5E;
 }
 
+.page-section {
+    background-color: #FCEBD5 !important;
+}
+
 nav h1 {
     margin-bottom: 0;
     margin-top: 20px;
@@ -24,7 +28,7 @@ p {
     margin-bottom: 10px;
     padding-bottom: 0;
     font-family: 'Roboto';
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 300;
     line-height: 20px;
 }
@@ -68,7 +72,7 @@ p {
 
 .price {
     font-family: 'Roboto';
-    font-size: 45px;
+    font-size: 40px;
     font-weight: bold;
     line-height: 50px;
 }
@@ -145,4 +149,11 @@ div .btnDays:last-child {
 }
 .bg-brown:hover {
     background-color: #D44C2E;
+}
+
+.designChart {
+    height: 30vh !important;
+    padding-top: 48px;
+    margin-left: auto;
+    margin-right: auto;
 }
