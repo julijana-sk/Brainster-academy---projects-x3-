@@ -3,8 +3,11 @@
 }
 
 body {
-    background-color: #FCEBD5;
     color: #A16A5E;
+}
+
+.page-section {
+    background-color: #FCEBD5;
 }
 
 nav h1 {
@@ -46,7 +49,7 @@ nav h1 {
 
 .position-absolute-masterpiece {
     position: absolute;
-    top: 20%;
+    top: 21%;
     left: 50%;
     width: 100%;
     transform: translate(-50%, -50%);
@@ -88,6 +91,9 @@ nav h1 {
     margin-bottom: 0;
 }
 
+.carousel-inner {
+    background-color: #FCEBD5;
+}
 .carousel-control-prev-icon, .carousel-control-next-icon {
     color: #A16A5E !important;
     cursor: pointer;
@@ -129,7 +135,7 @@ blockquote p {
 /* infiniti loop carousel - 1 */
 #carousel1, #carousel2 {
     background-color: #EDD5BB;
-    height: 31vh;
+    height: 25vh;
 }
 .slider1 {
     margin: auto;

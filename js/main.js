@@ -1,7 +1,6 @@
 const LANDING_HOME_PAGE = '#landingPage';
 const VISITOR_HOME_PAGE = '#visitorHomePage';
 const VISITOR_LISTING_PAGE = '#visitorListingPage';
-// const VISITOR_LISTING_FILTERS_PAGE = '#visitorListingFiltersPage';
 const ARTIST_HOME_PAGE = '#artistHomePage';
 const ARTIST_ITEM_PAGE = '#artistItemPage';
 const AUCTION_PAGE = '#auctionPage';
@@ -42,13 +41,12 @@ function handleRoute () {
             navigateVisitorHomePage()
             break;
         case VISITOR_HOME_PAGE:
-            // renderVisitorHomePage();
-            navigateAuctionPage();
+            navigateAuctionPage1();
             break;
         case VISITOR_LISTING_PAGE:
             renderVisitorListingPage();
             renderVistiorListingFiltersPage();
-            navigateAuctionPage();
+            navigateAuctionPage2();
             break;
         case ARTIST_HOME_PAGE:
             mainMenu();
@@ -62,15 +60,5 @@ function handleRoute () {
 };
 
 
-
-
-
-
-
-
 window.addEventListener("load", handleRoute);
 window.addEventListener("hashchange", handleRoute);
-
-
-
-

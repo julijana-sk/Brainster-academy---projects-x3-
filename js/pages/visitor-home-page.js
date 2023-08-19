@@ -1,23 +1,18 @@
-// function renderVisitorHomePage() {
-
-// }
-
 const carouselImg = document.querySelector('.carousel-wrapper', 'img');
 
-
 carouselImg.addEventListener('click', () => {
-    // console.log('you clicked on an img from sliders')
     location.hash = "#visitorListingPage";
 });
 
-function navigateAuctionPage () {
-const auctionSymbol = document.querySelector('#auctionSymbol');
 
-auctionSymbol.addEventListener('click', () => {
+function navigateAuctionPage1 () {
+const auctionSymbol1 = document.querySelector('#auctionSymbol1');
+auctionSymbol1.addEventListener('click', () => {
     location.hash = "#auctiongPage";
 });
 }
 
 document.querySelector('#navigateVisitorListingPage').addEventListener('click', () => {
     location.hash = "#visitorListingPage";
-})
+});
+

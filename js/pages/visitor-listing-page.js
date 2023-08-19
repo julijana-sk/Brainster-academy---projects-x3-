@@ -4,7 +4,7 @@ const CHOSEN_PRICE_FILTER_MAX = 'chosenPriceFilterMax';
 const CHOSEN_TYPE_FILTER = 'chosenTypeFilter';
 const artistItemContainer = document.querySelector('#artistItemContainer');
 
-fetchArtists();
+// fetchArtists();
 
 artistItemContainer.innerHTML = "";
 
@@ -148,15 +148,12 @@ function renderVistiorListingFiltersPage() {
 }
 
 
-function navigateAuctionPage () {
-    const auctionSymbol = document.querySelector('#auctionSymboll');
-
-    auctionSymbol.addEventListener('click', () => {
-        location.hash = "#auctiongPage";
+function navigateAuctionPage2 () {
+    const auctionSymbol2 = document.querySelector('#auctionSymbol2');
+    auctionSymbol2.addEventListener('click', () => {
+      location.hash = "#auctiongPage";
     });
 }
-
-navigateAuctionPage();
 
 
 window.addEventListener('scroll', function() {
