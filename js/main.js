@@ -3,6 +3,7 @@ const VISITOR_HOME_PAGE = '#visitorHomePage';
 const VISITOR_LISTING_PAGE = '#visitorListingPage';
 const ARTIST_HOME_PAGE = '#artistHomePage';
 const ARTIST_ITEM_PAGE = '#artistItemPage';
+CAPTURE_IMAGE_POPUP = "#captureImagePopup";
 const AUCTION_PAGE = '#auctionPage';
 
 const SECTION_PAGE = '.page-section';
@@ -15,6 +16,7 @@ const ALLOWED_ROUTES = [
     VISITOR_LISTING_PAGE,
     ARTIST_HOME_PAGE,
     ARTIST_ITEM_PAGE,
+    CAPTURE_IMAGE_POPUP,
     AUCTION_PAGE,    
 ];
 
@@ -57,10 +59,12 @@ function handleRoute () {
             break;
         case ARTIST_ITEM_PAGE:
             renderArtistItemsPage();
-            // addItem();
+            addItem();
             // takeSnapshot();
-            redirectingMenu1();
             mainMenu1();
+            break;
+        case CAPTURE_IMAGE_POPUP:
+            // populateContentArtistSnapshotPage();
             break;
         case AUCTION_PAGE:
             // mainMenu();
@@ -73,4 +77,3 @@ function handleRoute () {
 
 window.addEventListener("load", handleRoute);
 window.addEventListener("hashchange", handleRoute);
-

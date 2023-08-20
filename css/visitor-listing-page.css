@@ -3,8 +3,11 @@
 }
 
 body {
-    background-color: #EDD5BB;
     color: #A16A5E;
+}
+
+#visitorListingPage {
+    background-color: #EDD5BB;
 }
 
 nav h1 {

@@ -1,4 +1,39 @@
 const artistItemWrapper = document.querySelector('#artistItemWrapper');
+const CHOSEN_TYPE_ITEM = 'chosenTypeItem';
+
+//navigation
+const navMenu = document.getElementById("navMenu");
+const navMenuDisplay = document.querySelector('.navMenuDisplay');
+
+function mainMenu1 () {
+  navMenu.addEventListener('click', () => {
+    if (navMenuDisplay.style.display === "block") {
+      navMenuDisplay.style.display = "none";
+    } else {
+      navMenuDisplay.style.display = "block";
+    }
+  });
+
+
+  const navMenuHome = document.getElementById('navMenuHome');
+  const navMenuItems = document.getElementById('navMenuItems');
+  const navMenuAuction = document.getElementById('navMenuAuction');
+
+  navMenuHome.addEventListener('click', () => {
+    location.hash = "#artistHomePage";
+  });
+
+  navMenuItems.addEventListener('click', () => {
+    location.hash = "#artistItemPage";
+    navMenuDisplay.style.display = "none";
+  });
+
+  navMenuAuction.addEventListener('click', () => {
+    location.hash = "#auctionPage";
+  });
+}
+
+// rendering main page Artist Item Page
 
 function renderArtistItemsPage() {
         let chosenArtistName = localStorage.getItem('CHOSEN_ARTIST');
@@ -33,12 +68,12 @@ function renderArtistItemsPage() {
                 <div class="card-body py-3 px-4">
                   <div class="d-flex flex-row justify-content-between align-item-center mb-2">
                   <div class="d-flex flex-column align-self-center align-item-center>
-                    <h1 class="card-title font-italic m-0">${artistItem.artist}</h1>
+                    <h1 class="card-title font-italic m-0">${artistItem.title}</h1>
                     <h4 class="card-subtitle date mt-2">${convertingDate(artistItem.dateCreated)}</h4>
                     </div>
                     <p class="price-brown align-self-center">$${artistItem.price}</p>
                   </div>
-                  <p class="card-text">
+                  <p class="card-text small">
                     ${artistItem.description}
                   </p>
                 </div> 
@@ -57,65 +92,51 @@ function renderArtistItemsPage() {
 }
 
 
-//DEL ZA KOREKCIJA I POPRAVANJE !!! <-----
+
+
+const addItemBtn = document.querySelector('#addItemCard');
+
 function addItem() {
-  const x = document.getElementById("filter-layer");
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.width = "100%";
-  }
-}
+      addItemBtn.addEventListener('click', () => {
 
-function takeSnapshot() {
-  // const x = document.getElementById("filter-layer");
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.width = "100%";
-  }
+      const showFilterLayerAddItem = document.querySelector("#filter-layer-add-item");
+      showFilterLayerAddItem.style.width = "100%";
+    });
 }
 
 
+const takeSnapshot = document.querySelector('#takeSnapshot');
+
+takeSnapshot.addEventListener('click', function takeSnapshot() {
+    document.getElementById('captureImagePopup').style.display = 'flex';
+});
 
 
+// Choosing type of Item
+const chooseByTypeDropdown = document.querySelector('#chooseByTypeDropdown');
 
+chooseByTypeDropdown.addEventListener('click', function renderType() {
+  chooseByTypeDropdown.innerHTML = "";
 
-//nadolu ne cepkaj !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-const menuBtn1 = document.querySelector("#menuBtn1");
-const x1 = document.querySelector('.myLinksDisplay1');
+  itemTypes.forEach((type) => {
+    chooseByTypeDropdown.innerHTML += `<option value="${type}">${type}</option>`;
 
-function mainMenu1() {
-  x1.style.display = "none";
-  menuBtn1.addEventListener('click', () => {
-    if (x1.style.display === "block") {
-      x1.style.display = "none";
-    } else {
-      x1.style.display = "block";
-    }
   });
-}
+      chooseByTypeDropdown.addEventListener('change', () => {
+      const selectedOption = chooseByTypeDropdown.options[chooseByTypeDropdown.selectedIndex].text;
+      chooseByTypeDropdown.innerHTML = `<option value="${selectedOption}">${selectedOption}</option>`;
+    });
 
-const navBtnHome1 = document.querySelector('#navBtnHome1');
-const navBtnItem1 = document.querySelector('#navBtnItem1');
-const navBtnAuction1 = document.querySelector('#navBtnAuction1');
-
-function redirectingMenu1 () {
-    navBtnHome1.addEventListener('click', () => {
-        location.hash = "#artistHomePage";
-        });
-
-    navBtnItem1.addEventListener('click', () => {
-        location.hash = "#artistItemPage";
-         x1.style.display = "none";
-      });
-     x1.style.display = "block";
-
-    navBtnAuction1.addEventListener('click', () => {
-        location.hash = "#auctiongPage";
-      });
-}
+});
 
 
-window.addEventListener("load", mainMenu1);
-window.addEventListener("hashchange", mainMenu1);
+
+
+
+
+
+
+
+
+
+
