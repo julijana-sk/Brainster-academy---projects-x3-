@@ -60,14 +60,10 @@ function handleRoute () {
         case ARTIST_ITEM_PAGE:
             renderArtistItemsPage();
             addItem();
-            // takeSnapshot();
             mainMenu1();
-            break;
-        case CAPTURE_IMAGE_POPUP:
-            // populateContentArtistSnapshotPage();
+            // takeSnapshotCamera(); (ja povikuvam vo artist-items-page.js)
             break;
         case AUCTION_PAGE:
-            // mainMenu();
             break;
         default:
             break;

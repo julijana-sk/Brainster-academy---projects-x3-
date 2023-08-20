@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="./css/artist-home-page.css" />
     <link rel="stylesheet" href="./css/artist-items-page.css" />
     <link rel="stylesheet" href="./css/capture-image-popup.css" />
-    <link rel="stylesheet" href="./css/auction-page.css" />
 
     <!-- custom font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -885,26 +884,34 @@
         </div>
         <!-- filter layer end -->
       </section>
-
-      <!-- <section>
-        <h3>Artist snapshot page</h3>
-        <div>
-          <button id="captureImageButton">Capture Image</button>
-          <button id="stopStreamButton">Stop Stream</button>
-        </div>
-        <video id="liveStream" autoplay></video>
-        <canvas id="captureStream"></canvas>
-
-        <img id="capturedImage" />
-      </section> -->
       <section id="captureImagePopup" class="page-section">
         <div class="container-fluid">
           <div
             class="row d-flex flex-column pointer text-center popup content-popup"
           >
             <div class="col-12 mt-5 p-0">
-              <div id="snapshotDiv"></div>
-              <i class="fa-solid fa-3x mb-3 fa-camera my-3"></i>
+              <div id="snapshotDiv">
+                <video id="liveStream" autoplay></video>
+                <canvas id="captureStream"></canvas>
+
+                <img id="capturedImage" />
+              </div>
+              <div
+                class="row d-flex flex-row justify-content-center align-item-center align-self-center my-3"
+              >
+                <button class="iBtn">
+                  <i
+                    class="fa-solid fa-3x fa-camera mr-3"
+                    id="captureImageButton"
+                  ></i>
+                </button>
+                <button
+                  id="stopStreamButton"
+                  class="iBtn border rounded-sm px-2"
+                >
+                  <i class="fa-solid fa-2x fa-stop"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -914,89 +921,24 @@
       <!-- Auction page START -->
 
       <section id="auctionPage" class="page-section">
-        <!-- <header>
-          <nav class="heading-layout py-2 px-3">
-            <div
-              class="d-flex flex-row justify-content-between align-self-center align-item-center"
-            >
-              <img
-                src="./images/logo.png"
-                alt="logo centered"
-                class="align-self-center align-item-center"
-                id="logo"
-              />
-              <h1 class="align-self-center" id=""></h1>
-            </div>
-            <a
-              href="javascript:void(0);"
-              class="icon mt-3 mr-3 align-self-center"
-              id=""
-            >
-              <i class="fa fa-bars"></i>
-            </a>
-          </nav>
-          <div class="">
-            <div id="">
-              <button class="myBtn1" id="">Home</button>
-              <button class="myBtn1" id="">Items</button>
-              <button class="myBtn1" id="">Auction</button>
-            </div>
-          </div>
-        </header>
-      <div class="page-section">
-          <div class="container-fluid p-4">
-            <div
-              class="row d-flex flex-row flex-nowrap text-capitalize text-center"
-            >
-              <div class="col-5 mb-3 card-brown p-3 mr-auto ml-auto">
-                <p>total items sold</p>
-                <p class="price">12/35</p>
-              </div>
-              <div class="col-5 mb-3 card-brown mr-auto ml-auto p-3">
-                <p>total income</p>
-                <p class="price">$1700</p>
-              </div>
-            </div>
-            <a
-              href="./auction-page.html"
-              id="navigateAuctionPageDiv"
-              style="text-decoration: none; margin: 0"
-            >
-              <div class="col-12 m-0 card-brick p-3 text-center">
-                <p class="text-capitalize">live auctioning item</p>
-                <p class="price">$12000</p>
-                <p>current bid</p>
-              </div>
-            </a>
-          </div>
-          <div class="container-fluid">
-            <div class="row p-4">
-              <div class="col-12 p-0">
-                <p>Display my income for last</p>
-                <div
-                  class="d-flex flex-row flex-wrap justify-content-between align-item-center align-self-center"
-                >
-                  <button class="btnDays bg-brown" data-option="last7days">
-                    7 days
-                  </button>
-                  <button class="btnDays bg-brick" data-option="last14days">
-                    14 days
-                  </button>
-                  <button class="btnDays bg-brown" data-option="lastmonth">
-                    1 month
-                  </button>
-                  <button class="btnDays bg-brown" data-option="lastyear">
-                    1 year
-                  </button>
-                </div>
-              </div>
-              <div class="col-12"></div>
-            </div>
-          </div>
-          <div>
-            <canvas id="myChart"></canvas>
-          </div>
-        </div> -->
+        <div
+          id="loading-page"
+          class="centered-and-darken"
+          style="display: block; height: 100vh"
+        >
+          <p
+            style="
+              margin-top: 10%;
+              margin-left: 30px;
+              color: white;
+              font-weight: bolder;
+              font-size: xx-large;
+            "
+          >
+            Coming soon...
+          </p>
+          <span class="loader"></span>
+        </div>
       </section>
       <!-- Auction page END -->
 
@@ -1034,7 +976,6 @@
     <script src="./js/pages/artist-home-page.js"></script>
     <script src="./js/pages/artist-items-page.js"></script>
     <script src="./js/pages/capture-image-popup.js"></script>
-    <script src="./js/pages/auction-page.js"></script>
     <script src="./js/main.js"></script>
   </body>
 </html>

@@ -8,7 +8,7 @@ carouselImg.addEventListener('click', () => {
 function navigateAuctionPage1 () {
 const auctionSymbol1 = document.querySelector('#auctionSymbol1');
 auctionSymbol1.addEventListener('click', () => {
-    location.hash = "#auctiongPage";
+    location.hash = "#auctionPage";
 });
 }
 

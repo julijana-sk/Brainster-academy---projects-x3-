@@ -30,7 +30,7 @@ function redirectingMenu () {
     });
 
   navBtnAuction.addEventListener('click', () => {
-      location.hash = "#auctiongPage";
+      location.hash = "#auctionPage";
     });
 }
 
@@ -85,7 +85,7 @@ document.addEventListener('storage', handleArtistNameChange);
 const liveAuctioningNav = document.querySelector('#liveAuctioningNav');
 
 liveAuctioningNav.addEventListener('click', () => {
-    location.hash = "#auctiongPage";
+    location.hash = "#auctionPage";
 })
 
 const liveAuctioningPrice = document.querySelector('#liveAuctioningPrice');

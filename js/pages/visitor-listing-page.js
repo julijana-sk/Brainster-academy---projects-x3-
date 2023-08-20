@@ -150,7 +150,7 @@ function renderVistiorListingFiltersPage() {
 function navigateAuctionPage2 () {
     const auctionSymbol2 = document.querySelector('#auctionSymbol2');
     auctionSymbol2.addEventListener('click', () => {
-      location.hash = "#auctiongPage";
+      location.hash = "#auctionPage";
     });
 }
 

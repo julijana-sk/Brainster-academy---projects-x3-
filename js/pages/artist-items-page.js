@@ -34,7 +34,6 @@ function mainMenu1 () {
 }
 
 // rendering main page Artist Item Page
-
 function renderArtistItemsPage() {
         let chosenArtistName = localStorage.getItem('CHOSEN_ARTIST');
         document.getElementById('chosen-artist-name1').innerText = chosenArtistName;
@@ -91,9 +90,6 @@ function renderArtistItemsPage() {
       });
 }
 
-
-
-
 const addItemBtn = document.querySelector('#addItemCard');
 
 function addItem() {
@@ -109,6 +105,7 @@ const takeSnapshot = document.querySelector('#takeSnapshot');
 
 takeSnapshot.addEventListener('click', function takeSnapshot() {
     document.getElementById('captureImagePopup').style.display = 'flex';
+    takeSnapshotCamera();   
 });
 
 
