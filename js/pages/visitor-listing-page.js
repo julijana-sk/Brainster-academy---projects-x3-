@@ -101,7 +101,6 @@ function renderVistiorListingFiltersPage() {
         chosenPriceFilterMax.innerText = "";                  
 
           items            
-            // .filter(({ artist, priceMin, priceMax }) => (artist === chosenArtistFilter && priceMin >= chosenPriceFilterMin && priceMax <= chosenPriceFilterMax))   
             .filter(({ artist}) => (artist === chosenArtistFilter))           
             .forEach((artistItem, index) => {
 

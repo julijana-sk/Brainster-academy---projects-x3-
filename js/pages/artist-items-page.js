@@ -33,6 +33,7 @@ function mainMenu1 () {
   });
 }
 
+
 // rendering main page Artist Item Page
 function renderArtistItemsPage() {
         let chosenArtistName = localStorage.getItem('CHOSEN_ARTIST');
@@ -91,11 +92,11 @@ function renderArtistItemsPage() {
 }
 
 const addItemBtn = document.querySelector('#addItemCard');
+const showFilterLayerAddItem = document.querySelector("#filter-layer-add-item");
+
 
 function addItem() {
       addItemBtn.addEventListener('click', () => {
-
-      const showFilterLayerAddItem = document.querySelector("#filter-layer-add-item");
       showFilterLayerAddItem.style.width = "100%";
     });
 }
@@ -127,7 +128,16 @@ chooseByTypeDropdown.addEventListener('click', function renderType() {
 });
 
 
+const cancel = document.querySelector('#cancel');
+const addbtn = document.querySelector('#addbtn');
 
+addbtn.addEventListener('click', () => {
+    showFilterLayerAddItem.style.width = "0%";
+});
+
+cancel.addEventListener('click', () => {
+    showFilterLayerAddItem.style.width = "0%";
+})
 
 
 

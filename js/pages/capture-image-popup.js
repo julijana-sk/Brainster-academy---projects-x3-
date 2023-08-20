@@ -17,6 +17,9 @@ function takeSnapshotCamera () {
 
     const stopStreamBtn = document.querySelector('#stopStreamButton');
     stopStreamBtn.addEventListener('click', stopStream);
+    stopStreamBtn.addEventListener('click', cancelCamera);
+
+
 
     navigator.mediaDevices.getUserMedia({
         video: {
@@ -63,7 +66,14 @@ function takeSnapshotCamera () {
                 addEditItem();
 
                 document.getElementById('capturedImage').src = binaryImage;
+                cancelCamera();
                 });
 
     });
 };
+
+
+function cancelCamera() {
+    document.getElementById('captureImagePopup').style.display = 'none';
+
+}
