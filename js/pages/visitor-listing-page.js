@@ -4,8 +4,6 @@ const CHOSEN_PRICE_FILTER_MAX = 'chosenPriceFilterMax';
 const CHOSEN_TYPE_FILTER = 'chosenTypeFilter';
 const artistItemContainer = document.querySelector('#artistItemContainer');
 
-// fetchArtists();
-
 artistItemContainer.innerHTML = "";
 
 function renderVisitorListingPage () {

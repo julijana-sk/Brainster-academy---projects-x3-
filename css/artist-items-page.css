@@ -7,7 +7,7 @@ body {
 }
 
 .page-section {
-    background-color: #EDD5BB;
+    background-color: #EDD5BB !important;
 } 
 
 nav h1 {
@@ -60,7 +60,7 @@ p {
 .price-brown {
     max-width: 30%;
     height: 3%;
-    padding: 3px 5px;
+    padding: 3px 10px;
     border: #A16A5E;
     border-radius: 5px;
     background-color: #A16A5E;
@@ -76,18 +76,14 @@ p {
     background-color: #A16A5E;
 }
 
-.price-beige {
-    max-width: 30%;
-    height: 3%;
-    padding: 3px 5px;
-    border: #FCEBD5;
-    border-radius: 5px;
-    background-color: #FCEBD5;
-    color: #A16A5E;
-    font-weight: bold;
-    font-size: small;
-    text-align: center;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+.date {
+    color: #E09686;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 11px;
+    letter-spacing: 0em;
+    text-align: left;
 }
 
 .nav-link {
@@ -168,7 +164,6 @@ p {
 .btnAuction {
     padding: 7px;
     margin-right: 5px;
-    margin-bottom: 5px;
     border: none;
     border-radius: 2px;
     font-family: 'Roboto';

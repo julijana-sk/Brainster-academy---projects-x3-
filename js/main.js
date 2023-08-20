@@ -56,9 +56,9 @@ function handleRoute () {
             redirectingMenu();
             break;
         case ARTIST_ITEM_PAGE:
+            renderArtistItemsPage();
             // addItem();
             // takeSnapshot();
-            renderChosenArtist1();
             redirectingMenu1();
             mainMenu1();
             break;
@@ -73,3 +73,4 @@ function handleRoute () {
 
 window.addEventListener("load", handleRoute);
 window.addEventListener("hashchange", handleRoute);
+

@@ -295,5 +295,3 @@ function generateDateLabels(daysAgo) {
       }
       return arr;
   }
-
-

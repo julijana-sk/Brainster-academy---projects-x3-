@@ -2,11 +2,11 @@ const ARTIST = 'artistNames';
 const CHOSEN_ARTIST = 'chosenArtistName';
 const RENDER_ITEMS_STORED = 'artistItem';
 
+const artistNamesDropdown = document.querySelector("#dropdown-menu");
 
 function fetchArtists () {
-    const artistNamesDropdown = document.querySelector("#dropdown-menu");
+
     let artistNames = localStorage.getItem(ARTIST);
-    
     if (!localStorage.getItem(RENDER_ITEMS_STORED)) {
         const renderedItemsInSession = JSON.stringify(items);
         localStorage.setItem(RENDER_ITEMS_STORED, renderedItemsInSession);
@@ -20,16 +20,15 @@ function fetchArtists () {
             localStorage.setItem(ARTIST, artistNames);
         })
     }
+    const artistNamesArray = artistNames.split(",");   
 
-    const artistNamesArray = artistNames.split(",");
+    artistNamesArray.forEach((artistName) => {   
+        artistNamesDropdown.innerHTML += `<option value="${artistName}">${artistName}</option>`;
+        });
 
-    artistNamesArray.forEach((artistName) => {    
-    artistNamesDropdown.innerHTML += `<option value="${artistName}">${artistName}</option>`;
-    });
 
     artistNamesDropdown.addEventListener('change', (event) => {
         startCountdown();
-
         const chosenArtistName = event.target.value;
         localStorage.setItem('CHOSEN_ARTIST', chosenArtistName);
         location.hash = "#artistHomePage";
@@ -61,5 +60,3 @@ function navigateVisitorHomePage () {
         location.hash = "#visitorHomePage";
     })
 }
-
-    
