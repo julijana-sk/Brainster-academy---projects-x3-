@@ -1,12 +1,11 @@
+import { BtnType } from '@/types/types';
 import React from 'react'
 
-const Btn = () => {
+const Btn: React.FC<BtnType> = ({title}) => {
   return (
-    <div>
-    <button className="item button fluid button-big button-buy">
-		<span className="icon icon-shopping-bag-white">Add</span>
-		</button>
-    </div>
+      <button type="submit" className="item button fluid button-big">
+        {title}
+      </button>
   );
 }
 

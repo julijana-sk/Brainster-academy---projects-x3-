@@ -41,3 +41,7 @@ export interface AboutType {
     fifth_content: string,
     author: string,
 }
+
+export interface BtnType {
+    title: string,
+}

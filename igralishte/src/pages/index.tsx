@@ -1,8 +1,7 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
 import { NextPage } from 'next'
-
-const inter = Inter({ subsets: ['latin'] })
+import PageTitle from '@/components/PageTitle';
+import Banner from '@/components/Banner';
 
 // interface Props {
 //   bannerData: BannerType,
@@ -11,6 +10,8 @@ const inter = Inter({ subsets: ['latin'] })
 // }
 
 const Home: NextPage = () => {
+
+
   return (
     <>
       <Head>
@@ -20,15 +21,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-{/*         
-      <Banner preTitle={bannerData.preTitle} title={bannerData.title}/>
-
-      <CategoryPicker />
-
-      <FeaturedProducts products={featuredProductData}/>
-
-      <FeaturedBlogs blogs={featuredBlogsData}/> */}
-        
+        <PageTitle title="HOMEPAGE" />  
+        <Banner />  
       </main>
     </>
   )

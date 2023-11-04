@@ -1,8 +1,12 @@
+import { UserContext } from "@/context/UserContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 const Header: React.FC = () => {
+
+  const { user, handleLogOut } = useContext(UserContext);
+
   
   const {pathname, push} = useRouter();
   const router = useRouter();
@@ -32,19 +36,19 @@ const Header: React.FC = () => {
               <div className="left-top-bar">Free shipping for standard order over $100</div>
 
               <div className="right-top-bar flex-w h-full">
-                <a href="#" className="flex-c-m trans-04 p-lr-25">
+                <a className="flex-c-m trans-04 p-lr-25">
                   Help & FAQs
                 </a>
 
-                <a href="#" className="flex-c-m trans-04 p-lr-25">
+                <a className="flex-c-m trans-04 p-lr-25">
                   My Account
                 </a>
 
-                <a href="#" className="flex-c-m trans-04 p-lr-25">
+                <a className="flex-c-m trans-04 p-lr-25">
                   EN
                 </a>
 
-                <a href="#" className="flex-c-m trans-04 p-lr-25">
+                <a className="flex-c-m trans-04 p-lr-25">
                   USD
                 </a>
               </div>
@@ -82,6 +86,12 @@ const Header: React.FC = () => {
                     <Link href="/about">
                       <a>About</a>
                     </Link>
+                  </li>
+                  <li className={pathname === "/login" ? "active-menu" : ""}>
+                    { user ? <button onClick={handleLogOut}>Logout</button> : <Link href="/login">
+                      <a>Login</a>
+                    </Link>
+                    }
                   </li>
                 </ul>
               </div>
