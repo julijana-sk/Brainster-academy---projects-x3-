@@ -12,7 +12,7 @@ const Banner: React.FC = () => {
                 <img src="../pictures/icons/Logo Igralishte final version 1.png" alt="logo-igralishte" />   
 
                 <div className="layer-slick1">
-                  <Link href="/">
+                  <Link href="/NewArrivals">
                     <button className="btn btn-primary btn-large">
                       New arrivals
                     </button>

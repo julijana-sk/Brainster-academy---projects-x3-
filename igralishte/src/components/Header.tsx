@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
 
+
 const Header: React.FC = () => {
 
   const { user, handleLogOut } = useContext(UserContext);
@@ -31,65 +32,40 @@ const Header: React.FC = () => {
     <>
       <header className="header-v4">
         <div className="container-menu-desktop ">
-          <div className="top-bar fixed-top">
-            <div className="content-topbar flex-sb-m h-full container">
-              <div className="left-top-bar">Free shipping for standard order over $100</div>
-
-              <div className="right-top-bar flex-w h-full">
-                <a className="flex-c-m trans-04 p-lr-25">
-                  Help & FAQs
-                </a>
-
-                <a className="flex-c-m trans-04 p-lr-25">
-                  My Account
-                </a>
-
-                <a className="flex-c-m trans-04 p-lr-25">
-                  EN
-                </a>
-
-                <a className="flex-c-m trans-04 p-lr-25">
-                  USD
-                </a>
-              </div>
-            </div>
-          </div>
           <div className="wrap-menu-desktop how-shadow1">
             <nav className="limiter-menu-desktop container">
               <Link href="/">
-                <a className="logo">
-                  <img src="/images/icons/logo-01.png" alt="IMG-LOGO" />
-                </a>
+                <img src="../pictures/icons/sparks-elements-and-symbols-isolated-on-white-background-free-vector 5.png" />   
               </Link>
 
               <div className="menu-desktop">
                 <ul className="main-menu">
                   <li className={pathname === "/" ? "active-menu" : ""}>
                     <Link href="/">
-                      <a>Home</a>
+                      <h3>Home</h3>
                     </Link>
                   </li>
 
                     <li className={pathname === "/shop" ? "active-menu" : ""}>
                     <Link href="/shop">
-                      <a>Shop</a>
+                      <h3>Shop</h3>
                     </Link>
                   </li>
 
                     <li className={pathname === "/blog" ? "active-menu" : ""}>
                     <Link href="/blog">
-                      <a>Blog</a>
+                      <h3>Blog</h3>
                     </Link>
                   </li>
 
                     <li className={pathname === "/about" ? "active-menu" : ""}>
                     <Link href="/about">
-                      <a>About</a>
+                      <h3>About</h3>
                     </Link>
                   </li>
                   <li className={pathname === "/login" ? "active-menu" : ""}>
                     { user ? <button onClick={handleLogOut}>Logout</button> : <Link href="/login">
-                      <a>Login</a>
+                      <h3>Login</h3>
                     </Link>
                     }
                   </li>
