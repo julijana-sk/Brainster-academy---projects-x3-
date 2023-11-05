@@ -14,9 +14,6 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      <Head>
-        <PageTitle title="HOMEPAGE" />  
-      </Head>
         <Banner />  
     </div>
   )

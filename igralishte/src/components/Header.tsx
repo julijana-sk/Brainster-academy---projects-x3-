@@ -2,6 +2,12 @@ import { UserContext } from "@/context/UserContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
+import '../pictures/icons/shopping cart.png'
+import '../pictures/icons/heart-straight-thin.png'
+import '../pictures/icons/user-light.png'
+
+
+
 
 
 const Header: React.FC = () => {
@@ -12,6 +18,8 @@ const Header: React.FC = () => {
   const {pathname, push} = useRouter();
   const router = useRouter();
   const [toggleSearch, setToggleSearch] = useState(false);
+  const [toggleNav, setToggleNav] = useState(false);
+
   const [searchState, setSearchState] = useState("");
 
   const handleSearchSubmit = (event: React.FormEvent) => {
@@ -28,81 +36,100 @@ const Header: React.FC = () => {
       setToggleSearch(!toggleSearch);
   };
 
+  
+  const openNav = () => {
+    setToggleNav(!toggleNav);
+  }
+
+
   return (
-    <>
-      <header className="header-v4">
-        <div className="container-menu-desktop ">
-          <div className="wrap-menu-desktop how-shadow1">
-            <nav className="limiter-menu-desktop container">
-              <Link href="/">
-                <img src="../pictures/icons/sparks-elements-and-symbols-isolated-on-white-background-free-vector 5.png" />   
-              </Link>
+    <header>
+      <div id="myNav" className="overlay">
+      {/* <Link href="/" className="closebtn" onClick={openNav}>×</Link> */}
+      <div className="overlay-content">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <a className="nav-link"
+              >Vintage облека<span className="sr-only">(current)</span></a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link">Брендови</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link">Аксесоари</a>
+          </li>
+          <li className="nav-item mr-4">
+            <a className="nav-link">Lifestyle</a>
+          </li>
+          <li className="nav-item mr-4">
+            <a className="nav-link">Подари картичка*</a>
+          </li>
+          <li className="nav-item mr-4">
+            <a className="nav-link">Попуст</a>
+          </li>
+          <li className="nav-item mr-4">
+            <Link href={"/"} className="nav-link"><img src="../pictures/icons/shopping cart.png" />Кошничка</Link>
+          </li>
+          <li className="nav-item mr-4">
+            <Link href={"/"} className="nav-link"><img src="../pictures/icons/heart-straight-thin.png" />Омилени</Link>
+          </li>
+          <li className={pathname === "/login" ? "active-menu" : ""}>
+            <Link href="/login" className="nav-link d-flex flex-row justify-content-start"><img src="../pictures/icons/user-light.png"/>
+            { user ? <button onClick={handleLogOut} className="bg-danger">Logout</button> : <Link href="/login">
+              <h3>Login</h3>
+            </Link>
+            }
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-              <div className="menu-desktop">
-                <ul className="main-menu">
-                  <li className={pathname === "/" ? "active-menu" : ""}>
-                    <Link href="/">
-                      <h3>Home</h3>
-                    </Link>
-                  </li>
+    <nav className="navbar navbar-light text-dark mb-3 p-3">
+      <button
+        className="navbar-toggler text-dark"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        onClick={openNav}
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+        <Link href="/" className="navbar-brand m-0 text-center">
+          <img
+            src="../pictures/icons/Logo Igralishte final version 1.png"
+            alt="logo-igralihste"
+            className="w-75"/>
+        </Link>
+      {/* search */}
+      <button className="btn-search" onClick={toggleSearchForm}>
+        <img src="../pictures/icons/fluent_search-48-regular.png" alt="search icon" />
+      </button>
+    </nav> 
 
-                    <li className={pathname === "/shop" ? "active-menu" : ""}>
-                    <Link href="/shop">
-                      <h3>Shop</h3>
-                    </Link>
-                  </li>
+    {/* use show-modal-search class on this div to toggle the serch*/}
+      <div className={`${toggleSearch ? "show-modal-search" : "" } modal-search-header flex-c-m trans-04 js-hide-modal-search pt-3`}>
+        <div className="container-search-header">
+          {/* close the search on this button on click */}
+          <button className="btn-search flex-c-m btn-hide-modal-search trans-04" onClick={toggleSearchForm}>
+            <img src="../pictures/icons/fluent_search-48-regular.png" alt="close" />
+          </button>
 
-                    <li className={pathname === "/blog" ? "active-menu" : ""}>
-                    <Link href="/blog">
-                      <h3>Blog</h3>
-                    </Link>
-                  </li>
-
-                    <li className={pathname === "/about" ? "active-menu" : ""}>
-                    <Link href="/about">
-                      <h3>About</h3>
-                    </Link>
-                  </li>
-                  <li className={pathname === "/login" ? "active-menu" : ""}>
-                    { user ? <button onClick={handleLogOut}>Logout</button> : <Link href="/login">
-                      <h3>Login</h3>
-                    </Link>
-                    }
-                  </li>
-                </ul>
-              </div>
-
-              <div className="wrap-icon-header flex-w flex-r-m h-full">
-                <div className="flex-c-m h-full p-r-24">
-                  {/* make a click event listener on this div to show the search */}
-                  <div className="icon-header-item cl2 hov-cl1 trans-04 p-lr-11" onClick={toggleSearchForm}>
-                    <i className="zmdi zmdi-search"></i> 
-                  </div>
-                </div>
-              </div>
-            </nav>
-          </div>
-        </div>
-
-        {/* use show-modal-search class on this div to toggle the serch*/}
-        <div className={`${toggleSearch ? "show-modal-search" : "" } modal-search-header flex-c-m trans-04 js-hide-modal-search`}>
-          <div className="container-search-header">
-            {/* close the search on this button on click */}
-            <button className="flex-c-m btn-hide-modal-search trans-04" onClick={toggleSearchForm}>
-              <img src="images/icons/icon-close2.png" alt="CLOSE" />
+          <form className="wrap-search-header flex-w p-l-15 align-items-center" onSubmit={handleSearchSubmit}>
+            <button className="btn-search" type="submit">
+              <i className="fas fa-chevron-left fa-1x text-light" />
             </button>
-
-            <form className="wrap-search-header flex-w p-l-15" onSubmit={handleSearchSubmit}>
-              <button className="flex-c-m trans-04" type="submit">
-                <i className="zmdi zmdi-search"></i>
-              </button>
-              <input className="plh3" type="search" value={searchState} onChange={event => setSearchState(event.target.value)} name="search" placeholder="Search..." />
-            </form>
-          </div>
+            <input className="plh3 p-0" type="search" value={searchState} onChange={event => setSearchState(event.target.value)} name="search" placeholder="Пребарувај..." />
+          </form>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
-};
+
+
+}
 
 export default Header;
