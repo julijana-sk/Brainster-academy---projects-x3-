@@ -1,4 +1,5 @@
-import React, { createContext, useState } from "react";
+import { ProductType } from "@/types/types";
+import React, { createContext, useEffect, useState } from "react";
 
 interface UserContextType {
   user: {
@@ -6,12 +7,15 @@ interface UserContextType {
   } | null;
   handleLogIn: (username: string, password: string) => void;
   handleLogOut: () => void;
+  products: ProductType[];
+
 }
 
 export const UserContext = createContext<UserContextType>({
   user: null,
   handleLogIn: () => {},
   handleLogOut: () => {},
+  products: []
 });
 
 interface Props {
@@ -19,9 +23,30 @@ interface Props {
 }
 
 const UserContextConstructor: React.FC<Props> = ({ children }) => {
-  const [user, setUser] = useState<UserContextType["user"]>({
-    email: "igralishte@hotmail.com",
-  });
+
+  const [user, setUser] = useState<UserContextType["user"]>({email: "igralishte@hotmail.com"});
+  const [products, setProducts] = useState<ProductType[]>([]);
+  // const [isFavorite, setIsFavorite] = useState(false);
+
+
+
+
+   useEffect(() => {
+        fetch("http://localhost:5001/products")
+        .then((res) => res.json())
+        .then((products) => {
+            setProducts(products);
+        });
+    }, []);
+
+
+    // ... >  PODESI ZA USER KORISNIK AKO GO IMA VO LOCAL STORAGE !!!!! < ---- 
+    // useEffect(() => {
+    //     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+    //     setIsFavorite(favorites.includes(id));
+    // }, [id]);
+
 
   const handleLogIn = (username: string, password: string) => {
 
@@ -38,7 +63,8 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
     <UserContext.Provider value={{ 
         user, 
         handleLogIn, 
-        handleLogOut 
+        handleLogOut ,
+        products
       }}>
       {children}
     </UserContext.Provider>
