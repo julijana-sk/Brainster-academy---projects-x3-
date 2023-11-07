@@ -2,12 +2,10 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import MenuDropdowns from "./MenuList";
-
 
 const Header: React.FC = () => {
 
-  const { user, products, handleLogOut } = useContext(UserContext);
+  const { user, handleLogOut, handleLogIn, products, brands } = useContext(UserContext);
 
   
   const {pathname, push} = useRouter();
@@ -16,6 +14,8 @@ const Header: React.FC = () => {
   const [toggleNav, setToggleNav] = useState(false);
 
   const [searchState, setSearchState] = useState("");
+
+
 
   const handleSearchSubmit = (event: React.FormEvent) => {
       event.preventDefault();
@@ -44,13 +44,26 @@ const Header: React.FC = () => {
       {/* <Link href="/" className="closebtn" onClick={openNav}>×</Link> */}
       <div className="overlay-content">
         <ul className="navbar-nav">
-          {products.map((item) => (
-              <Link href="/">
-            <li key={item.id}>
-                {/* {item} */}
-            </li>
-              </Link>
-          ))}
+          <li>
+             <h2 className="mb-3">Продукти</h2>
+          <div className="row">
+            {products.map((product) => (
+              <div className="col-md-4" key={product.id}>
+                <h5 className="card-title">{product.product_type}</h5>
+              </div>
+            ))}
+          </div>
+          </li>
+          <li>
+            <h2 className="mb-3">Брендови</h2>
+          {/* <div className="row">
+            {data.map((brand) => (
+              <div>
+                  <p className="text-left">{brand}</p>
+              </div>
+            ))}
+          </div> */}
+          </li>
           <li className="nav-item mr-4">
             <Link href={"/"} className="nav-link"><img src="../pictures/icons/shopping cart.png" />Кошничка</Link>
           </li>

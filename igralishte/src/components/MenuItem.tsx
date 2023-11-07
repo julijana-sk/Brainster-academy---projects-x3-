@@ -1,20 +1,13 @@
-import React from "react";
 import { ProductType } from "@/types/types";
-import Link from "next/link";
+import React from "react";
 
-interface Props {
-  product: ProductType;
-}
+// interface Props {
+//   items: ProductType;
+// }
 
-const MenuItem: React.FC<Props> = ({ product }) => {
+// const MenuItem: React.FC<Props> = ({items}) => {
 
-return (
-   <Link href={`/products/${product.id}`}> 
-      <div className="container">
-        <p className="text-left">{product.product_type}</p>
-      </div>
-    </Link>
-  );
-};
+// return <div>{items.type}</div>
+// };
 
-export default MenuItem;
+// export default MenuItem;
