@@ -1,43 +1,35 @@
-import Head from 'next/head'
-import { NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 import Banner from '../components/Banner';
-import PageTitle from '../components/PageTitle';
+import { ProductType } from '@/types/types';
+import MenuDropdowns from '@/components/MenuList';
 
-// interface Props {
-//   bannerData: BannerType,
-//   featuredProductData: ProductType[],
-//   featuredBlogsData: BlogType[],
-// }
+interface Props {
+  products: ProductType[],
+}
 
-const Home: NextPage = () => {
+const Home: NextPage<Props> = ({products}) => {
 
 
   return (
     <div>
         <Banner />  
+        {/* <ProductsList /> */}
+        <MenuDropdowns products={products}/>
+
     </div>
   )
 }
 
 export default Home;
 
+export const getStaticProps: GetStaticProps = async () => {
 
-// export const getStaticProps: GetStaticProps = async () => {
+ const resProduct = await fetch("http://localhost:5001/products");
+ const products: ProductType[] = await resProduct.json();
 
-//  const resBanner = await fetch("http://localhost:5001/banner_content");
-//  const bannerData: BannerType= await resBanner.json();
-
-//  const resFeaturedProduct = await fetch("http://localhost:5001/products/?_limit=4");
-//  const featuredProductData: ProductType[] = await resFeaturedProduct.json();
-
-//  const resFeaturedBlogs = await fetch("http://localhost:5001/blogs/?_limit=3");
-//  const featuredBlogsData: BlogType[] = await resFeaturedBlogs.json();
-
-//  return {
-//     props: {
-//       bannerData,
-//       featuredProductData,
-//       featuredBlogsData,
-//     },
-//  };
-// };
+ return {
+    props: {
+      products,
+    },
+ };
+}

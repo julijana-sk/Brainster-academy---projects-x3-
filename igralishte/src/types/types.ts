@@ -1,8 +1,3 @@
-// export interface BannerType {
-//     preTitle: string,
-//     title: string
-// }
-
 export interface ProductType {
     id: string,
     type: string,

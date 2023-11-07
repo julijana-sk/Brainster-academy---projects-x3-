@@ -31,13 +31,14 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
 
 
 
-   useEffect(() => {
-        fetch("http://localhost:5001/products")
-        .then((res) => res.json())
-        .then((products) => {
-            setProducts(products);
-        });
-    }, []);
+  //  useEffect(() => {
+  //       fetch("http://localhost:5001/products")
+  //       .then((res) => res.json())
+  //       .then((products) => {
+  //           setProducts(products);
+  //       });
+  //   }, []);
+  //   console.log(products)
 
 
     // ... >  PODESI ZA USER KORISNIK AKO GO IMA VO LOCAL STORAGE !!!!! < ---- 

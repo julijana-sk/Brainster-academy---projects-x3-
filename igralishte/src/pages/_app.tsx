@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import UserContextConstructor from '../context/UserContext';
 import Authentication from '../components/Authentication';
 
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -20,3 +21,4 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
+
