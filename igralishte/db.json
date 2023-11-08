@@ -1,6 +1,7 @@
 {
-  "products": {
-      "Vintage clothes": [
+  "data":  [
+    {
+    "VintageClothes": [
           {
             "id": "OKE22GJU7MQ",
             "type": "Vintage clothes",
@@ -361,8 +362,10 @@
             "description": "eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem.",
             "date": "05/11/2023"
           }
-        ],
-      "Accessories": [
+        ]
+      },
+      {
+    "Accessories": [
           {
             "id": "OKE22GJU7MQ",
             "type": "Accessories",
@@ -721,21 +724,11 @@
             "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
             "date": "21/09/2023"
           }
-        ]
-      },
-  "brands": [ 
-      "Pinc Partywear", 
-      "Factory Girl",
-      "Main Days",
-      "Нежно",
-      "Ред",
-      "Наш",
-      "Зш да не",
-      "Fraeil",
-      "Urma",
-      "Candle Nest",
-      "Beyond Green",
-      "Gatta"
-    ]
+        ] },
+        {
+    "Brands": ["Pinc Partywear", "Factory Girl", "Main Days", "Нежно", "Ред", "Наш", "Зш да не", "Fraeil", "Urma", "Candle Nest", "Beyond Green", "Gatta" ]
+        }
+  ]
 }
+
 

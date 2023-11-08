@@ -1,13 +1,20 @@
 import { ProductType } from "@/types/types";
 import React from "react";
 
-// interface Props {
-//   items: ProductType;
-// }
+interface Props {
+  item: ProductType;
+}
 
-// const MenuItem: React.FC<Props> = ({items}) => {
+const MenuItem: React.FC<Props> = ({item}) => {
 
-// return <div>{items.type}</div>
-// };
+return (
+    <div >
+      <h3>{item.product_type}</h3>
+    </div>
+  )
+};
 
-// export default MenuItem;
+export default MenuItem;
+
+
+

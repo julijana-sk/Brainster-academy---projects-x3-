@@ -1,4 +1,4 @@
-import { BrandType, ProductType } from "@/types/types";
+import { DataType } from "@/types/types";
 import React, { createContext, useEffect, useState } from "react";
 
 interface UserContextType {
@@ -7,16 +7,14 @@ interface UserContextType {
   } | null,
   handleLogIn: (username: string, password: string) => void,
   handleLogOut: () => void,
-  products: ProductType[],
-  brands: BrandType[]
+  data: DataType[]
 }
 
 export const UserContext = createContext<UserContextType>({
   user: null,
   handleLogIn: () => {},
   handleLogOut: () => {},
-  products: [],
-  brands: []
+  data: []
 });
 
 interface Props {
@@ -26,33 +24,18 @@ interface Props {
 const UserContextConstructor: React.FC<Props> = ({ children }) => {
 
   const [user, setUser] = useState<UserContextType["user"]>({email: "igralishte@hotmail.com"});
-  const [products, setProducts] = useState<ProductType[]>([]);
-  const [brands, setBrand] = useState<BrandType[]>([]);
-
-
-
+  const [data, setData] = useState<DataType[]>([]);
 
 
   useEffect(() => {
-        fetch("http://localhost:5001/products")
+        fetch("http://localhost:5001/data")
         .then((res) => res.json())
-        .then((products) => {
-            setProducts(products);
+        .then((data) => {
+            setData(data);
         });
     }, []);
 
-console.log(products)
-
-useEffect(() => {
-        fetch("http://localhost:5001/brands")
-        .then((res) => res.json())
-        .then((brands) => {
-            setProducts(brands);
-        });
-    }, []);
-
-console.log(brands)
-
+console.log(data[2])
 
 
   const handleLogIn = (username: string, password: string) => {
@@ -70,9 +53,8 @@ console.log(brands)
     <UserContext.Provider value={{ 
         user, 
         handleLogIn, 
-        handleLogOut ,
-        products,
-        brands
+        handleLogOut,
+        data
       }}>
       {children}
     </UserContext.Provider>

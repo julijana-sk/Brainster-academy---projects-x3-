@@ -1,21 +1,20 @@
 import { GetStaticProps, NextPage } from 'next'
 import Banner from '../components/Banner';
-import { ProductType } from '@/types/types';
-import MenuDropdowns from '@/components/MenuList';
+import { DataType } from '@/types/types';
+import Header from '@/components/Header';
+import MenuList from '@/components/MenuList';
 
 interface Props {
-  products: ProductType[],
+  data: DataType[],
 }
 
-const Home: NextPage<Props> = ({products}) => {
+const Home: NextPage<Props> = ({data}) => {
 
 
   return (
     <div>
-        <Banner />  
-        {/* <ProductsList /> */}
-        <MenuDropdowns products={products}/>
-
+        <Banner /> 
+        <MenuList data={data}/>
     </div>
   )
 }
@@ -24,12 +23,12 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
 
- const resProduct = await fetch("http://localhost:5001/products");
- const products: ProductType[] = await resProduct.json();
+ const resData = await fetch("http://localhost:5001/data");
+ const data: DataType[] = await resData.json();
 
  return {
     props: {
-      products,
+      data,
     },
  };
 }
