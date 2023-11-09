@@ -3,6 +3,7 @@ import { ProductType } from "../types/types";
 import Link from "next/link";
 
 const ProductItem: React.FC<ProductType> = (product) => {
+  
   return (
     <Link href={`/products/${product.id}`}> 
     <div className="container">

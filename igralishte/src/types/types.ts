@@ -20,6 +20,7 @@ export interface ProductType {
 export type BrandType = string[];
 
 export interface DataType {
-    Products: ProductType[];
-    Brands: BrandType;
+    vintageClothes: ProductType[];
+    accessories: ProductType[];
+    brands: BrandType;
 }
