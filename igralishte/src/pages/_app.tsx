@@ -4,16 +4,23 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import UserContextConstructor from '../context/UserContext';
 import Authentication from '../components/Authentication';
+import { useRouter } from 'next/router';
 
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+  const router = useRouter();
+  const isLoginPage = router.route === '/login';
+  const isProfilePage = router.route === '/profile';
+
+
   return (
     <>
       <UserContextConstructor>
         <Authentication>
-          <Header />
-            <Component {...pageProps} />
-          <Footer />
+           {!isLoginPage && !isProfilePage && <Header />}
+          <Component {...pageProps} />
+           {!isLoginPage && !isProfilePage && <Footer />}
         </Authentication>
       </UserContextConstructor>
     </>

@@ -1,6 +1,17 @@
 * {
     box-sizing: border-box;
 }
+body {
+    font-family: 'Cormorant Garamond', serif;
+    margin: 0;
+    padding: 0;
+    }
+h1 {
+    font-family: 'Century', serif;
+}
+h2, h3, h4, h5 {
+    font-family: 'Cormorant Infant', serif;
+}
 .navbar-brand img {
     height: 100%;
     width: 100%;
@@ -30,7 +41,7 @@
 /* Hamburger menu */
 
 .container {
-    background: linear-gradient(315deg, #b1bfd8 0%, #667eaa 74%);
+    background: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -38,7 +49,7 @@
 
 .hamburber {
     width: 30px;
-    height: 3px;
+    height: 2px;
     background-color: black;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -49,8 +60,9 @@
 .hamburber::before {
     content: "";
     position: absolute;
+    cursor: pointer;
     width: 30px;
-    height: 3px;
+    height: 2px;
     background-color: black;
     border-radius: 5px;
     transition: all 0.5s ease-in-out;
@@ -60,8 +72,9 @@
 .hamburber::after {
     content: '';
     position: absolute;
+    cursor: pointer;
     width: 30px;
-    height: 3px;
+    height: 2px;
     background-color: black;
     border-radius: 5px;
     transition: all 0.5s ease-in-out;
@@ -75,11 +88,13 @@
     transform: translateX(-50px);
     background: transparent;
     transition: all 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 .activeHamburger::before {
     content: '';
     position: absolute;
+    cursor: pointer;
     width: 30px;
     height: 3px;
     background-color: black;
@@ -91,8 +106,9 @@
 .activeHamburger::after {
     content: '';
     position: absolute;
+    cursor: pointer;
     width: 30px;
-    height: 3px;
+    height: 2px;
     background-color: black;
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
@@ -102,33 +118,69 @@
     position: fixed;
     width: 100%;
     height: 100vh;
-    background-color: linear-gradient(150deg, #b1bfd8 0%, #667eaa 74%);
-    transform: translateX(-100%);
-    transition: all 0.3s ease-in-out;
+    background-color: white;
+    transform: translateX(100%);
+    transition: all 0.1s ease-in-out;
     z-index: 2222222;
 }
 .activeSidenav {
     position: fixed;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(150deg, #b1bfd8 0%, #667eaa 74%);
-    transform: translateX(0);
-    transition: all 0.3s ease-in-out;
+    background: white;
+    transform: translateX(0%);
+    transition: all 0.5s ease-in-out;
     z-index: 222222222;
+    left: 0;
 }
 
 ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
-
-ul li {
-    padding: 20px 0;
-}
-
 ul li a {
-    margin: "20px 0";
-    color: "white";
+    color: black;
 }
+.menu-footer {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 33px;
+    letter-spacing: -0.011em;
+    text-align: left;
+    display: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.menu-footer p {
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+.menu-footer-button {
+    width: 45px;
+    height: 45px;
+    border-radius: 6.24px;
+    border: 0.62px lightgray;
+    box-shadow: 0px 0px 1.872483253479004px 0px #C2C2C2;
+    background: linear-gradient(0deg, #FFF7F7, #FFF7F7);
+    position: relative;
+    align-self: center;
+    align-self: center;
+}
+.menu-footer img {
+    width: 30px;
+    height: 28px;
+    top: 9px;
+    left: 6px;
+    position: absolute;
+}
+
 /* ______________________________ */
 
 /*[ Modal search ]*/
@@ -153,8 +205,8 @@ ul li a {
 /*---------------------------------------------*/
 .btn-hide-modal-search {
     position: absolute;
-    right: 35px;
-    bottom: 35px;
+    right: 20px;
+    bottom: 0px;
     opacity: 0.8;
 }
 
@@ -301,7 +353,7 @@ ul li a {
 .rs1-select2 .select2-search--dropdown .select2-search__field {
   border: 1px solid #aaa;
   outline: none;
-  font-family: Poppins-Regular;
+  font-family: 'Cormorant Garamond', serif;
   font-size: 13px;
   color: #555;
   line-height: 1.2;
@@ -328,4 +380,45 @@ ul li a {
 } */
 
 /* search end  */
+form label {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 14.52px;
+}
+.btnProfilePicture {
+    max-width: 100%;
+    top: 345.29px;
+    left: 137.49px;
+    border-radius: 8.41px;
+}
 
+.PrimaryBtn {
+    width: 220px;
+    height: 40px;
+    top: 400px;
+    left: 70px;
+    border-radius: 13px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.SecondaryBtn {
+    width: 220px;
+    height: 40px;
+    top: 400px;
+    left: 70px;
+    border-radius: 13px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+}

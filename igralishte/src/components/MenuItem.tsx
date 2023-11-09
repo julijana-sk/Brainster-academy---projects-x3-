@@ -2,14 +2,14 @@ import { ProductType } from "@/types/types";
 import React from "react";
 
 interface Props {
-  item: ProductType;
+  product: ProductType;
 }
 
-const MenuItem: React.FC<Props> = ({item}) => {
+const MenuItem: React.FC<Props> = ({product}) => {
 
 return (
     <div >
-      <h3>{item.product_type}</h3>
+      <h3>{product.product_type}</h3>
     </div>
   )
 };

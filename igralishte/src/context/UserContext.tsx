@@ -35,7 +35,7 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
         });
     }, []);
 
-console.log(data[2])
+console.log(data)
 
 
   const handleLogIn = (username: string, password: string) => {
