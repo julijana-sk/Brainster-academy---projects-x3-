@@ -1,8 +1,8 @@
 import { GetStaticProps, NextPage } from 'next'
 import Banner from '../components/Banner';
-import { DataType } from '@/types/types';
+import { Category, DataType, SubCategory } from '@/types/types';
+// import CategoryItems from '@/components/CategoryItems';
 import Header from '@/components/Header';
-// import MenuList from '@/components/MenuList';
 
 interface Props {
   data: DataType[],
@@ -14,7 +14,10 @@ const Home: NextPage<Props> = ({data}) => {
   return (
     <div>
         <Banner /> 
-        {/* <MenuList data={data}/> */}
+        {/* <Header data={data}/> */}
+       
+        {/* <CategoryItems data={data} category={item} subcategory={item.category}/> */}
+        
     </div>
   )
 }

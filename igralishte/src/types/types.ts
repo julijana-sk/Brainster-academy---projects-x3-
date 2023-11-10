@@ -17,10 +17,22 @@ export interface ProductType {
     date: string;
 };
 
-export type BrandType = string[];
+
+export interface SubCategory {
+  type: string;
+  products: ProductType[];
+}
+
+export interface Category {
+  category: string;
+  subs: SubCategory[];
+}
+
+// export interface DataType {
+//   items: Category[];
+// }
 
 export interface DataType {
-    vintageClothes: ProductType[];
-    accessories: ProductType[];
-    brands: BrandType;
+  category: Category,
+  subs: SubCategory[]
 }

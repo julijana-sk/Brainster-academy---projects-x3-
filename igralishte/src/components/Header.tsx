@@ -2,14 +2,17 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import MenuList from "./MenuList";
+import CategorySubItem from "./CategorySubItem";
+import { DataType, SubCategory } from "@/types/types";
+import CategoryItems from "./CategoryItems";
 
+interface Props {
+  list: SubCategory[],
+  item: DataType
+}
+const Header: React.FC<Props> = ({list, item}) => {
 
-
-
-const Header: React.FC = () => {
-
-  const { user, handleLogOut, handleLogIn, data } = useContext(UserContext);
+  const { user, handleLogOut, handleLogIn, data} = useContext(UserContext);
 
   console.log(data)
 
@@ -47,8 +50,7 @@ return (
       <div className="container text-dark p-0">
           <div onClick={openNav} className={toggleNav ? "activeHamburger" : "hamburber"} />
           <Link href={"/"} className="navbar-brand m-0 text-center">
-          <img src={require("../pictures/icons/Logo Igralishte final version 1.png")}
-            alt="logo-igralihste"/>
+          <img src={require('../pictures/Profile-picture.png')} alt="logo"/>
         </Link>
       {/* search */}
       <button className="btn-search" onClick={toggleSearchForm}>
@@ -71,17 +73,23 @@ return (
       </div>
     </div>
       <div className={toggleNav ? "activeSidenav" : "sidenav"}>
-        <ul className="ul">
-          {/* {Object.values(data)?.map((item, index) => ( */}
-            <li>
-              {data.map((product, index) => {
-                return (
-                <MenuList key={index}/>
-                    )
-              })
-            }
+        <ul className="menu">
+          <li>
+          {data.map((item, index) => (
+            <li key={index}>
+              {item.category.category}<CategoryItems category={item.category.category}/>
+              <ul>
+                {item.subs.map((sub) => (
+                  <li key={sub.type}>
+                  <Link href={`/category/${item.category}/${sub.type}`}>
+                      {sub.type}
+                  </Link>
+                  </li>
+                ))}
+              </ul>
             </li>
-          {/* ))} */}
+          ))}
+        </li>
           <div className="menu-footer">
             <li className="nav-item ">
               <Link href={"/"} className="nav-link d-flex flex-row justify-content-start">
