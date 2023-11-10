@@ -2,9 +2,8 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
-// import MenuList from "./MenuList";
-import { DataType, ProductType } from "@/types/types";
-import MenuList from "./lista";
+import MenuList from "./MenuList";
+
 
 
 
@@ -48,13 +47,12 @@ return (
       <div className="container text-dark p-0">
           <div onClick={openNav} className={toggleNav ? "activeHamburger" : "hamburber"} />
           <Link href={"/"} className="navbar-brand m-0 text-center">
-          <img
-            src="../pictures/icons/Logo Igralishte final version 1.png"
+          <img src={require("../pictures/icons/Logo Igralishte final version 1.png")}
             alt="logo-igralihste"/>
         </Link>
       {/* search */}
       <button className="btn-search" onClick={toggleSearchForm}>
-        <img src="../pictures/icons/fluent_search-48-regular.png" alt="search icon" />
+        <img src={require("../pictures/icons/fluent_search-48-regular.png")} alt="search icon" />
       </button>
 
     {/* show-modal-search class on this div for  toggle the search button*/}
@@ -66,7 +64,7 @@ return (
             </button>
             <input className="plh3 p-2" type="search" value={searchState} onChange={event => setSearchState(event.target.value)} name="search" placeholder="Пребарувај..." />
             <button className="btn-search flex-c-m btn-hide-modal-search trans-04 p-0" onClick={toggleSearchForm}>
-            <img src="../pictures/icons/fluent_search-48-regular.png" alt="close" />
+            <img src={require("../pictures/icons/fluent_search-48-regular.png")} alt="search close btn" />
           </button>
           </form>
         </div>
@@ -87,19 +85,19 @@ return (
           <div className="menu-footer">
             <li className="nav-item ">
               <Link href={"/"} className="nav-link d-flex flex-row justify-content-start">
-                <button className="menu-footer-button"><img src="../pictures/icons/shopping cart.png" /></button>
+                <button className="menu-footer-button"><img src={require("../pictures/icons/shopping cart.png")} /> </button>
                 <p>Кошничка</p>
               </Link>
             </li>
             <li className="nav-item">
               <Link href={"/"} className="nav-link d-flex flex-row justify-content-start">
-                <button className="menu-footer-button"><img src="../pictures/icons/heart-straight-thin.png" /></button>
+                <button className="menu-footer-button"><img src={require("../pictures/icons/heart-straight-thin.png")} /> </button>
                 <p>Омилени</p>
               </Link>
             </li>
             <li className={pathname === "/login" ? "active-menu" : ""}>
               <div className="nav-link d-flex flex-row justify-content-start">
-                <button className="menu-footer-button"><img src="../pictures/icons/user-light.png"/></button>
+                <button className="menu-footer-button"><img src={require("../pictures/icons/user-light.png")} /></button>
                 { user ? <Link onClick={handleLogOut} href={"/profile"} className="bg-transparent menu-footer border-0"><p>Мој профил</p></Link> 
                 : <Link href={"/login"}><p>Регистрирај се/Логирај се</p> 
                 </Link>}

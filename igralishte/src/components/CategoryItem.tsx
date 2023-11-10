@@ -1,8 +1,9 @@
+import { DataType } from '@/types/types';
 import Link from 'next/link';
 import React from 'react'
 
 interface Props {
-  category: string;
+  category: DataType[];
 
 }
 

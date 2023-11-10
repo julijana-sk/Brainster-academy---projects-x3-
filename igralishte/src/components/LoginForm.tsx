@@ -32,8 +32,8 @@ const LoginForm = () => {
           <div className='text center mb-5'>
             <PrimaryBtn title="Најави се" btnClass={"PrimaryBtn"} backgroundColor={"black"} color='white' border='none'/>
             <p className='text-left ml-5 pl-5 my-4'>или</p>
-            <PrimaryBtn btnClass={"SecondaryBtn"} img={"../pictures/icons/google.png"} title="Најави се преку Google" backgroundColor={"transparent"} color='black' border='3px solid #FFDBDB'/>
-            <PrimaryBtn btnClass={"SecondaryBtn"}  img={"../pictures/icons/facebook.png"} title="Најави се преку Facebook" backgroundColor={"transparent"} color='black' border='3px solid #FFDBDB'/>
+            <PrimaryBtn btnClass={"SecondaryBtn"} img={require("../pictures/icons/google.png")} title="Најави се преку Google" backgroundColor={"transparent"} color='black' border='3px solid #FFDBDB'/>
+            <PrimaryBtn btnClass={"SecondaryBtn"}  img={require("../pictures/icons/facebook.png")} title="Најави се преку Facebook" backgroundColor={"transparent"} color='black' border='3px solid #FFDBDB'/>
             <Link href="/login"><p className='mr-2 mt-4 mb-5 text-dark font-weight-bold'>Немаш профил? <span style={{color: "#8A8328", textDecoration: "underline"}}> Регистрирај се</span></p></Link>
           </div>
 

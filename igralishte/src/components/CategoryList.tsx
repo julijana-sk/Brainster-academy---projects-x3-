@@ -15,7 +15,7 @@ return (
         <div>
             {data.map((category, index) => {
                 return (
-                    <CategoryItem key={index} category={data.}/>
+                    <CategoryItem key={index} category={category.vintageClothes}/>
                 )
             }        
             

@@ -6,7 +6,7 @@ const Banner: React.FC = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-11">
-          <img src="../pictures/banner.png"
+          <img src={require("../pictures/banner.png")}
             alt="banner picture"
             className="w-100 h-50 position-relative" />
             <Link href="/NewArrivals">

@@ -9,7 +9,7 @@ const ProductItem: React.FC<ProductType> = (product) => {
     <div className="container">
       <div className="row d-flex flex-column justify-content-between">
         <div className="col-12">
-          <img src={product.img} alt="IMG-PRODUCT" />
+          <img src={require(product.img)} alt="IMG-PRODUCT" />
             <p className="text-left">{product.title}</p>
             <span className="text-left">{product.price} ден.</span>
           </div>
