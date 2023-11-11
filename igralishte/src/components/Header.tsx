@@ -2,15 +2,10 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { DataType, SubCategory } from "@/types/types";
 import CategoryItems from "./CategoryItems";
 
 
-interface Props {
-  list: SubCategory[],
-  item: DataType
-}
-const Header: React.FC<Props> = ({list, item}) => {
+const Header: React.FC = () => {
 
   const { user, handleLogOut, handleLogIn, data} = useContext(UserContext);
 
@@ -46,7 +41,7 @@ const Header: React.FC<Props> = ({list, item}) => {
   }
 
 return (
-    <div className="p-3">
+    <div className="px-3 py-2">
       <div className="container text-dark p-0">
           <div onClick={openNav} className={toggleNav ? "activeHamburger" : "hamburber"} />
           <Link href={"/"} className="navbar-brand m-0 text-center">
@@ -54,7 +49,7 @@ return (
 
         </Link>
       {/* search */}
-      <button className="btn-search" onClick={toggleSearchForm}>
+      <button className="btn-search p-0" onClick={toggleSearchForm}>
         <img src="../pictures/icons/fluent_search-48-regular.png" alt="search icon" />
       </button>
 

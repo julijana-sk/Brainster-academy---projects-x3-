@@ -1,19 +1,20 @@
-import Link from "next/link";
 import React from "react";
 
-const Banner: React.FC = () => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const Banner: React.FC<Props> = ({children}) => {
+
+  
   return (
     <div className="container-fluid">
-      <div className="row">
-        <div className="col-11">
-          <img src={require("../pictures/banner.png")}
+      <div className="row d-flex flex-column justify-content-center">
+        <div className="banner-bcg">
+          <img src="../pictures/banner.png"
             alt="banner picture"
-            className="w-100 h-50 position-relative" />
-            <Link href="/NewArrivals">
-              <button className="btn btn-primary btn-large">
-                New arrivals
-              </button>
-            </Link>
+            className="banner-picture" />
+            {children}
           </div>
         </div>
       </div>

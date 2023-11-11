@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 
   return (
-    <>
+    <div>
       <UserContextConstructor>
         <Authentication>
            {!isLoginPage && !isProfilePage && <Header />}
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
            {!isLoginPage && !isProfilePage && <Footer />}
         </Authentication>
       </UserContextConstructor>
-    </>
+    </div>
   );
 }
 

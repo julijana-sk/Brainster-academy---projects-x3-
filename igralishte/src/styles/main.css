@@ -31,7 +31,7 @@ h2, h3, h4, h5 {
     color: red !important;
 }
 
-.absolute {
+.absolute-absolute {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -200,6 +200,7 @@ ul li a {
     width: auto;
     max-width: 100%;
     position: relative;
+    z-index: 1;
 }
 
 /*---------------------------------------------*/
@@ -423,25 +424,250 @@ form label {
     text-align: left;
 }
 
+.banner-bcg {
+    background: linear-gradient(180deg, #FFDBDB 0.05%, #FDFDFD 93.1%, #FDFDFD 110.6%, #8A8328 152.03%);
+    display: flex;
+    flex-direction: column;
+
+}
+.banner-picture {
+    width: 92.5%;
+    position: relative;
+    height: 383px;
+    left: 30px;
+    top: 20px;
+    overflow-x: hidden;
+}
+.img1-span {
+    position: absolute;
+    top: 0px;
+    left: -10px;
+}
+.img2-span {
+    position: absolute;
+    top: 6px;
+    left: 34px;
+}
+
+.banner-span {
+    position: absolute;
+    top: 30%;
+    left: 12%;
+}
+
+.banner-span > span {
+    width: 40px;
+    height: 25px;
+    rotate: -16deg;
+    position: absolute;
+    font-family: "Jost";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 25px;
+    letter-spacing: -0.011em;
+    text-align: center;
+    color: #FF5B29;
+}
+
+.banner-text-wrapper {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.011em;
+    text-align: center;
+    color: #666560;
+}
 .btn-pink-circle {
-    background: linear-gradient(0deg, #232221, #232221),
-            linear-gradient(180deg, #FFDBDB 0.05%, #FDFDFD 93.1%, #FDFDFD 110.6%, #8A8328 152.03%);
+    background: linear-gradient(180deg, #FFDBDB 0.05%, #FDFDFD 93.1%, #FDFDFD 110.6%, #8A8328 152.03%);
     color: black;
     width: 240px;
     height: 240px;
     top: 395px;
     left: 30px;
     border-radius: 120px;
-    border: 1.25px;
+    border: 1.25px solid #232221;
+    position: absolute;
 }
+
+.btn-pink-circle-hover {
+    background: linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%);
+}
+.btn-pink-circle-hover .img1-span, .img2-span {
+    color: #FF5B29;
+}
+
 .btn-white-circle {
-    background: linear-gradient(0deg, #232221, #232221),
-            linear-gradient(0deg, #FDFDFD, #FDFDFD);
-            border: 1.25px solid #232221;
-        width: 240px ;
-        height: 240px;
-         top: 2025px;
-          left: 270px;
-           border-radius: 120px;
-            border: 1.25px;
+    background: linear-gradient(0deg, #FDFDFD, #FDFDFD);
+    border: 1.25px solid #232221;
+    width: 240px ;
+    height: 240px;
+    top: 2025px;
+    left: 270px;
+    border-radius: 120px;
+    border: 1.25px solid #232221;
+    position: absolute;
 }
+
+
+
+/* // --- >   announcement-bar  <------  */
+
+.announcement-bar__message {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-self: center;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-family: 'Cormorant Infant', serif;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: -0.011em;
+    text-align: center;
+    white-space: nowrap;
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    -moz-animation: scroll-left 2s linear infinite;
+    -webkit-animation: scroll-left 2s linear infinite;
+    animation: scroll-left 27s linear infinite;
+}
+
+.announcement-bar {
+    overflow: hidden;
+    top: 69px;
+    background-color: #FFF6F6;
+    height: 45px;
+    width: 100%;
+}
+
+.announcement-bar p {
+    margin: 0;
+}
+
+.announcement-bar img {
+    width: 23.73px;
+    height: 23.73px;
+    top: 0.79px;
+    left: 0.79px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+@-moz-keyframes scroll-left {
+    0% {
+        -moz-transform: translateX(100%);
+    }
+
+    100% {
+        -moz-transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes scroll-left {
+    0% {
+        -webkit-transform: translateX(100%);
+    }
+
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@keyframes scroll-left {
+    0% {
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+
+    100% {
+        -moz-transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+}
+
+/* @media only screen and (max-width: 800px) {
+    .announcement-bar__message {
+        font-size: 13px;
+        animation: scroll-left 20s linear infinite;
+    }
+
+    .home-page-video video {
+        width: 100%;
+    }
+
+    #shopify-section-slideshow img,
+    .index-slideshow-section img {
+        height: unset !important;
+    }
+
+    #shopify-section-slideshow,
+    #shopify-section-slideshow .slick-list,
+    .index-slideshow-section,
+    .index-slideshow-section .slick-list {
+        height: 400px;
+    }
+
+    @-moz-keyframes scroll-left {
+        0% {
+            -moz-transform: translateX(100%);
+        }
+
+        100% {
+            -moz-transform: translateX(-150%);
+        }
+    }
+
+    @-webkit-keyframes scroll-left {
+        0% {
+            -webkit-transform: translateX(100%);
+        }
+
+        100% {
+            -webkit-transform: translateX(-150%);
+        }
+    }
+
+    @keyframes scroll-left {
+        0% {
+            -moz-transform: translateX(100%);
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+        }
+
+        100% {
+            -moz-transform: translateX(-150%);
+            -webkit-transform: translateX(-150%);
+            transform: translateX(-150%);
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    #shopify-section-slideshow,
+    #shopify-section-slideshow .slick-list,
+    .index-slideshow-section,
+    .index-slideshow-section .slick-list {
+        height: 260px;
+    }
+
+}
+
+@media only screen and (max-width: 500px) {
+
+    #shopify-section-slideshow,
+    #shopify-section-slideshow .slick-list,
+    .index-slideshow-section,
+    .index-slideshow-section .slick-list {
+        height: 240px;
+    }
+
+} */
+
+/* / ------------------------- /  */
