@@ -422,3 +422,26 @@ form label {
     letter-spacing: 0em;
     text-align: left;
 }
+
+.btn-pink-circle {
+    background: linear-gradient(0deg, #232221, #232221),
+            linear-gradient(180deg, #FFDBDB 0.05%, #FDFDFD 93.1%, #FDFDFD 110.6%, #8A8328 152.03%);
+    color: black;
+    width: 240px;
+    height: 240px;
+    top: 395px;
+    left: 30px;
+    border-radius: 120px;
+    border: 1.25px;
+}
+.btn-white-circle {
+    background: linear-gradient(0deg, #232221, #232221),
+            linear-gradient(0deg, #FDFDFD, #FDFDFD);
+            border: 1.25px solid #232221;
+        width: 240px ;
+        height: 240px;
+         top: 2025px;
+          left: 270px;
+           border-radius: 120px;
+            border: 1.25px;
+}

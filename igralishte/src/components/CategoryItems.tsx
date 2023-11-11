@@ -5,8 +5,6 @@ import { UserContext } from '@/context/UserContext';
 
 interface Props {
   category: string
-  // subcategory: SubCategory
-  // data: DataType[]
 }
 
 

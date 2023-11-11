@@ -28,11 +28,25 @@ export interface Category {
   subs: SubCategory[];
 }
 
-// export interface DataType {
-//   items: Category[];
-// }
-
 export interface DataType {
   category: Category,
   subs: SubCategory[]
 }
+// export interface DataType {
+//   items: Category[];
+// }
+
+
+// export interface MenuType {
+//   categoryName: MenuCategory;
+//   subsMenu: SubCategory[]
+// }
+// export interface MenuCategory {
+//   menuType: string;
+//   menuSubs: MenuSubsCategory[]
+// }
+
+// export interface MenuSubsCategory {
+//   menuSubsType: string;
+//   menuSubsProduct: ProductType[]
+// }
