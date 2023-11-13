@@ -29,9 +29,11 @@ export interface Category {
 }
 
 export interface DataType {
-  category: Category,
-  subs: SubCategory[]
+  categories: Category[],
+  // subs: SubCategory[]
 }
+
+
 // export interface DataType {
 //   items: Category[];
 // }

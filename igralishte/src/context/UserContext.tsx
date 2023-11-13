@@ -7,17 +7,19 @@ interface UserContextType {
   } | null,
   handleLogIn: (username: string, password: string) => void,
   handleLogOut: () => void,
-  data: DataType[]
+  // data: DataType[];
+  data: DataType
+
 }
 
 export const UserContext = createContext<UserContextType>({
   user: null,
   handleLogIn: () => {},
   handleLogOut: () => {},
-  data: []
-  // data: {
-  //   items: []
-  // }
+  // data: []
+  data: {
+    categories: []
+  }
 });
 
 interface Props {
@@ -27,8 +29,8 @@ interface Props {
 const UserContextConstructor: React.FC<Props> = ({ children }) => {
 
   const [user, setUser] = useState<UserContextType["user"]>({email: "igralishte@hotmail.com"});
-  // const [data, setData] = useState<DataType>({items: []});
-  const [data, setData] = useState<DataType[]>([]);
+  const [data, setData] = useState<DataType>({categories: []});
+  // const [data, setData] = useState<DataType[]>([]);
 
 
 

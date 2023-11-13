@@ -1,20 +1,18 @@
 import React, { useContext } from 'react';
-import { Category, DataType, SubCategory } from '@/types/types';
-import CategorySubItem from './CategorySubItem';
 import { UserContext } from '@/context/UserContext';
+import { Category } from '@/types/types';
 
 interface Props {
-  category: string
+  category: Category
 }
 
 
-const CategoryItems: React.FC<Props> = ({ category }) => {
+const CategoryItems: React.FC<Props> = ({category}) => {
   
   return (
-    
       <div>
-        {category}
-    </div>
+        <h3>{category.category}</h3>
+      </div>
   )
 };
 

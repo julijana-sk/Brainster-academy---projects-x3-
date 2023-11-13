@@ -430,7 +430,7 @@ form label {
     flex-direction: column;
 
 }
-.banner-picture {
+.banner-picture1 {
     width: 92.5%;
     position: relative;
     height: 383px;
@@ -438,15 +438,66 @@ form label {
     top: 20px;
     overflow-x: hidden;
 }
-.img1-span {
+
+/* Carousell section  */
+.carousel-text {
+    font-family: 'Cormorant Infant', serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 33px;
+    letter-spacing: -0.011em;
+    text-align: center;
+}
+.carousel-img {
+    width: 100%;
+    height: 55vh;
+}
+
+.indicators {
+    width: 30%;
+}
+
+.indicator {
+    margin: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color:transparent;
+    border: none;
+    cursor: pointer;
     position: absolute;
+
+}
+
+.indicator:focus {
+    outline: none;
+}
+
+/* Carousel section - end  */
+
+.banner {
+    height: 550px;
+}
+.banner-picture2 {
+    width: 92.5%;
+    position: relative;
+    height: 383px;
+    right: 0px;
+    top: 20px;
+    overflow-x: hidden;
+}
+.img1 {
     top: 0px;
     left: -10px;
-}
-.img2-span {
     position: absolute;
+}
+.img2 {
     top: 6px;
     left: 34px;
+    position: absolute;
+}
+.imgSpan-hover {
+    fill: #FF5B29;
 }
 
 .banner-span {
@@ -483,17 +534,32 @@ form label {
     color: black;
     width: 240px;
     height: 240px;
-    top: 395px;
-    left: 30px;
+    top: 280px;
     border-radius: 120px;
     border: 1.25px solid #232221;
     position: absolute;
 }
 
+.btn-circle1 {
+    left: 30px;
+}
+
+.btn-circle2 {
+    right: 30px;
+}
+
 .btn-pink-circle-hover {
     background: linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%);
+    width: 240px;
+    height: 240px;
+    top: 280px;
+    left: 30px;
+    color: black;
+    border-radius: 120px;
+    border: 1.25px solid #232221;
+    position: absolute;
 }
-.btn-pink-circle-hover .img1-span, .img2-span {
+.img1-span-hover, .img2-span-hover {
     color: #FF5B29;
 }
 
@@ -502,13 +568,40 @@ form label {
     border: 1.25px solid #232221;
     width: 240px ;
     height: 240px;
-    top: 2025px;
-    left: 270px;
+    top: 160px;
+    left: 50px;
     border-radius: 120px;
     border: 1.25px solid #232221;
     position: absolute;
 }
 
+.gift-banner {
+    display: flex;
+    right: 0;
+    flex-direction: row;
+    justify-content: end;
+    margin-left: auto;
+}
+.star-banner {
+    width: 50.91px;
+    height: 50.91px;
+    bottom: 320px;
+    left: 100px;
+    rotate: 5deg;
+    position: absolute;
+}
+
+.rectangle-gift-banner {
+    position: absolute;
+    width: 177%;
+    height: 264px;
+    top: -172px;
+    left: 100px;
+    border-radius: 128.88px;
+    border: 1.34px;
+    rotate: -2deg;
+    overflow: hidden;
+}
 
 
 /* // --- >   announcement-bar  <------  */
@@ -671,3 +764,10 @@ form label {
 } */
 
 /* / ------------------------- /  */
+
+.footer {
+    width: 360px;
+    height: 870px;
+    top: 870px;
+    background: linear-gradient(180deg, #FFDBDB -52.68%, #FDFDFD 68.98%, #FDFDFD 91.87%);
+}

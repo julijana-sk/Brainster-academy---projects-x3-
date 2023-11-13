@@ -3,16 +3,16 @@ import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import CategoryItems from "./CategoryItems";
+import { Category, DataType } from "@/types/types";
 
 
 const Header: React.FC = () => {
 
   const { user, handleLogOut, handleLogIn, data} = useContext(UserContext);
 
-  console.log(data)
+  // console.log(data)
 
-
-  
+ 
   const {pathname, push} = useRouter();
   const router = useRouter();
   const [toggleSearch, setToggleSearch] = useState(false);
@@ -46,8 +46,7 @@ return (
           <div onClick={openNav} className={toggleNav ? "activeHamburger" : "hamburber"} />
           <Link href={"/"} className="navbar-brand m-0 text-center">
           <img src="../pictures/icons/Logo Igralishte final version 1.png" alt="logo"/>
-
-        </Link>
+          </Link>
       {/* search */}
       <button className="btn-search p-0" onClick={toggleSearchForm}>
         <img src="../pictures/icons/fluent_search-48-regular.png" alt="search icon" />
@@ -71,9 +70,9 @@ return (
       <div className={toggleNav ? "activeSidenav" : "sidenav"}>
         <ul className="menu">
           <li>
-          {data.map((item, index) => (
+          {data?.categories?.map((item, index) => (
             <li key={index}>
-              <CategoryItems category={item.category.category}/>
+              <CategoryItems category={item}/>
               <ul>
                 {item.subs.map((sub) => (
                   <li key={sub.type}>
@@ -85,7 +84,7 @@ return (
               </ul>
             </li>
           ))}
-        </li>
+        </li> 
           <div className="menu-footer">
             <li className="nav-item ">
               <Link href={"/"} className="nav-link d-flex flex-row justify-content-start">
