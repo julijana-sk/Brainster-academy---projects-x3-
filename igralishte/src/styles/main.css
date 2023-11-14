@@ -5,12 +5,21 @@ body {
     font-family: 'Cormorant Garamond', serif;
     margin: 0;
     padding: 0;
-    }
+    overflow-x: hidden !important;
+}
 h1 {
     font-family: 'Century', serif;
 }
 h2, h3, h4, h5 {
     font-family: 'Cormorant Infant', serif;
+}
+
+.color-olive {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.011em;
+    color: #8A8328;
 }
 .navbar-brand img {
     height: 100%;
@@ -36,6 +45,14 @@ h2, h3, h4, h5 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+.relative {
+    position: relative;
 }
 
 /* Hamburger menu */
@@ -424,10 +441,23 @@ form label {
     text-align: left;
 }
 
+.btn-gold {
+    background: linear-gradient(99.4deg, #F0C434 -10.68%, #F2D1A0 18.14%, #F2D1A0 43.87%, #F0C749 81.17%, #D4AF37 100%);
+    border: 1.5px solid #C2C2C2;
+    box-shadow: 0px 0px 4.499999523162842px 0px #C2C2C2;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 38px;
+    letter-spacing: -0.011em;
+    text-align: left;
+}
+
 .banner-bcg {
     background: linear-gradient(180deg, #FFDBDB 0.05%, #FDFDFD 93.1%, #FDFDFD 110.6%, #8A8328 152.03%);
     display: flex;
     flex-direction: column;
+    height: 100%;
 
 }
 .banner-picture1 {
@@ -571,11 +601,12 @@ form label {
     right: 0;
     flex-direction: row;
     margin-left: auto;
+    max-width: 100%;
 }
 .star-banner {
     width: 50.91px;
     height: 50.91px;
-    bottom: 480px;
+    top: 1880px;
     left: 140px;
     rotate: 12deg;
     position: absolute;
@@ -584,13 +615,13 @@ form label {
 
 .rectangle-gift-banner {
     position: absolute;
-    width: 300px;
-    height: 264px;
-    top: -10px;
-    left: 136px;
+    max-width: 410px !important;
+    height: 260px;
+    left: 120px;
     overflow: hidden;
-    rotate: -2deg;
+    rotate: 0deg;
     z-index: 1;
+    top: 1866px;
 }
 
 
@@ -599,7 +630,7 @@ form label {
 .announcement-bar__message {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     align-self: center;
     padding-left: 0px;
@@ -616,7 +647,7 @@ form label {
     transform: translateX(100%);
     -moz-animation: scroll-left 2s linear infinite;
     -webkit-animation: scroll-left 2s linear infinite;
-    animation: scroll-left 27s linear infinite;
+    animation: scroll-left 10s linear infinite;
 }
 
 .announcement-bar {
@@ -662,15 +693,15 @@ form label {
 
 @keyframes scroll-left {
     0% {
-        -moz-transform: translateX(100%);
-        -webkit-transform: translateX(100%);
-        transform: translateX(100%);
+        -moz-transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+        transform: translateX(0%);
     }
 
     100% {
-        -moz-transform: translateX(-100%);
-        -webkit-transform: translateX(-100%);
-        transform: translateX(-100%);
+        -moz-transform: translateX(-80%);
+        -webkit-transform: translateX(-80%);
+        transform: translateX(-80%);
     }
 }
 
@@ -756,8 +787,45 @@ form label {
 /* / ------------------------- /  */
 
 .footer {
-    width: 360px;
+    width: 100%;
     height: 870px;
-    top: 870px;
-    background: linear-gradient(180deg, #FFDBDB -52.68%, #FDFDFD 68.98%, #FDFDFD 91.87%);
+    font-family: Century;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 33px;
+    letter-spacing: -0.011em;
+    text-align: center;
+}
+
+.footer-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: -0.011em;
+    color: #666560;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+    margin-top: 30px;
+}
+
+.footer-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+    text-decoration: none;
+    color: black;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: -0.011em;
+    margin-bottom: 10px;
+}
+
+.hr {
+    border: 1px solid #232221;
 }

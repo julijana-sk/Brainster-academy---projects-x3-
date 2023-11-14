@@ -1,7 +1,7 @@
 {
   "vintageClothes": [
     { 
-        "tops": [
+      "tops": [
         {
           "id": "OKE22GJU7MQ",
           "category_type": "vintage-clothes",
@@ -42,12 +42,12 @@
           "id": "GCB49YOU8GN",
           "category_type": "vintage-clothes",
           "product_type": "Tops",
-          "title": "Кратка маица на прерамки",
+          "title": "Кратка маица со ракави",
           "img": "../pictures/images/product-01-6.jpg",
           "price": 4457,
           "brand": "Main Days",
           "model_size": "XS",
-          "color": "black",
+          "color": "white",
           "material": "polyester",
           "composition": "100% polyester",
           "condition": "7/10",
