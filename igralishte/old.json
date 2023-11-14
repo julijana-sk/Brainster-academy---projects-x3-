@@ -1,10 +1,11 @@
-{"category": [
-  {
-"vintageClothes": [
-  {
-        "tops":  [ 
-              
-            
+{
+  "data": [
+    {
+      "category": "vintageClothes",
+      "subs": [
+            { 
+              "type": "tops",
+              "products": [
                 {
                   "id": "OKE22GJU7MQ",
                   "category_type": "vintage-clothes",
@@ -79,8 +80,9 @@
                 }
               ]
             },
-  { 
-     "pants": [
+            { 
+              "type": "pants",
+              "products": [
                 {
                   "id": "WZK97IIS7NC",
                   "category_type": "vintage-clothes",
@@ -137,8 +139,9 @@
                 }
               ]
             },
-  { 
-    "bottoms/shorts":[
+            { 
+              "type": "bottoms/shorts",
+              "products": [
                 {
                   "id": "GCC72JBS6YH",
                   "category_type": "vintage-clothes",
@@ -177,8 +180,9 @@
                 }
               ]
             },
-    { 
-      "dresses": [
+            { 
+              "type": "dresses",
+              "products": [
                 {
                   "id": "YEE40HJL7DK",
                   "category_type": "vintage-clothes",
@@ -217,9 +221,10 @@
                 }
               ]
             },
-    { 
-    "coats-and-jackets": [
-        {
+            { 
+              "type": "coats-and-jackets",
+              "products": [
+                {
                   "id": "XRG67ITR9BY",
                   "category_type": "vintage-clothes",
                   "product_type": "coats-and-jackets",
@@ -257,9 +262,10 @@
                 }
               ]
             },
-  { 
-    "underwear": [
-      {
+            { 
+              "type": "underwear",
+              "products": [
+                {
                   "id": "BMS22PVI6GE",
                   "category_type": "vintage-clothes",
                   "product_type": "underwear",
@@ -389,11 +395,12 @@
             }
         ]
       },
-
-  {
-  "accessories": [
-        { 
-           "purses": [
+    {
+      "category": "accessories",
+        "subs": [
+            { 
+              "type": "purses",
+              "products": [
                 {
                   "id": "OKE22GJU7MQ",
                   "category_type": "accessories",
@@ -575,7 +582,8 @@
               ]
             },
             { 
-             "jewelry": [
+              "type": "jewelry",
+              "products": [
                 {
                   "id": "LLO65AMZ7WZ",
                   "category_type": "accessories",
@@ -761,8 +769,12 @@
         ]
     },
     {
-      "brands": [
+      "category": "brands",
+        "subs": [
               { 
+                "type": "brands",
+                "products": [
+                  {
                     "id": "1",
                     "name": "Pinc Partywear"
                   },
@@ -812,39 +824,47 @@
                   }
 
                 ]
-              },
+              }
+        ]
+    },
     {
-      "lifestyle": 
+      "category": "lifestyle",
+        "subs": [
               { 
-                "lifestyle": 
+                "type": "lifestyle",
+                "products": [
                   {
                     
                   }
-                
+                ]
               }
-        
+        ]
     },
     {
-     "gift-a-card": 
+      "category": "gift-a-card",
+        "subs": [
               { 
                 "type": "gift-a-card",
-                "products": 
-                  {
-                  } 
-              }
-    },
-    {
-      "discount": 
-              { 
-                "discount": 
+                "products": [
                   {
                     
                   }
-                
+                ]
               }
-        
+        ]
+    },
+    {
+      "category": "discount",
+        "subs": [
+              { 
+                "type": "discount",
+                "products": [
+                  {
+                    
+                  }
+                ]
+              }
+        ]
     }
   ]
 }
-
-

@@ -1,4 +1,33 @@
 export interface ProductType {
+  id: string;
+    type: string;
+    product_type: string;
+    title: string;
+    img: string;
+    price: number;
+    brand: string;
+    model_size: string;
+    colour: string;
+    material: string;
+    composition: string;
+    condition: string;
+    care_instructions: string;
+    in_stock: boolean;
+    description: string;
+    date: string;
+  };
+  
+  export interface VintageClothes {
+    tops: ProductType[],
+    pants: ProductType[],
+    bottomsShorts: ProductType[],
+    dresses: ProductType[],
+    coatsAndJackets: ProductType[],
+    underwear: ProductType[],
+    // vintageClothes: ProductType[]
+  }
+
+export interface AccessoriesType {
     id: string;
     type: string;
     product_type: string;
@@ -15,40 +44,48 @@ export interface ProductType {
     in_stock: boolean;
     description: string;
     date: string;
-};
-
-
-export interface SubCategory {
-  type: string;
-  products: ProductType[];
 }
 
-export interface Category {
-  category: string;
-  subs: SubCategory[];
+export interface Accessories {
+  purses: AccessoriesType,
+  jewelry: AccessoriesType
 }
 
+export interface BrandType {
+  id: string,
+  name: string
+}
 export interface DataType {
-  categories: Category[],
-  // subs: SubCategory[]
+  vintageClothes: VintageClothes[],
+  accessories: Accessories[],
+  brands: BrandType[],
+  lifestyle: string,
+  giftCard: string,
+  discount: string
 }
 
+
+
+
+
+
+
+
+
+
+
+// export interface SubCategory {
+//   type: string;
+//   products: ProductType[];
+// }
+
+// export interface Category {
+//   category: string;
+//   subs: SubCategory[];
+// }
 
 // export interface DataType {
-//   items: Category[];
+//   data: Category[],
+//   subs: SubCategory[]
 // }
 
-
-// export interface MenuType {
-//   categoryName: MenuCategory;
-//   subsMenu: SubCategory[]
-// }
-// export interface MenuCategory {
-//   menuType: string;
-//   menuSubs: MenuSubsCategory[]
-// }
-
-// export interface MenuSubsCategory {
-//   menuSubsType: string;
-//   menuSubsProduct: ProductType[]
-// }

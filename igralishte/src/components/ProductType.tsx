@@ -2,17 +2,18 @@ import { UserContext } from "@/context/UserContext";
 import React, { useContext } from "react";
 import ProductItem from "./ProductItem";
 import { ProductType, VintageClothes } from "@/types/types";
+import ProductList from "./ProductList";
 
 interface Props {
-    products: ProductType[]
+    clothes: VintageClothes[],
 }
-const ProductList: React.FC<Props> = ({products}) => {
+const ProductType: React.FC<Props> = ({clothes}) => {
   return (
     <div>
-        {products?.map((product, index) => {
+        {clothes.map((item, index) => {
             return (
                 <div key={index}>
-                    <ProductItem product={product}/>
+                    <ProductList products={item.tops} />
                 </div>
             )
         })}
@@ -20,4 +21,4 @@ const ProductList: React.FC<Props> = ({products}) => {
   )
 }
 
-export default ProductList
+export default ProductType
