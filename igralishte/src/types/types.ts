@@ -64,28 +64,31 @@ export interface DataType {
   discount: string
 }
 
+export interface AboutType {
+    title: string,
+    image1:  string,
+    image2:  string,
+    first_content: string,
+    second_content: string,
+}
+
+export interface ContactType {
+  title: string,
+  image: string,
+  content: string,
+  address: string,
+  city: string,
+  phone: string,
+  workingHours: string
+}
+
+export interface BlogType {
+  id: string;
+  title: string;
+  published: string;
+  excerpt: string;
+  image: string;
+}
 
 
-
-
-
-
-
-
-
-
-// export interface SubCategory {
-//   type: string;
-//   products: ProductType[];
-// }
-
-// export interface Category {
-//   category: string;
-//   subs: SubCategory[];
-// }
-
-// export interface DataType {
-//   data: Category[],
-//   subs: SubCategory[]
-// }
 

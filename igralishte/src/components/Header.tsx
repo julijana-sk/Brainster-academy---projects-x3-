@@ -3,7 +3,6 @@ import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import CategoryItems from "./CategoryItems";
-import { Category, DataType } from "@/types/types";
 
 
 const Header: React.FC = () => {

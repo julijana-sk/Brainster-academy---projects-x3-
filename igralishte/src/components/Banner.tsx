@@ -8,26 +8,23 @@ interface Props {
   title: string;
   description: string;
   img: string;
+  offset: string;
   children?: React.ReactNode
 }
 
-const Banner: React.FC<Props> = ({imageBanner, classOfPicture, bgColor, title, description, img, children}) => {
+const Banner: React.FC<Props> = ({imageBanner, classOfPicture, bgColor, title, description, img, offset, children}) => {
 
   
-  const [backgroundColor, setBackgroundColor] = useState(`${bgColor}`)
-  // const [backgroundColor, setBackgroundColor] = useState(bgColor)
+const [backgroundColor, setBackgroundColor] = useState(`${bgColor}`)
 
-
-  function handleBackgroundColor() {
+function handleBackgroundColor() {
     setBackgroundColor("btn-pink-circle-hover")
   }
-
-
-  
+ 
   return (
     <div className="container-fluid banner">
       <div className="row d-flex flex-column justify-content-center">
-        <div className="mb-5" style={{position: "relative"}}>
+        <div className={`${offset} p-0 mb-5`} style={{position: "relative"}}>
           <img src={imageBanner}
             alt="banner picture"
             className={`${classOfPicture}`} />

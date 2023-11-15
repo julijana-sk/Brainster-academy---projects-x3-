@@ -10,7 +10,7 @@ const PageTitle: React.FC<Props> = ({title}) => {
       className="bg-img1 txt-center p-lr-15 p-tb-92"
       style={{ backgroundImage: "url('/images/bg-01.jpg')" }}
     >
-      <h2 className="ltext-105 cl0 txt-center">{title}</h2>
+      <h2 className="title">{title}</h2>
     </section>
   );
 };

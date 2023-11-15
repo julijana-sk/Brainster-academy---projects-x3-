@@ -13,7 +13,14 @@ h1 {
 h2, h3, h4, h5 {
     font-family: 'Cormorant Infant', serif;
 }
-
+.title {
+    font-family: Century;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 33px;
+    letter-spacing: -0.011em;
+    text-align: center;
+}
 .color-olive {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 600;
@@ -413,8 +420,6 @@ form label {
 }
 
 .PrimaryBtn {
-    width: 220px;
-    height: 40px;
     top: 400px;
     left: 70px;
     border-radius: 13px;
@@ -424,10 +429,11 @@ form label {
     line-height: 18px;
     letter-spacing: 0em;
     text-align: center;
+    border: 1.8px solid #C2C2C2;
+    box-shadow: 0px 0px 5.399999618530273px 0px #C2C2C2;
 }
 
 .SecondaryBtn {
-    width: 220px;
     height: 40px;
     top: 400px;
     left: 70px;
@@ -442,15 +448,17 @@ form label {
 }
 
 .btn-gold {
-    background: linear-gradient(99.4deg, #F0C434 -10.68%, #F2D1A0 18.14%, #F2D1A0 43.87%, #F0C749 81.17%, #D4AF37 100%);
-    border: 1.5px solid #C2C2C2;
-    box-shadow: 0px 0px 4.499999523162842px 0px #C2C2C2;
+    background: linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%);        
+}
+
+.btn-gold-text {
     font-family: 'Cormorant Garamond', serif;
     font-size: 25px;
     font-weight: 400;
     line-height: 38px;
     letter-spacing: -0.011em;
-    text-align: left;
+    text-align: center;
+    margin: 0;
 }
 
 .banner-bcg {
@@ -461,10 +469,10 @@ form label {
 
 }
 .banner-picture1 {
-    width: 92.5%;
+    width: 100%;
     position: relative;
     height: 383px;
-    left: 30px;
+    right: 0;
     top: 20px;
     overflow-x: hidden;
 }
@@ -499,10 +507,10 @@ form label {
     height: 550px;
 }
 .banner-picture2 {
-    width: 92.5%;
+    width: 100%;
     position: relative;
     height: 383px;
-    right: 0px;
+    left: 0px;
     top: 20px;
     overflow-x: hidden;
 }
@@ -561,11 +569,11 @@ form label {
 }
 
 .btn-circle1 {
-    left: 30px;
+    left: 0px;
 }
 
 .btn-circle2 {
-    right: 30px;
+    right: 0px;
 }
 
 .btn-pink-circle-hover {
@@ -588,8 +596,8 @@ form label {
     border: 1.25px solid #232221;
     width: 240px ;
     height: 240px;
-    top: 160px;
-    left: 70px;
+    top: 150px;
+    left: -15px;
     border-radius: 120px;
     border: 1.25px solid #232221;
     position: absolute;
@@ -606,9 +614,9 @@ form label {
 .star-banner {
     width: 50.91px;
     height: 50.91px;
-    top: 1880px;
-    left: 140px;
-    rotate: 12deg;
+    top: 0px;
+    right: 216px;
+    rotate: 13deg;
     position: absolute;
     z-index: 1;
 }
@@ -617,11 +625,11 @@ form label {
     position: absolute;
     max-width: 410px !important;
     height: 260px;
-    left: 120px;
+    right: 0px;
     overflow: hidden;
     rotate: 0deg;
     z-index: 1;
-    top: 1866px;
+    top: -10px;
 }
 
 
@@ -795,6 +803,7 @@ form label {
     line-height: 33px;
     letter-spacing: -0.011em;
     text-align: center;
+    background: linear-gradient(180deg, #FDFDFD -52.68%, #FDFDFD 68.98%, #FFDBDB 91.87%);
 }
 
 .footer-text {
@@ -828,4 +837,57 @@ form label {
 
 .hr {
     border: 1px solid #232221;
+}
+
+.toggle-about-wrapper {
+    height: 29.05px;
+    border-radius: 8.57px;
+    border: 0.86px;
+    background: #FFF6F6;
+    border: 0.86px solid #C2C2C2;
+    box-shadow: 0px 0px 2.5714282989501953px 0px #C2C2C2;
+    text-align: center;
+}
+.toggle-about-text {
+    font-family: 'Cormorant Infant', serif;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: -0.011em;
+    text-align: left;
+    text-decoration: none;
+    list-style: none;
+    border: 0px;
+    border-right: 1px solid lightgrey;
+}
+.toggle-about-text:last-child {
+    border: 0;
+}
+
+
+.about-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: -0.011em;
+}
+
+.address-text {
+    font-family: Century;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.011em;
+    text-align: center;
+}
+
+.contact-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 35px;
+    letter-spacing: -0.011em;
+    text-align: center;
 }

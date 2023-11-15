@@ -10,15 +10,15 @@ const Footer: React.FC = () => {
     <footer>
 	<div className="container-fluid footer">
 		<div className="row d-flex flex-wrap flex-column">
-			<h2>Следи ги нашите новости!</h2>
-			<div className="col-11 mr-auto ml-auto mb-5">
+			<p className="m-0">Следи ги нашите новости!</p>
+			<div className="col-11 mr-auto ml-auto">
 				<div className="footer-text">
-			    <p>Биди дел од нашиот newsletter и дознавај прва за промоции, попусти и нови колекции.</p>
+			    <p className="mb-4">Биди дел од нашиот newsletter и дознавај прва за промоции, попусти и нови колекции.</p>
 					<label htmlFor="username">Email адреса:</label>
-					<input type="email" id="username" className="PrimaryBtn mb-3 w-100" style={{fontWeight: "lighter"}} placeholder="" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+					<input type="email" id="username" className="PrimaryBtn mb-3 w-100" style={{fontWeight: "lighter", height: "50px"}} placeholder="" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 						setUsername(event.target.value);
 						}}/>
-					<PrimaryBtn title="Зачлени се" btnClass={"PrimaryBtn w-100 btn-gold"} backgroundColor={"btn-gold"} color='black' border='none'/>
+					<PrimaryBtn title="Зачлени се!" btnClass={"PrimaryBtn w-100 btn-gold btn-gold-text"} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/>
 				</div>
 			    <hr className="w-100 my-5 border border-dark"/>
 				<div className="row d-flex flex-wrap flex-column justify-content-left">
