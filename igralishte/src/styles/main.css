@@ -960,3 +960,99 @@ form label {
 .faq-item:nth-last-child(1) hr {
     width: 0;
 }
+.gift-tape {
+    height: 26.88px;
+    background: linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%);
+    color: black;
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+
+}
+.gift-text {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: -0.011em;
+}
+.gift-star {
+    background: 504E21;
+    width: 43.31px;
+    height: 43.31px;
+}
+.right-side .gift-star {
+    order: 1;
+}
+.left-side .gift-star {
+    order: 0;
+}
+
+.top-padding {
+    top: 10px;
+}
+
+.bottom-padding {
+    bottom: 10px;
+}
+.giftBtn {
+    width: 100%;
+    height: 60px;
+    padding: 6px, 73px, 6px, 73px;
+    border-radius: 18px;
+    border: 1.8px;
+    gap: 8px;
+    background: linear-gradient(0deg, #FFF7F7, #FFF7F7);
+    box-shadow: 0px 0px 5.399999618530273px 0px #C2C2C2;
+    font-family: Century;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 48px;
+    letter-spacing: -0.011em;
+    text-align: center;
+    color: #504E21;
+}
+
+.giftBtnHover {
+    animation-timing-function: ease-in-out;
+    animation-duration: 250ms;
+    background: linear-gradient(0deg, #FFDBDB, #FFDBDB);
+    box-shadow: 0px 0px 5.399999618530273px 0px #C2C2C2;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 38px;
+    letter-spacing: -0.011em;
+    text-align: left;
+    height: 60px;
+    padding: 6px, 73px, 6px, 73px;
+    border-radius: 18px;
+    border: 1.8px;
+    gap: 8px;
+} 
+.giftBtn-text {
+    text-align: center;
+    color: #504E21;
+}
+
+.add-to-card {
+    width: 100%;
+    height: 61px !important;
+    border-radius: 18px;
+    border: 1.8px solid #C2C2C2;
+    box-shadow: 0px 0px 5.399999618530273px 0px #C2C2C2;
+    background: linear-gradient(0deg, #FFF7F7, #FFF7F7);
+    padding: 6px, 73px, 6px, 73px;
+}
+
+.add-to-card p {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: -0.011em;
+}
+
+.add-to-card img {
+    top: 30%;
+}

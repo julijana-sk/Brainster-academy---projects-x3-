@@ -808,8 +808,6 @@
           ],
 
   "lifestyle": [],
-
-  "gift-a-card": [],
   
   "discount":[],
 
@@ -867,6 +865,21 @@
     "city": "Скопје",
     "phone": "+ 389 078 380 406",
     "workingHours": "Понеделник - Петок 12:00 - 19:00. Сабота 12:00 - 17:00"
-  }
+  },
+
+  "gifts": [
+      {
+        "img": "../pictures/gift-card-1.png",
+        "title": "Partygirl Gift card"
+      },
+      {
+        "img": "../pictures/gift-card-2.png",
+        "title": "Vintage chick Gift card"
+      },
+      {
+        "img": "../pictures/gift-card-3.png",
+        "title": "Wavy baby Gift card"
+      }
+    ]
 
 }

@@ -86,6 +86,7 @@ return (
         </li> 
           <div className="menu-footer">
             <li className="nav-item ">
+              <Link href={"/gifts"} >link to gifts</Link>
               <Link href={"/"} className="nav-link d-flex flex-row justify-content-start">
                 <button className="menu-footer-button"><img src="../pictures/icons/shopping cart.png" /> </button>
                 {/* <button className="menu-footer-button"><img src={require("../pictures/icons/Logo Igralishte final version 1.png")} /> </button> */}

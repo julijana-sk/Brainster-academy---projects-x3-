@@ -55,17 +55,6 @@ export interface BrandType {
   id: string,
   name: string
 }
-export interface DataType {
-  vintageClothes: VintageClothes[],
-  accessories: Accessories[],
-  brands: BrandType[],
-  lifestyle: string,
-  giftCard: string,
-  discount: string,
-  about: AboutType,
-  FAQ: FAQType[],
-  contact: ContactType
-}
 
 export interface AboutType {
     title: string,
@@ -91,5 +80,21 @@ export interface FAQType {
   answer: string
 }
 
+export interface GiftType {
+  img: string,
+  title: string
+}
 
+
+export interface DataType {
+  vintageClothes: VintageClothes[],
+  accessories: Accessories[],
+  brands: BrandType[],
+  lifestyle: string,
+  discount: string,
+  about: AboutType,
+  FAQ: FAQType[],
+  contact: ContactType,
+  gifts: GiftType[]
+}
 
