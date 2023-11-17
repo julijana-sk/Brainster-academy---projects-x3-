@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
 						<Link href={"/about"} className="footer-link">За нас</Link>
 						<Link href={"/contact"} className="footer-link">Контакт</Link>
 						<Link href={"https://maps.app.goo.gl/c6RUfhjcp3Eyehz26"} className="footer-link">Локатор на продавницата</Link>
-						<Link href={"/FAQ"} className="footer-link">Често поставувани прашања (FAQ)</Link>
+						<Link href={"/faq"} className="footer-link">Често поставувани прашања (FAQ)</Link>
 						<Link href={"/login"} className="footer-link">Регистрирај се / логирај се</Link>
 					</div>
 					<div className="col-12 text-left mt-4">

@@ -3,8 +3,9 @@ import {UserContext} from '@/context/UserContext';
 import Head from 'next/head';
 import Link from 'next/link';
 import PrimaryBtn from '@/components/PrimaryBtn';
+import { GetServerSideProps } from 'next';
 
-const LoginPage = () => {
+const ProfilePage = () => {
 
   const { handleLogIn } = useContext(UserContext);
   const [name, setName] = useState<string>("");
@@ -40,48 +41,47 @@ const LoginPage = () => {
                   <button className='btnProfilePicture small p-0 px-2 border-0'>Одбери слика</button>
                 </div>
               </div>
-              {/* <div className='row d-flex flex-row justify-content-left'> */}
-              <div className='mb-3 col-12 px-4 text-left'>
+              <div className='mb-3 col-11 px-4 text-left mr-auto ml-auto'>
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="name">Име</label>
-                <input type="text" id="name" className="PrimaryBtn w-100" style={{fontWeight: "lighter"}} placeholder="Ивана" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                <input type="text" id="name" className="PrimaryBtn form-input" placeholder="Ивана" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setName(event.target.value);
                     }}/>
               </div>
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="surname">Презиме</label>
-                <input type="text" id="surname" className="PrimaryBtn w-100" style={{fontWeight: "lighter"}} placeholder="Голабоска" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                <input type="text" id="surname" className="PrimaryBtn form-input" placeholder="Голабоска" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setSurname(event.target.value);
                     }}/>
               </div>
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="username">Email адреса</label>
-                <input type="email" id="username" className="PrimaryBtn w-100" style={{fontWeight: "lighter"}} placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                <input type="email" id="username" className="PrimaryBtn form-input" placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   setUsername(event.target.value);
                   }}/>
               </div>
               <div className='d-flex flex-column justify-content-left'>
               <label htmlFor="password">Лозинка</label>
-              <input type="password" id="password" className="PrimaryBtn w-100" style={{fontWeight: "lighter"}} placeholder="********" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              <input type="password" id="password" className="PrimaryBtn form-input" placeholder="********" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                   setPassword(event.target.value);
                   }} /> 
               </div>
               <div className='d-flex flex-column justify-content-left'>
               <Link href="/profile/password"><p style={{color: "#8A8328", textDecoration: "underline"}}>Промени лозинката</p></Link>
                 <label htmlFor="address">Адреса</label>
-                <input type="text" id="address" className="PrimaryBtn w-100" style={{fontWeight: "lighter"}} placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                <input type="text" id="address" className="PrimaryBtn form-input" placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setAddress(event.target.value);
                     }}/>
               </div>
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="phone">Телефонски број</label>
-                <input type="text" id="phone" className="PrimaryBtn w-100" style={{fontWeight: "lighter"}} placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                <input type="text" id="phone" className="PrimaryBtn form-input" placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setPhone(event.target.value);
                     }}/>
               </div>
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="biography">Биографија</label>
-                <input type="textarea" id="biography" className="PrimaryBtn w-100" style={{fontWeight: "lighter", height: "80px" }} placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                <input type="textarea" id="biography" className="PrimaryBtn w-100 p-3 text-left" style={{fontWeight: "lighter", height: "80px" }} placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setBiography(event.target.value);
                     }}/>
               </div>
@@ -93,7 +93,7 @@ const LoginPage = () => {
                   </div>
                   <input type='text' style={{fontSize: "10px", fontFamily: "Inter"}} className="form-control border-0" aria-label="Text input with checkbox" placeholder='Испраќај ми известувања за нови зделки и промоции.'/>
                 </div>
-              <PrimaryBtn title="Зачувај" btnClass={"PrimaryBtn"} backgroundColor={"black"} color='white' border='none'/>
+              <PrimaryBtn title="Зачувај" btnClass={"PrimaryBtn w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/>
                 </div>
               </div>
             </div>
@@ -103,4 +103,37 @@ const LoginPage = () => {
 
 }
 
-export default LoginPage
+export default ProfilePage;
+
+// export const getServerSideProps: GetServerSideProps = async ({query}) => {
+
+//  let resSearchedBlogsItems: Response;
+//  let resSearchedProductsItems: Response;
+//  let searchQuery = query.query || "";
+
+//  if (searchQuery) {
+//     [resSearchedBlogsItems, resSearchedProductsItems] = await Promise.all([
+//       fetch(`http://localhost:5001/blogs?q=${query.query}`),
+//       fetch(`http://localhost:5001/products?q=${query.query}`),
+//     ]);
+//  } else {
+//     [resSearchedBlogsItems, resSearchedProductsItems] = await Promise.all([
+//       fetch("http://localhost:5001/blogs"),
+//       fetch("http://localhost:5001/products"),
+//     ]);
+//  }
+
+//  const [searchedBlogsItemsData, searchedProductsItemsData ] = await Promise.all([
+//     resSearchedBlogsItems.json(),
+//     resSearchedProductsItems.json(),
+//   ]);
+   
+
+//  return {
+//   props: {
+//     searchedBlogsItemsData,
+//     searchedProductsItemsData,
+//     },
+//   };
+
+// };

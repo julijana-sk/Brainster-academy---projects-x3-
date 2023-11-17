@@ -61,7 +61,10 @@ export interface DataType {
   brands: BrandType[],
   lifestyle: string,
   giftCard: string,
-  discount: string
+  discount: string,
+  about: AboutType,
+  FAQ: FAQType[],
+  contact: ContactType
 }
 
 export interface AboutType {
@@ -82,12 +85,10 @@ export interface ContactType {
   workingHours: string
 }
 
-export interface BlogType {
-  id: string;
-  title: string;
-  published: string;
-  excerpt: string;
-  image: string;
+export interface FAQType {
+  id: number,
+  question: string,
+  answer: string
 }
 
 

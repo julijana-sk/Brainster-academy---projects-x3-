@@ -406,11 +406,30 @@ ul li a {
 
 /* search end  */
 form label {
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
     font-weight: 700;
     font-size: 15px;
     line-height: 14.52px;
+}
+
+.form-input {
+    border-radius: 8px;
+    padding: 16px;
+    text-align: left !important;
+    font-weight: lighter !important;
+    height: 40px;
+    width: 100%;
+}
+
+.note {
+    font-family: "Inter";
+    font-size: 8px;
+    font-weight: 500;
+    line-height: 10px;
+    letter-spacing: 0em;
+    text-align: center;
+ 
 }
 .btnProfilePicture {
     max-width: 100%;
@@ -890,4 +909,54 @@ form label {
     line-height: 35px;
     letter-spacing: -0.011em;
     text-align: center;
+}
+
+.faq-container {
+    border-radius: 5px;
+    background-color: rgb(251, 251, 251);
+    border: 0.46px solid #C2C2C2;
+    box-shadow: 0px 0px 1.384615182876587px 0px #C2C2C2;
+}
+.faq-item {
+    height: 360px;
+    text-align: left;
+    color: black;
+    position: relative;
+    border-radius: 5px;
+    padding: 15px 15px 0px 15px;
+}
+
+.hr-line-faq {
+    width: 90%;
+    bottom: 0;
+    border: 0.33px;
+    background: #C2C2C2;
+    border: 0.33px solid #C2C2C2;
+    position: absolute;
+    margin: 0 auto;
+}
+
+.faq-item-olive {
+    font-family: 'Cormorant Infant', serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: -0.011em;
+    text-align: left;
+    color: #8A8328;
+}
+
+.faq-item:nth-child(odd) {
+    background-color: rgb(251, 251, 251);
+}
+
+.faq-item:nth-child(even) {
+    background: #FFF6F6;
+}
+.faq-item:nth-last-child(1), .faq-item:nth-last-child(2) {
+    height: 70px;
+    margin-bottom: 0;
+}
+.faq-item:nth-last-child(1) hr {
+    width: 0;
 }

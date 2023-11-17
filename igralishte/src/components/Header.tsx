@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import CategoryItems from "./CategoryItems";
+
 
 
 const Header: React.FC = () => {
@@ -69,7 +69,7 @@ return (
       <div className={toggleNav ? "activeSidenav" : "sidenav"}>
         <ul className="menu">
           <li>
-          {data?.categories?.map((item, index) => (
+          {/* {data?.categories?.map((item, index) => (
             <li key={index}>
               <CategoryItems category={item}/>
               <ul>
@@ -82,7 +82,7 @@ return (
                 ))}
               </ul>
             </li>
-          ))}
+          ))} */}
         </li> 
           <div className="menu-footer">
             <li className="nav-item ">
@@ -106,9 +106,11 @@ return (
                 <button className="menu-footer-button"><img src="../pictures/icons/user-light.png" /></button>
                 {/* <button className="menu-footer-button"><img src="../pictures/icons/user-light.png")} /></button> */}
 
-                { user ? <Link onClick={handleLogOut} href={"/profile"} className="bg-transparent menu-footer border-0"><p>Мој профил</p></Link> 
-                : <Link href={"/login"}><p>Регистрирај се/Логирај се</p> 
-                </Link>}
+                {user ? (
+                <button onClick={handleLogOut}><Link href={"/profile"}> Мој профил </Link></button>
+                  ) : (
+                    <Link href="/login">Регистрирај се/Логирај се</Link>
+                  )}
               </div>
             </li>
           </div>

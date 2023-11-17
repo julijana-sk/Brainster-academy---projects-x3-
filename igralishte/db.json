@@ -821,28 +821,42 @@
     "second_content": "Igralishte was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
   },
 
-  "blogs": [
+  "FAQ": [
     {
-      "id": "5f98e7cd-d5cd-446a-9c18-7a7a27f9c27f",
-      "title": "Crock Pot Roast",
-      "published": "8/1/2022",
-      "excerpt": "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
-      "image": "http://img.sndimg.com/food/image/upload/w_266/v1/img/recipes/50/84/7/picMcSyVd.jpg"
+      "id": "1",
+      "question": "Ова е примерок за прашања кои би биле на страната?",
+      "answer": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
     },
     {
-      "id": "5c98e7cd-d5cd-446a-9c18-7a7a27f9c27f",
-      "title": "Big Night Pizza",
-      "published": "8/1/2022",
-      "excerpt": "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
-      "image": "http://upload.wikimedia.org/wikipedia/commons/c/c7/Spinach_pizza.jpg"
+      "id": "2",
+      "question": "Ова е примерок за прашања кои би биле на страната?",
+      "answer": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
     },
     {
-      "id": "5d98e7cd-d5cd-446a-9c18-7a7a27f9c27f",
-      "title": "Cranberry and Apple Stuffed Acorn Squash Recipe",
-      "published": "8/1/2022",
-      "excerpt": "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
-      "image": "http://elanaspantry.com/wp-content/uploads/2008/10/acorn_squash_with_cranberry.jpg"
-    }
+      "id": "3",
+      "question": "Ова е примерок за прашања кои би биле на страната?",
+      "answer": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+    },
+    {
+      "id": "4",
+      "question": "Ова е примерок за прашања кои би биле на страната?",
+      "answer": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+    },
+    {
+      "id": "5",
+      "question": "Ова е примерок за прашања кои би биле на страната?",
+      "answer": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+    },
+    {
+      "id": "6",
+      "question": "",
+      "answer": ""
+    }, 
+    {
+      "id": "7",
+      "question": "",
+      "answer": ""
+    }  
   ],
 
   "contact": {

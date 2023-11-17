@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import LoginForm from '../../components/LoginForm';
 import Link from 'next/link';
+import LoginForm from '@/components/LoginForm';
 
 const LoginPage = () => {
    
@@ -18,7 +18,7 @@ const LoginPage = () => {
           <div className='col-12 mt-5 mb-4 text-center'>
             <Link href={"/"}><img src="../pictures/icons/Logo Igralishte final version.png" alt="logo-igralishte" /></Link>
           </div>
-          <div className='offset-2 col-10 pl-4 mt-5'>
+          <div className='col-10 mr-auto ml-auto mt-5'>
             <LoginForm />
           </div>
         </div>

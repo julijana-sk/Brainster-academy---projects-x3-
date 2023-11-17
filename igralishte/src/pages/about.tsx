@@ -14,7 +14,7 @@ interface Props {
 type ActiveView = "about1" | "about2";
 
 
-const About: NextPage<Props> = ({aboutContentData}) => {
+const AboutPage: NextPage<Props> = ({aboutContentData}) => {
 
   const [view, setView] = useState<ActiveView>("about1");
 
@@ -26,7 +26,7 @@ const About: NextPage<Props> = ({aboutContentData}) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="d-flex flex-row align-items-center align-self-center my-4 justify-content-center">
+      <div className="d-flex flex-row align-items-center align-self-center my-3 justify-content-center">
         <img src="../pictures/icons/sparks-elements.png" alt="spakrs" className="mr-2" />
         <PageTitle title={aboutContentData.title}/>
       </div>
@@ -51,7 +51,7 @@ const About: NextPage<Props> = ({aboutContentData}) => {
   );
 };
 
-export default About;
+export default AboutPage;
 
 
 export const getStaticProps: GetStaticProps = async () => {

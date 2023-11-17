@@ -1,15 +1,26 @@
-import { GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import Banner from '../components/Banner';
 import { VintageClothes } from '@/types/types';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import Carousel from '@/components/Carousel';
+import { useContext } from 'react';
+import { UserContext } from '@/context/UserContext';
 
 interface Props {
   vintageClothes: VintageClothes[]
 }
 
-const Home: NextPage<Props> = ({vintageClothes}) => {
+const HomePage: NextPage<Props> = ({vintageClothes}) => {
+
+
+  const { user} = useContext(UserContext);
+
   
+  // function getCookie(arg0: string, arg1: { req: import("http").IncomingMessage & { cookies: Partial<{ [key: string]: string; }>; }; res: import("http").ServerResponse<import("http").IncomingMessage>; }) {
+  //   throw new Error('Function not implemented.');
+  // }
+
+
   return (
       <div className='banner-bcg'>
         <AnnouncementBar />      
@@ -30,17 +41,27 @@ const Home: NextPage<Props> = ({vintageClothes}) => {
   );
 }
 
-export default Home;
+export default HomePage;
 
-export const getStaticProps: GetStaticProps = async () => {
 
-const resProductClothes = await fetch("http://localhost:5001/vintageClothes");
-const vintageClothes: VintageClothes[] = await resProductClothes.json();
+export const getServerSideProps: GetServerSideProps = async (context) => {
 
+  const resProductClothes = await fetch("http://localhost:5001/vintageClothes");
+  const vintageClothes: VintageClothes[] = await resProductClothes.json();
+
+  
+  // const req = context.req
+  //   const res = context.res
+  //   const username = getCookie('username', { req, res });
+  //   if (username == undefined){
+  //       username = false;
+  //   }
 
  return {
     props: {
-      vintageClothes
+      vintageClothes,  
+      // {username}
     },
  };
-}
+};
+

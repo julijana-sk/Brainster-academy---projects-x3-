@@ -11,7 +11,7 @@ interface Props {
 }
 
 
-const Contact: NextPage<Props> = ({ contactData }) => {
+const ContactPage: NextPage<Props> = ({ contactData }) => {
 
 return (
     <>
@@ -21,7 +21,7 @@ return (
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="d-flex flex-row align-items-center align-self-center my-4 justify-content-center">
+      <div className="d-flex flex-row align-items-center align-self-center my-3 justify-content-center">
         <PageTitle title={contactData.title}/>
         <img src="../pictures/icons/sparks-elements.png" alt="spakrs" className="ml-2"/>
       </div>
@@ -51,7 +51,7 @@ return (
   );
 };
 
-export default Contact;
+export default ContactPage;
 
 export const getStaticProps: GetStaticProps = async () => {
 

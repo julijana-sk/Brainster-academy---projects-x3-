@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 //   searchedProductsData: ProductType[];
 // }
 
-// const Shop: NextPage<Props> = ({searchedProductsData}) => {
+// const OrderPage: NextPage<Props> = ({searchedProductsData}) => {
 
 //   const router = useRouter();
 
@@ -181,7 +181,7 @@ import { useRouter } from "next/router";
 //   ); 
 // };
 
-// export default Shop;
+// export default OrderPage;
 
 
 // export const getServerSideProps: GetServerSideProps = async ({query}) => {

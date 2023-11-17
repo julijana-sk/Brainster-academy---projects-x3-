@@ -6,7 +6,7 @@ import { ProductType } from "../types/types";
 interface Props {
   searchedProductsItemsData: ProductType[];
 }
-const Search: NextPage<Props> = ({searchedProductsItemsData}) => {
+const SearchPage: NextPage<Props> = ({searchedProductsItemsData}) => {
   return (
     <>
       <Head>
@@ -42,7 +42,7 @@ const Search: NextPage<Props> = ({searchedProductsItemsData}) => {
   );
 };
 
-export default Search;
+export default SearchPage;
 
 // export const getServerSideProps: GetServerSideProps = async ({query}) => {
 

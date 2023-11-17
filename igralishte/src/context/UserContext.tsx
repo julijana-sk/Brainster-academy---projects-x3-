@@ -28,7 +28,8 @@ interface Props {
 
 const UserContextConstructor: React.FC<Props> = ({ children }) => {
 
-  const [user, setUser] = useState<UserContextType["user"]>({email: "igralishte@hotmail.com"});
+  const [user, setUser] = useState<UserContextType["user"]>({email: ""});
+  // const [user, setUser] = useState<UserContextType["user"]>({email: "igralishte@hotmail.com"});
   // const [data, setData] = useState<DataType>({categories: []});
   const [data, setData] = useState<DataType[]>([]);
 
@@ -39,6 +40,7 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
         .then((res) => res.json())
         .then((data) => {
             setData(data);
+            // setUser(null)
         });
     }, []);
 

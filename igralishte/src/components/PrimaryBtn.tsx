@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 interface Props {
   title: string;
@@ -8,11 +8,15 @@ interface Props {
   img?: string;
   btnClass: string;
   height: string;
+  onClick?: () => void 
 }
 
-const PrimaryBtn: React.FC<Props> = ({title, backgroundColor, color, border, img, height, btnClass}) => {
+const PrimaryBtn: React.FC<Props> = ({title, backgroundColor, color, border, img, height, btnClass, onClick}) => {
+
+  const [view, setView] = useState("");
+
   return (
-      <button type="submit" className={`${btnClass} button-big my-2 text-center`} style={{backgroundColor: `${backgroundColor}`, color: `${color}`, height: `${height}`, border: `${border}`}} >
+      <button type="submit" onClick={() => setView(view)} className={`${btnClass} button-big my-2 text-center`} style={{backgroundColor: `${backgroundColor}`, color: `${color}`, height: `${height}`, border: `${border}`}} >
         <img src={`${img}`} alt="" />
         {title}
       </button>
