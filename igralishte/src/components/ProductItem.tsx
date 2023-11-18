@@ -3,18 +3,18 @@ import { ProductType } from "../types/types";
 import Link from "next/link";
 
 interface Props {
-  product: ProductType
+  product: ProductType,
 }
 const ProductItem: React.FC<Props> = ({product}) => {
   
   return (
-    <Link href={`/products/${product.id}`}> 
-      <div >
+    <div className="mb-3 p-0">
+        <Link href={`/products/${product.id}`}> 
         <img src={product.img} alt="IMG-PRODUCT" className="product-img"/>
-        <p className="product-text">{product.title}</p>
-        <p className="product-text" style={{fontWeight: '500'}}>{product.price} ден.</p>
+        <p>{product.title}</p>
+        <p style={{fontWeight: '500'}}>{product.price} ден.</p>
+        </Link>
       </div>
-    </Link>
   );
 };
 

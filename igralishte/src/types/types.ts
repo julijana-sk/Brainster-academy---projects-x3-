@@ -24,7 +24,6 @@ export interface ProductType {
     dresses: ProductType[],
     coatsAndJackets: ProductType[],
     underwear: ProductType[],
-    // vintageClothes: ProductType[]
   }
 
 export interface AccessoriesType {
@@ -98,3 +97,8 @@ export interface DataType {
   gifts: GiftType[]
 }
 
+export interface DataProductType {
+  vintageClothes: VintageClothes[],
+  accessories: Accessories[],
+  brands: BrandType[]
+}
