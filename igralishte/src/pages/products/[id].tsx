@@ -1,15 +1,24 @@
+import PageTitle from '@/components/PageTitle';
+// import RelatedProducts from '@/components/RelatedProducts';
+import { ProductType, VintageClothes } from '@/types/types';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react'
 
 interface Props {
-   product: ProductType;
+  product: ProductType;
   randomProducts: ProductType[];
+  allproducts: ProductType[]
 }
 
-const ProductDetailPage: NextPage<Props> = ({ product, products }) => {
-const ShopDetail: NextPage<Props> = ({product, randomProducts}) => {
-  return (
+const ProductDetailPage: NextPage<Props> = ({ product, randomProducts, allproducts }) => {
+
+  console.log(allproducts)
+  console.log(product)
+
+
+
+return (
     <>
       <Head>
         <title>{product.title}</title>
@@ -28,7 +37,14 @@ const ShopDetail: NextPage<Props> = ({product, randomProducts}) => {
                   <div className="slick3 gallery-lb">
                     <div className="item-slick3">
                       <div className="wrap-pic-w pos-relative">
-                        <img src={product.img} alt="IMG-PRODUCT" />
+                        {/* <img src={product.img} alt="IMG-PRODUCT" /> */}
+                        {allproducts.map((item) => {
+                          if (product.id === item.id) {
+                            return (
+                                <div key={item.id}>{item.img}</div>
+                                )
+                              }
+                        })}
                       </div>
                     </div>
                   </div>
@@ -96,60 +112,58 @@ const ShopDetail: NextPage<Props> = ({product, randomProducts}) => {
           </div>
         </div>
 
-        <div className="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-          <span className="stext-107 cl6 p-lr-25">Free shipping - only today</span>
-        </div>
       </section>
 
-      <RelatedProducts products={randomProducts}/>
+      {/* <RelatedProducts products={randomProducts}/> */}
     </>
   );
 };
-}
+
 
 export default ProductDetailPage;
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const resProducts = await fetch("http://localhost:5001/vintageClothes");
+  const vintageClothes: VintageClothes[] = await resProducts.json();
 
-  const resProducts = await fetch("http://localhost:5001/products");
-  const products: ProductType[] = await resProducts.json();
-
-  const paths = products.map((product) => {
-    return {
-      params: {
-        id: product.id,
-        },
-    };
+  const allproducts = vintageClothes.flatMap((category: VintageClothes) => {
+    return Object.values(category).flatMap((productList: ProductType[]) => productList);
   });
+
+  const paths = allproducts.map((product: ProductType) => ({
+    params: {
+      id: String(product.id),
+    },
+  }));
 
   return {
     paths,
     fallback: false,
   };
-}
+};
 
 
-export const getStaticProps: GetStaticProps = async ({params}) => {
-
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   let product: ProductType | undefined = undefined;
-  let randomNo: number | undefined;
 
-  const resProductsCount = await fetch("http://localhost:5001/products");
-  const productsCount: ProductType[] = await resProductsCount.json();
+  const resProductsCount = await fetch("http://localhost:5001/vintageClothes");
+  const vintageClothes: VintageClothes[] = await resProductsCount.json();
 
-  productsCount.map(() => {
-    if (productsCount.length > 4) {
-      randomNo = Math.floor(Math.random() * (productsCount.length - 4));
-    }
+  let allproducts: ProductType[] = vintageClothes.flatMap((category: VintageClothes) => {
+    return Object.values(category).flatMap((productList: ProductType[]) => productList);
   });
-  
-  const resRandomProducts = await fetch(`http://localhost:5001/products?_start=${randomNo}&_limit=4`);
-  const randomProducts: ProductType[] = await resRandomProducts.json();
 
+  let randomProducts: ProductType[] = [];
+
+  if (allproducts.length > 4) {
+    const randomNo = Math.floor(Math.random() * (allproducts.length - 4));
+    const resRandomProducts = await fetch(`http://localhost:5001/products?_start=${randomNo}&_limit=4`);
+    randomProducts = await resRandomProducts.json();
+  }
 
   if (params?.id) {
-    const  resProduct = await fetch(`http://localhost:5001/products/${params.id}`);
+    const resProduct = await fetch(`http://localhost:5001/products/${params.id}`);
     product = await resProduct.json();
   }
 
@@ -157,7 +171,7 @@ export const getStaticProps: GetStaticProps = async ({params}) => {
     props: {
       product,
       randomProducts,
-    }
-  }
-
-}
+      allproducts,
+    },
+  };
+};

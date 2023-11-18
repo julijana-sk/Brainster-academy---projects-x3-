@@ -1,5 +1,6 @@
 import React from "react";
 import { ProductType } from "../types/types";
+import ProductItem from "./ProductItem";
 
 // interface Props {
 //   products: ProductType[];
@@ -15,9 +16,9 @@ import { ProductType } from "../types/types";
 
 //         <div className="wrap-slick2">
 //           <div className="d-flex">
-//             {products.map((product) => {
+//             {products?.map((product) => {
 //               return (
-//               <ProductItem key={product.id} {...product}/>
+//               <ProductItem key={product.id} product={product}/>
 //               )
 //             })}
 //           </div>

@@ -880,6 +880,8 @@
         "img": "../pictures/gift-card-3.png",
         "title": "Wavy baby Gift card"
       }
-    ]
+    ],
+    
+  "pages": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 }

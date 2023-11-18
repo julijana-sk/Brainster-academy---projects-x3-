@@ -6,16 +6,29 @@ import { useRouter } from 'next/router';
 import ProductItem from '@/components/ProductItem';
 
 
+
 interface Props {
   vintageClothes: VintageClothes[];
   searchedProductsData: ProductType[];
-  products: ProductType[],
-  allproducts: ProductType[]
+  products: ProductType[];
+  allproducts: ProductType[];
 }
 
 const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, products, allproducts}) => {
+    
+    const router = useRouter();
+    const [page, setPage] = useState(1);
+    const totalPages = Math.ceil(allproducts.length / 10);
 
-  const router = useRouter();
+    const handleNextPage = () => {
+        setPage(page + 1);
+    };
+
+    const handlePreviousPage = () => {
+        setPage(page - 1);
+    };
+
+
 
   return (
     < >
@@ -154,29 +167,6 @@ const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, pro
             </div>
         {/* search END */}
         </div>
-
-        {/* <div className= "col-12 mr-auto ml-auto my-5">
-            {vintageClothes.length > 0 ? ( allproducts?.map((product) => {
-              return (
-                <div key={product.id}>
-                    <div key={product.id} className='d-flex flex-column flex-wrap' >
-                        <div className="col-12 d-flex flex-row flex-wrap">
-                        <ProductItem product={product} size='col-5 mb-3 mr-3 h-100 p-0 mr-auto ml-auto'/>
-                        <ProductItem product={product} size='col-5 mb-3 mr-3 h-100 p-0 mr-auto ml-auto'/>
-                        <ProductItem product={product} size='col-12 mb-3'/>
-                        <ProductItem product={product} size='col-5 mb-3 mr-3 h-100 p-0 mr-auto ml-auto'/>
-                        <ProductItem product={product} size='col-5 mb-3 mr-3 h-100 p-0 mr-auto ml-auto'/>
-                        </div>
-                    </div>
-                </div>
-                )}
-            )
-            ) : (
-                <p>There are no results...</p>
-              )
-            }
-        </div> */}
-
         <div className="container my-5">
           <div  className="row d-flex flex-row flex-wrap">
             <div className="container">
@@ -189,8 +179,8 @@ const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, pro
                     let columnText = "product-text-a"
                     if ((productIndex + 1) % 3 === 0) {columnSize = "col-11"; columnText = "product-text"}
                         return (
-                            <div className={`${columnSize} ${columnText} p-0 mb-2`}>
-                            <ProductItem key={productIndex} product={product}  />
+                            <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
+                            <ProductItem  product={product}  />
                             </div>
                         );
                     })
@@ -206,17 +196,13 @@ const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, pro
         {/* pagination */}
           <div className="d-flex flex-row">
             <div className="col-12 bg-primary ">
-                <a href="#" className="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1 text-dark">
-                1
-                </a>
-
-                <a href="#" className="flex-c-m how-pagination1 trans-04 m-all-7 text-dark">
-                2
-                </a>
-
-                <a href="#" className="flex-c-m how-pagination1 trans-04 m-all-7 text-dark">
-                3
-                </a>
+                <button onClick={handlePreviousPage} disabled={page === 1}>
+                    Previous
+                </button>
+                <span>Page {page} of {totalPages}</span>
+                <button onClick={handleNextPage} disabled={page === totalPages}>
+                    Next
+                </button>
             </div>
         </div>
 
@@ -228,19 +214,42 @@ export default ProductPage;
 
 
 export const getServerSideProps: GetServerSideProps = async ({query}) => {
+    
+const page = parseInt(query.page as string, 10) || 1;
 
-    //   const resProductClothes = await fetch("http://localhost:5001/vintageClothes&_limit=10");
-  const resProductClothes = await fetch("http://localhost:5001/vintageClothes?limit=10");
-  const vintageClothes: VintageClothes[] = await resProductClothes.json();
+const resProductClothes = await fetch(`http://localhost:5001/vintageClothes?limit=10&page=${page}`);
+const vintageClothes: VintageClothes[] = await resProductClothes.json();
 
-  const resAccessories = await fetch("http://localhost:5001/accessories?limit=10");
-  const accessories: AccessoriesType[] = await resAccessories.json();
+const resAccessories = await fetch(`http://localhost:5001/accessories?limit=10&page=${page}`);
+const accessories: AccessoriesType[] = await resAccessories.json();
 
 
-  const response = await fetch("http://localhost:5001?limit=10");
-  const products: ProductType[] = await response.json();
+const response = await fetch(`http://localhost:5001?limit=10&page=${page}`);
+const products: ProductType[] = await response.json();
 
-  let allproducts: ProductType[] = []
+// let resSearchedProducts: Response;
+
+//   if (query.gender && query.query) {
+//     resSearchedProducts = await fetch(
+//       `http://localhost:5001/products?gender_like=${query.gender}&q=${query.query}`
+//     );
+//   } else if (query.gender) {
+//     resSearchedProducts = await fetch(
+//       `http://localhost:5001/products?gender_like=${query.gender}`
+//     );
+//   } else if (query.query) {
+//     resSearchedProducts = await fetch(
+//       `http://localhost:5001/products?q=${query.query}`
+//     );
+//   }  else {
+//     resSearchedProducts = await fetch("http://localhost:5001/products");
+//   }
+
+//   const searchedProductsData: ProductType[] = await resSearchedProducts.json();
+
+
+
+let allproducts: ProductType[] = []
 
 
     vintageClothes.forEach((category: VintageClothes) => {
@@ -264,8 +273,7 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
             }
         });
     });
-
-
+    
 
   return {
       props: {
@@ -273,6 +281,7 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
         allproducts,
         vintageClothes,
         accessories,
+        page
       },
     }
 }
