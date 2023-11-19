@@ -1,21 +1,27 @@
 import PageTitle from '@/components/PageTitle';
-// import RelatedProducts from '@/components/RelatedProducts';
-import { ProductType, VintageClothes } from '@/types/types';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { CategoryType, DataType, ProductType, SubcategoryType } from '@/types/types';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React from 'react'
+
+
 
 interface Props {
   product: ProductType;
-  randomProducts: ProductType[];
+  // randomProducts: ProductType[];
   allproducts: ProductType[]
 }
 
-const ProductDetailPage: NextPage<Props> = ({ product, randomProducts, allproducts }) => {
+const ProductDetailPage: NextPage<Props> = ({ product, allproducts }) => {
 
-  console.log(allproducts)
-  console.log(product)
 
+//   const router = useRouter();
+// const { id } = router.query;
+
+// if (router.isFallback) {
+// return <div>Loading...</div>;
+// }
 
 
 return (
@@ -28,93 +34,33 @@ return (
 
       <PageTitle title={product.title} />
 
-      <section className="sec-product-detail bg0 p-t-65 p-b-60">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-6 col-lg-7 p-b-30">
-              <div className="p-r-30 p-lr-0-lg">
-                <div className="wrap-slick3 flex-sb flex-w">
-                  <div className="slick3 gallery-lb">
-                    <div className="item-slick3">
-                      <div className="wrap-pic-w pos-relative">
-                        {/* <img src={product.img} alt="IMG-PRODUCT" /> */}
-                        {allproducts.map((item) => {
-                          if (product.id === item.id) {
-                            return (
-                                <div key={item.id}>{item.img}</div>
-                                )
-                              }
-                        })}
+        <div className="container-fluid my-5">
+          <div className="row d-flex flex-column justify-content-center">
+            <div className="col-12 h-100">
+              {allproducts?.map((item) => {
+                if (product.id === item.id) {
+                  return (
+                      < div key={item.id}>
+                      <img src={item.img} alt="IMG-PRODUCT" />
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                      )
+                    }
+              })}
             </div>
-
-            <div className="col-md-6 col-lg-5 p-b-30">
-              <div className="p-r-50 p-t-5 p-lr-0-lg">
-                <h4 className="mtext-105 cl2 js-name-detail p-b-14">{product.title}</h4>
-
-                <span className="mtext-106 cl2">{product.price}</span>
-
-                <p className="stext-102 cl3 p-t-23">{product.description}</p>
-
-                <div className="flex-w flex-m p-l-100 p-t-40 respon7">
-                  <div className="flex-m bor9 p-r-10 m-r-11">
-                    <a
-                      href="#"
-                      className="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-                      data-tooltip="Add to Wishlist"
-                    >
-                      <i className="zmdi zmdi-favorite"></i>
-                    </a>
-                  </div>
-
-                  <a
-                    href="#"
-                    className="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                    data-tooltip="Facebook"
-                  >
-                    <i className="fa fa-facebook"></i>
-                  </a>
-
-                  <a
-                    href="#"
-                    className="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                    data-tooltip="Twitter"
-                  >
-                    <i className="fa fa-twitter"></i>
-                  </a>
-
-                  <a
-                    href="#"
-                    className="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                    data-tooltip="Google Plus"
-                  >
-                    <i className="fa fa-google-plus"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
+            <div className="col-12">
+                <h4 className="text-center">{product.title}</h4>
+                <span className="text-center">{product.price}</span>
+                <p className="text-left">{product.description}</p>
           </div>
-
-          <div className="bor10 m-t-50 p-t-43 p-b-40">
-            <div className="tab01">
-              <div className="tab-content p-t-43">
-                <div className="tab-pane fade show active" id="description" role="tabpanel">
-                  <div className="how-pos2 p-lr-15-md">
-                    <p className="stext-102 cl6">{product.description}</p>
-                  </div>
-                </div>
+            <div className="col-12">
+              <img src="../../pictures/about-banner1.png" alt="probna slikicka" />
+              {product.id}
               </div>
-            </div>
-          </div>
+
+
+          {/* <RelatedProducts products={randomProducts}/> */}
         </div>
-
-      </section>
-
-      {/* <RelatedProducts products={randomProducts}/> */}
+      </div>
     </>
   );
 };
@@ -123,15 +69,19 @@ return (
 export default ProductDetailPage;
 
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const resProducts = await fetch("http://localhost:5001/vintageClothes");
-  const vintageClothes: VintageClothes[] = await resProducts.json();
 
-  const allproducts = vintageClothes.flatMap((category: VintageClothes) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+
+  const resClothes = await fetch('http://localhost:5001/vintageClothes');
+  const vintageClothes: SubcategoryType[] = await resClothes.json();
+  // const res = await fetch("http://localhost:5001/vintageClothes");
+  // const data: DataType = await res.json();
+
+  const allproducts = vintageClothes?.flatMap((category) => {
     return Object.values(category).flatMap((productList: ProductType[]) => productList);
   });
 
-  const paths = allproducts.map((product: ProductType) => ({
+  const paths = allproducts?.map((product: ProductType) => ({
     params: {
       id: String(product.id),
     },
@@ -144,33 +94,79 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 
+//   let allproducts: ProductType[] = []
+
+
+//   const pathsArray = vintageClothes.forEach((category: SubcategoryType) => {
+//         Object.values(category).forEach((productList: ProductType[]) => {
+//             productList.forEach((product: ProductType) => {
+//                 allproducts?.push(product);
+            
+//             });
+//         });
+//     });
+
+//   const paths = allproducts.map((item) => {
+//           return (
+//                 {id: item.id.toString()}
+//               )
+//             }
+//       )
+
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
+
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+
   let product: ProductType | undefined = undefined;
 
   const resProductsCount = await fetch("http://localhost:5001/vintageClothes");
-  const vintageClothes: VintageClothes[] = await resProductsCount.json();
+  const vintageClothes: SubcategoryType[] = await resProductsCount.json();
 
-  let allproducts: ProductType[] = vintageClothes.flatMap((category: VintageClothes) => {
-    return Object.values(category).flatMap((productList: ProductType[]) => productList);
-  });
+  // let allproducts: ProductType[] = vintageClothes.flatMap((category: SubcategoryType) => {
+  //   return Object.values(category).flatMap((productList: ProductType[]) => productList);
+  // });
 
-  let randomProducts: ProductType[] = [];
+  // let randomProducts: ProductType[] = [];
 
-  if (allproducts.length > 4) {
-    const randomNo = Math.floor(Math.random() * (allproducts.length - 4));
-    const resRandomProducts = await fetch(`http://localhost:5001/products?_start=${randomNo}&_limit=4`);
-    randomProducts = await resRandomProducts.json();
-  }
+  // if (allproducts.length > 4) {
+  //   const randomNo = Math.floor(Math.random() * (allproducts.length - 4));
+  //   const resRandomProducts = await fetch(`http://localhost:5001/products?_start=${randomNo}&_limit=4`);
+  //   randomProducts = await resRandomProducts.json();
+  // }
+
+
+  let allproducts: ProductType[] = []
+
+
+    vintageClothes.forEach((category: SubcategoryType) => {
+        Object.values(category).forEach((productList: ProductType[]) => {
+            productList.forEach((product: ProductType) => {
+            if (allproducts.length <= 10 && product.id) {
+                allproducts?.push(product);
+            } else {
+                return;
+            }
+            });
+        });
+    });
+
+  console.log(params?.id)
 
   if (params?.id) {
-    const resProduct = await fetch(`http://localhost:5001/products/${params.id}`);
+    const resProduct = await fetch(`http://localhost:5001/vintageClothes/${params.id}`);
     product = await resProduct.json();
   }
 
+  console.log(product)
   return {
     props: {
       product,
-      randomProducts,
+      // randomProducts,
       allproducts,
     },
   };

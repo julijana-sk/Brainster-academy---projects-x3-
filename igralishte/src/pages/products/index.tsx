@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 import Head from 'next/head';
 import { GetServerSideProps, NextPage } from 'next';
-import { AccessoriesType, ProductType, VintageClothes } from '@/types/types';
 import { useRouter } from 'next/router';
 import ProductItem from '@/components/ProductItem';
+import { CategoryType, ProductType, SubcategoryType } from '@/types/types';
 
 
 
 interface Props {
-  vintageClothes: VintageClothes[];
-  searchedProductsData: ProductType[];
+  vintageClothes: SubcategoryType[];
+  accessories: SubcategoryType[];
   products: ProductType[];
   allproducts: ProductType[];
+  //   searchedProductsData: ProductType[];
 }
 
-const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, products, allproducts}) => {
+const ProductPage: NextPage<Props> = ({vintageClothes, accessories, products, allproducts }) => {
     
     const router = useRouter();
     const [page, setPage] = useState(1);
@@ -65,7 +66,7 @@ const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, pro
                         onChange={(event) => {
                         event.preventDefault();
                         router.push({
-                        pathname: "/product",
+                        pathname: "/products",
                         query: {
                             ...router.query,
                             query: event.target.value,
@@ -83,7 +84,7 @@ const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, pro
                     data-filter="*"
                     onClick={() => {
                     router.replace({
-                    pathname: "/product",
+                    pathname: "/products",
                     });
                 }}>
                     All Products
@@ -94,7 +95,7 @@ const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, pro
                     data-filter=".women"
                     onClick={() => {
                         router.push({
-                        pathname: "/product",
+                        pathname: "/products",
                         query: {
                             ...router.query,
                             gender: "women",
@@ -108,7 +109,7 @@ const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, pro
                 <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men"
                 onClick={() => {
                         router.push({
-                        pathname: "/product",
+                        pathname: "/products",
                         query: {
                             ...router.query,
                             gender: "man",
@@ -123,7 +124,7 @@ const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, pro
                     data-filter=".bag" 
                     onClick={() => {
                         router.push({
-                        pathname: "/product",
+                        pathname: "/products",
                         query: {
                             ...router.query,
                             query: "Belt"
@@ -138,7 +139,7 @@ const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, pro
                     data-filter=".shoes"
                     onClick={() => {
                         router.push({
-                        pathname: "/product",
+                        pathname: "/products",
                         query: {
                             ...router.query,
                             query: "converse"
@@ -153,7 +154,7 @@ const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, pro
                     data-filter=".watches"
                     onClick={() => {
                         router.push({
-                        pathname: "/product",
+                        pathname: "/products",
                         query: {
                             ...router.query,
                             query: "watch"
@@ -180,7 +181,7 @@ const ProductPage: NextPage<Props> = ({vintageClothes, searchedProductsData, pro
                     if ((productIndex + 1) % 3 === 0) {columnSize = "col-11"; columnText = "product-text"}
                         return (
                             <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
-                            <ProductItem  product={product}  />
+                            <ProductItem   id={product.id} title={product.title} img={product.img} price={product.price}/>
                             </div>
                         );
                     })
@@ -217,11 +218,11 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
     
 const page = parseInt(query.page as string, 10) || 1;
 
-const resProductClothes = await fetch(`http://localhost:5001/vintageClothes?limit=10&page=${page}`);
-const vintageClothes: VintageClothes[] = await resProductClothes.json();
+const resClothes = await fetch(`http://localhost:5001/vintageClothes?limit=10&page=${page}`);
+const vintageClothes: SubcategoryType[] = await resClothes.json();
 
 const resAccessories = await fetch(`http://localhost:5001/accessories?limit=10&page=${page}`);
-const accessories: AccessoriesType[] = await resAccessories.json();
+const accessories: SubcategoryType[] = await resAccessories.json();
 
 
 const response = await fetch(`http://localhost:5001?limit=10&page=${page}`);
@@ -252,7 +253,7 @@ const products: ProductType[] = await response.json();
 let allproducts: ProductType[] = []
 
 
-    vintageClothes.forEach((category: VintageClothes) => {
+    vintageClothes.forEach((category: SubcategoryType) => {
         Object.values(category).forEach((productList: ProductType[]) => {
             productList.forEach((product: ProductType) => {
             if (allproducts.length <= 10 && product.id) {
@@ -264,7 +265,7 @@ let allproducts: ProductType[] = []
         });
     });
 
-    accessories.forEach((accessory: AccessoriesType) => {
+    accessories.forEach((accessory: SubcategoryType) => {
         Object.values(accessory).forEach((product: ProductType) => {
             if (allproducts.length <= 10 && product.id) {
             allproducts?.push(product);
