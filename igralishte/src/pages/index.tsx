@@ -1,13 +1,13 @@
 import { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import Banner from '../components/Banner';
-import { VintageClothes } from '@/types/types';
 import AnnouncementBar from '@/components/AnnouncementBar';
 import Carousel from '@/components/Carousel';
 import { useContext } from 'react';
 import { UserContext } from '@/context/UserContext';
+import { CategoryType } from '@/types/types';
 
 interface Props {
-  vintageClothes: VintageClothes[]
+  vintageClothes: CategoryType[]
 }
 
 const HomePage: NextPage<Props> = ({vintageClothes}) => {
@@ -47,7 +47,7 @@ export default HomePage;
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const resProductClothes = await fetch("http://localhost:5001/vintageClothes");
-  const vintageClothes: VintageClothes[] = await resProductClothes.json();
+  const vintageClothes: CategoryType[] = await resProductClothes.json();
 
   
   // const req = context.req

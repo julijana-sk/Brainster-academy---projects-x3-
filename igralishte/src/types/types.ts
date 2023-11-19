@@ -150,6 +150,8 @@ export interface ProductType {
 export interface BrandType {
  id: string;
  name: string;
+ img: string;
+ description: string;
 }
 
 export interface AboutType {

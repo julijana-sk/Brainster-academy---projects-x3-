@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import BrandsPicker from "./BrandsPicker";
 
 
 
@@ -40,8 +41,8 @@ const Header: React.FC = () => {
   }
 
 return (
-    <div className="px-3 py-2">
-      <div className="container text-dark p-0">
+    <div className="px-4 py-3">
+      <div className="container text-dark pl-2 pr-0">
           <div onClick={openNav} className={toggleNav ? "activeHamburger" : "hamburber"} />
           <Link href={"/"} className="navbar-brand m-0 text-center">
           <img src="../pictures/icons/Logo Igralishte final version 1.png" alt="logo"/>
@@ -84,6 +85,11 @@ return (
             </li>
           ))} */}
         </li> 
+        <ul>
+        <li>
+          <BrandsPicker />
+        </li>
+        </ul>
           <div className="menu-footer">
             <li className="nav-item ">
               <Link href={"/gifts"} >link to gifts</Link>

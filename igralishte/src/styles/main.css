@@ -915,6 +915,10 @@ form label {
     letter-spacing: -0.011em;
 }
 
+a {
+    color: black;
+}
+
 .address-text {
     font-family: Century;
     font-size: 16px;
