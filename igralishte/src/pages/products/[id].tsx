@@ -17,11 +17,7 @@ interface Props {
 const ProductDetailPage: NextPage<Props> = ({ product, allproducts, boxItemsData }) => {
 
   const router = useRouter();
-// const { id } = router.query;
 
-// if (router.isFallback) {
-// return <div>Loading...</div>;
-// }
 
   const [expandedBox, setExpandedBox] = useState(null);
    

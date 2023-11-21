@@ -1,5 +1,8 @@
 export interface DataType {
-    categories: CategoryType[];
+    products: {
+        vintageClothes: VintageClothesType;
+        accessories: AccessoriesType;
+    }
     brands: BrandType[];
     about: AboutType;
     FAQ: FAQType[];
@@ -8,33 +11,42 @@ export interface DataType {
     box: BoxComponentType[];
 }
 
-export interface CategoryType {
-    subcategories: SubcategoryType[];
+export interface VintageClothesType {
+        tops: ProductType[];
+        pants: ProductType[];
+        bottomsShorts: ProductType[];
+        dresses: ProductType[];
+        coatsAndJackets: ProductType[];
+        underwear: ProductType[];
 }
 
-export interface SubcategoryType {
-    products: ProductType[];
+export interface AccessoriesType {
+        purses: ProductType[];
+        jewelry: ProductType[];
 }
+
+// export interface SubcategoryType {
+//     subcategory: ProductType[];
+// }
 
 export interface ProductType {
-    id: string;
-    name: string;
-    category: string;
-    subcategory: string;
-    title: string;
-    img: string;
-    price: number;
-    brand: string;
-    sizes: string;
-    color: string;
-    material: string;
-    discount: number;
-    composition: string;
-    condition: string;
-    care_instructions: string;
-    in_stock: boolean;
-    description: string;
-    date: string;
+    id: string,
+    category: string,
+    subcategory: string,
+    title: string,
+    img: string,
+    price: number,
+    brand: string,
+    model_size: string,
+    color: string,
+    material: string,
+    composition: string,
+    condition: string,
+    care_instructions: string,
+    in_stock: boolean,
+    discount: number,
+    description: string,
+    date: string
 }
 
 

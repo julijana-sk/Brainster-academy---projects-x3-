@@ -3,45 +3,43 @@ import Head from 'next/head';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import ProductItem from '@/components/ProductItem';
-import { ProductType, SubcategoryType } from '@/types/types';
+import { DataType, ProductType, SubcategoryType } from '@/types/types';
 
-import "../../../public/pictures/images/product-01-1.jpg"
 
 interface Props {
   vintageClothes: SubcategoryType[];
   accessories: SubcategoryType[];
-  products: ProductType[];
-  allproducts: ProductType[];
+  products: DataType["products"];
   searchedProductsData: ProductType[];
 }
 
-const ProductPage: NextPage<Props> = ({ allproducts }) => {
+const ProductPage: NextPage<Props> = ({ products }) => {
     
-    const router = useRouter();
-    const [page, setPage] = useState(1);
-    const totalPages = 10;
-    const [itemProducts, setItemProducts] = useState(allproducts.slice(0, 10));
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [activePage, setActivePage] = useState(1);
+//     const router = useRouter();
+//     const [page, setPage] = useState(1);
+//     const totalPages = 10;
+//     const [itemProducts, setItemProducts] = useState(allproducts.slice(0, 10));
+//     const [currentIndex, setCurrentIndex] = useState(0);
+//     const [activePage, setActivePage] = useState(1);
 
 
-    const handlePrevClick = () => {
-        setPage(page - 1);
-        setActivePage(page - 1);
-        if (currentIndex > 0) {
-        setCurrentIndex(currentIndex - 10);
-        setItemProducts(allproducts.slice(currentIndex - 10, currentIndex));
-        }
-  };
+//     const handlePrevClick = () => {
+//         setPage(page - 1);
+//         setActivePage(page - 1);
+//         if (currentIndex > 0) {
+//         setCurrentIndex(currentIndex - 10);
+//         setItemProducts(allproducts.slice(currentIndex - 10, currentIndex));
+//         }
+//   };
 
-    const handleNextClick = () => {
-        setPage(page + 1);
-        setActivePage(page + 1);
-        if (currentIndex + 10 < allproducts.length) {
-        setCurrentIndex(currentIndex + 10);
-        setItemProducts(allproducts.slice(currentIndex + 10, currentIndex + 20));
-        }
-  };
+//     const handleNextClick = () => {
+//         setPage(page + 1);
+//         setActivePage(page + 1);
+//         if (currentIndex + 10 < allproducts.length) {
+//         setCurrentIndex(currentIndex + 10);
+//         setItemProducts(allproducts.slice(currentIndex + 10, currentIndex + 20));
+//         }
+//   };
 
 
   return (
@@ -241,8 +239,8 @@ const resAccessories = await fetch(`http://localhost:5001/accessories?limit=10&p
 const accessories: SubcategoryType[] = await resAccessories.json();
 
 
-const response = await fetch(`http://localhost:5001?limit=10&page=${page}`);
-const products: ProductType[] = await response.json();
+const response = await fetch(`http://localhost:5001/products?limit=10&page=${page}`);
+const products: DataType["products"] = await response.json();
 
 // let resSearchedProducts: Response;
 
@@ -266,35 +264,34 @@ const products: ProductType[] = await response.json();
 
 
 
-let allproducts: ProductType[] = []
+// let allproducts: ProductType[] = []
 
 
-    vintageClothes.forEach((category: SubcategoryType) => {
-        Object.values(category).forEach((productList: ProductType[]) => {
-            productList.forEach((product: ProductType) => {
-            if (allproducts.length <= 10 && product.id) {
-                allproducts?.push(product);
-            } else {
-                return;
-            }
-            });
-        });
-    });
+//     vintageClothes.forEach((category: SubcategoryType) => {
+//         Object.values(category).forEach((productList: ProductType[]) => {
+//             productList.forEach((product: ProductType) => {
+//             if (allproducts.length <= 10 && product.id) {
+//                 allproducts?.push(product);
+//             } else {
+//                 return;
+//             }
+//             });
+//         });
+//     });
 
-    accessories.forEach((accessory: SubcategoryType) => {
-        Object.values(accessory).forEach((product: ProductType) => {
-            if (allproducts.length <= 10 && product.id) {
-            allproducts?.push(product);
-            } else {
-            return;
-            }
-        });
-    });
+//     accessories.forEach((accessory: SubcategoryType) => {
+//         Object.values(accessory).forEach((product: ProductType) => {
+//             if (allproducts.length <= 10 && product.id) {
+//             allproducts?.push(product);
+//             } else {
+//             return;
+//             }
+//         });
+//     });
     
   return {
       props: {
         products,
-        allproducts,
         vintageClothes,
         accessories,
         page,
