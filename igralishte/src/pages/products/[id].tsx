@@ -12,7 +12,6 @@ interface Props {
   product: ProductType;
   allproducts: ProductType[];
   boxItemsData: BoxComponentType[];
-  // randomProducts: ProductType[];
 }
 
 const ProductDetailPage: NextPage<Props> = ({ product, allproducts, boxItemsData }) => {
@@ -137,16 +136,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = allproducts?.map((product: ProductType) => ({
     params: {
-      id: String(product.id),
+      id: product.id,
     },
   }));
-
+  
   return {
     paths,
     fallback: false,
   };
 };
-
 
 
 // OPTION 2
@@ -179,7 +177,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   let product: ProductType | undefined = undefined;
-
+  
   const resBoxItems = await fetch('http://localhost:5001/boxComponents');
   const boxItemsData = await resBoxItems.json();
 
@@ -203,27 +201,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             productList.forEach((product: ProductType) => {
             if (allproducts.length <= 10 && product.id) {
                 allproducts?.push(product);
-            } else {
+              } else {
                 return;
-            }
+              }
             });
-        });
+          });
     });
-
-  console.log(params?.id)
+console.log(params?.id)
 
   if (params?.id) {
     const resProduct = await fetch(`http://localhost:5001/vintageClothes/${params.id}`);
     product = await resProduct.json();
   }
 
-  console.log(product)
-  return {
+
+return {
     props: {
       product,
       allproducts,
       boxItemsData
-      // randomProducts,
     },
   };
 };

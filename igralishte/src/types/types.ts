@@ -9,14 +9,10 @@ export interface DataType {
 }
 
 export interface CategoryType {
-    //  id: string;
-    name: string;
     subcategories: SubcategoryType[];
 }
 
 export interface SubcategoryType {
-    //  id: string;
-    name: string;
     products: ProductType[];
 }
 
@@ -29,7 +25,7 @@ export interface ProductType {
     img: string;
     price: number;
     brand: string;
-    sizes: string[];
+    sizes: string;
     color: string;
     material: string;
     discount: number;

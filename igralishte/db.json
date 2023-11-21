@@ -801,7 +801,7 @@
             "id": "1",
             "name": "Зш да не",
             "img": "../../pictures/brands/brand-ZsDaNe.png",
-            "description": "Концептот на @zshdane_ се базира на неколку прашања:  Дали постои простор за етикетирања и табу во овој безобразно неетички свет?   Зошто фолирањето култура е поприфатено од искрениот отпор?  Дали треба да се срамиме од сопственото само за друг да биде мирен?   Дали ќе ни текне?   Зачувај го слободниот дух и биди тоа што си с е к о г а ш."
+            "description": "Концептот на @zshdane_ се базира на неколку прашања: Дали постои простор за етикетирања и табу во овој безобразно неетички свет?  Зошто фолирањето култура е поприфатено од искрениот отпор? Дали треба да се срамиме од сопственото само за друг да биде мирен?  Дали ќе ни текне?  Зачувај го слободниот дух и биди тоа што си с е к о г а ш."
           },
           {
             "id": "2",
@@ -870,10 +870,6 @@
             "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum sequi eos placeat corrupti quas quisquam, soluta officia dicta, exercitationem voluptatem dolorem ipsam impedit mollitia architecto praesentium nostrum, aliquam quia numquam."
           }
           ],
-
-  "lifestyle": [],
-  
-  "discount":[],
 
   "about": {
     "title": "За Нас",

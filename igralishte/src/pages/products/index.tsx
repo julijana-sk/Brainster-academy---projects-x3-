@@ -3,8 +3,9 @@ import Head from 'next/head';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import ProductItem from '@/components/ProductItem';
-import { BoxComponentType, ProductType, SubcategoryType } from '@/types/types';
+import { ProductType, SubcategoryType } from '@/types/types';
 
+import "../../../public/pictures/images/product-01-1.jpg"
 
 interface Props {
   vintageClothes: SubcategoryType[];
@@ -12,11 +13,9 @@ interface Props {
   products: ProductType[];
   allproducts: ProductType[];
   searchedProductsData: ProductType[];
-  boxItemsData: BoxComponentType[];
-
 }
 
-const ProductPage: NextPage<Props> = ({vintageClothes, accessories, products, searchedProductsData, allproducts, boxItemsData }) => {
+const ProductPage: NextPage<Props> = ({ allproducts }) => {
     
     const router = useRouter();
     const [page, setPage] = useState(1);
@@ -230,8 +229,9 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
     
 const page = parseInt(query.page as string, 10) || 1;
 
-  const resBoxItems = await fetch('http://localhost:5001/boxComponents');
-  const boxItemsData = await resBoxItems.json();
+const resBoxItems = await fetch('http://localhost:5001/boxComponents');
+const boxItemsData = await resBoxItems.json();
+
 
 
 const resClothes = await fetch(`http://localhost:5001/vintageClothes?limit=10&page=${page}`);
