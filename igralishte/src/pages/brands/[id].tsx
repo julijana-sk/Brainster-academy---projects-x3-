@@ -1,27 +1,59 @@
+import BoxComponent from '@/components/BoxComponent';
 import PageTitle from '@/components/PageTitle';
-import { CategoryType, DataType, ProductType, SubcategoryType } from '@/types/types';
+import { BoxComponentType, CategoryType, DataType, ProductType, SubcategoryType } from '@/types/types';
 import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useState } from 'react'
 
 
 
 interface Props {
   product: ProductType;
+  allproducts: ProductType[];
+  boxItemsData: BoxComponentType[];
   // randomProducts: ProductType[];
-  allproducts: ProductType[]
 }
 
-const ProductDetailPage: NextPage<Props> = ({ product, allproducts }) => {
+const BrandDetailPage: NextPage<Props> = ({ product, allproducts, boxItemsData }) => {
 
 
-//   const router = useRouter();
+const router = useRouter();
 // const { id } = router.query;
 
 // if (router.isFallback) {
 // return <div>Loading...</div>;
 // }
+
+const [expandedBox, setExpandedBox] = useState(null);
+  
+const [page, setPage] = useState(1);
+const totalPages = 10;
+const [itemProducts, setItemProducts] = useState(allproducts.slice(0, 10));
+const [currentIndex, setCurrentIndex] = useState(0);
+const [activePage, setActivePage] = useState(1);
+    
+const handlePrevClick = () => {
+    setPage(page - 1);
+    setActivePage(page - 1);
+      if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 10);
+      setItemProducts(allproducts.slice(currentIndex - 10, currentIndex));
+      }
+  };
+
+const handleNextClick = () => {
+    setPage(page + 1);
+    setActivePage(page + 1);
+      if (currentIndex + 10 < allproducts.length) {
+        setCurrentIndex(currentIndex + 10);
+        setItemProducts(allproducts.slice(currentIndex + 10, currentIndex + 20));
+        }
+  };
+      
+const handleBoxClick = (box: any) => {
+    setExpandedBox(box === expandedBox ? null : box);
+};
 
 
 return (
@@ -57,8 +89,32 @@ return (
               {product.id}
               </div>
 
+          {/* Box Component Item  */}
+          {boxItemsData.map((boxItem, index) => {
+            return (
+              <BoxComponent key={index} boxItem={boxItem} onClick={() => handleBoxClick(boxItem)} expanded={boxItem === expandedBox}/>
+            )
+          })}
+
 
           {/* <RelatedProducts products={randomProducts}/> */}
+
+
+          <div className="d-flex flex-row">
+            <div className="col-12 text-center mb-5" style={{letterSpacing: "3px"}}>
+                {allproducts.length > 10 && (
+                    <>
+                    <button className="bg-transparent border-0 mr-3" onClick={handlePrevClick} disabled={page === 1}>
+                        {'<'}
+                    </button>
+                    <span>{page} • {page + 1} • {page + 2} • {page + 3} • {page + 4} ... {totalPages}</span>
+                    <button className="bg-transparent border-0 ml-3" onClick={handleNextClick} disabled={page === totalPages}>
+                        {'>'}
+                    </button>
+                    </>
+                )}
+            </div>
+          </div>
         </div>
       </div>
     </>
@@ -66,7 +122,7 @@ return (
 };
 
 
-export default ProductDetailPage;
+export default BrandDetailPage;
 
 
 
@@ -77,6 +133,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // const res = await fetch("http://localhost:5001/vintageClothes");
   // const data: DataType = await res.json();
 
+
+  // OPTION 1 :
   const allproducts = vintageClothes?.flatMap((category) => {
     return Object.values(category).flatMap((productList: ProductType[]) => productList);
   });
@@ -94,6 +152,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 
+// OPTION 2 :
 //   let allproducts: ProductType[] = []
 
 
@@ -124,24 +183,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   let product: ProductType | undefined = undefined;
 
+  const resBoxItems = await fetch('http://localhost:5001/boxComponents');
+  const boxItemsData = await resBoxItems.json();
+
+
   const resProductsCount = await fetch("http://localhost:5001/vintageClothes");
   const vintageClothes: SubcategoryType[] = await resProductsCount.json();
 
-  // let allproducts: ProductType[] = vintageClothes.flatMap((category: SubcategoryType) => {
-  //   return Object.values(category).flatMap((productList: ProductType[]) => productList);
-  // });
-
-  // let randomProducts: ProductType[] = [];
-
-  // if (allproducts.length > 4) {
-  //   const randomNo = Math.floor(Math.random() * (allproducts.length - 4));
-  //   const resRandomProducts = await fetch(`http://localhost:5001/products?_start=${randomNo}&_limit=4`);
-  //   randomProducts = await resRandomProducts.json();
-  // }
-
-
+  
   let allproducts: ProductType[] = []
-
 
     vintageClothes.forEach((category: SubcategoryType) => {
         Object.values(category).forEach((productList: ProductType[]) => {
@@ -156,18 +206,30 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     });
 
   console.log(params?.id)
-
+  
   if (params?.id) {
     const resProduct = await fetch(`http://localhost:5001/vintageClothes/${params.id}`);
     product = await resProduct.json();
   }
+  
+  // console.log(product)
 
-  console.log(product)
+
+  // let randomProducts: ProductType[] = [];
+
+  // if (allproducts.length > 4) {
+  //   const randomNo = Math.floor(Math.random() * (allproducts.length - 4));
+  //   const resRandomProducts = await fetch(`http://localhost:5001/products?_start=${randomNo}&_limit=4`);
+  //   randomProducts = await resRandomProducts.json();
+  // }
+
+
   return {
     props: {
       product,
-      // randomProducts,
       allproducts,
+      boxItemsData,
+      // randomProducts
     },
   };
 };

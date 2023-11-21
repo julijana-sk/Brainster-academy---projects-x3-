@@ -799,9 +799,9 @@
   "brands": [
           {
             "id": "1",
-            "name": "Pinc Partywear",
-            "img": "../../pictures/brands/brand-PinkPartyWear.png",
-            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum sequi eos placeat corrupti quas quisquam, soluta officia dicta, exercitationem voluptatem dolorem ipsam impedit mollitia architecto praesentium nostrum, aliquam quia numquam."
+            "name": "Зш да не",
+            "img": "../../pictures/brands/brand-ZsDaNe.png",
+            "description": "Концептот на @zshdane_ се базира на неколку прашања:  Дали постои простор за етикетирања и табу во овој безобразно неетички свет?   Зошто фолирањето култура е поприфатено од искрениот отпор?  Дали треба да се срамиме од сопственото само за друг да биде мирен?   Дали ќе ни текне?   Зачувај го слободниот дух и биди тоа што си с е к о г а ш."
           },
           {
             "id": "2",
@@ -835,9 +835,9 @@
           },
           {
             "id": "7",
-            "name": "Зш да не",
-            "img": "../../pictures/brands/brand-ZsDaNe.png",
-            "description": "Концептот на @zshdane_ се базира на неколку прашања:  Дали постои простор за етикетирања и табу во овој безобразно неетички свет?   Зошто фолирањето култура е поприфатено од искрениот отпор?  Дали треба да се срамиме од сопственото само за друг да биде мирен?   Дали ќе ни текне?   Зачувај го слободниот дух и биди тоа што си с е к о г а ш."
+            "name": "Pinc Partywear",
+            "img": "../../pictures/brands/brand-PinkPartyWear.png",
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum sequi eos placeat corrupti quas quisquam, soluta officia dicta, exercitationem voluptatem dolorem ipsam impedit mollitia architecto praesentium nostrum, aliquam quia numquam."
           },
           {
             "id": "8",
@@ -946,6 +946,31 @@
       }
     ],
     
-  "pages": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  "boxComponents": [
+      {
+        "title": "Контрола на квалитет",
+        "img": "../../pictures/box/kontrola-na-kvalitet.png",
+        "first_content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "second_content": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      },
+      {
+        "title": "Политика на враќање",
+        "img": "../../pictures/box/politika-na-vrakjanje.png",
+        "first_content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "second_content": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      },
+      {
+        "title": "Достава",
+        "img": "../../pictures/box/dostava.png",
+        "first_content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "second_content": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      },
+      {
+        "title": "Помош",
+        "img": "../../pictures/box/pomos.png",
+        "first_content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        "second_content": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      }
+    ]
 
 }

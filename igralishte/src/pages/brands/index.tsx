@@ -16,17 +16,48 @@ interface Props {
 
 const ProductPage: NextPage<Props> = ({vintageClothes, accessories, products, allproducts, searchedBrandsData }) => {
     
-    const router = useRouter();
-    const [page, setPage] = useState(1);
-    const totalPages = Math.ceil(allproducts.length / 10);
+  const router = useRouter();
+  const [page, setPage] = useState(1);
+  const totalPages = Math.ceil(allproducts.length / 10);
+  const [brandedProducts, setBrandedProducts] = useState(searchedBrandsData.slice(0, 6));
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  
+  const handleNextPage = () => {
+    if (currentIndex + 10 < searchedBrandsData.length) {
+      setCurrentIndex(currentIndex + 10);
+      setBrandedProducts(searchedBrandsData.slice(currentIndex + 10, currentIndex + 20));
+    }
+      setPage(page + 1);
+  };
 
-    const handleNextPage = () => {
-        setPage(page + 1);
-    };
-
-    const handlePreviousPage = () => {
+  const handlePreviousPage = () => {
+      if (currentIndex > 0) {
+        setCurrentIndex(currentIndex - 10);
+        setBrandedProducts(searchedBrandsData.slice(currentIndex - 10, currentIndex));
         setPage(page - 1);
+      }
     };
+      
+  const handlePrevClick = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 6);
+      setBrandedProducts(searchedBrandsData.slice(currentIndex - 6, currentIndex));
+    }
+  };
+
+  const handleNextClick = () => {
+    if (currentIndex + 6 < searchedBrandsData.length) {
+      setCurrentIndex(currentIndex + 6);
+      setBrandedProducts(searchedBrandsData.slice(currentIndex + 6, currentIndex + 12));
+    }
+  };
+  
+
+  // const handleProductClick = (productId: any) => {
+  //   router.push(`/products/${productId}`);
+  // };
+
 
 return (
     < >
@@ -37,131 +68,61 @@ return (
         </Head>
         <div className="container">
           <div className="row d-flex flex-column justify-content-center">
-            <div className="col-11 mr-auto ml-auto">
-              <button
-                className="btn btn-large btn-danger"
-                data-filter="*"
-                onClick={() => {
-                router.replace({
-                  pathname: "/brands",
-                });
-              }}>
-                All Brands
-              </button>
-
-              {/* <button
-                className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-                data-filter=".women"
-                onClick={() => {
-                    router.push({
-                      pathname: "/shop",
-                      query: {
-                        ...router.query,
-                        gender: "women",
-                      },
-                    });
-                  }}
-              >
-                Women
-              </button>
-
-              <button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men"
-              onClick={() => {
-                    router.push({
-                      pathname: "/shop",
-                      query: {
-                        ...router.query,
-                        gender: "man",
-                      },
-                    });
-                  }}>
-                Men
-              </button>
-
-              <button 
-                className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" 
-                data-filter=".bag" 
-                onClick={() => {
-                    router.push({
-                      pathname: "/shop",
-                      query: {
-                        ...router.query,
-                        query: "Belt"
-                      }
-                    });
-                  }} >
-                Belt
-              </button>
-
-              <button
-                className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-                data-filter=".shoes"
-                onClick={() => {
-                    router.push({
-                      pathname: "/shop",
-                      query: {
-                        ...router.query,
-                        query: "converse"
-                      }
-                    });
-                  }} >
-                Shoes
-              </button>
-
-              <button
-                className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-                data-filter=".watches"
-                onClick={() => {
-                    router.push({
-                      pathname: "/shop",
-                      query: {
-                        ...router.query,
-                        query: "watch"
-                      }
-                    });
-                  }} >
-                Watches
-              </button> */}
-            </div>
-        <div className='col-11 mr-auto ml-auto my-5'>
+            <div className='col-11 mr-auto ml-auto my-5'>
             {searchedBrandsData.length > 0 ? ( searchedBrandsData.map((brand) => {
-
-
             // treba da go prikazuva SAMO brendot kojsto odgovara na linkot !! ?? sporedi spored URL ?
             //   http://localhost:3000/brands?brand=nezno
-
             // {searchedBrandsData.length > 0 ? ( searchedBrandsData.find((brand) => {
                 // if (router.query.id === brand.id) {
-                return (
-                    <div>
-                        <BrandItem  brand={brand} />
-                        <p className='about-text text-left mb-5'>{`Погледнете ги производите на ${brand.name} кои ги нудиме во Игралиште. Имаме доста голем избор на Pussy привезоци кои се кул и ултра феминистички, а.к.а. grl pwr.`}</p>
+              return (
+                <div>
+                    <BrandItem  brand={brand} />
+                    <p className='about-text text-left mb-5'>{`Погледнете ги производите на ${brand.name} кои ги нудиме во Игралиште. Имаме доста голем избор на Pussy привезоци кои се кул и ултра феминистички, а.к.а. grl pwr.`}</p>
+                    
+                    <h2 className='mb-4'>Парчиња од брендот:</h2>  
+
+
+                    <div className='col-11 mr-auto ml-auto my-5'>
+            {/* treba da go prikazuva SAMO brendot kojsto odgovara od pogore izbranoto !?!??! */}
+
+                      {searchedBrandsData.length > 0 ? (
+                        searchedBrandsData.map((product) => (
+                          <div key={product.id} >
+                            <ProductItem {...product}/>
+                          </div>
+                        ))
+                      ) : (
+                        <p>There are no results...</p>
+                      )}
+                      
+                      {searchedBrandsData.length > 6 && (
                         <div>
-                            <h2 className='mb-4'>Парчиња од брендот:</h2>
-                            {/* <ProductItem /> */}
+                          <button onClick={handlePrevClick}>{'<'}</button>
+                          <button onClick={handleNextClick}>{'>'}</button>
                         </div>
+                      )}
                     </div>
-                    ) 
-            //  }
-            })
-            ) : (
-                <p>There are no results...</p>
-              )
-            }
-          </div>
-
-
-        {/* pagination */}
-           <div className="d-flex flex-row justify-content-center">
-            <div className="col-11 bg-primary mr-auto ml-auto">
-                <button onClick={handlePreviousPage} disabled={page === 1}>
-                    Previous
-                </button>
-                <span>Page {page} of {totalPages}</span>
-                <button onClick={handleNextPage} disabled={page === totalPages}>
-                    Next
-                </button>
-          </div>
+                  </div>
+                  )
+                  })) : (
+                  <p>There are no results...</p>
+                )}
+                
+        <div className="d-flex flex-row">
+            <div className="col-12 text-center" style={{letterSpacing: "3px"}}>
+                {allproducts.length > 10 && (
+                    <>
+                    <button className="bg-transparent border-0 mr-3" onClick={handlePreviousPage} disabled={page === 1}>
+                        {'<'}
+                    </button>
+                    <span>{page} • {page + 1} • {page + 2} • {page + 3} • {page + 4} ... {totalPages}</span>
+                    <button className="bg-transparent border-0 ml-3" onClick={handleNextPage} disabled={page === totalPages}>
+                        {'>'}
+                    </button>
+                    </>
+                )}
+            </div>
+        </div>
         </div>
       </div>
     </div>

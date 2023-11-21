@@ -44,8 +44,6 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
         });
     }, []);
 
-// console.log(categories)
-
 
   const handleLogIn = (username: string, password: string) => {
 
