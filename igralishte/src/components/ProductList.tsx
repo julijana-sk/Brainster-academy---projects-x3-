@@ -8,11 +8,9 @@ interface Props {
 const ProductList: React.FC<Props> = ({products}) => {
   return (
     <div>
-        {products?.map((product, index) => {
+        {products?.map((product) => {
             return (
-                <div key={index}>
-                    <ProductItem product={product}/>
-                </div>
+                <ProductItem key={product.id} {...product} />
             )
         })}
     </div>

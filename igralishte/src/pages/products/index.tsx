@@ -1,24 +1,25 @@
 import React, { useState } from 'react'
 import Head from 'next/head';
 import { GetServerSideProps, NextPage } from 'next';
-import { useRouter } from 'next/router';
 import ProductItem from '@/components/ProductItem';
-import { DataType, ProductType, SubcategoryType } from '@/types/types';
+import { AccessoriesType, DataType, VintageClothesType } from '@/types/types';
+import { useRouter } from 'next/router';
+import ProductList from '@/components/ProductList';
 
 
 interface Props {
-  vintageClothes: SubcategoryType[];
-  accessories: SubcategoryType[];
   products: DataType["products"];
-  searchedProductsData: ProductType[];
+  vintageClothes: VintageClothesType;
+  accessories: AccessoriesType;
 }
 
-const ProductPage: NextPage<Props> = ({ products }) => {
+const ProductPage: NextPage<Props> = ({ products, vintageClothes, accessories }) => {
     
-//     const router = useRouter();
-//     const [page, setPage] = useState(1);
-//     const totalPages = 10;
-//     const [itemProducts, setItemProducts] = useState(allproducts.slice(0, 10));
+    
+    const router = useRouter();
+    const [page, setPage] = useState(1);
+//     const totalPages = Math.ceil(products.vintageClothes.length / 10);
+//     const [itemProducts, setItemProducts] = useState(products.slice(0, 10));
 //     const [currentIndex, setCurrentIndex] = useState(0);
 //     const [activePage, setActivePage] = useState(1);
 
@@ -54,7 +55,7 @@ const ProductPage: NextPage<Props> = ({ products }) => {
         {/* navbar nad produktite  */}
             <div className="flex-w flex-sb-m p-b-52">
                 {/* search */}
-                <div className="panel-search w-full p-t-10 p-b-15">
+                {/* <div className="panel-search w-full p-t-10 p-b-15">
                 <div className="bor8 dis-flex p-l-15">
                     <button className="">
                     <i className="zmdi zmdi-search"></i>
@@ -83,7 +84,7 @@ const ProductPage: NextPage<Props> = ({ products }) => {
 
                         />
                 </div>
-                </div>
+                </div> */}
                 {/* filtri selekt kopcinja */}
                 <div className="flex-w flex-l-m filter-tope-group m-tb-10">
                 <button
@@ -180,7 +181,49 @@ const ProductPage: NextPage<Props> = ({ products }) => {
             <div className="container">
               <div  className="row flex-row">
                 <div className="col-12 flex-row flex-wrap justify-content-around">
-                {allproducts.length > 0 ? (
+                    {products.vintageClothes.tops?.map((product) => {
+                        return (
+                        <ProductItem key={product.id} {...product}/>
+                        )
+                    })
+                    }
+                    {products.accessories.purses?.map((product) => {
+                        return (
+                        <ProductItem key={product.id} {...product}/>
+                        )
+                    })
+                    }
+
+                {/* // OPTION 1 */}              
+                {/* {products.vintageClothes.forEach((product) => {
+                        return (
+                            <>
+                            <ProductList products={product.top} />
+                            <ProductList products={product.pants} />
+                            <ProductList products={product.bottomsShorts} />
+                            <ProductList products={product.dresses} />
+                            <ProductList products={product.coatsAndJackets} />
+                            <ProductList products={product.underwear} />
+                            </>
+                        )
+                    })
+                } */}
+
+
+                {/* // OPTION 2  */}
+               {/* {products.vintageClothes.forEach((vintageClothes: VintageClothesType) => {
+                Object.values(vintageClothes).forEach((products: ProductType[]) => {
+                    products.forEach((product: ProductType) => {
+                        return (
+                            <ProductItem {...product}/>
+                        )
+                    })
+                })
+            })} */}
+                    
+
+                  {/* // OPTION 3    */}
+                  {/* {allproducts.length > 0 ? (
                     allproducts.map((product, productIndex) => {
                     let columnSize = "col-5 product-img-small";
                     let columnText = "product-text-a"
@@ -193,13 +236,14 @@ const ProductPage: NextPage<Props> = ({ products }) => {
                     })
                     ) : (
                         <div>No products found.</div>
-                    )}
+                    )} */}
+
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex-row">
+        {/* <div className="flex-row">
             <div className="col-12 text-center mb-5" style={{letterSpacing: "3px"}}>
                 {allproducts.length > 10 && (
                     <>
@@ -213,7 +257,7 @@ const ProductPage: NextPage<Props> = ({ products }) => {
                     </>
                 )}
             </div>
-        </div>
+        </div> */}
     </>
   ); 
 };
@@ -222,80 +266,37 @@ export default ProductPage;
 
 
 
-export const getServerSideProps: GetServerSideProps = async ({query}) => {
-    
+ export const getServerSideProps: GetServerSideProps = async ({query}) => { 
     
 const page = parseInt(query.page as string, 10) || 1;
 
-const resBoxItems = await fetch('http://localhost:5001/boxComponents');
+
+const resBoxItems = await fetch('http://localhost:5001/boxComponents'); 
 const boxItemsData = await resBoxItems.json();
 
-
-
-const resClothes = await fetch(`http://localhost:5001/vintageClothes?limit=10&page=${page}`);
-const vintageClothes: SubcategoryType[] = await resClothes.json();
-
-const resAccessories = await fetch(`http://localhost:5001/accessories?limit=10&page=${page}`);
-const accessories: SubcategoryType[] = await resAccessories.json();
-
-
-const response = await fetch(`http://localhost:5001/products?limit=10&page=${page}`);
+const response = await fetch(`http://localhost:5001/products?limit=10&page=${page}`); 
 const products: DataType["products"] = await response.json();
 
-// let resSearchedProducts: Response;
 
-//   if (query.gender && query.query) {
-//     resSearchedProducts = await fetch(
-//       `http://localhost:5001/products?gender_like=${query.gender}&q=${query.query}`
-//     );
-//   } else if (query.gender) {
-//     resSearchedProducts = await fetch(
-//       `http://localhost:5001/products?gender_like=${query.gender}`
-//     );
-//   } else if (query.query) {
-//     resSearchedProducts = await fetch(
-//       `http://localhost:5001/products?q=${query.query}`
-//     );
-//   }  else {
-//     resSearchedProducts = await fetch("http://localhost:5001/products");
-//   }
+const resVintageClothes = await fetch(`http://localhost:5001/products?vintageClothes?limit=10&page=${page}`); 
+const vintageClothes: VintageClothesType  = await resVintageClothes.json();
+const resAccessories = await fetch(`http://localhost:5001/products?accessories?limit=10&page=${page}`); 
+const accessories: AccessoriesType = await resAccessories.json();
 
-//   const searchedProductsData: ProductType[] = await resSearchedProducts.json();
+// const resVintageClothes = await fetch(`http://localhost:5001/products?vintageClothes?limit=10&page=${page}`); 
+// const  {tops, pants, bottomsShorts, dresses, coatsAndJackets, underwear }  = await resVintageClothes.json();
+// const resAccessories = await fetch(`http://localhost:5001/products?accessories?limit=10&page=${page}`); 
+// const {purses, jewelry}  = await resAccessories.json();
 
-
-
-// let allproducts: ProductType[] = []
-
-
-//     vintageClothes.forEach((category: SubcategoryType) => {
-//         Object.values(category).forEach((productList: ProductType[]) => {
-//             productList.forEach((product: ProductType) => {
-//             if (allproducts.length <= 10 && product.id) {
-//                 allproducts?.push(product);
-//             } else {
-//                 return;
-//             }
-//             });
-//         });
-//     });
-
-//     accessories.forEach((accessory: SubcategoryType) => {
-//         Object.values(accessory).forEach((product: ProductType) => {
-//             if (allproducts.length <= 10 && product.id) {
-//             allproducts?.push(product);
-//             } else {
-//             return;
-//             }
-//         });
-//     });
-    
-  return {
-      props: {
-        products,
+return { 
+    props: { 
+        products, 
         vintageClothes,
         accessories,
-        page,
-        boxItemsData
-      },
+        page, 
+        boxItemsData 
+        // vintageClothes: [{tops, pants, bottomsShorts, dresses, coatsAndJackets, underwear }] ,
+        // accessories: [{purses, jewelry} ],
+    },
     }
-}
+ }

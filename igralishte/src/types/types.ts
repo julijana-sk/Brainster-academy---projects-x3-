@@ -25,9 +25,6 @@ export interface AccessoriesType {
         jewelry: ProductType[];
 }
 
-// export interface SubcategoryType {
-//     subcategory: ProductType[];
-// }
 
 export interface ProductType {
     id: string,
