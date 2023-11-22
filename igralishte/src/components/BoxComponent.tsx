@@ -10,7 +10,7 @@ interface Props {
 const BoxComponent: React.FC<Props> = ({boxItem, onClick, expanded}) => {
     
   return (
-      <div className='container-fluid my-5' onClick={onClick}>
+      <div className='container-fluid mb-3' onClick={onClick}>
         <div className="row flex-row align-items-center">
           <div className="col-11 p-3 border" style={{borderRadius: "4px"}}>
             <div className="flex-row align-items-center justify-content-start">

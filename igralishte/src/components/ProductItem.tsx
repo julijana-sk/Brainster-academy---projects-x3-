@@ -10,12 +10,12 @@ interface Props {
 }
 const ProductItem: React.FC<Props> = ({id, img, title, price}) => {
 
-  const router = useRouter();
-  const { productId } = router.query;
+  // const router = useRouter();
+  // const { productId } = router.query;
   
   return (
     <div className="mb-3 p-0">
-        <Link href={`/products/${productId}`}> 
+        <Link href={`/products/${id}`}> 
         <img src={img} alt="IMG-PRODUCT" className="product-img"/>
         <p>{title}</p>
         <p style={{fontWeight: '500'}}>{price} ден.</p>

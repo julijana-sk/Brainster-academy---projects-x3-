@@ -2,45 +2,43 @@ import React, { useState } from 'react'
 import Head from 'next/head';
 import { GetServerSideProps, NextPage } from 'next';
 import ProductItem from '@/components/ProductItem';
-import { AccessoriesType, DataType, VintageClothesType } from '@/types/types';
+import { DataType, ProductType } from '@/types/types';
 import { useRouter } from 'next/router';
-import ProductList from '@/components/ProductList';
 
 
 interface Props {
   products: DataType["products"];
-  vintageClothes: VintageClothesType;
-  accessories: AccessoriesType;
+  allProducts: ProductType[];
 }
 
-const ProductPage: NextPage<Props> = ({ products, vintageClothes, accessories }) => {
+const ProductPage: NextPage<Props> = ({  products, allProducts }) => {
     
     
     const router = useRouter();
     const [page, setPage] = useState(1);
-//     const totalPages = Math.ceil(products.vintageClothes.length / 10);
-//     const [itemProducts, setItemProducts] = useState(products.slice(0, 10));
-//     const [currentIndex, setCurrentIndex] = useState(0);
-//     const [activePage, setActivePage] = useState(1);
+    const totalPages = Math.ceil(allProducts.length / 10);
+    const [itemProducts, setItemProducts] = useState(allProducts.slice(0, 10));
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [activePage, setActivePage] = useState(1);
 
 
-//     const handlePrevClick = () => {
-//         setPage(page - 1);
-//         setActivePage(page - 1);
-//         if (currentIndex > 0) {
-//         setCurrentIndex(currentIndex - 10);
-//         setItemProducts(allproducts.slice(currentIndex - 10, currentIndex));
-//         }
-//   };
+    const handlePrevClick = () => {
+        setPage(page - 1);
+        setActivePage(page - 1);
+        if (currentIndex > 0) {
+        setCurrentIndex(currentIndex - 10);
+        setItemProducts(allProducts.slice(currentIndex - 10, currentIndex));
+        }
+  };
 
-//     const handleNextClick = () => {
-//         setPage(page + 1);
-//         setActivePage(page + 1);
-//         if (currentIndex + 10 < allproducts.length) {
-//         setCurrentIndex(currentIndex + 10);
-//         setItemProducts(allproducts.slice(currentIndex + 10, currentIndex + 20));
-//         }
-//   };
+    const handleNextClick = () => {
+        setPage(page + 1);
+        setActivePage(page + 1);
+        if (currentIndex + 10 < allProducts.length) {
+        setCurrentIndex(currentIndex + 10);
+        setItemProducts(allProducts.slice(currentIndex + 10, currentIndex + 20));
+        }
+  };
 
 
   return (
@@ -181,50 +179,8 @@ const ProductPage: NextPage<Props> = ({ products, vintageClothes, accessories })
             <div className="container">
               <div  className="row flex-row">
                 <div className="col-12 flex-row flex-wrap justify-content-around">
-                    {products.vintageClothes.tops?.map((product) => {
-                        return (
-                        <ProductItem key={product.id} {...product}/>
-                        )
-                    })
-                    }
-                    {products.accessories.purses?.map((product) => {
-                        return (
-                        <ProductItem key={product.id} {...product}/>
-                        )
-                    })
-                    }
-
-                {/* // OPTION 1 */}              
-                {/* {products.vintageClothes.forEach((product) => {
-                        return (
-                            <>
-                            <ProductList products={product.top} />
-                            <ProductList products={product.pants} />
-                            <ProductList products={product.bottomsShorts} />
-                            <ProductList products={product.dresses} />
-                            <ProductList products={product.coatsAndJackets} />
-                            <ProductList products={product.underwear} />
-                            </>
-                        )
-                    })
-                } */}
-
-
-                {/* // OPTION 2  */}
-               {/* {products.vintageClothes.forEach((vintageClothes: VintageClothesType) => {
-                Object.values(vintageClothes).forEach((products: ProductType[]) => {
-                    products.forEach((product: ProductType) => {
-                        return (
-                            <ProductItem {...product}/>
-                        )
-                    })
-                })
-            })} */}
-                    
-
-                  {/* // OPTION 3    */}
-                  {/* {allproducts.length > 0 ? (
-                    allproducts.map((product, productIndex) => {
+                  {allProducts.length > 0 ? (
+                    allProducts.map((product, productIndex) => {
                     let columnSize = "col-5 product-img-small";
                     let columnText = "product-text-a"
                     if ((productIndex + 1) % 3 === 0) {columnSize = "col-11"; columnText = "product-text"}
@@ -236,16 +192,16 @@ const ProductPage: NextPage<Props> = ({ products, vintageClothes, accessories })
                     })
                     ) : (
                         <div>No products found.</div>
-                    )} */}
+                    )}
 
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* <div className="flex-row">
+        <div className="flex-row">
             <div className="col-12 text-center mb-5" style={{letterSpacing: "3px"}}>
-                {allproducts.length > 10 && (
+                {allProducts.length > 10 && (
                     <>
                     <button className="bg-transparent border-0 mr-3" onClick={handlePrevClick} disabled={page === 1}>
                         {'<'}
@@ -253,11 +209,11 @@ const ProductPage: NextPage<Props> = ({ products, vintageClothes, accessories })
                     <span>{page} • {page + 1} • {page + 2} • {page + 3} • {page + 4} ... {totalPages}</span>
                     <button className="bg-transparent border-0 ml-3" onClick={handleNextClick} disabled={page === totalPages}>
                         {'>'}
-                    </button>
-                    </>
-                )}
+                        </button>
+                        </>
+                        )}
             </div>
-        </div> */}
+        </div>
     </>
   ); 
 };
@@ -267,36 +223,36 @@ export default ProductPage;
 
 
  export const getServerSideProps: GetServerSideProps = async ({query}) => { 
-    
-const page = parseInt(query.page as string, 10) || 1;
+     
+     const page = parseInt(query.page as string, 10) || 1;
+     
+     
+     const resBoxItems = await fetch('http://localhost:5001/boxComponents'); 
+     const boxItemsData = await resBoxItems.json();
+     
+     const response = await fetch(`http://localhost:5001/products?page=${page}`); 
+     const products: DataType["products"] = await response.json();
 
+    const allProducts: ProductType[] = [];
 
-const resBoxItems = await fetch('http://localhost:5001/boxComponents'); 
-const boxItemsData = await resBoxItems.json();
+        Object.values(products.vintageClothes).forEach((productList: ProductType[]) => {
+            productList.forEach((product: ProductType) => {
+                allProducts.push(product);
+            });
+        });
 
-const response = await fetch(`http://localhost:5001/products?limit=10&page=${page}`); 
-const products: DataType["products"] = await response.json();
-
-
-const resVintageClothes = await fetch(`http://localhost:5001/products?vintageClothes?limit=10&page=${page}`); 
-const vintageClothes: VintageClothesType  = await resVintageClothes.json();
-const resAccessories = await fetch(`http://localhost:5001/products?accessories?limit=10&page=${page}`); 
-const accessories: AccessoriesType = await resAccessories.json();
-
-// const resVintageClothes = await fetch(`http://localhost:5001/products?vintageClothes?limit=10&page=${page}`); 
-// const  {tops, pants, bottomsShorts, dresses, coatsAndJackets, underwear }  = await resVintageClothes.json();
-// const resAccessories = await fetch(`http://localhost:5001/products?accessories?limit=10&page=${page}`); 
-// const {purses, jewelry}  = await resAccessories.json();
+        Object.values(products.accessories).forEach((productList: ProductType[]) => {
+            productList.forEach((product: ProductType) => {
+                allProducts.push(product);
+            });
+        });
 
 return { 
     props: { 
         products, 
-        vintageClothes,
-        accessories,
+        allProducts,
         page, 
         boxItemsData 
-        // vintageClothes: [{tops, pants, bottomsShorts, dresses, coatsAndJackets, underwear }] ,
-        // accessories: [{purses, jewelry} ],
     },
     }
  }

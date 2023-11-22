@@ -1,4 +1,4 @@
-import { DataType } from "@/types/types";
+import { DataType, ProductType } from "@/types/types";
 import React, { createContext, useEffect, useState } from "react";
 
 interface UserContextType {
@@ -7,6 +7,7 @@ interface UserContextType {
   } | null,
   handleLogIn: (username: string, password: string) => void,
   handleLogOut: () => void,
+  getRandomProducts: (products: ProductType[], count: number) => ProductType[];
   data: DataType[];
 }
 
@@ -14,6 +15,7 @@ export const UserContext = createContext<UserContextType>({
   user: null,
   handleLogIn: () => {},
   handleLogOut: () => {},
+  getRandomProducts: (products: ProductType[], count: number) => [],
   data: []
 });
 
@@ -50,11 +52,29 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
     setUser(null);
   };
 
+
+  function getRandomProducts(products: ProductType[], count: number): ProductType[] {
+    const randomProducts: ProductType[] = [];
+
+    for (let i = 0; i < count; i++) {
+        const randomIndex = Math.floor(Math.random() * products.length);
+        randomProducts.push(products[randomIndex]);
+
+        // za da nema duplikat
+        products.splice(randomIndex, 1);
+    }
+    return randomProducts;
+}
+
+
+
+
   return (
     <UserContext.Provider value={{ 
         user, 
         handleLogIn, 
         handleLogOut,
+        getRandomProducts,
         data
       }}>
       {children}
