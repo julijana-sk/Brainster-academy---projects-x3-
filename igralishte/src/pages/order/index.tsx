@@ -1,13 +1,12 @@
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { UserContext } from '@/context/UserContext';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import BoxComponent from '@/components/BoxComponent';
 import PageTitle from '@/components/PageTitle';
 import RelatedProducts from '@/components/RelatedProducts';
-import { UserContext } from '@/context/UserContext';
 import { BoxComponentType, DataType, ProductType } from '@/types/types';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react'
-
 
 
 interface Props {
@@ -18,7 +17,7 @@ interface Props {
   boxItemsData: BoxComponentType[];
 }
 
-const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData, randomProducts }) => {
+const OrderPage: NextPage<Props> = ({ product, products, allProducts, boxItemsData, randomProducts }) => {
 
 
   const { useFetchAllProducts, addToCard} = useContext(UserContext);
@@ -68,22 +67,12 @@ const handlePrevClick = () => {
 
         <div className="container-fluid my-5">
           <div className="row d-flex flex-column justify-content-center">
-            <div className="col-12 mb-5">
-                <h4 className="text-center">{product.title}</h4>
-                <img src={`${product.img}`}/>
-                <span className="text-center">{product.price}</span>
-                <p className="text-left">{product.description}</p>
-                <p>da se selektira kolku parcinja sakame counter??</p>
-                <button className='btn btn-large btn-danger'  onClick={() => addToCard(product)}>Add to Card</button>
-                <p>Size: {product.model_size}</p>
-                <p>Size description????????</p>
-                <p>Size dimension link?????</p>
-                <p>Color: {product.color}</p>
-                <p>Material: {product.material}</p>
-                <p>Condition and read more about condition link????: {product.condition}</p>
+            <div className="col-11 mb-5">
+                {/* renderiraj gi stavenite vo card to shop produkti */}
+            </div>
 
-                <p>Мaintenance guidelines: {product.care_instructions}</p>
-                <p>Product tags: ??????? Treba da prebaram kako se pravat{product.category} {product.brand} {product.color}</p>
+            <div className="col-11">
+                {/* kopcinjata za dodavanje/odzemanje quantity, presmetka i sumiranje vkupna suma  */}
             </div>
 
           {/* Box Component Item  */}
@@ -118,7 +107,8 @@ const handlePrevClick = () => {
 };
 
 
-export default ProductDetailPage;
+export default OrderPage;
+
 
 
 

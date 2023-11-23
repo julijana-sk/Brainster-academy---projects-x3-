@@ -20,7 +20,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum",
-                      "date": "04/12/2023"
+                      "date": "04/12/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "CWN25LOG2KF",
@@ -39,7 +41,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "blandit at, nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-                      "date": "25/11/2023"
+                      "date": "25/11/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "GCB49YOU8GN",
@@ -58,7 +62,9 @@
                       "in_stock": true,
                       "discount": 0,
                       "description": "convallis in, cursus et, eros. Proin ultrices. Duis volutpat nunc sit amet metus. Aliquam erat",
-                      "date": "07/11/2023"
+                      "date": "07/11/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "FJD94EFM4RY",
@@ -77,7 +83,9 @@
                       "in_stock": false,
                       "discount": 10,
                       "description": "ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus mauris",
-                      "date": "22/11/2023"
+                      "date": "22/11/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "FJD9KIT4RY",
@@ -96,7 +104,9 @@
                       "in_stock": false,
                       "discount": 10,
                       "description": "ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus mauris",
-                      "date": "15/11/2023"
+                      "date": "15/11/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "FJD96EFM4RY",
@@ -115,7 +125,9 @@
                       "in_stock": true,
                       "discount": 0,
                       "description": "ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus mauris",
-                      "date": "11/11/2023"
+                      "date": "11/11/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "FJD94EFM4RY",
@@ -134,7 +146,9 @@
                       "in_stock": false,
                       "discount": 10,
                       "description": "ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus mauris",
-                      "date": "01/10/2023"
+                      "date": "01/10/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "FJEE54IM4RY",
@@ -153,7 +167,9 @@
                       "in_stock": true,
                       "discount": 0,
                       "description": "ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus mauris",
-                      "date": "07/09/2023"
+                      "date": "07/09/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "FJD994PU4RY",
@@ -172,7 +188,9 @@
                       "in_stock": true,
                       "discount": 0,
                       "description": "ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus mauris",
-                      "date": "15/11/2023"
+                      "date": "15/11/2023",
+                      "amount": 1,
+                      "selected": false
                     }
 
                       ],        
@@ -194,7 +212,9 @@
                       "in_stock": false,
                       "discount": 0,
                       "description": "eget, dictum placerat, augue. Sed molestie. Sed id risus quis diam luctus lobortis. Class aptent taciti",
-                      "date": "18/11/2023"
+                      "date": "18/11/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "SSL40BRF8PO",
@@ -213,7 +233,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien molestie",
-                      "date": "19/10/2023"
+                      "date": "19/10/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "EJW54JME6EF",
@@ -232,7 +254,9 @@
                       "in_stock": false,
                       "discount": 0,
                       "description": "egestas. Fusce aliquet magna a neque. Nullam ut nisi a odio semper cursus. Integer mollis. Integer tincidunt aliquam arcu. Aliquam",
-                      "date": "24/09/2023"
+                      "date": "24/09/2023",
+                      "amount": 1,
+                      "selected": false
                     }
                       ],
                   "bottomsShorts": [
@@ -253,7 +277,9 @@
                       "in_stock": "true",
                       "discount": 10,
                       "description": "dui, semper et, lacinia vitae, sodales at, velit. Pellentesque ultricies dignissim lacus. Aliquam rutrum lorem ac risus. Morbi metus. Vivamus euismod urna. Nullam",
-                      "date": "29/11/2023"
+                      "date": "29/11/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "LLO65AMZ7WZ",
@@ -272,7 +298,9 @@
                       "in_stock": true,
                       "discount": 0,
                       "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                      "date": "21/09/2023"
+                      "date": "21/09/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "LL337AMZ7WZ",
@@ -291,7 +319,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                      "date": "18/09/2023"
+                      "date": "18/09/2023",
+                      "amount": 1,
+                      "selected": false
                     }
                       ],
                   "dresses": [
@@ -312,7 +342,9 @@
                       "in_stock": false,
                       "discount": 0,
                       "description": "lectus convallis est, vitae sodales nisi magna sed dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie tortor",
-                      "date": "05/12/2023"
+                      "date": "05/12/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "NSI08CMM8GQ",
@@ -331,7 +363,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "at arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Donec tincidunt. Donec vitae erat vel pede blandit",
-                      "date": "04/12/2023"
+                      "date": "04/12/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "NSI80UMM8GQ",
@@ -350,7 +384,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "at arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Donec tincidunt. Donec vitae erat vel pede blandit",
-                      "date": "01/12/2023"
+                      "date": "01/12/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "OPR08C654GQ",
@@ -369,7 +405,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "at arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Donec tincidunt. Donec vitae erat vel pede blandit",
-                      "date": "10.10/2023"
+                      "date": "10.10/2023",
+                      "amount": 1,
+                      "selected": false
                     }
                       ],
                   "coatsAndJackets": [
@@ -390,7 +428,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "fringilla purus mauris a nunc. In at pede. Cras vulputate velit eu sem. Pellentesque ut ipsum",
-                      "date": "05/09/2023"
+                      "date": "05/09/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "CDT12VRE1CO",
@@ -409,7 +449,9 @@
                       "in_stock": false,
                       "discount": 0,
                       "description": "Curabitur egestas nunc sed libero. Proin sed turpis nec mauris blandit mattis. Cras eget nisi dictum augue malesuada malesuada. Integer id magna",
-                      "date": "24/10/2023"
+                      "date": "24/10/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "CDTY18RE1CO",
@@ -428,7 +470,9 @@
                       "in_stock": false,
                       "discount": 0,
                       "description": "Curabitur egestas nunc sed libero. Proin sed turpis nec mauris blandit mattis. Cras eget nisi dictum augue malesuada malesuada. Integer id magna",
-                      "date": "01/10/2023"
+                      "date": "01/10/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "CDT12VRE1CO",
@@ -447,7 +491,9 @@
                       "in_stock": false,
                       "discount": 5,
                       "description": "Curabitur egestas nunc sed libero. Proin sed turpis nec mauris blandit mattis. Cras eget nisi dictum augue malesuada malesuada. Integer id magna",
-                      "date": "14/11/2023"
+                      "date": "14/11/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "CDT99GRE1CO",
@@ -466,7 +512,9 @@
                       "in_stock": true,
                       "discount": 0,
                       "description": "Curabitur egestas nunc sed libero. Proin sed turpis nec mauris blandit mattis. Cras eget nisi dictum augue malesuada malesuada. Integer id magna",
-                      "date": "20/11/2023"
+                      "date": "20/11/2023",
+                      "amount": 1,
+                      "selected": false
                     }
                       ],
                   "underwear": [
@@ -487,7 +535,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "mollis nec, cursus a, enim. Suspendisse aliquet, sem ut cursus luctus, ipsum leo elementum sem, vitae aliquam eros turpis non enim. Mauris quis",
-                      "date": "06/10/2023"
+                      "date": "06/10/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "YMW76URI3XX",
@@ -506,7 +556,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "felis. Nulla tempor augue ac ipsum. Phasellus vitae mauris sit amet lorem semper auctor. Mauris vel turpis.",
-                      "date": "09/11/2023"
+                      "date": "09/11/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "PRP15PJT4CF",
@@ -525,7 +577,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "interdum ligula eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis,",
-                      "date": "09/10/2023"
+                      "date": "09/10/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "EKQ37PLQ3QN",
@@ -544,7 +598,9 @@
                       "in_stock": false,
                       "discount": 10,
                       "description": "ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi non sapien",
-                      "date": "29/10/2023"
+                      "date": "29/10/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "UCW21EHO5HO",
@@ -563,7 +619,9 @@
                       "in_stock": true,
                       "discount": 10,
                       "description": "neque sed dictum eleifend, nunc risus varius orci, in consequat enim diam vel arcu. Curabitur ut odio vel est tempor bibendum.",
-                      "date": "15/11/2023"
+                      "date": "15/11/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "BUO12BXF7GT",
@@ -582,7 +640,9 @@
                       "in_stock": false,
                       "discount": 5,
                       "description": "sem egestas blandit. Nam nulla magna, malesuada vel, convallis in, cursus et, eros. Proin ultrices. Duis volutpat nunc sit amet metus.",
-                      "date": "06/12/2023"
+                      "date": "06/12/2023",
+                      "amount": 1,
+                      "selected": false
                     },
                     {
                       "id": "IRQ84OTF1WT",
@@ -601,7 +661,9 @@
                       "in_stock": false,
                       "discount": 20,
                       "description": "eu, odio. Phasellus at augue id ante dictum cursus. Nunc mauris elit, dictum eu, eleifend nec, malesuada ut, sem.",
-                      "date": "05/11/2023"
+                      "date": "05/11/2023",
+                      "amount": 1,
+                      "selected": false
                     }
                       ]
               },
@@ -624,8 +686,9 @@
                   "in_stock": false,
                   "discount": 10,
                   "description": "at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum",
-                  "date": "04/12/2023"
-                },
+                  "date": "04/12/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "OKE22GJU7MQ",
                   "category": "accessories",
@@ -643,8 +706,9 @@
                   "in_stock": true,
                   "discount": 10,
                   "description": "at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum",
-                  "date": "04/12/2023"
-                },
+                  "date": "04/12/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "OKE22GJU7MQ",
                   "category": "accessories",
@@ -662,8 +726,9 @@
                   "in_stock": true,
                   "discount": 0,
                   "description": "at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum",
-                  "date": "04/12/2023"
-                },
+                  "date": "04/12/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "OKE22GJU7MQ",
                   "category": "accessories",
@@ -681,8 +746,9 @@
                   "in_stock": true,
                   "discount": 10,
                   "description": "at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum",
-                  "date": "04/12/2023"
-                },
+                  "date": "04/12/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "OKE22GJU7MQ",
                   "category": "accessories",
@@ -700,8 +766,9 @@
                   "in_stock": true,
                   "discount": 0,
                   "description": "at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum",
-                  "date": "04/12/2023"
-                },
+                  "date": "04/12/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "OKU7MQ",
                   "subcategorye": "accessories",
@@ -718,8 +785,9 @@
                   "in_stock": true,
                   "discount": 0,
                   "description": "at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum",
-                  "date": "04/12/2023"
-                },
+                  "date": "04/12/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "OKU7MQ",
                   "subcategorye": "accessories",
@@ -736,8 +804,9 @@
                   "in_stock": true,
                   "discount": 0,
                   "description": "at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum",
-                  "date": "04/12/2023"
-                },
+                  "date": "04/12/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "OKE22GJU7MQ",
                   "category": "accessories",
@@ -755,8 +824,9 @@
                   "in_stock": false,
                   "discount": 50,
                   "description": "at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum",
-                  "date": "04/12/2023"
-                },
+                  "date": "04/12/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "OKE22GJU7MQ",
                   "category": "accessories",
@@ -774,8 +844,9 @@
                   "in_stock": true,
                   "discount": 5,
                   "description": "at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum",
-                  "date": "04/12/2023"
-                },
+                  "date": "04/12/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "OKE22GJU7MQ",
                   "category": "accessories",
@@ -793,8 +864,9 @@
                   "in_stock": true,
                   "discount": 0,
                   "description": "at, libero. Morbi accumsan laoreet ipsum. Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum",
-                  "date": "04/12/2023"
-                }
+                  "date": "04/12/2023",
+                  "amount": 1,
+                  "selected": false              }
                 ],
           "jewelry": [
                 {
@@ -814,8 +886,9 @@
                   "in_stock": true,
                   "discount": 10,
                   "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                  "date": "21/09/2023"
-                },
+                  "date": "21/09/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "LLO65AMZ7WZ",
                   "category": "accessories",
@@ -833,8 +906,9 @@
                   "in_stock": true,
                   "discount": 0,
                   "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                  "date": "21/09/2023"
-                },
+                  "date": "21/09/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "LLO65AMZ7WZ",
                   "category": "accessories",
@@ -852,8 +926,9 @@
                   "in_stock": false,
                   "discount": 0,
                   "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                  "date": "21/09/2023"
-                },
+                  "date": "21/09/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "LLO65AMZ7WZ",
                   "category": "accessories",
@@ -871,8 +946,9 @@
                   "in_stock": true,
                   "discount": 0,
                   "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                  "date": "21/09/2023"
-                },
+                  "date": "21/09/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "LLO65AMZ7WZ",
                   "category": "accessories",
@@ -890,8 +966,9 @@
                   "in_stock": true,
                   "discount": 5,
                   "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                  "date": "21/09/2023"
-                },
+                  "date": "21/09/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "LLO65AMZ7WZ",
                   "category": "accessories",
@@ -909,8 +986,9 @@
                   "in_stock": true,
                   "discount": 10,
                   "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                  "date": "21/09/2023"
-                },
+                  "date": "21/09/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "LLO65AMZ7WZ",
                   "category": "accessories",
@@ -928,8 +1006,9 @@
                   "in_stock": true,
                   "discount": 0,
                   "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                  "date": "21/09/2023"
-                },
+                  "date": "21/09/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "LLO65AMZ7WZ",
                   "category": "accessories",
@@ -947,8 +1026,9 @@
                   "in_stock": false,
                   "discount": 10,
                   "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                  "date": "21/09/2023"
-                },
+                  "date": "21/09/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "LLO65AMZ7WZ",
                   "category": "accessories",
@@ -966,8 +1046,9 @@
                   "in_stock": true,
                   "discount": 10,
                   "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                  "date": "21/09/2023"
-                },
+                  "date": "21/09/2023",
+                  "amount": 1,
+                  "selected": false              },
                 {
                   "id": "LLO65AMZ7WZ",
                   "category": "accessories",
@@ -985,8 +1066,9 @@
                   "in_stock": true,
                   "discount": 0,
                   "description": "ultrices iaculis odio. Nam interdum enim non nisi. Aenean eget metus. In nec orci. Donec nibh. Quisque nonummy ipsum non arcu. Vivamus sit",
-                  "date": "21/09/2023"
-                }
+                  "date": "21/09/2023",
+                  "amount": 1,
+                  "selected": false              }
               ]
           }
     },
@@ -1139,24 +1221,28 @@
     
   "boxComponents": [
         {
+          "id": 1,
           "title": "Контрола на квалитет",
           "img": "../../pictures/box/kontrola-na-kvalitet.png",
           "first_content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
           "second_content": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
         },
         {
+          "id": 2,
           "title": "Политика на враќање",
           "img": "../../pictures/box/politika-na-vrakjanje.png",
           "first_content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
           "second_content": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
         },
         {
+          "id": 3,
           "title": "Достава",
           "img": "../../pictures/box/dostava.png",
           "first_content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
           "second_content": "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
         },
         {
+          "id": 4,
           "title": "Помош",
           "img": "../../pictures/box/pomos.png",
           "first_content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",

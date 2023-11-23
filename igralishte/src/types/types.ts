@@ -43,7 +43,9 @@ export interface ProductType {
     in_stock: boolean,
     discount: number,
     description: string,
-    date: string
+    date: string,
+    amount: number,
+    selected: boolean
 }
 
 
@@ -84,6 +86,7 @@ export interface GiftType {
 }
 
 export interface BoxComponentType {
+    id: number;
     title: string;
     img: string;
     first_content: string;

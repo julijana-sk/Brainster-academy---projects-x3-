@@ -1093,3 +1093,18 @@ a {
 .add-to-card img {
     top: 30%;
 }
+
+.boxComponent {
+    position: fixed;
+    width: 100%;
+    /* height: 100vh; */
+    transform: translateY(100%);
+    transition: all 0.1s ease-in-out;
+    /* z-index: 2222222; */
+    color: #666560;
+    margin-top: 20px;
+}
+
+.boxComponent img {
+    background-image: url('../pictures/box/X.png');
+}
