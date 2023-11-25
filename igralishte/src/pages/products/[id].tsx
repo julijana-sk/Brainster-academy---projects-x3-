@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { BoxComponentType, DataType, ProductType } from '@/types/types';
@@ -8,6 +8,7 @@ import AmountOfProduct from '@/components/AmountOfProduct';
 import BoxComponent from '@/components/BoxComponent';
 import PrimaryBtn from '@/components/PrimaryBtn';
 import RelatedProducts from '@/components/RelatedProducts';
+import Link from 'next/link';
 
 
 
@@ -24,14 +25,10 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
   // const { useFetchAllProducts, addToCard} = useContext(UserContext);
 
   const router = useRouter();
-  
   const [expandedBox, setExpandedBox] = useState(null);
-   
-  const [page, setPage] = useState(1);
+  
+  const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(allProducts.length / 10);
-  const [itemProducts, setItemProducts] = useState(allProducts.slice(0, 10));
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [activePage, setActivePage] = useState(1);
   
   const [products, setProducts] = useState<ProductType[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -49,29 +46,6 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
     setFavorites(updatedFavorites);
     setIsFavorite(!isFavorite);
 };
-    
-
-
-
-
-    
-const handlePrevClick = () => {
-        setPage(page - 1);
-        setActivePage(page - 1);
-        if (currentIndex > 0) {
-        setCurrentIndex(currentIndex - 10);
-        setItemProducts(allProducts.slice(currentIndex - 10, currentIndex));
-        }
-  };
-
-  const handleNextClick = () => {
-    setPage(page + 1);
-        setActivePage(page + 1);
-        if (currentIndex + 10 < allProducts.length) {
-        setCurrentIndex(currentIndex + 10);
-        setItemProducts(allProducts.slice(currentIndex + 10, currentIndex + 20));
-        }
-  };
 
   const handleBoxClick = (box: any) => {
     setExpandedBox(box === expandedBox ? null : box);
@@ -161,6 +135,32 @@ const handlePrevClick = () => {
       });
     }
   };
+
+
+    useEffect(() => {
+        const indexOfLastProduct = currentPage * 10;
+        const indexOfFirstProduct = indexOfLastProduct - 10;
+        const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+        setProducts(currentProducts);
+    }, [currentPage]);
+
+    const handleArrowClick = (direction: string, clickedPage: any) => {
+        if (direction === 'previous') {
+            setCurrentPage(currentPage - 1);
+        } else {
+            setCurrentPage(currentPage + 1);
+        }
+        handleClick(clickedPage);
+    };
+
+    const handleClick = (pageNumber: number) => {
+     if (pageNumber === currentPage) {
+        return;
+        }
+        setCurrentPage(pageNumber);
+    };
+
   
   return (
     <>
@@ -232,23 +232,38 @@ const handlePrevClick = () => {
           })}
 
            {/* Other Related Product Items  */}
-              <RelatedProducts key={currentIndex} products={randomProducts}/>
+              <RelatedProducts key={product.id} products={randomProducts}/>
 
-          <div className="d-flex flex-row">
-            <div className="col-12 text-center mb-5" style={{letterSpacing: "3px"}}>
-                {allProducts.length > 10 && (
-                    <>
-                    <button className="bg-transparent border-0 mr-3" onClick={handlePrevClick} disabled={page === 1}>
-                        {'<'}
-                    </button>
-                    <span>{page} • {page + 1} • {page + 2} • {page + 3} • {page + 4} ... {totalPages}</span>
-                    <button className="bg-transparent border-0 ml-3" onClick={handleNextClick} disabled={page === totalPages}>
-                        {'>'}
-                    </button>
-                    </>
-                )}
-            </div>
-          </div>
+          {/* pagination  */}
+          <div className="text-center mb-5" style={{letterSpacing: "3px"}}>
+            {[...Array(totalPages)].map((_, i) => {
+              
+              const pageNumber = i + 1;
+              const isActive = (pageNumber === currentPage) ? "text-danger" : "text-dark";
+            return (
+                <>
+                    {i === 0 ? (
+                        <>
+                        <button className="bg-transparent border-0 font-weight-bold" >
+                        <Link href={`/products?page=${currentPage -1}`} onClick={() => handleArrowClick('previous', currentPage)}>
+                            {"<"}
+                        </Link>
+                        </button>
+                        <button className={`bg-transparent border-0 font-weight-bold ${isActive}`} onClick={() => handleClick(pageNumber)}>{pageNumber}</button>
+                        </>
+                    ) : (
+                        <button className={`bg-transparent border-0 font-weight-bold ${isActive}`} onClick={() => handleClick(pageNumber)}>{pageNumber} </button>
+                    )}
+                    
+                    {i === totalPages - 1 ? (
+                        <Link href={`/products?page=${currentPage + 1}`} onClick={() => handleClick(currentPage + 1)}>
+                            {">"}
+                        </Link>
+                    ) : null}
+                </>
+                );
+            })}
+        </div>
       </div>
     </div>
   </>

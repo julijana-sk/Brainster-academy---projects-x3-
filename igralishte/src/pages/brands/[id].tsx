@@ -1,10 +1,11 @@
-import BoxComponent from '@/components/BoxComponent';
-import PageTitle from '@/components/PageTitle';
-import { BoxComponentType, CategoryType, DataType, ProductType, SubcategoryType } from '@/types/types';
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import Head from 'next/head';
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-import React, { useState } from 'react'
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import Head from 'next/head';
+import PageTitle from '@/components/PageTitle';
+import Link from 'next/link';
+import BoxComponent from '@/components/BoxComponent';
+import { BoxComponentType, ProductType } from '@/types/types';
 
 
 
@@ -18,37 +19,42 @@ interface Props {
 const BrandDetailPage: NextPage<Props> = ({ product, allproducts, boxItemsData }) => {
 
 
-const router = useRouter();
-// const { id } = router.query;
+  const router = useRouter();
+  const [expandedBox, setExpandedBox] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState<ProductType[]>([]);
+  
+  const totalPages = Math.ceil(allproducts.length / 10);
+  // const { id } = router.query;
 
 // if (router.isFallback) {
 // return <div>Loading...</div>;
 // }
 
-const [expandedBox, setExpandedBox] = useState(null);
-const totalPages = Math.ceil(allproducts.length / 10);
-const [page, setPage] = useState(1)
-const [itemProducts, setItemProducts] = useState(allproducts.slice(0, 10));
-const [currentIndex, setCurrentIndex] = useState(0);
-const [activePage, setActivePage] = useState(1);
-    
-const handlePrevClick = () => {
-    setPage(page - 1);
-    setActivePage(page - 1);
-      if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 10);
-      setItemProducts(allproducts.slice(currentIndex - 10, currentIndex));
-      }
-  };
 
-const handleNextClick = () => {
-    setPage(page + 1);
-    setActivePage(page + 1);
-      if (currentIndex + 10 < allproducts.length) {
-        setCurrentIndex(currentIndex + 10);
-        setItemProducts(allproducts.slice(currentIndex + 10, currentIndex + 20));
+    useEffect(() => {
+        const indexOfLastProduct = currentPage * 10;
+        const indexOfFirstProduct = indexOfLastProduct - 10;
+        const currentProducts = allproducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+        setProducts(currentProducts);
+    }, [currentPage]);
+
+    const handleArrowClick = (direction: string, clickedPage: any) => {
+        if (direction === 'previous') {
+            setCurrentPage(currentPage - 1);
+        } else {
+            setCurrentPage(currentPage + 1);
         }
-  };
+        handleClick(clickedPage);
+    };
+
+    const handleClick = (pageNumber: number) => {
+     if (pageNumber === currentPage) {
+        return;
+        }
+        setCurrentPage(pageNumber);
+    };
       
 const handleBoxClick = (box: any) => {
     setExpandedBox(box === expandedBox ? null : box);
@@ -99,21 +105,36 @@ return (
           {/* <RelatedProducts products={randomProducts}/> */}
 
 
-          <div className="d-flex flex-row">
-            <div className="col-12 text-center mb-5" style={{letterSpacing: "3px"}}>
-                {allproducts.length > 10 && (
-                    <>
-                    <button className="bg-transparent border-0 mr-3" onClick={handlePrevClick} disabled={page === 1}>
-                        {'<'}
-                    </button>
-                    <span>{page} • {page + 1} • {page + 2} • {page + 3} • {page + 4} ... {totalPages}</span>
-                    <button className="bg-transparent border-0 ml-3" onClick={handleNextClick} disabled={page === totalPages}>
-                        {'>'}
-                    </button>
-                    </>
-                )}
-            </div>
-          </div>
+          {/* pagination  */}
+          <div className="text-center mb-5" style={{letterSpacing: "3px"}}>
+            {[...Array(totalPages)].map((_, i) => {
+              
+              const pageNumber = i + 1;
+              const isActive = (pageNumber === currentPage) ? "text-danger" : "text-dark";
+            return (
+                <>
+                    {i === 0 ? (
+                        <>
+                        <button className="bg-transparent border-0 font-weight-bold" >
+                        <Link href={`/products?page=${currentPage -1}`} onClick={() => handleArrowClick('previous', currentPage)}>
+                            {"<"}
+                        </Link>
+                        </button>
+                        <button className={`bg-transparent border-0 font-weight-bold ${isActive}`} onClick={() => handleClick(pageNumber)}>{pageNumber}</button>
+                        </>
+                    ) : (
+                        <button className={`bg-transparent border-0 font-weight-bold ${isActive}`} onClick={() => handleClick(pageNumber)}>{pageNumber} </button>
+                    )}
+                    
+                    {i === totalPages - 1 ? (
+                        <Link href={`/products?page=${currentPage + 1}`} onClick={() => handleClick(currentPage + 1)}>
+                            {">"}
+                        </Link>
+                    ) : null}
+                </>
+                );
+            })}
+        </div>
         </div>
       </div>
     </>

@@ -1,43 +1,54 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head';
-import { ProductType, SubcategoryType } from '@/types/types';
+import { ProductType } from '@/types/types';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import BrandItem from '@/components/Brands';
 import ProductItem from '@/components/ProductItem';
+import Link from 'next/link';
 
 interface Props {
-  vintageClothes: SubcategoryType[];
-  accessories: SubcategoryType[];
   products: ProductType[];
-  allproducts: ProductType[];
+  allProducts: ProductType[];
   searchedBrandsData: ProductType[];
 }
 
-const ProductPage: NextPage<Props> = ({vintageClothes, accessories, products, allproducts, searchedBrandsData }) => {
+const ProductPage: NextPage<Props> = ({allProducts, searchedBrandsData }) => {
     
   const router = useRouter();
-  const [page, setPage] = useState(1);
-  const totalPages = Math.ceil(allproducts.length / 10);
-  const [brandedProducts, setBrandedProducts] = useState(searchedBrandsData.slice(0, 6));
   const [currentIndex, setCurrentIndex] = useState(0);
-  
-  
-  const handleNextPage = () => {
-    if (currentIndex + 10 < searchedBrandsData.length) {
-      setCurrentIndex(currentIndex + 10);
-      setBrandedProducts(searchedBrandsData.slice(currentIndex + 10, currentIndex + 20));
-    }
-      setPage(page + 1);
-  };
+  const [brandedProducts, setBrandedProducts] = useState(searchedBrandsData.slice(0, 6));
+  const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState<ProductType[]>([]);
 
-  const handlePreviousPage = () => {
-      if (currentIndex > 0) {
-        setCurrentIndex(currentIndex - 10);
-        setBrandedProducts(searchedBrandsData.slice(currentIndex - 10, currentIndex));
-        setPage(page - 1);
-      }
+  const totalPages = Math.ceil(allProducts.length / 10);
+
+    useEffect(() => {
+        const indexOfLastProduct = currentPage * 10;
+        const indexOfFirstProduct = indexOfLastProduct - 10;
+        const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+        setProducts(currentProducts);
+    }, [currentPage]);
+
+    const handleArrowClick = (direction: string, clickedPage: any) => {
+        if (direction === 'previous') {
+            setCurrentPage(currentPage - 1);
+        } else {
+            setCurrentPage(currentPage + 1);
+        }
+        handleClick(clickedPage);
     };
+
+    const handleClick = (pageNumber: number) => {
+     if (pageNumber === currentPage) {
+        return;
+        }
+        setCurrentPage(pageNumber);
+    };
+
+    
+    
       
   const handlePrevClick = () => {
     if (currentIndex > 0) {
@@ -54,9 +65,7 @@ const ProductPage: NextPage<Props> = ({vintageClothes, accessories, products, al
   };
   
 
-  // const handleProductClick = (productId: any) => {
-  //   router.push(`/products/${productId}`);
-  // };
+  
 
 
 return (
@@ -108,20 +117,35 @@ return (
                   <p>There are no results...</p>
                 )}
                 
-        <div className="d-flex flex-row">
-            <div className="col-12 text-center" style={{letterSpacing: "3px"}}>
-                {allproducts.length > 10 && (
-                    <>
-                    <button className="bg-transparent border-0 mr-3" onClick={handlePreviousPage} disabled={page === 1}>
-                        {'<'}
-                    </button>
-                    <span>{page} • {page + 1} • {page + 2} • {page + 3} • {page + 4} ... {totalPages}</span>
-                    <button className="bg-transparent border-0 ml-3" onClick={handleNextPage} disabled={page === totalPages}>
-                        {'>'}
-                    </button>
-                    </>
-                )}
-            </div>
+            {/* pagination  */}
+          <div className="text-center mb-5" style={{letterSpacing: "3px"}}>
+            {[...Array(totalPages)].map((_, i) => {
+              
+              const pageNumber = i + 1;
+              const isActive = (pageNumber === currentPage) ? "text-danger" : "text-dark";
+            return (
+                <>
+                    {i === 0 ? (
+                        <>
+                        <button className="bg-transparent border-0 font-weight-bold" >
+                        <Link href={`/products?page=${currentPage -1}`} onClick={() => handleArrowClick('previous', currentPage)}>
+                            {"<"}
+                        </Link>
+                        </button>
+                        <button className={`bg-transparent border-0 font-weight-bold ${isActive}`} onClick={() => handleClick(pageNumber)}>{pageNumber}</button>
+                        </>
+                    ) : (
+                        <button className={`bg-transparent border-0 font-weight-bold ${isActive}`} onClick={() => handleClick(pageNumber)}>{pageNumber} </button>
+                    )}
+                    
+                    {i === totalPages - 1 ? (
+                        <Link href={`/products?page=${currentPage + 1}`} onClick={() => handleClick(currentPage + 1)}>
+                            {">"}
+                        </Link>
+                    ) : null}
+                </>
+                );
+            })}
         </div>
         </div>
       </div>
@@ -198,7 +222,7 @@ let allproducts: ProductType[] = []
   return {
       props: {
         products,
-        allproducts,
+        allroducts,
         vintageClothes,
         accessories,
         searchedBrandsData,
