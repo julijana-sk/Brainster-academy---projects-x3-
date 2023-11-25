@@ -26,9 +26,8 @@ const router = useRouter();
 // }
 
 const [expandedBox, setExpandedBox] = useState(null);
-  
-const [page, setPage] = useState(1);
-const totalPages = 10;
+const totalPages = Math.ceil(allproducts.length / 10);
+const [page, setPage] = useState(1)
 const [itemProducts, setItemProducts] = useState(allproducts.slice(0, 10));
 const [currentIndex, setCurrentIndex] = useState(0);
 const [activePage, setActivePage] = useState(1);

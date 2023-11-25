@@ -1094,6 +1094,12 @@ a {
     top: 30%;
 }
 
+.add-to-card-fixed {
+    position: fixed;
+    right: 25px;
+    bottom: 40%;
+    z-index: 1 !important;
+}
 .boxComponent {
     position: fixed;
     width: 100%;

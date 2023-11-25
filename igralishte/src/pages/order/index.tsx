@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { UserContext } from '@/context/UserContext';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import BoxComponent from '@/components/BoxComponent';
 import PageTitle from '@/components/PageTitle';
 import RelatedProducts from '@/components/RelatedProducts';
 import { BoxComponentType, DataType, ProductType } from '@/types/types';
+import AmountOfProduct from '@/components/AmountOfProduct';
+import PrimaryBtn from '@/components/PrimaryBtn';
 
 
 interface Props {
@@ -20,41 +21,62 @@ interface Props {
 const OrderPage: NextPage<Props> = ({ product, products, allProducts, boxItemsData, randomProducts }) => {
 
 
-  const { useFetchAllProducts, addToCard} = useContext(UserContext);
-
-
+  // const { useFetchAllProducts, addToCard} = useContext(UserContext);
+  
+  
   const router = useRouter();
-
-  const [expandedBox, setExpandedBox] = useState(null);
-   
+  
   const [page, setPage] = useState(1);
-  const totalPages = 10;
+  const totalPages = Math.ceil(allProducts.length / 10);
   const [itemProducts, setItemProducts] = useState(allProducts.slice(0, 10));
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activePage, setActivePage] = useState(1);
-    
-const handlePrevClick = () => {
-        setPage(page - 1);
-        setActivePage(page - 1);
-        if (currentIndex > 0) {
-        setCurrentIndex(currentIndex - 10);
-        setItemProducts(allProducts.slice(currentIndex - 10, currentIndex));
-        }
-  };
-
-  const handleNextClick = () => {
-    setPage(page + 1);
-        setActivePage(page + 1);
-        if (currentIndex + 10 < allProducts.length) {
-        setCurrentIndex(currentIndex + 10);
-        setItemProducts(allProducts.slice(currentIndex + 10, currentIndex + 20));
-        }
-  };
-
-  const handleBoxClick = (box: any) => {
-    setExpandedBox(box === expandedBox ? null : box);
-  }
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [expandedBox, setExpandedBox] = useState(null);
   
+
+  
+  const calcPrice = () => {
+    let price = 0;
+    selectedProducts.forEach((p) => {
+      price += p.price * p.amount;
+    });
+
+    setTotalPrice(price);
+  };
+
+  useEffect(() => {
+    calcPrice();
+  }, [selectedProducts]);
+
+  // const goBack = () => {
+  //   history.push("/");
+  // };
+  
+  const handlePrevClick = () => {
+          setPage(page - 1);
+          setActivePage(page - 1);
+          if (currentIndex > 0) {
+          setCurrentIndex(currentIndex - 10);
+          setItemProducts(allProducts.slice(currentIndex - 10, currentIndex));
+          }
+    };
+  
+    const handleNextClick = () => {
+      setPage(page + 1);
+          setActivePage(page + 1);
+          if (currentIndex + 10 < allProducts.length) {
+          setCurrentIndex(currentIndex + 10);
+          setItemProducts(allProducts.slice(currentIndex + 10, currentIndex + 20));
+          }
+    };
+  
+    const handleBoxClick = (box: any) => {
+      setExpandedBox(box === expandedBox ? null : box);
+    }
+
+
+
   return (
     <>
       <Head>
@@ -71,8 +93,33 @@ const handlePrevClick = () => {
                 {/* renderiraj gi stavenite vo card to shop produkti */}
             </div>
 
+          {/* kopcinjata za dodavanje/odzemanje quantity, presmetka i sumiranje vkupna suma  */}
             <div className="col-11">
-                {/* kopcinjata za dodavanje/odzemanje quantity, presmetka i sumiranje vkupna suma  */}
+              {/* <button className="btn btn-outline-primary" onClick={goBack}>
+                Go To Product List
+              </button> */}
+              <div style={{ textAlign: "center" }}>
+                <div className="basket">
+                  {/* {selectedProducts?.map((prod, i) => (
+                    <AmountOfProduct
+                      key={i}
+                      product={prod}
+                      onMinusClick={onRemoveItem}
+                      onPlusClick={onAddItem}
+                    />
+                  ))} */}
+                </div>
+                <p>Вкупно: {totalPrice} ден.</p>
+              
+                <PrimaryBtn onClick={placeOrder} title="Продолжи" btnClass={"PrimaryBtn w-75"} backgroundColor={"btn-gold"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/>
+                
+                {/* dodadi funcija so koja dokolku se klikne na ova slikicka, da se isprazni seta niza od produkti !!!  */}
+                <img src="../../pictures/icons/Basket.png" alt="empty" />
+                {/* {selectedProducts.length === 0 && (
+                  <p>EMPTY BASKET</p>
+                  )} */}
+                
+              </div>
             </div>
 
           {/* Box Component Item  */}
@@ -149,7 +196,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const resBoxItems = await fetch('http://localhost:5001/boxComponents'); 
   const boxItemsData = await resBoxItems.json();
   
-  const response = await fetch(`http://localhost:5001/products`); 
+  const response = await fetch('http://localhost:5001/products'); 
   const products: DataType["products"] = await response.json();
 
   const allProducts: ProductType[] = [];

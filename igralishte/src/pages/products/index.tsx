@@ -230,7 +230,7 @@ export default ProductPage;
      const resBoxItems = await fetch('http://localhost:5001/boxComponents'); 
      const boxItemsData = await resBoxItems.json();
      
-     const response = await fetch(`http://localhost:5001/products?page=${page}`); 
+     const response = await fetch(`http://localhost:5001/products?&page=${page}`); 
      const products: DataType["products"] = await response.json();
 
     const allProducts: ProductType[] = [];
