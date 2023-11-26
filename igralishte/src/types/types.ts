@@ -38,6 +38,7 @@ export interface ProductType {
     price: number,
     brand: string,
     model_size: string,
+    size_description: string,
     color: string,
     material: string,
     composition: string,

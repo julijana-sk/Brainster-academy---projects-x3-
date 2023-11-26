@@ -3,14 +3,11 @@ import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from 'next';
 import { BoxComponentType, DataType, ProductType } from '@/types/types';
 import Head from 'next/head';
-import PageTitle from '@/components/PageTitle';
 import AmountOfProduct from '@/components/AmountOfProduct';
 import BoxComponent from '@/components/BoxComponent';
 import PrimaryBtn from '@/components/PrimaryBtn';
 import RelatedProducts from '@/components/RelatedProducts';
 import Link from 'next/link';
-import { Carousel } from 'react-responsive-carousel';
-import CarouselComponent from '@/components/CarouselComponent';
 import Slider from '@/components/Slider';
 
 
@@ -104,6 +101,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
   };
 
   const onAddItem = (prod: ProductType) => {
+    console.log("you clicked plus")
     setProducts((prevState) => {
       return prevState.map((p) => {
         if (p.id === prod.id) {
@@ -118,6 +116,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
   };
 
   const onRemoveItem = (prod: ProductType) => {
+    console.log("you clicked minus")
     if (prod.amount === 1) {
       setProducts((prevState) => {
         return prevState.map((p) => {
@@ -145,15 +144,6 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
       });
     }
   };
-
-
-    // useEffect(() => {
-    //     const indexOfLastProduct = currentPage * 10;
-    //     const indexOfFirstProduct = indexOfLastProduct - 10;
-    //     const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
-    //     setProducts(currentProducts);
-    // }, [currentPage]);
 
     const handleArrowClick = (direction: string, clickedPage: any) => {
         if (direction === 'previous') {
@@ -208,33 +198,59 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
                     ><img src="../pictures/icons/shopping cart.png" /></button>
                   {/* </Link> */}
                 </div>
-                <span className="text-center">{foundProduct.price}</span>
-                <p className="text-left">{foundProduct.description}</p>
+                <span className="title text-left">{foundProduct.price}  ден.</span>
+                <p className="text-left my-3">{foundProduct.description}</p>
                 <AmountOfProduct
-                      key={product.id}
-                      product={product}
+                      key={foundProduct.id}
+                      product={foundProduct}
                       onMinusClick={onRemoveItem}
                       onPlusClick={onAddItem}
                     />
-                <PrimaryBtn onClick={() => addToCard(product)} title="Додај во кошничка" btnClass={"PrimaryBtn w-75 giftBtnHover"} backgroundColor={"linear-gradient(0deg, #FFDBDB, #FFDBDB)"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/>
-                <i
-                onClick={(event: React.MouseEvent<HTMLElement>) => {
-                    event.preventDefault();
-                    toggleFavorite(product.id);
-                  }}
-                  // className={isFavorite && selectedRestaurantId === product.id ? "fas fa-heart fa-3x" : "far fa-heart fa-3x"}
-                  className={isFavorite ? "fas fa-heart fa-3x" : "far fa-heart fa-3x"}
-                ></i>
-                <hr />
-                <p>Size: {product.model_size}</p>
-                <p>Size description????????</p>
-                <p>Size dimension link?????</p>
-                <p>Color: {product.color}</p>
-                <p>Material: {product.material}</p>
-                <p>Condition and read more about condition link????: {product.condition}</p>
-
-                <p>Мaintenance guidelines: {product.care_instructions}</p>
-                <p>Product tags: ??????? Treba da prebaram kako se pravat{product.category} {product.brand} {product.color}</p>
+                <div className="flex-row justify-content-start align-items-center align-self-center">
+                  <PrimaryBtn onClick={() => addToCard(foundProduct)} title="Додај во кошничка" btnClass={"PrimaryBtn add w-50 mr-3"} backgroundColor={"linear-gradient(0deg, #FFDBDB, #FFDBDB)"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/>
+                  <i
+                  onClick={(event: React.MouseEvent<HTMLElement>) => {
+                      event.preventDefault();
+                      toggleFavorite(foundProduct.id);
+                    }}
+                    // className={isFavorite && selectedRestaurantId === foundProduct.id ? "fas fa-heart fa-3x" : "far fa-heart fa-3x"}
+                    className={isFavorite ? "fas fa-heart fa-2x" : "far fa-heart fa-2x"}
+                  ></i>
+                </div>
+                <hr style={{paddingTop: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
+                <div className='flex-row my-3 justify-content-start align-items-center text-left '>
+                  <p className='title '>Величина: </p>
+                  <div className="border-0 px-2 mx-3" style={{backgroundColor: "#FFDBDB", borderRadius: '4px'}}>{foundProduct.model_size}</div>
+                  <p className='about-text text-dark'>*само 1 парче</p>
+                </div>
+                <p>{foundProduct.size_description}</p>
+                <Link href='#'><p style={{textDecoration: 'underline'}}>види ги димензиите</p></Link>
+                <hr style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 150%, #D4AF37 0%)"}}/>
+                <div className='flex-row my-3 title justify-content-start align-items-center text-left '>
+                  <p>Боја: </p>
+                  <div className="border mx-2 p-2" style={{background: `${foundProduct.color}`, borderRadius: '4px'}} />
+                  <p className='about-text text-dark'>{foundProduct.color}</p>
+                </div>
+                <p className='title text-left'>Материјал: </p>
+                  {foundProduct.material}
+                <div className="flex-row justify-content-start align-items-center">
+                  <p className='mr-2'>Постава:</p> 
+                  {foundProduct.composition}
+                </div>
+                <div className="flex-row my-3 justify-content-start align-items-center">
+                  <p className='title mr-3'>Состојба: {foundProduct.condition}</p>
+                  <Link href='#'><p style={{textDecoration: 'underline'}}>прочитај повеќе</p></Link>
+                </div>
+                <p className='title text-left'>Насоки за одржување: </p>
+                {foundProduct.care_instructions}
+                <hr style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 150%, #D4AF37 0%)"}}/>
+                <p className='title text-left'>Ознаки:</p>
+                <div className="flex-row mt-2 my-3 justify-content-start align-items-center">
+                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{foundProduct.subcategory}</Link>
+                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{foundProduct.category}</Link>
+                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{foundProduct.material}</Link>
+                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{foundProduct.color}</Link>
+                </div>
             </div>
 
           {/* Box Component Item  */}
@@ -245,7 +261,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
           })}
 
            {/* Other Related Product Items  */}
-              <RelatedProducts key={product.id} products={randomProducts}/>
+              <RelatedProducts key={foundProduct.id} products={randomProducts}/>
 
           {/* pagination  */}
           <div className="text-center mb-5" style={{letterSpacing: "3px"}}>
