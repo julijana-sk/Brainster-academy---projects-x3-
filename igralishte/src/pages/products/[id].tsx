@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from 'next';
 import { BoxComponentType, DataType, ProductType } from '@/types/types';
 import Head from 'next/head';
 import PageTitle from '@/components/PageTitle';
@@ -9,6 +9,9 @@ import BoxComponent from '@/components/BoxComponent';
 import PrimaryBtn from '@/components/PrimaryBtn';
 import RelatedProducts from '@/components/RelatedProducts';
 import Link from 'next/link';
+import { Carousel } from 'react-responsive-carousel';
+import CarouselComponent from '@/components/CarouselComponent';
+import Slider from '@/components/Slider';
 
 
 
@@ -18,11 +21,10 @@ interface Props {
   allProducts: ProductType[];
   randomProducts: ProductType[];
   boxItemsData: BoxComponentType[];
+  foundProduct: ProductType
 }
 
-const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData, randomProducts }) => {
-
-  // const { useFetchAllProducts, addToCard} = useContext(UserContext);
+const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData, randomProducts, foundProduct }) => {
 
   const router = useRouter();
   const [expandedBox, setExpandedBox] = useState(null);
@@ -36,6 +38,14 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
   const [isAddToCard, setIsAddToCard] = useState(false);
   // const [selectedRestaurantId, setSelectedRestaurantId] = useState("");
 
+
+     useEffect(() => {
+        const indexOfLastProduct = currentPage * 10;
+        const indexOfFirstProduct = indexOfLastProduct - 10;
+        const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+        setProducts(currentProducts);
+    }, [currentPage]);
  
 
  const toggleFavorite = (id: any) => {
@@ -137,13 +147,13 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
   };
 
 
-    useEffect(() => {
-        const indexOfLastProduct = currentPage * 10;
-        const indexOfFirstProduct = indexOfLastProduct - 10;
-        const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+    // useEffect(() => {
+    //     const indexOfLastProduct = currentPage * 10;
+    //     const indexOfFirstProduct = indexOfLastProduct - 10;
+    //     const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
-        setProducts(currentProducts);
-    }, [currentPage]);
+    //     setProducts(currentProducts);
+    // }, [currentPage]);
 
     const handleArrowClick = (direction: string, clickedPage: any) => {
         if (direction === 'previous') {
@@ -170,19 +180,22 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <PageTitle title={product.title} />
 
         <div className="container-fluid my-5">
           <div className="row d-flex flex-column justify-content-center">
             <div className="col-12 mb-5">
-                <h4 className="text-center">{product.title}</h4>
-                <img src={`${product.img}`}/>
+              <h1 className='title mb-4' style={{textAlign: 'left'}}>{foundProduct.title}</h1>
+                {/* <img src={`${foundProduct.img}`} className='product-img'/> */}
+                <Slider product={foundProduct}/>
+
+
+                
                 <div className='flex-column add-to-card-fixed'>
                   {/* <Link href={"/"} className="nav-link d-flex flex-row justify-content-start"> */}
                     <button className="menu-footer-button mb-3"
                             onClick={(event: React.MouseEvent<HTMLElement>) => {
                             event.preventDefault();
-                            toggleFavorite(product.id);
+                            toggleFavorite(foundProduct.id);
                           }}
                     ><img src="../pictures/icons/heart-straight-thin.png" /></button>
                   {/* </Link> */}
@@ -190,13 +203,13 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
                     <button className="menu-footer-button"
                             onClick={(event: React.MouseEvent<HTMLElement>) => {
                             event.preventDefault();
-                            // toggleAddToCard(product.id);
+                            // toggleAddToCard(foundProduct.id);
                           }}
                     ><img src="../pictures/icons/shopping cart.png" /></button>
                   {/* </Link> */}
                 </div>
-                <span className="text-center">{product.price}</span>
-                <p className="text-left">{product.description}</p>
+                <span className="text-center">{foundProduct.price}</span>
+                <p className="text-left">{foundProduct.description}</p>
                 <AmountOfProduct
                       key={product.id}
                       product={product}
@@ -277,7 +290,7 @@ export default ProductDetailPage;
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
-  const response = await fetch(`http://localhost:5001/products`); 
+  const response = await fetch('http://localhost:5001/products'); 
   const products: DataType["products"] = await response.json();
 
 
@@ -304,53 +317,73 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-
-  let product: ProductType | undefined = undefined;
+export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {
   
-  const resBoxItems = await fetch('http://localhost:5001/boxComponents'); 
+  let product: ProductType | undefined;
+  
+  
+  const resBoxItems = await fetch('http://localhost:5001/boxComponents');
   const boxItemsData = await resBoxItems.json();
+
   
   const response = await fetch('http://localhost:5001/products'); 
-  const products: DataType["products"] = await response.json();
+     const products: DataType["products"] = await response.json();
+    
 
-  const allProducts: ProductType[] = [];
+    const allProducts: ProductType[] = [];
 
-      Object.values(products.vintageClothes).forEach((productList: ProductType[]) => {
-          productList.forEach((product: ProductType) => {
-              allProducts.push(product);
-          });
-      });
+        Object.values(products.vintageClothes).forEach((productList: ProductType[]) => {
+            productList.forEach((product: ProductType) => {
+                allProducts.push(product);
+            });
+        });
 
+        Object.values(products.accessories).forEach((productList: ProductType[]) => {
+            productList.forEach((product: ProductType) => {
+                allProducts.push(product);
+            });
+        });
+
+
+
+
+  const getRandomProducts = (products: ProductType[], quantity: number): ProductType[] => {
+    const randomProducts: ProductType[] = [];
+
+    for (let i = 0; i < quantity; i++) {
+      const randomIndex = Math.floor(Math.random() * products.length);
+      randomProducts.push(products[randomIndex]);
+      products.splice(randomIndex, 1);
+    }
+    return randomProducts;
+  }
+
+  const randomProducts: ProductType[] = getRandomProducts(allProducts, 6);
   
- 
-const getRandomProducts = (products: ProductType[], quantity: number): ProductType[] => {
-   const randomProducts: ProductType[] = [];
 
-   for (let i = 0; i < quantity; i++) {
-     const randomIndex = Math.floor(Math.random() * products.length);
-     randomProducts.push(products[randomIndex]);
+  const productId = params?.id;
 
-     // Za da nema duplikati
-     products.splice(randomIndex, 1);
-   }
-   return randomProducts;
-}
-
-const randomProducts: ProductType[] = getRandomProducts(allProducts, 6);
+    let foundProduct = null;
+    Object.values(products).forEach((productType) => {
+      Object.values(productType).forEach((products: ProductType[]) => {
+        products.forEach((product) => {
+          if (product.id === productId) {
+            foundProduct = product;
+          }
+        });
+      });
+    });
 
 
-
-  if (params?.id) {
-    const resProduct = await fetch(`http://localhost:5001/products/${params.id}`);
-    product = await resProduct.json();
+if (foundProduct) {
+    product = foundProduct;
   }
 
 
-return {
+  return {
     props: {
       product,
+      foundProduct,
       allProducts,
       randomProducts,
       boxItemsData

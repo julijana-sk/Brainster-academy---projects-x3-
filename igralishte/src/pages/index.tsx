@@ -1,10 +1,11 @@
 import { GetStaticProps, NextPage } from 'next'
 import Banner from '../components/Banner';
 import AnnouncementBar from '@/components/AnnouncementBar';
-import Carousel from '@/components/Carousel';
+import Carousel from '@/components/CarouselComponent';
 import { useContext } from 'react';
 import { UserContext } from '@/context/UserContext';
 import { DataType } from '@/types/types';
+import CarouselComponent from '@/components/CarouselComponent';
 
 
 
@@ -27,7 +28,7 @@ const HomePage: NextPage<Props> = ({products}) => {
               <span>Ново</span><img className="img2" src="../pictures/icons/Star-small.png" alt="golden star mini" />
             </div>
           </Banner>
-          <Carousel vintageClothes={products.vintageClothes}/>
+          <CarouselComponent vintageClothes={products.vintageClothes}/>
           <Banner classOfPicture='banner-picture2' offset={"col-11"} imageBanner='../pictures/product-banner.png' bgColor='btn-pink-circle btn-circle2' img="../pictures/icons/sparks-elements-rose.png" title='Козметика & аксесоари' description='Погледни ги свежите љубовни парчиња'/>
           <div className='relative'>
             <img src="../pictures/Rectangle-gift-banner.png" alt="star" className='rectangle-gift-banner'/>

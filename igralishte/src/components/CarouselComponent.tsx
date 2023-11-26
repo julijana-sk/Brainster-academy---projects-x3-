@@ -9,7 +9,7 @@ interface Props {
   vintageClothes: VintageClothesType;
 }
 
-const CarouselWithIndicators: React.FC<Props> = ({ vintageClothes }) => {
+const CarouselComponent: React.FC<Props> = ({ vintageClothes }) => {
 
   return (
     <div className="carousel container-fluid h-100">
@@ -31,4 +31,4 @@ const CarouselWithIndicators: React.FC<Props> = ({ vintageClothes }) => {
   );
 };
 
-export default CarouselWithIndicators;
+export default CarouselComponent;
