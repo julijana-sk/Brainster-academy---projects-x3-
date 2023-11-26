@@ -182,12 +182,12 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
 
 
         <div className="container-fluid my-5">
-          <div className="row d-flex flex-column justify-content-center">
-            <div className="col-12 mb-5">
-              <h1 className='title mb-4' style={{textAlign: 'left'}}>{foundProduct.title}</h1>
-                {/* <img src={`${foundProduct.img}`} className='product-img'/> */}
+          <div className="row flex-column justify-content-center">
+            <div className="col-11 mb-5 mr-auto ml-auto">
+              <div>
+                <h1 className='title' style={{textAlign: 'left'}}>{foundProduct.title}</h1>
                 <Slider product={foundProduct}/>
-
+              </div>
 
                 
                 <div className='flex-column add-to-card-fixed'>
