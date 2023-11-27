@@ -8,27 +8,43 @@ import Link from 'next/link';
 
 
 interface Props {
-//   products: DataType["products"];
-  allProducts: ProductType[];
+  products: DataType["products"];
 }
 
-const ProductPage: NextPage<Props> = ({  allProducts }) => {
+const ProductPage: NextPage<Props> = ({  products }) => {
     
     
     const router = useRouter();
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [products, setProducts] = useState<ProductType[]>([]);
+    const [productsForPage, setProductsForPage] = useState<ProductType[]>([]);
 
-    const totalPages = Math.ceil(allProducts.length / 10);
-
+    
     useEffect(() => {
         const indexOfLastProduct = currentPage * 10;
         const indexOfFirstProduct = indexOfLastProduct - 10;
         const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
-        setProducts(currentProducts);
+        setProductsForPage(currentProducts);
     }, [currentPage]);
+
+
+    const allProducts: ProductType[] = [];
+
+        Object.values(products.vintageClothes).forEach((productList: ProductType[]) => {
+            productList.forEach((product: ProductType) => {
+                allProducts.push(product);
+            });
+        });
+        
+        Object.values(products.accessories).forEach((productList: ProductType[]) => {
+            productList.forEach((product: ProductType) => {
+                allProducts.push(product);
+            });
+        });
+        
+        
+    const totalPages = Math.ceil(allProducts.length / 10);
 
     const handleArrowClick = (direction: string, clickedPage: any) => {
         if (direction === 'previous') {
@@ -186,8 +202,8 @@ const ProductPage: NextPage<Props> = ({  allProducts }) => {
             <div className="container">
               <div  className="row flex-row">
                 <div className="col-12 flex-row flex-wrap justify-content-around">
-                  {products.length > 0 ? (
-                    products.map((product, productIndex) => {
+                  {allProducts.length > 0 ? (
+                    allProducts.map((product, productIndex) => {
                     let columnSize = "col-5 product-img-small";
                     let columnText = "product-text-a"
                     if (productIndex === 2 || productIndex === 7) {columnSize = "col-11"; columnText = "product-text"}
@@ -251,33 +267,15 @@ export default ProductPage;
      
      const page = parseInt(query.page as string, 10) || 1;
      
-     
-     const resBoxItems = await fetch('http://localhost:5001/boxComponents'); 
-     const boxItemsData = await resBoxItems.json();
-     
      const response = await fetch(`http://localhost:5001/products?&page=${page}`); 
      const products: DataType["products"] = await response.json();
 
-    const allProducts: ProductType[] = [];
-
-        Object.values(products.vintageClothes).forEach((productList: ProductType[]) => {
-            productList.forEach((product: ProductType) => {
-                allProducts.push(product);
-            });
-        });
-
-        Object.values(products.accessories).forEach((productList: ProductType[]) => {
-            productList.forEach((product: ProductType) => {
-                allProducts.push(product);
-            });
-        });
+    
 
 return { 
     props: { 
         products, 
-        allProducts,
-        page, 
-        boxItemsData 
+        page
     },
     }
  }

@@ -18,10 +18,10 @@ interface Props {
   allProducts: ProductType[];
   randomProducts: ProductType[];
   boxItemsData: BoxComponentType[];
-  foundProduct: ProductType
+  // foundProduct: ProductType
 }
 
-const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData, randomProducts, foundProduct }) => {
+const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData, randomProducts }) => {
 
   const router = useRouter();
   const [expandedBox, setExpandedBox] = useState(null);
@@ -32,8 +32,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
   const [products, setProducts] = useState<ProductType[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [favorites, setFavorites] = useState<ProductType[]>([]);
-  const [isAddToCard, setIsAddToCard] = useState(false);
-  // const [selectedRestaurantId, setSelectedRestaurantId] = useState("");
+  // const [isAddToCard, setIsAddToCard] = useState(false);
 
 
      useEffect(() => {
@@ -175,8 +174,8 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
           <div className="row flex-column justify-content-center">
             <div className="col-11 mb-5 mr-auto ml-auto">
               <div>
-                <h1 className='title' style={{textAlign: 'left'}}>{foundProduct.title}</h1>
-                <Slider product={foundProduct}/>
+                <h1 className='title' style={{textAlign: 'left'}}>{product.title}</h1>
+                <Slider product={product}/>
               </div>
 
                 
@@ -185,7 +184,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
                     <button className="menu-footer-button mb-3"
                             onClick={(event: React.MouseEvent<HTMLElement>) => {
                             event.preventDefault();
-                            toggleFavorite(foundProduct.id);
+                            toggleFavorite(product.id);
                           }}
                     ><img src="../pictures/icons/heart-straight-thin.png" /></button>
                   {/* </Link> */}
@@ -193,63 +192,63 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
                     <button className="menu-footer-button"
                             onClick={(event: React.MouseEvent<HTMLElement>) => {
                             event.preventDefault();
-                            // toggleAddToCard(foundProduct.id);
+                            // toggleAddToCard(product.id);
                           }}
                     ><img src="../pictures/icons/shopping cart.png" /></button>
                   {/* </Link> */}
                 </div>
-                <span className="title text-left">{foundProduct.price}  ден.</span>
-                <p className="text-left my-3">{foundProduct.description}</p>
+                <span className="title text-left">{product.price}  ден.</span>
+                <p className="text-left my-3">{product.description}</p>
                 <AmountOfProduct
-                      key={foundProduct.id}
-                      product={foundProduct}
+                      key={product.id}
+                      product={product}
                       onMinusClick={onRemoveItem}
                       onPlusClick={onAddItem}
                     />
                 <div className="flex-row justify-content-start align-items-center align-self-center">
-                  <PrimaryBtn onClick={() => addToCard(foundProduct)} title="Додај во кошничка" btnClass={"PrimaryBtn add w-50 mr-3"} backgroundColor={"linear-gradient(0deg, #FFDBDB, #FFDBDB)"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/>
+                  <PrimaryBtn onClick={() => addToCard(product)} title="Додај во кошничка" btnClass={"PrimaryBtn add w-50 mr-3"} backgroundColor={"linear-gradient(0deg, #FFDBDB, #FFDBDB)"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/>
                   <i
                   onClick={(event: React.MouseEvent<HTMLElement>) => {
                       event.preventDefault();
-                      toggleFavorite(foundProduct.id);
+                      toggleFavorite(product.id);
                     }}
-                    // className={isFavorite && selectedRestaurantId === foundProduct.id ? "fas fa-heart fa-3x" : "far fa-heart fa-3x"}
+                    // className={isFavorite && selectedRestaurantId === product.id ? "fas fa-heart fa-3x" : "far fa-heart fa-3x"}
                     className={isFavorite ? "fas fa-heart fa-2x" : "far fa-heart fa-2x"}
                   ></i>
                 </div>
                 <hr style={{paddingTop: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
                 <div className='flex-row my-3 justify-content-start align-items-center text-left '>
                   <p className='title '>Величина: </p>
-                  <div className="border-0 px-2 mx-3" style={{backgroundColor: "#FFDBDB", borderRadius: '4px'}}>{foundProduct.model_size}</div>
+                  <div className="border-0 px-2 mx-3" style={{backgroundColor: "#FFDBDB", borderRadius: '4px'}}>{product.model_size}</div>
                   <p className='about-text text-dark'>*само 1 парче</p>
                 </div>
-                <p>{foundProduct.size_description}</p>
+                <p>{product.size_description}</p>
                 <Link href='#'><p style={{textDecoration: 'underline'}}>види ги димензиите</p></Link>
                 <hr style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 150%, #D4AF37 0%)"}}/>
                 <div className='flex-row my-3 title justify-content-start align-items-center text-left '>
                   <p>Боја: </p>
-                  <div className="border mx-2 p-2" style={{background: `${foundProduct.color}`, borderRadius: '4px'}} />
-                  <p className='about-text text-dark'>{foundProduct.color}</p>
+                  <div className="border mx-2 p-2" style={{background: `${product.color}`, borderRadius: '4px'}} />
+                  <p className='about-text text-dark'>{product.color}</p>
                 </div>
                 <p className='title text-left'>Материјал: </p>
-                  {foundProduct.material}
+                  {product.material}
                 <div className="flex-row justify-content-start align-items-center">
                   <p className='mr-2'>Постава:</p> 
-                  {foundProduct.composition}
+                  {product.composition}
                 </div>
                 <div className="flex-row my-3 justify-content-start align-items-center">
-                  <p className='title mr-3'>Состојба: {foundProduct.condition}</p>
+                  <p className='title mr-3'>Состојба: {product.condition}</p>
                   <Link href='#'><p style={{textDecoration: 'underline'}}>прочитај повеќе</p></Link>
                 </div>
                 <p className='title text-left'>Насоки за одржување: </p>
-                {foundProduct.care_instructions}
+                {product.care_instructions}
                 <hr style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 150%, #D4AF37 0%)"}}/>
                 <p className='title text-left'>Ознаки:</p>
                 <div className="flex-row mt-2 my-3 justify-content-start align-items-center">
-                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{foundProduct.subcategory}</Link>
-                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{foundProduct.category}</Link>
-                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{foundProduct.material}</Link>
-                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{foundProduct.color}</Link>
+                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{product.subcategory}</Link>
+                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{product.category}</Link>
+                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{product.material}</Link>
+                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{product.color}</Link>
                 </div>
             </div>
 
@@ -261,7 +260,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
           })}
 
            {/* Other Related Product Items  */}
-              <RelatedProducts products={randomProducts}/>
+              <RelatedProducts key={product.id} products={randomProducts}/>
 
           {/* pagination  */}
           <div className="text-center mb-5" style={{letterSpacing: "3px"}}>
@@ -310,13 +309,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const products: DataType["products"] = await response.json();
 
 
-   const allProducts: ProductType[] = [];
+  const allProducts: ProductType[] = [];
 
-      Object.values(products.vintageClothes).forEach((productList: ProductType[]) => {
-          productList.forEach((product: ProductType) => {
-              allProducts.push(product);
-          });
-      });
+        Object.values(products.vintageClothes).forEach((productList: ProductType[]) => {
+            productList.forEach((product: ProductType) => {
+                allProducts.push(product);
+            });
+        });
+        
+        Object.values(products.accessories).forEach((productList: ProductType[]) => {
+            productList.forEach((product: ProductType) => {
+                allProducts.push(product);
+            });
+        });
 
 
   const paths = allProducts?.map((product: ProductType) => ({
@@ -379,16 +384,25 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
 
   const productId = params?.id;
 
-    let foundProduct = null;
-    Object.values(products).forEach((productType) => {
-      Object.values(productType).forEach((products: ProductType[]) => {
-        products.forEach((product) => {
-          if (product.id === productId) {
-            foundProduct = product;
-          }
-        });
-      });
-    });
+  let foundProduct = null;
+
+  allProducts.forEach((product) => {
+    if (product.id === productId) {
+      foundProduct = product;
+    }
+  });
+      
+
+    // let foundProduct = null;
+    // Object.values(products).forEach((productType) => {
+    //   Object.values(productType).forEach((products: ProductType[]) => {
+    //     products.forEach((product) => {
+    //       if (product.id === productId) {
+    //         foundProduct = product;
+    //       }
+    //     });
+    //   });
+    // });
 
 
 if (foundProduct) {
