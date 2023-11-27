@@ -190,7 +190,7 @@ const ProductPage: NextPage<Props> = ({  allProducts }) => {
                     products.map((product, productIndex) => {
                     let columnSize = "col-5 product-img-small";
                     let columnText = "product-text-a"
-                    if ((productIndex + 1) % 3 === 0) {columnSize = "col-11"; columnText = "product-text"}
+                    if (productIndex === 2 || productIndex === 7) {columnSize = "col-11"; columnText = "product-text"}
                         return (
                             <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
                             <ProductItem   id={product.id} title={product.title} img={product.img} price={product.price}/>

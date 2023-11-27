@@ -8,7 +8,8 @@ interface Props {
 const Slider: React.FC<Props> = ({ product }) => {
 
   return (
-          <div className="slider-box mb-5">
+        <div className="container-fluid p-0 w-100" style={{height: '570px'}}>
+          <div className="slider-box">
             <div className="main-container">
               <div className="main-slider">
                 <input type="radio" id="box1" name='julijana' checked/>
@@ -26,6 +27,7 @@ const Slider: React.FC<Props> = ({ product }) => {
               </div>
             </div>
           </div>
+        </div>
   );
 };
 

@@ -9,7 +9,7 @@ interface Props {
   description: string;
   img: string;
   offset: string;
-  children?: React.ReactNode
+  children?: React.ReactNode;
 }
 
 const Banner: React.FC<Props> = ({imageBanner, classOfPicture, bgColor, title, description, img, offset, children}) => {
@@ -18,8 +18,14 @@ const Banner: React.FC<Props> = ({imageBanner, classOfPicture, bgColor, title, d
 const [backgroundColor, setBackgroundColor] = useState(`${bgColor}`)
 
 function handleBackgroundColor() {
-    setBackgroundColor("btn-pink-circle-hover")
+  if (`${bgColor}` === 'btn-pink-circle btn-circle1') {
+    setBackgroundColor("btn-pink-circle-hover-gold")
+  } else if (`${bgColor}` === 'btn-pink-circle btn-circle2') {
+    setBackgroundColor("btn-pink-circle-hover-pink")
+  } else {
+    setBackgroundColor("btn-pink-circle-hover-white");
   }
+}
  
   return (
     <div className="container-fluid banner">

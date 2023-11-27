@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head';
-import { ProductType } from '@/types/types';
+import { BrandType, DataType, ProductType } from '@/types/types';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import BrandItem from '@/components/Brands';
@@ -8,27 +8,27 @@ import ProductItem from '@/components/ProductItem';
 import Link from 'next/link';
 
 interface Props {
-  products: ProductType[];
+  // brands: BrandType;
+  searchedBrands: BrandType[];
   allProducts: ProductType[];
-  searchedBrandsData: ProductType[];
 }
 
-const ProductPage: NextPage<Props> = ({allProducts, searchedBrandsData }) => {
+const ProductPage: NextPage<Props> = ({searchedBrands, allProducts }) => {
     
   const router = useRouter();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [brandedProducts, setBrandedProducts] = useState(searchedBrandsData.slice(0, 6));
   const [currentPage, setCurrentPage] = useState(1);
-  const [products, setProducts] = useState<ProductType[]>([]);
+  const [brands, setBrands] = useState<BrandType[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [brandedProducts, setBrandedProducts] = useState<BrandType[]>(searchedBrands.slice(0, 6));
 
-  const totalPages = Math.ceil(allProducts.length / 10);
+  const totalPages = Math.ceil(brands.length / 10);
 
     useEffect(() => {
         const indexOfLastProduct = currentPage * 10;
         const indexOfFirstProduct = indexOfLastProduct - 10;
-        const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+        const currentProducts = brands.slice(indexOfFirstProduct, indexOfLastProduct);
 
-        setProducts(currentProducts);
+        setBrands(currentProducts);
     }, [currentPage]);
 
     const handleArrowClick = (direction: string, clickedPage: any) => {
@@ -53,18 +53,16 @@ const ProductPage: NextPage<Props> = ({allProducts, searchedBrandsData }) => {
   const handlePrevClick = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 6);
-      setBrandedProducts(searchedBrandsData.slice(currentIndex - 6, currentIndex));
+      setBrandedProducts(searchedBrands.slice(currentIndex - 6, currentIndex));
     }
   };
 
   const handleNextClick = () => {
-    if (currentIndex + 6 < searchedBrandsData.length) {
+    if (currentIndex + 6 < searchedBrands.length) {
       setCurrentIndex(currentIndex + 6);
-      setBrandedProducts(searchedBrandsData.slice(currentIndex + 6, currentIndex + 12));
+      setBrandedProducts(searchedBrands.slice(currentIndex + 6, currentIndex + 12));
     }
   };
-  
-
   
 
 
@@ -78,44 +76,38 @@ return (
         <div className="container">
           <div className="row d-flex flex-column justify-content-center">
             <div className='col-11 mr-auto ml-auto my-5'>
-            {searchedBrandsData.length > 0 ? ( searchedBrandsData.map((brand) => {
-            // treba da go prikazuva SAMO brendot kojsto odgovara na linkot !! ?? sporedi spored URL ?
-            //   http://localhost:3000/brands?brand=nezno
-            // {searchedBrandsData.length > 0 ? ( searchedBrandsData.find((brand) => {
-                // if (router.query.id === brand.id) {
+            {searchedBrands.length > 0 ? ( searchedBrands.map((brand) => {
+              const filterProducts = allProducts?.filter(product => product.brand === brand.name)
               return (
                 <div>
                     <BrandItem  brand={brand} />
                     <p className='about-text text-left mb-5'>{`Погледнете ги производите на ${brand.name} кои ги нудиме во Игралиште. Имаме доста голем избор на Pussy привезоци кои се кул и ултра феминистички, а.к.а. grl pwr.`}</p>
                     
-                    <h2 className='mb-4'>Парчиња од брендот:</h2>  
-
-
-                    <div className='col-11 mr-auto ml-auto my-5'>
-            {/* treba da go prikazuva SAMO brendot kojsto odgovara od pogore izbranoto !?!??! */}
-
-                      {searchedBrandsData.length > 0 ? (
-                        searchedBrandsData.map((product) => (
-                          <div key={product.id} >
-                            <ProductItem {...product}/>
+                    <div className="container-fluid">
+                      <div className="row flex-column">
+                        <h3 className="text-center my-4">Парчиња од брендот:</h3>
+                      <div className="row flex-row">
+                      {filterProducts?.map((product) => {
+                          return (
+                              <div className="col-5 p-0 mb-3 mr-2 product-img-small">
+                                <ProductItem key={product.id} {...product}/>
+                              </div>
+                              )
+                            })} 
+                        {filterProducts?.length >= 6 && (
+                          <div>
+                            <button onClick={handlePrevClick}>{'<'}</button>
+                            <button onClick={handleNextClick}>{'>'}</button>
                           </div>
-                        ))
-                      ) : (
-                        <p>There are no results...</p>
-                      )}
-                      
-                      {searchedBrandsData.length > 6 && (
-                        <div>
-                          <button onClick={handlePrevClick}>{'<'}</button>
-                          <button onClick={handleNextClick}>{'>'}</button>
-                        </div>
-                      )}
+                        )}
                     </div>
                   </div>
-                  )
-                  })) : (
-                  <p>There are no results...</p>
-                )}
+                </div>
+                </div>
+              )
+              })) : (
+              <p>There are no results...</p>
+            )}
                 
             {/* pagination  */}
           <div className="text-center mb-5" style={{letterSpacing: "3px"}}>
@@ -128,7 +120,7 @@ return (
                     {i === 0 ? (
                         <>
                         <button className="bg-transparent border-0 font-weight-bold" >
-                        <Link href={`/products?page=${currentPage -1}`} onClick={() => handleArrowClick('previous', currentPage)}>
+                        <Link href={`/brands?page=${currentPage -1}`} onClick={() => handleArrowClick('previous', currentPage)}>
                             {"<"}
                         </Link>
                         </button>
@@ -139,7 +131,7 @@ return (
                     )}
                     
                     {i === totalPages - 1 ? (
-                        <Link href={`/products?page=${currentPage + 1}`} onClick={() => handleClick(currentPage + 1)}>
+                        <Link href={`/brands?page=${currentPage + 1}`} onClick={() => handleClick(currentPage + 1)}>
                             {">"}
                         </Link>
                     ) : null}
@@ -157,76 +149,56 @@ return (
 export default ProductPage;
 
 
-export const getServerSideProps: GetServerSideProps = async ({query}) => {
-    
-const page = parseInt(query.page as string, 10) || 1;
+ export const getServerSideProps: GetServerSideProps = async ({query}) => { 
+     
+    const page = parseInt(query.page as string, 10) || 1;
+          
+    const responseBrands = await fetch(`http://localhost:5001/brands?_limit=1&page=${page}`); 
+    const brands: BrandType[] = await responseBrands.json();
 
-const resClothes = await fetch(`http://localhost:5001/vintageClothes?page=${page}`);
-const vintageClothes: SubcategoryType[] = await resClothes.json();
+    const responseProducts = await fetch(`http://localhost:5001/products?&page=${page}`); 
+    const products: DataType["products"] = await responseProducts.json();
 
-const resAccessories = await fetch(`http://localhost:5001/accessories?page=${page}`);
-const accessories: SubcategoryType[] = await resAccessories.json();
+    const allProducts: ProductType[] = [];
 
-
-const response = await fetch(`http://localhost:5001?page=${page}`);
-const products: ProductType[] = await response.json();
-
-let resSearchedBrands: Response;
-
-  if (query.brand && query.query) {
-    resSearchedBrands = await fetch(
-      `http://localhost:5001/brands?gender_like=${query.brand}&q=${query.query}`
-    );
-  } else if (query.brand) {
-    resSearchedBrands = await fetch(
-      `http://localhost:5001/brands?gender_like=${query.brand}`
-    );
-  } else if (query.query) {
-    resSearchedBrands = await fetch(
-      `http://localhost:5001/brands?q=${query.query}`
-    );
-  }  else {
-    resSearchedBrands = await fetch("http://localhost:5001/brands");
-  }
-
-  const searchedBrandsData: ProductType[] = await resSearchedBrands.json();
-
-
-
-let allproducts: ProductType[] = []
-
-
-    vintageClothes.forEach((category: SubcategoryType) => {
-        Object.values(category).forEach((productList: ProductType[]) => {
+        Object.values(products.vintageClothes).forEach((productList: ProductType[]) => {
             productList.forEach((product: ProductType) => {
-            if (allproducts.length <= 10 && product.id) {
-                allproducts?.push(product);
-            } else {
-                return;
-            }
+                allProducts.push(product);
             });
         });
-    });
 
-    accessories.forEach((accessory: SubcategoryType) => {
-        Object.values(accessory).forEach((product: ProductType) => {
-            if (allproducts.length <= 10 && product.id) {
-            allproducts?.push(product);
-            } else {
-            return;
-            }
+        Object.values(products.accessories).forEach((productList: ProductType[]) => {
+            productList.forEach((product: ProductType) => {
+                allProducts.push(product);
+            });
         });
-    });
-    
 
-  return {
-      props: {
-        products,
-        allroducts,
-        vintageClothes,
-        accessories,
-        searchedBrandsData,
-        page
-      },
+     
+  let resSearchedBrands: Response;
+
+    if (query.brand && query.query) {
+      resSearchedBrands = await fetch(
+        `http://localhost:5001/brands?category_like=${query.brand}&q=${query.query}`
+      );
+    } else if (query.brand) {
+      resSearchedBrands = await fetch(
+        `http://localhost:5001/brands?category_like=${query.brand}`
+      );
+    } else if (query.query) {
+      resSearchedBrands = await fetch(
+        `http://localhost:5001/brands?q=${query.query}`
+      );
+    }  else {
+      resSearchedBrands = await fetch("http://localhost:5001/brands");
     }
-}
+
+    const searchedBrands: BrandType[] = await resSearchedBrands.json();
+
+return { 
+    props: { 
+        brands,
+        searchedBrands,
+        allProducts,
+    },
+    }
+ }

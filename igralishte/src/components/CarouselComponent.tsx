@@ -12,11 +12,11 @@ interface Props {
 const CarouselComponent: React.FC<Props> = ({ vintageClothes }) => {
 
   return (
-    <div className="carousel container-fluid h-100">
+    <div className="carousel container-fluid">
       <div className="row d-flex flex-row justify-content-center">
         <h2 className="carousel-header mb-3">Trendy парчиња во моментов</h2>
-        <div className="col-11">
-          <Carousel showIndicators={false} showStatus={false} showThumbs={true} infiniteLoop={true} className='carousel-container'>
+        <div className="col-11  h-100">
+          <Carousel showIndicators={false} showStatus={false} showThumbs={false} infiniteLoop={true} className='carousel-container'>
               {vintageClothes.tops.map((product) => {
                 return (
                   <ProductItem key={product.id} {...product}/>

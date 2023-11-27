@@ -261,7 +261,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, allProducts, boxItemsData
           })}
 
            {/* Other Related Product Items  */}
-              <RelatedProducts key={foundProduct.id} products={randomProducts}/>
+              <RelatedProducts products={randomProducts}/>
 
           {/* pagination  */}
           <div className="text-center mb-5" style={{letterSpacing: "3px"}}>
