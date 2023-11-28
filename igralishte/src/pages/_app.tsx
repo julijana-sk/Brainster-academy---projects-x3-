@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import UserContextConstructor from '../context/UserContext';
 import Authentication from '../components/Authentication';
 import { useRouter } from 'next/router';
+import HamburgerMenu from '@/components/HamburgerMenu';
 
 
 function MyApp({ Component, pageProps }: AppProps) {

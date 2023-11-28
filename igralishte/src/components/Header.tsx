@@ -1,17 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import BrandsPicker from "./BrandsPicker";
+import { BrandType, ProductType } from "@/types/types";
+import BrandItem from "./BrandsPicker";
 
 
 
 const Header: React.FC = () => {
 
-  const { user, handleLogOut, handleLogIn, data} = useContext(UserContext);
+  const { user, handleLogOut, handleLogIn, data, brands, useFetchAllProducts} = useContext(UserContext);
 
-  // console.log(data)
-
+  const [products, setProducts] = useState<ProductType[]>([]);
  
   const {pathname, push} = useRouter();
   const router = useRouter();
@@ -21,6 +22,7 @@ const Header: React.FC = () => {
   const [searchState, setSearchState] = useState("");
 
 
+  useEffect(() => { useFetchAllProducts});
 
   const handleSearchSubmit = (event: React.FormEvent) => {
       event.preventDefault();
@@ -36,14 +38,14 @@ const Header: React.FC = () => {
       setToggleSearch(!toggleSearch);
   };
 
-  const openNav = () => {
+  const handleToggleNav = () => {
     setToggleNav(!toggleNav);
   }
 
 return (
     <div className="px-4 py-3">
       <div className="container text-dark pl-2 pr-0">
-          <div onClick={openNav} className={toggleNav ? "activeHamburger" : "hamburber"} />
+          <div onClick={handleToggleNav} className={toggleNav ? "activeHamburger" : "hamburber"} />
           <Link href={"/"} className="navbar-brand m-0 text-center">
           <img src="../pictures/icons/Logo Igralishte final version 1.png" alt="logo"/>
           </Link>
@@ -67,29 +69,52 @@ return (
         </div>
       </div>
     </div>
-      <div className={toggleNav ? "activeSidenav" : "sidenav"}>
+      <button className={toggleNav ? "activeSidenav" : "sidenav"} onClick={handleToggleNav}>
+        {toggleNav && (
         <ul className="menu">
-          <li>
-          {/* {data?.categories?.map((item, index) => (
-            <li key={index}>
-              <CategoryItems category={item}/>
-              <ul>
-                {item.subs.map((sub) => (
-                  <li key={sub.type}>
-                  <Link href={`/category/${item.category}/${sub.type}`}>
-                      {sub.type}
-                  </Link>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))} */}
-        </li> 
-        <ul>
-        <li>
-          <BrandsPicker />
-        </li>
-        </ul>
+          {/* <li>
+            {Object.keys(data).map((category, index) => {
+              return (
+                <div key={index}>{Object.values(category).map((element, index) => {                 
+                  return (
+                    <div key={index}>{element}</div>
+                  )
+                })}</div>
+              )
+            })}
+          </li> */}
+                <li className="dropdown">
+                  <p className="btn btn-secondary dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Vintage Clothes
+                  </p>
+                  <div className="dropdown-menu">
+                    <p className="dropdown-item" >Сите</p>
+                    <p className="dropdown-item" >Блузи</p>
+                    <p className="dropdown-item" >Пантолони</p>
+                  </div>
+                </li>
+                <li className="dropdown">
+                  <p className="btn btn-secondary dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Accessories
+                  </p>
+                  <div className="dropdown-menu">
+                    <p className="dropdown-item" >Сите</p>
+                    <p className="dropdown-item" >Ташни</p>
+                    <p className="dropdown-item" >Накит</p>
+                  </div>
+                </li>
+                <li className="dropdown">
+                  <p className="btn btn-secondary dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Брендови
+                  </p>
+                  <div className="dropdown-menu">
+                    <p className="dropdown-item" >Сите</p>
+                    <p className="dropdown-item" >Зш да не</p>
+                    <p className="dropdown-item" >Нежно</p>
+                  </div>
+                </li>
+         
+    
           <div className="menu-footer">
             <li className="nav-item ">
               <Link href={"/gifts"} >link to gifts</Link>
@@ -109,9 +134,10 @@ return (
               </Link>
             </li>
             <li className={pathname === "/login" ? "active-menu" : ""}>
+            <li className="nav-item">
               <div className="nav-link d-flex flex-row justify-content-start">
                 <button className="menu-footer-button"><img src="../pictures/icons/user-light.png" /></button>
-                {/* <button className="menu-footer-button"><img src="../pictures/icons/user-light.png")} /></button> */}
+                <button className="menu-footer-button"><img src="../pictures/icons/user-light.png" /></button>
 
                 {user ? (
                 <button onClick={handleLogOut}><Link href={"/profile"}> Мој профил </Link></button>
@@ -119,10 +145,12 @@ return (
                     <Link href="/login">Регистрирај се/Логирај се</Link>
                   )}
               </div>
+              </li>
             </li>
           </div>
         </ul>
-      </div>
+         )}
+      </button>
     </div>
   );
 };

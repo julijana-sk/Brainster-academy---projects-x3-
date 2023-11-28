@@ -1,4 +1,4 @@
-import { DataType, ProductType } from "@/types/types";
+import { BrandType, DataType, ProductType } from "@/types/types";
 import React, { createContext, useEffect, useState } from "react";
 
 interface UserContextType {
@@ -7,9 +7,9 @@ interface UserContextType {
   } | null,
   handleLogIn: (username: string, password: string) => void,
   handleLogOut: () => void,
-  // getRandomProducts: (products: ProductType[], count: number) => ProductType[];
   data: DataType[];
   useFetchAllProducts: () => { loading: boolean; products: ProductType[] };
+  brands: BrandType[];
   addToCard: (prod: ProductType) => void;
 }
 
@@ -17,9 +17,9 @@ export const UserContext = createContext<UserContextType>({
   user: null,
   handleLogIn: () => {},
   handleLogOut: () => {},
-  // getRandomProducts: (products: ProductType[], count: number) => [],
   data: [],
   useFetchAllProducts: () => ({ loading: false, products: [] }),
+  brands: [],
   addToCard: () => {}
 
 });
@@ -34,6 +34,8 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
   const [user, setUser] = useState<UserContextType["user"]>({email: "igralishte@hotmail.com"});
   const [data, setData] = useState<DataType[]>([]);
   const [products, setProducts] = useState<ProductType[]>([]);
+  const [brands, setBrands] = useState<BrandType[]>([]);
+
 
 
 
@@ -46,6 +48,16 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
             // setUser(null)
         });
     }, []);
+
+
+    useEffect(() => {
+        fetch("http://localhost:5001/brands")
+        .then((res) => res.json())
+        .then((brands) => {
+            setData(brands);
+        });
+    }, []);
+
 
 
   const useFetchAllProducts = () => { 
@@ -105,27 +117,15 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
       setUser(null);
     };
   
-  
-  //   function getRandomProducts(products: ProductType[], count: number): ProductType[] {
-  //     const randomProducts: ProductType[] = [];
-  
-  //     for (let i = 0; i < count; i++) {
-  //         const randomIndex = Math.floor(Math.random() * products.length);
-  //         randomProducts.push(products[randomIndex]);
-  
-  //         // za da nema duplikat
-  //         products.splice(randomIndex, 1);
-  //     }
-  //     return randomProducts;
-  // }
+
 
   return (
     <UserContext.Provider value={{ 
         user, 
         handleLogIn, 
         handleLogOut,
-        // getRandomProducts,
         data,
+        brands,
         useFetchAllProducts,
         addToCard
       }}>
