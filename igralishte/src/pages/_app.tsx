@@ -5,23 +5,24 @@ import Footer from '../components/Footer';
 import UserContextConstructor from '../context/UserContext';
 import Authentication from '../components/Authentication';
 import { useRouter } from 'next/router';
-import HamburgerMenu from '@/components/HamburgerMenu';
 
 
 function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
-  const isLoginPage = router.route === '/login';
-  const isProfilePage = router.route === '/profile';
+  // const isLoginPage = router.route === '/login';
+  // const isProfilePage = router.route === '/profile';
 
 
   return (
     <div>
       <UserContextConstructor>
         <Authentication>
-           {!isLoginPage && !isProfilePage && <Header />}
+           {/* {!isLoginPage && !isProfilePage && <Header />} */}
+           <Header />
           <Component {...pageProps} />
-           {!isLoginPage && !isProfilePage && <Footer />}
+          <Footer />
+           {/* {!isLoginPage && !isProfilePage && <Footer />} */}
         </Authentication>
       </UserContextConstructor>
     </div>

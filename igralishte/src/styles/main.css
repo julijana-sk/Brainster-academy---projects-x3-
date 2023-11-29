@@ -12,12 +12,12 @@ h1 {
 }
 h2, h3, h4, h5 {
     font-family: 'Cormorant Infant', serif;
-    /* margin: 0; */
+    margin: 0;
 }
 
 p, a {
-    /* margin: 0;
-    padding: 0; */
+    margin: 0;
+    padding: 0;
     text-decoration:  none !important;
 }
 
@@ -61,10 +61,12 @@ p, a {
 
 .nav-link {
     transition: 0.7s ease;
+    padding: 0;
+    margin-bottom: 15px;
 }
 
-.nav-link:hover {
-    color: red !important;
+.nav-link:hover, .nav-link a:hover {
+    color: #8A8328;
 }
 
 .absolute-absolute {
@@ -84,11 +86,14 @@ p, a {
 
 /* Hamburger menu */
 
-.container {
-    background: white;
+.hamburger-btn {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 40px;
+    width: 13%;
+    background-color: transparent;
+    border: none;
 }
 
 .hamburber {
@@ -101,7 +106,7 @@ p, a {
     cursor: pointer;
 }
 
-.hamburber::before {
+.hamburber-top {
     content: "";
     position: absolute;
     cursor: pointer;
@@ -113,7 +118,7 @@ p, a {
     transform: translateY(-10px);
 }
 
-.hamburber::after {
+.hamburber-bottom {
     content: '';
     position: absolute;
     cursor: pointer;
@@ -135,7 +140,7 @@ p, a {
     cursor: pointer;
 }
 
-.activeHamburger::before {
+.activeHamburger-top {
     content: '';
     position: absolute;
     cursor: pointer;
@@ -144,10 +149,10 @@ p, a {
     background-color: black;
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
-    transform: rotate(45deg) translate(35px, -35px);
+    transform: rotate(45deg);
 }
 
-.activeHamburger::after {
+.activeHamburger-bottom {
     content: '';
     position: absolute;
     cursor: pointer;
@@ -156,12 +161,12 @@ p, a {
     background-color: black;
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
-    transform: rotate(-45deg) translate(35px, 35px);
+    transform: rotate(-45deg);
 }
 .sidenav {
     position: fixed;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: white;
     transform: translateX(100%);
     transition: all 0.1s ease-in-out;
@@ -170,14 +175,16 @@ p, a {
 .activeSidenav {
     position: fixed;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: white;
     transform: translateX(0%);
     transition: all 0.5s ease-in-out;
+    overflow: auto !important;
+    box-sizing: border-box;
     z-index: 222222222;
     left: 0;
+    top: 0;
 }
-
 ul {
     list-style: none;
     margin: 0;
@@ -194,11 +201,9 @@ ul li a {
     line-height: 33px;
     letter-spacing: -0.011em;
     text-align: left;
-    display: column;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    align-self: center;
+    position: fixed;
+    bottom: 0;
 }
 
 .menu-footer p {
@@ -215,7 +220,6 @@ ul li a {
     background: linear-gradient(0deg, #FFF7F7, #FFF7F7);
     position: relative;
     align-self: center;
-    align-self: center;
 }
 .menu-footer img {
     width: 30px;
@@ -223,6 +227,43 @@ ul li a {
     top: 9px;
     left: 6px;
     position: absolute;
+}
+
+.dropdown1 .dropdown-toggle::after {
+    margin-left: 200px;
+}
+.dropdown2 .dropdown-toggle::after {
+    margin-left: 250px;
+}
+.dropdown3 .dropdown-toggle::after {
+    margin-left: 239px;
+}
+.dropdown-menu {
+    margin-top: 0;
+    min-width: 100%;
+    position: relative;
+    border: none;
+}
+
+.dropdown-menu.show {
+    margin-bottom: 20px !important;
+    position: relative !important;
+    transform: translate3d(0px, 0px, 0px) !important;
+    padding: 10px 10px 10px 20px !important;
+    margin-right: 100px !important;
+    top: 40px;
+    left: 0px;
+}
+.dropdown-menu.show .dropdown-item:first-child {
+    padding-left: 0 !important;
+}
+
+.menu-list {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 33px;
+    letter-spacing: -0.011em;
 }
 
 /* ______________________________ */
@@ -281,36 +322,8 @@ ul li a {
 }
 
 /*---------------------------------------------*/
-/* @media (max-width: 767px) {
 
-    .wrap-search-header input,
-    .wrap-search-header button {
-        font-size: 30px;
-    }
-
-    .wrap-search-header {
-        height: 90px;
-    }
-}
-
-@media (max-width: 575px) {
-
-    .wrap-search-header input,
-    .wrap-search-header button {
-        font-size: 20px;
-    }
-
-    .wrap-search-header button {
-        width: 40px;
-    }
-
-    .wrap-search-header {
-        height: 80px;
-    }
-} */
-
-/*//////////////////////////////////////////////////////////////////
-[ Filter ]*/
+/* [ Filter ] */
 .show-search .icon-search,
 .show-filter .icon-filter {
     display: none;
@@ -403,26 +416,6 @@ ul li a {
   color: #555;
   line-height: 1.2;
 }
-/* 
-@media (max-width: 767px) {
-
-    .filter-col1,
-    .filter-col2,
-    .filter-col3,
-    .filter-col4 {
-        width: 50%;
-    }
-}
-
-@media (max-width: 575px) {
-
-    .filter-col1,
-    .filter-col2,
-    .filter-col3,
-    .filter-col4 {
-        width: 100%;
-    }
-} */
 
 /* search end  */
 form label {
@@ -893,86 +886,6 @@ form label {
         transform: translateX(-80%);
     }
 }
-
-/* @media only screen and (max-width: 800px) {
-    .announcement-bar__message {
-        font-size: 13px;
-        animation: scroll-left 20s linear infinite;
-    }
-
-    .home-page-video video {
-        width: 100%;
-    }
-
-    #shopify-section-slideshow img,
-    .index-slideshow-section img {
-        height: unset !important;
-    }
-
-    #shopify-section-slideshow,
-    #shopify-section-slideshow .slick-list,
-    .index-slideshow-section,
-    .index-slideshow-section .slick-list {
-        height: 400px;
-    }
-
-    @-moz-keyframes scroll-left {
-        0% {
-            -moz-transform: translateX(100%);
-        }
-
-        100% {
-            -moz-transform: translateX(-150%);
-        }
-    }
-
-    @-webkit-keyframes scroll-left {
-        0% {
-            -webkit-transform: translateX(100%);
-        }
-
-        100% {
-            -webkit-transform: translateX(-150%);
-        }
-    }
-
-    @keyframes scroll-left {
-        0% {
-            -moz-transform: translateX(100%);
-            -webkit-transform: translateX(100%);
-            transform: translateX(100%);
-        }
-
-        100% {
-            -moz-transform: translateX(-150%);
-            -webkit-transform: translateX(-150%);
-            transform: translateX(-150%);
-        }
-    }
-}
-
-@media only screen and (max-width: 600px) {
-
-    #shopify-section-slideshow,
-    #shopify-section-slideshow .slick-list,
-    .index-slideshow-section,
-    .index-slideshow-section .slick-list {
-        height: 260px;
-    }
-
-}
-
-@media only screen and (max-width: 500px) {
-
-    #shopify-section-slideshow,
-    #shopify-section-slideshow .slick-list,
-    .index-slideshow-section,
-    .index-slideshow-section .slick-list {
-        height: 240px;
-    }
-
-} */
-
 /* / ------------------------- /  */
 
 .footer {
@@ -1257,83 +1170,3 @@ a {
 .boxComponent img {
     background-image: url('../pictures/box/X.png');
 }
-
-
-/* HAMBURGER-MENU */
-/* .hamburger-menu {
-    position: relative;
-}
-
-.hamburger {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    outline: none;
-}
-
-.menu {
-    background-color: white;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 0;
-    width: 100%;
-    top: 0;
-}
-
-.menu li a {
-    color: white;
-    display: block;
-    padding: 12px 16px;
-    text-decoration: none;
-}
-
-.menu li a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.hamburger-dropdown-items {
-    display: none;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.hamburger-dropdown-items li a {
-    color: white;
-    display: block;
-    padding: 12px 16px;
-    text-decoration: none;
-}
-
-.hamburger-dropdown-items li a:hover {
-    background-color: #ddd;
-    color: black;
-} */
-
-.menu {
-    position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: white;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: space-around;
-z-index: 1;
-}
-
-.close-menu {
-    color: #fff;
-font-size: 2rem;
-cursor: pointer;
-position: absolute;
-top: 1rem;
-right: 1rem;
-}
-/* hamburger MENU end  */

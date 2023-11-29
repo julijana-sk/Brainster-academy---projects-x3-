@@ -108,7 +108,7 @@ const ProfilePage = () => {
                   </div>
                   <input type='text' style={{fontSize: "10px", fontFamily: "Inter"}} className="form-control border-0" aria-label="Text input with checkbox" placeholder='Испраќај ми известувања за нови зделки и промоции.'/>
                 </div>
-              <PrimaryBtn title="Зачувај" btnClass={"PrimaryBtn w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/>
+                <Link href="/"><PrimaryBtn title="Зачувај" btnClass={"PrimaryBtn w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/></Link>
                 </div>
               </div>
             </div>
