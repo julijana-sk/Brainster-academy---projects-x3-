@@ -169,7 +169,7 @@ import Link from 'next/link';
      
 //     const page = parseInt(query.page as string, 10) || 1;
           
-//     const responseBrands = await fetch(`http://localhost:5001/brands?_limit=1&page=${page}`); 
+//     const responseBrands = await fetch(`http://localhost:5001/brands?&page=${page}`); 
 //     const brands: BrandType[] = await responseBrands.json();
 
 //     const responseProducts = await fetch(`http://localhost:5001/products?&page=${page}`); 

@@ -150,11 +150,11 @@ import { BoxComponentType, ProductType } from '@/types/types';
 
 //   const resClothes = await fetch('http://localhost:5001/vintageClothes');
 //   const vintageClothes: SubcategoryType[] = await resClothes.json();
-  // const res = await fetch("http://localhost:5001/vintageClothes");
-  // const data: DataType = await res.json();
+//   const res = await fetch("http://localhost:5001/vintageClothes");
+//   const data: DataType = await res.json();
 
 
-  // OPTION 1 :
+//   OPTION 1 :
 //   const allproducts = vintageClothes?.flatMap((category) => {
 //     return Object.values(category).flatMap((productList: ProductType[]) => productList);
 //   });
@@ -232,16 +232,16 @@ import { BoxComponentType, ProductType } from '@/types/types';
 //     product = await resProduct.json();
 //   }
   
-  // console.log(product)
+//   console.log(product)
 
 
-  // let randomProducts: ProductType[] = [];
+//   let randomProducts: ProductType[] = [];
 
-  // if (allproducts.length > 4) {
-  //   const randomNo = Math.floor(Math.random() * (allproducts.length - 4));
-  //   const resRandomProducts = await fetch(`http://localhost:5001/products?_start=${randomNo}&_limit=4`);
-  //   randomProducts = await resRandomProducts.json();
-  // }
+//   if (allproducts.length > 4) {
+//     const randomNo = Math.floor(Math.random() * (allproducts.length - 4));
+//     const resRandomProducts = await fetch(`http://localhost:5001/products?_start=${randomNo}&_limit=4`);
+//     randomProducts = await resRandomProducts.json();
+//   }
 
 
 //   return {
