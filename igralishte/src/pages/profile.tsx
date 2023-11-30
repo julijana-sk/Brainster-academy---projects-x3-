@@ -100,13 +100,13 @@ const ProfilePage = () => {
                     setBiography(event.target.value);
                     }}/>
               </div>
-                <div className="input-group my-3">
-                  <div className="input-group-prepend">
-                    <div className="input-group-text border-0 bg-transparent px-1">
-                      <input type="checkbox" aria-label="Checkbox for following text input"/>
+               <div className="input-group my-3">
+                  <div className="input-group-prepend d-flex justify-content-between align-items-center">
+                    <div className="input-group-text border-0 bg-transparent px-1 mr-2">
+                      <input type="checkbox" aria-label="Checkbox for following text input" checked/>
                     </div>
+                    <div><p style={{fontSize: "10px", fontFamily: "Inter"}} className="p-0">Испраќај ми известувања за нови зделки и промоции.</p></div>
                   </div>
-                  <input type='text' style={{fontSize: "10px", fontFamily: "Inter"}} className="form-control border-0" aria-label="Text input with checkbox" placeholder='Испраќај ми известувања за нови зделки и промоции.'/>
                 </div>
                 <Link href="/"><PrimaryBtn title="Зачувај" btnClass={"PrimaryBtn w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/></Link>
                 </div>
@@ -154,36 +154,3 @@ const ProfilePage = () => {
 }
 
 export default ProfilePage;
-
-// export const getServerSideProps: GetServerSideProps = async ({query}) => {
-
-//  let resSearchedBlogsItems: Response;
-//  let resSearchedProductsItems: Response;
-//  let searchQuery = query.query || "";
-
-//  if (searchQuery) {
-//     [resSearchedBlogsItems, resSearchedProductsItems] = await Promise.all([
-//       fetch(`http://localhost:5001/blogs?q=${query.query}`),
-//       fetch(`http://localhost:5001/products?q=${query.query}`),
-//     ]);
-//  } else {
-//     [resSearchedBlogsItems, resSearchedProductsItems] = await Promise.all([
-//       fetch("http://localhost:5001/blogs"),
-//       fetch("http://localhost:5001/products"),
-//     ]);
-//  }
-
-//  const [searchedBlogsItemsData, searchedProductsItemsData ] = await Promise.all([
-//     resSearchedBlogsItems.json(),
-//     resSearchedProductsItems.json(),
-//   ]);
-   
-
-//  return {
-//   props: {
-//     searchedBlogsItemsData,
-//     searchedProductsItemsData,
-//     },
-//   };
-
-// };

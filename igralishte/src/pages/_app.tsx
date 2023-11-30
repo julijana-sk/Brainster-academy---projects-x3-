@@ -10,19 +10,19 @@ import { useRouter } from 'next/router';
 function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
-  // const isLoginPage = router.route === '/login';
-  // const isProfilePage = router.route === '/profile';
+  const isLoginPage = router.route === '/login';
+  const isProfilePage = router.route === '/profile';
+  const isRegisterPage = router.route === '/register';
+
 
 
   return (
     <div>
       <UserContextConstructor>
         <Authentication>
-           {/* {!isLoginPage && !isProfilePage && <Header />} */}
-           <Header />
+           {(!isLoginPage && !isProfilePage && !isRegisterPage) && <Header />}
           <Component {...pageProps} />
-          <Footer />
-           {/* {!isLoginPage && !isProfilePage && <Footer />} */}
+           {(!isLoginPage && !isProfilePage && !isRegisterPage) && <Footer />}
         </Authentication>
       </UserContextConstructor>
     </div>

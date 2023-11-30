@@ -10,9 +10,10 @@ interface Props {
   img: string;
   offset: string;
   children?: React.ReactNode;
+  toPage: string
 }
 
-const Banner: React.FC<Props> = ({imageBanner, classOfPicture, bgColor, title, description, img, offset, children}) => {
+const Banner: React.FC<Props> = ({imageBanner, classOfPicture, bgColor, title, description, img, offset, toPage, children}) => {
 
   
 const [backgroundColor, setBackgroundColor] = useState(`${bgColor}`)
@@ -34,12 +35,9 @@ function handleBackgroundColor() {
           <img src={imageBanner}
             alt="banner picture"
             className={`${classOfPicture}`} />
-             <Link href={"/newArrivals"}>
+             <Link href={`${toPage}`}>
             <button className={`${backgroundColor} rounded-circle banner-text-wrapper`} 
-                    onClick={ (event: React.MouseEvent<HTMLElement>) => {
-                      event.preventDefault();
-                      handleBackgroundColor()
-                      }}>
+                    onClick={() => handleBackgroundColor()}>
               <img src={`${img}`} alt="spark elements" />
               <h3 className="text-center">{title}</h3>
               <p className="small">{description}</p>

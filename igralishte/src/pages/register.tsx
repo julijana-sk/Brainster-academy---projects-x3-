@@ -26,12 +26,13 @@ const RegisterPage: NextPage = () => {
 
 
   const handleChangeView1 = () => {
-    setView(view === 'register' ? 'register-2' : 'register');
+    setView(view === 'register' ? 'register-2' : "register");
   };
 
   const handleChangeView2 = () => {
     setView(view === 'register-2' ? 'register-3' : 'register');
   };
+ 
 
   useEffect(() => {
     console.log('View changed to:', view);
@@ -48,18 +49,20 @@ const RegisterPage: NextPage = () => {
 
       {view === "register" ? 
 
-      <div className="container my-5">
+      <div className="container mt-5">
           <div className="row d-flex flex-column justify-content-center mr-auto ml-auto">
-            <div className="col-12">
+              <div className='col-12 my-5 text-center'>
+                <Link href={"/"}><img src="../pictures/icons/Logo Igralishte final version.png" alt="logo-igralishte" className="mb-5" /></Link>
             <form className="d-flex flex-column justify-content-center">
-            <div className='text-center mb-5'>
-              <PrimaryBtn btnClass={"SecondaryBtn w-100"}  onClick={handleChangeView1} title="Регистрирај се со емаил адреса" backgroundColor={"transparent"} color='black' height="40px" border='3px solid #FFDBDB'/>            
-              <p className='text-center my-4'>или</p>
-              <PrimaryBtn btnClass={"SecondaryBtn w-100"} img="../pictures/icons/google.png" title="Најави се преку Google" backgroundColor={"transparent"} color='black' height="40px" border='3px solid #FFDBDB'/>
-              <PrimaryBtn btnClass={"SecondaryBtn w-100"}  img="../pictures/icons/facebook.png" title="Најави се преку Facebook" backgroundColor={"transparent"} color='black' height="40px" border='3px solid #FFDBDB'/>
-              <Link href="/login"><p className='mr-2 mt-4 mb-5 text-dark font-weight-bold'>Веќе имаш профил? <span style={{color: "#8A8328", textDecoration: "underline"}}> Логирај се</span></p></Link>
+            <div className='col-11 text-center p-0 mr-auto ml-auto'>
+              <div className="mt-5 w-100" onClick={handleChangeView1} >
+                <PrimaryBtn btnClass={"SecondaryBtn w-100"}  title="Регистрирај се со емаил адреса" backgroundColor={"transparent"} color='black' height="40px" border='3px solid #FFDBDB'/> </div>           
+                <p className='text-center my-4'>или</p>
+                <PrimaryBtn btnClass={"SecondaryBtn w-100"} img="../pictures/icons/google.png" title="Најави се преку Google" backgroundColor={"transparent"} color='black' height="40px" border='3px solid #FFDBDB'/>
+                <PrimaryBtn btnClass={"SecondaryBtn w-100"}  img="../pictures/icons/facebook.png" title="Најави се преку Facebook" backgroundColor={"transparent"} color='black' height="40px" border='3px solid #FFDBDB'/>
+                <Link href="/login"><p className='mr-2 mt-4 mb-5 text-dark font-weight-bold'>Веќе имаш профил? <span style={{color: "#8A8328", textDecoration: "underline"}}> Логирај се</span></p></Link>
+                <div className='p-0 note text-center'>Сите права задржани @ Игралиште Скопје</div>
               </div>
-              <p className='note'>Сите права задржани @ Игралиште Скопје</p>
             </form>
         </div>
         </div>
@@ -68,22 +71,11 @@ const RegisterPage: NextPage = () => {
 
       {view === "register-2" ? 
 
-      <div className="container p-0 my-5 mr-auto ml-auto">
-        <form className="d-flex flex-column justify-content-center"
-          onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
-          handleLogIn(username, password);
-          }}>
-
-          <div className='container-fluid mt-5 text-center'>
-            <div className='row d-flex flex-column justify-content-center'>
-              <div className='col-12 mt-5'>
+      <div className="container mt-5">
+        <form className="d-flex flex-column justify-content-center mr-auto ml-auto"
+          onSubmit={() => handleLogIn(username, password)}>
+              <div className='col-12 text-center my-5'>
                 <Link href={"/"}><img src="../pictures/icons/Logo Igralishte final version.png" alt="logo-igralishte" /></Link>
-                <div className='col-12 mt-5 mb-3 text-center'>
-                  <img src="../pictures/Profile-picture.png" alt="profile picture" />
-                  </div>
-                  <div className='col-12 mb-3 text-center'>
-                  <button className='btnProfilePicture small p-0 px-2 border-0'>Одбери слика</button>
-                </div>
               </div>
               <div className='mb-3 col-11 px-4 text-left mr-auto ml-auto'>
               <div className='d-flex flex-column justify-content-left'>
@@ -116,13 +108,17 @@ const RegisterPage: NextPage = () => {
                   setPassword(event.target.value);
                   }} /> 
               </div>
-              
-              
-              <PrimaryBtn onClick={handleChangeView2}  title="Регистрирај се"  btnClass={"PrimaryBtn w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/>
-              
-              <p className='note'>Со вашата регистрација, се согласувате со Правилата и Условите за кориснички сајтови.</p>
-              </div>
-            </div>
+              <div className="input-group my-3">
+                  <div className="input-group-prepend d-flex justify-content-between align-items-center">
+                    <div className="input-group-text border-0 bg-transparent px-1 mr-2">
+                      <input type="checkbox" aria-label="Checkbox for following text input" checked />
+                    </div>
+                    <div><p style={{fontSize: "10px", fontFamily: "Inter"}} className="p-0">Испраќај ми известувања за нови зделки и промоции.</p></div>
+                  </div>
+                </div>
+              <div className="mt-5 w-100" onClick={handleChangeView2} >
+              <PrimaryBtn onClick={handleChangeView2}  title="Регистрирај се"  btnClass={"PrimaryBtn mt-5 w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/></div>
+              <p className='note p-0 text-left'>Со вашата регистрација, се согласувате со <strong><u>Правилата и Условите</u></strong> за кориснички сајтови.</p>
           </div>
         </form>
         </div>
@@ -165,17 +161,9 @@ const RegisterPage: NextPage = () => {
                     setBiography(event.target.value);
                     }}/>
               </div>
-                <div className="input-group my-3">
-                  <div className="input-group-prepend">
-                    <div className="input-group-text border-0 bg-transparent px-1">
-                      <input type="checkbox" aria-label="Checkbox for following text input"/>
-                    </div>
-                  </div>
-                  <input type='text' style={{fontSize: "10px", fontFamily: "Inter"}} className="form-control border-0" aria-label="Text input with checkbox" placeholder='Испраќај ми известувања за нови зделки и промоции.'/>
-                </div>
-              <Link href="/"><PrimaryBtn title="Заврши" onClick={() => {handleLogIn}} btnClass={"PrimaryBtn w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/></Link>
+              <Link href="/"><PrimaryBtn title="Заврши" onClick={() => {handleLogIn}} btnClass={"PrimaryBtn mt-5 w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/></Link>
               
-              <Link href="/login"><p style={{color: "black", textDecoration: "underline"}}>Прескокни</p></Link>
+              <Link href="/login"><p className="mt-3"><u>Прескокни</u></p></Link>
               </div>
               </div>
             </div>

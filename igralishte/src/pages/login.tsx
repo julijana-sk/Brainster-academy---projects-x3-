@@ -4,7 +4,7 @@ import Link from 'next/link';
 import LoginForm from '@/components/LoginForm';
 
 const LoginPage = () => {
-   
+
   return (
     <>
       <Head>

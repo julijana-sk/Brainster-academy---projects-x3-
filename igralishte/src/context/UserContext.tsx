@@ -1,12 +1,12 @@
-import { AccessoriesType, BrandType, DataType, ProductType, VintageClothesType } from "@/types/types";
+import { BrandType, DataType, ProductType } from "@/types/types";
 import React, { createContext, useEffect, useState } from "react";
 
 interface UserContextType {
   user: {
     email: string;
-  } | null,
-  handleLogIn: (username: string, password: string) => void,
-  handleLogOut: () => void,
+  } | null;
+  handleLogin: (username: string, password: string) => void;
+  handleLogout: () => void;
   data: DataType[];
   useFetchAllProducts: () => { loading: boolean; products: ProductType[] };
   brands: BrandType[];
@@ -17,8 +17,8 @@ interface UserContextType {
 
 export const UserContext = createContext<UserContextType>({
   user: null,
-  handleLogIn: () => {},
-  handleLogOut: () => {},
+  handleLogin: () => {},
+  handleLogout: () => {},
   data: [],
   useFetchAllProducts: () => ({ loading: false, products: [] }),
   brands: [],
@@ -31,20 +31,23 @@ interface Props {
   children: React.ReactNode;
 }
 
+
 const UserContextConstructor: React.FC<Props> = ({ children }) => {
 
-  // const [user, setUser] = useState<UserContextType["user"]>({email: ""});
-  const [user, setUser] = useState<UserContextType["user"]>({email: "igralishte@hotmail.com"});
+  const [user, setUser] = useState<UserContextType["user"] | null>({email: 'igralishte@hotmail.com'});
   const [data, setData] = useState<DataType[]>([]);
   const [products, setProducts] = useState<ProductType[]>([]);
   const [brands, setBrands] = useState<BrandType[]>([]);
   const [vintageClothes, setVintageClothes] = useState<ProductType[]>([]);
   const [accessories, setAccessories] = useState<ProductType[]>([]);
-  const [addItems, setAddedToCard] = useState(JSON.parse(localStorage.getItem("cart") || '{}'));
+  const [addItems, setAddedToCard] = useState<ProductType>();
 
-
-
-
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("username");
+      if (loggedInUser) {
+        setUser({ email: loggedInUser });
+      }
+}, []);
 
   useEffect(() => {
         fetch("http://localhost:5001")
@@ -73,19 +76,30 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
     const accessoriesArrray: ProductType[] = [];
 
    
-    products.map((category) => {
-        {if (category.category === 'vintageClothes') (
-          vintageClothesArrray.push(category))
-          setVintageClothes(vintageClothesArrray)
-     }})
+    // products?.map((category) => {
+    //     {if (category.category === 'vintageClothes') (
+    //       vintageClothesArrray.push(category))
+    //       setVintageClothes(vintageClothesArrray)
+    //  }})
 
 
-    products.map((category) => {
-        {if (category.category === 'accessories') (
-          accessoriesArrray.push(category))
-          setAccessories(accessoriesArrray)
-     }})
+    // products?.map((category) => {
+    //     {if (category.category === 'accessories') (
+    //       accessoriesArrray.push(category))
+    //       setAccessories(accessoriesArrray)
+    //  }})
 
+     Object.values(vintageClothes).forEach((product: ProductType) => {
+              vintageClothesArrray.push(product);
+              setVintageClothes(vintageClothesArrray)
+            });
+
+      Object.values(vintageClothes).forEach((product: ProductType) => {
+              accessoriesArrray.push(product);
+              setAccessories(accessoriesArrray)
+            });
+        
+      
 
 
     useEffect(() => {
@@ -129,7 +143,9 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
         
 
   const addToCard = (prod: ProductType) => {
-    const updatedAllProducts = products?.map((p) => {
+    const updatedAllProducts: ProductType | undefined = undefined;
+    
+    products?.map((p) => {
       if (p.id === prod.id) {
         return {
           ...p,
@@ -140,30 +156,32 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
       return p;
     });
     setAddedToCard(updatedAllProducts);
+
   };
 
   
   
-  const handleLogIn = (username: string, password: string) => {
-  
-      if (username === "igralishte" && password === "12345") {
-        setUser({ email: "igralishte@hotmail.com" });
+  const handleLogin = (username: string, password: string) => {
+    if (username === "igralishte" && password === "12345") {
+        localStorage.setItem("username", username);
+        setUser({ email: username });
       }
-    };
-  
-    const handleLogOut = () => {
-      setUser(null);
-    };
+      return;
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    setUser(null);
+  };
   
 
 
   return (
     <UserContext.Provider value={{ 
         user, 
-        handleLogIn, 
-        handleLogOut,
+        handleLogin, 
+        handleLogout,
         data,
-        // products,
         vintageClothes,
         accessories,
         brands,
