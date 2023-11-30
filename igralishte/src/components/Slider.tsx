@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ProductType } from '@/types/types';
 
 interface Props {
@@ -7,12 +7,19 @@ interface Props {
 
 const Slider: React.FC<Props> = ({ product }) => {
 
+  const [isChecked, setIsChecked] = useState(true);
+
+  
+  const handleChange = () => {
+      setIsChecked(!isChecked);
+  };
+
   return (
         <div className="container-fluid p-0 w-100" style={{height: '570px'}}>
           <div className="slider-box">
             <div className="main-container">
               <div className="main-slider">
-                <input type="radio" id="box1" name='julijana' checked/>
+                <input type="radio" id="box1" name='julijana' checked={isChecked} onChange={handleChange} />
                 <label htmlFor="box1" ><img src={`${product.img}`} alt="---" /></label>
                   <img src={`${product.img}`} alt="---" />
                 <input type="radio" id="box2" name='julijana'/>

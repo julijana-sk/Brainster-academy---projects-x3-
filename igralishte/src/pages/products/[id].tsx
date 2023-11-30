@@ -26,10 +26,11 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(products.length / 10);
   
-  const [selectedProducts, setSelectedProducts] = useState<ProductType[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isAddToCard, setIsAddToCard] = useState(false);
   const [favorites, setFavorites] = useState<ProductType[]>([]);
-  // const [addToCard, setAddToCard] = useState(false);
+  const [addToCardProducts, setAddToCardProducts] = useState<ProductType[]>([]);
+  const [selectedProducts, setSelectedProducts] = useState<ProductType[]>([]);
 
 
      useEffect(() => {
@@ -39,9 +40,31 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
 
         setSelectedProducts(currentProducts);
     }, [currentPage]);
+
  
+    const handleBoxClick = (box: any) => {
+      setExpandedBox(box === expandedBox ? null : box);
+    }
+
+
+    const clickProduct = (prod: ProductType) => {
+    console.log("you clicked the product")
+      const updatedProducts = products.map((p) => {
+        if (p.id === prod.id) {
+          return {
+            ...p,
+            selected: !p.selected,
+            amount: p.selected ? 0 : 1,
+          };
+        }
+        return p;
+      });
+      setSelectedProducts(updatedProducts);
+    };
+
 
  const toggleFavorite = (id: any) => {
+    console.log("you clicked Favorites")
     const updatedFavorites = isFavorite
       ? favorites.filter((favId: any) => favId !== id)
       : [...favorites, id];
@@ -50,39 +73,16 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
     setIsFavorite(!isFavorite);
 };
 
-  const handleBoxClick = (box: any) => {
-    setExpandedBox(box === expandedBox ? null : box);
-  }
 
-
-  // const clickProduct = (prod: ProductType) => {
-  //   const updatedProducts = products.map((p) => {
-  //     if (p.id === prod.id) {
-  //       return {
-  //         ...p,
-  //         selected: !p.selected,
-  //         amount: p.selected ? 0 : 1,
-  //       };
-  //     }
-  //     return p;
-  //   });
-  //   setSelectedProducts(updatedProducts);
-  // };
-
-
-   const addToCard = (prod: ProductType) => {
-    const updatedAllProducts = products.map((p) => {
-      if (p.id === prod.id) {
-        return {
-          ...p,
-          selected: !p.selected,
-          amount: p.selected ? 0 : 1,
-        };
-      }
-      return p;
-    });
-    setSelectedProducts(updatedAllProducts);
-  };
+  const toggleAddToCard = (id: any) => {
+    console.log("you clicked Add to Card")
+    const updatedAddToCard = isAddToCard
+      ? addToCardProducts.filter((favId: any) => favId !== id)
+      : [...addToCardProducts, id];
+    localStorage.setItem('addToCardProducts', JSON.stringify(updatedAddToCard));
+    setAddToCardProducts(updatedAddToCard);
+    setIsAddToCard(!isAddToCard);
+};
 
 
   const placeOrder = () => {
@@ -106,6 +106,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
             amount: p.amount + 1,
           };
         }
+        console.log(p.amount)
         return p;
       });
     });
@@ -140,23 +141,6 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
       });
     }
   };
-
-    const handleArrowClick = (direction: string, clickedPage: any) => {
-        if (direction === 'previous') {
-            setCurrentPage(currentPage - 1);
-        } else {
-            setCurrentPage(currentPage + 1);
-        }
-        handleClick(clickedPage);
-    };
-
-    const handleClick = (pageNumber: number) => {
-     if (pageNumber === currentPage) {
-        return;
-        }
-        setCurrentPage(pageNumber);
-    };
-
   
   return (
     <>
@@ -177,25 +161,23 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
 
                 
                 <div className='flex-column add-to-card-fixed'>
-                  {/* <Link href={"/"} className="nav-link d-flex flex-row justify-content-start"> */}
                     <button className="menu-footer-button mb-3"
                             onClick={(event: React.MouseEvent<HTMLElement>) => {
-                            event.preventDefault();
-                            toggleFavorite(product.id);
-                          }}
-                    ><img src="../pictures/icons/heart-straight-thin.png" /></button>
-                  {/* </Link> */}
-                  {/* <Link href={"/"} className="nav-link d-flex flex-row justify-content-start"> */}
+                                      event.preventDefault();
+                                      toggleFavorite(product.id);
+                                      clickProduct(product);
+                                    }}>
+                            <img src="../pictures/icons/heart-straight-thin.png" /></button>
                     <button className="menu-footer-button"
                             onClick={(event: React.MouseEvent<HTMLElement>) => {
-                            event.preventDefault();
-                            // toggleAddToCard(product.id);
+                                    event.preventDefault();
+                                    toggleAddToCard(product.id);
+                                    clickProduct(product);
                           }}
                     ><img src="../pictures/icons/shopping cart.png" /></button>
-                  {/* </Link> */}
                 </div>
                 <span className="title text-left">{product.price}  ден.</span>
-                <p className="text-left my-3">{product.description}</p>
+                <p className="text-left my-4">{product.description}</p>
                 <AmountOfProduct
                       key={product.id}
                       product={product}
@@ -203,18 +185,32 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                       onPlusClick={onAddItem}
                     />
                 <div className="flex-row justify-content-start align-items-center align-self-center">
-                  <PrimaryBtn onClick={() => addToCard(product)} title="Додај во кошничка" btnClass={"PrimaryBtn add w-50 mr-3"} backgroundColor={"linear-gradient(0deg, #FFDBDB, #FFDBDB)"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/>
-                  <i
-                  onClick={(event: React.MouseEvent<HTMLElement>) => {
-                      event.preventDefault();
-                      toggleFavorite(product.id);
+                  { isAddToCard ? (
+                    <div className='col-7 text-left p-0' style={{marginRight: '10px'}}>
+                      <button onClick={(event: React.MouseEvent<HTMLElement>) => {
+                        event.preventDefault();
+                        toggleAddToCard(product.id);
+                        clickProduct(product)}} 
+                        className='bg-transparent p-0 border-0'>
+                      <img src="../pictures/icons/gift-added.png" className='p-0 h-100 w-100' alt="added to card"/></button>
+                      </div>
+                  ) : 
+                    ( <button onClick={(event: React.MouseEvent<HTMLElement>) => {
+                                    event.preventDefault();
+                                    toggleAddToCard(product.id);
+                                    clickProduct(product)}} 
+                          className='col-7 addToCardButton add'>Додај во кошничка</button>
+                  ) }
+                  <i onClick={(event: React.MouseEvent<HTMLElement>) => {
+                              event.preventDefault();
+                              toggleFavorite(product.id);
                     }}
                     // className={isFavorite && selectedRestaurantId === product.id ? "fas fa-heart fa-3x" : "far fa-heart fa-3x"}
                     className={isFavorite ? "fas fa-heart fa-2x" : "far fa-heart fa-2x"}
                   ></i>
                 </div>
                 <hr style={{paddingTop: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
-                <div className='flex-row my-3 justify-content-start align-items-center text-left '>
+                <div className='flex-row my-4 justify-content-start align-items-center text-left '>
                   <p className='title '>Величина: </p>
                   <div className="border-0 px-2 mx-3" style={{backgroundColor: "#FFDBDB", borderRadius: '4px'}}>{product.model_size}</div>
                   <p className='about-text text-dark'>*само 1 парче</p>
@@ -222,7 +218,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                 <p>{product.size_description}</p>
                 <Link href='#'><p style={{textDecoration: 'underline'}}>види ги димензиите</p></Link>
                 <hr style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 150%, #D4AF37 0%)"}}/>
-                <div className='flex-row my-3 title justify-content-start align-items-center text-left '>
+                <div className='flex-row my-4 title justify-content-start align-items-center text-left '>
                   <p>Боја: </p>
                   <div className="border mx-2 p-2" style={{background: `${product.color}`, borderRadius: '4px'}} />
                   <p className='about-text text-dark'>{product.color}</p>
@@ -233,7 +229,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                   <p className='mr-2'>Постава:</p> 
                   {product.composition}
                 </div>
-                <div className="flex-row my-3 justify-content-start align-items-center">
+                <div className="flex-row my-4 justify-content-start align-items-center">
                   <p className='title mr-3'>Состојба: {product.condition}</p>
                   <Link href='#'><p style={{textDecoration: 'underline'}}>прочитај повеќе</p></Link>
                 </div>
@@ -241,7 +237,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                 {product.care_instructions}
                 <hr style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 150%, #D4AF37 0%)"}}/>
                 <p className='title text-left'>Ознаки:</p>
-                <div className="flex-row mt-2 my-3 justify-content-start align-items-center">
+                <div className="flex-row mt-2 my-4 justify-content-start align-items-center">
                   <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{product.subcategory}</Link>
                   <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{product.category}</Link>
                   <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{product.material}</Link>

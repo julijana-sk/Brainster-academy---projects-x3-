@@ -1145,6 +1145,14 @@ a {
     padding: 6px, 73px, 6px, 73px;
 }
 
+ .addToCardButton {
+    width: 50%;
+    height: 41px;
+    margin-right: 10px;
+    background: linear-gradient(0deg, #FFDBDB, #FFDBDB);
+    color: black;
+    border: 1.21px solid #C2C2C2;
+ }
 .add-to-card p {
     margin: 0;
     font-family: 'Cormorant Garamond', serif;
