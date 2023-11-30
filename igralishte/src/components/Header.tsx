@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const Header: React.FC = () => {
 
-  const {  user, handleLogout, data, vintageClothes, accessories, brands} = useContext(UserContext);
+  const {  user, handleLogout} = useContext(UserContext);
  
   const router = useRouter();
   const [toggleSearch, setToggleSearch] = useState(false);
@@ -102,13 +102,16 @@ return (
                               onClick={() => {
                               router.push({
                               pathname: "/products",
+                              query: {
+                                    category: "vintageClothes",
+                                    },
                               });
                               }}>
                               <p className="dropdown-item pl-0 font-italic" style={{color: "#8A8328"}}><img src="../pictures/icons/sparks-elements.png" alt="stars" className="mr-1" /> Види ги сите</p>
                               </button>
                         <button  className="border-0 bg-transparent"
                                 onClick={() => {
-                                router.push({
+                                router.replace({
                                 pathname: "/products",
                                 query: {
                                     ...router.query,
@@ -120,7 +123,7 @@ return (
                               </button >
                         <button  className="border-0 bg-transparent"
                                 onClick={() => {
-                                router.push({
+                                router.replace({
                                 pathname: "/products",
                                 query: {
                                     ...router.query,
@@ -132,7 +135,7 @@ return (
                               </button >
                         <button  className="border-0 bg-transparent"
                                  onClick={() => {
-                                router.push({
+                                router.replace({
                                 pathname: "/products",
                                 query: {
                                     ...router.query,
@@ -144,7 +147,7 @@ return (
                               </button >
                         <button  className="border-0 bg-transparent"
                                 onClick={() => {
-                                  router.push({
+                                  router.replace({
                                   pathname: "/products",
                                   query: {
                                       ...router.query,
@@ -156,7 +159,7 @@ return (
                               </button >
                         <button  className="border-0 bg-transparent"
                                  onClick={() => {
-                                router.push({
+                                router.replace({
                                 pathname: "/products",
                                 query: {
                                     ...router.query,
@@ -168,7 +171,7 @@ return (
                               </button >
                         <button  className="border-0 bg-transparent"
                                  onClick={() => {
-                                router.push({
+                                router.replace({
                                 pathname: "/products",
                                 query: {
                                     ...router.query,
@@ -188,91 +191,91 @@ return (
                       <div className={`dropdown-menu menu-list text-left {aria-expanded ? ".dropdown-menu.show " : "" } mb-5`}  onClick={handleToggleNav}>
                         <button className="bg-transparent border-0 dropdown-item pl-0 font-italic" style={{color: "#8A8328"}}
                                 onClick={() => {
-                                  router.push({
+                                  router.replace({
                                   pathname: "/brands",
                                   });
                                   }}>
                                   <img src="../pictures/icons/sparks-elements.png" alt="stars" className="mr-2" /> Види ги сите</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                    router.push({
+                                    router.replace({
                                     pathname: "/brands",
                                     query: { brand: "pinkPartywear" },
                                     });
                                     }}>Pinc Partywear</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                            router.push({
+                                            router.replace({
                                             pathname: "/brands",
                                             query: { brand: "factoryGirl" },
                                             });
                                     }}>Factory Girl</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                            router.push({
+                                            router.replace({
                                             pathname: "/brands",
                                             query: { brand: "mainDays" },
                                             });
                                     }}>Main Days</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                            router.push({
+                                            router.replace({
                                             pathname: "/brands",
                                             query: { brand: "nezno" },
                                             });
                                     }}>Нежно</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                            router.push({
+                                            router.replace({
                                             pathname: "/brands",
                                             query: { brand: "red" },
                                             });
                                     }}>Ред</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                            router.push({
+                                            router.replace({
                                             pathname: "/brands",
                                             query: { brand: "nas" },
                                             });
                                     }}>Наш</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                            router.push({
+                                            router.replace({
                                             pathname: "/brands",
                                             query: { brand: "zsDaNe" },
                                             });
                                     }}>Зш да не</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                            router.push({
+                                            router.replace({
                                             pathname: "/brands",
                                             query: { brand: "fraeil" },
                                             });
                                     }}>Fraeil</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                            router.push({
+                                            router.replace({
                                             pathname: "/brands",
                                             query: { brand: "urma" },
                                             });
                                     }}>Urma</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                            router.push({
+                                            router.replace({
                                             pathname: "/brands",
                                             query: { brand: "candleNest" },
                                             });
                                     }}>Candle Nest</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                            router.push({
+                                            router.replace({
                                             pathname: "/brands",
                                             query: { brand: "beyondGreen" },
                                             });
                                     }}>Beyond Green</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                            router.push({
+                                            router.replace({
                                             pathname: "/brands",
                                             query: { brand: "gatta" },
                                             });
@@ -288,12 +291,15 @@ return (
                                 onClick={() => {
                                   router.push({
                                   pathname: "/products",
+                                  query: {
+                                    category: "accessories",
+                                    },
                                     });
                                   }}>
                                   <img src="../pictures/icons/sparks-elements.png" alt="stars" className="mr-2" /> Види ги сите</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                  router.push({
+                                  router.replace({
                                   pathname: "/products",
                                   query: {
                                       ...router.query,
@@ -303,7 +309,7 @@ return (
                                   }}>Ташни</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
-                                  router.push({
+                                  router.replace({
                                   pathname: "/products",
                                   query: {
                                       ...router.query,
@@ -335,9 +341,10 @@ return (
                       <div className="nav-link d-flex flex-row justify-content-start align-items-center" >
                         <button className="menu-footer-button"><img src="../pictures/icons/user-light.png" /></button>
                         {user ? (
-                          <div className="ml-3">
-                            <Link href={"/profile"} className="mr-5 pr-4"> Мој профил </Link>
-                            <button className='bg-transparent text-left ml-5 px-3 rounded-circle text-center'
+                          <div className="ml-3 d-flex flex-row justify-content-between">
+                            <Link href={"/profile"}> Мој профил</Link>
+                            <p className="pl-3 pr-4">/</p>
+                            <button className='bg-transparent text-left px-3 rounded-circle text-center'
                             onClick={() => {
                                 router.push({
                                 pathname: "/login",

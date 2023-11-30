@@ -1,68 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Head from 'next/head';
 import { GetServerSideProps, NextPage } from 'next';
 import ProductItem from '@/components/ProductItem';
-import { DataType, ProductType } from '@/types/types';
+import { ProductType } from '@/types/types';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import Pagination from '@/components/Pagination';
 
 
 interface Props {
-  products: DataType["products"];
+  products: ProductType[];
+  searchedProductsData: ProductType[];
 }
 
-const ProductPage: NextPage<Props> = ({  products }) => {
+const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
     
     
     const router = useRouter();
-
-    const [currentPage, setCurrentPage] = useState(1);
-    const [productsForPage, setProductsForPage] = useState<ProductType[]>([]);
-
-    
-    useEffect(() => {
-        const indexOfLastProduct = currentPage * 10;
-        const indexOfFirstProduct = indexOfLastProduct - 10;
-        const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
-        setProductsForPage(currentProducts);
-    }, [currentPage]);
-
-
-    const allProducts: ProductType[] = [];
-
-        Object.values(products.vintageClothes).forEach((productList: ProductType[]) => {
-            productList.forEach((product: ProductType) => {
-                allProducts.push(product);
-            });
-        });
-        
-        Object.values(products.accessories).forEach((productList: ProductType[]) => {
-            productList.forEach((product: ProductType) => {
-                allProducts.push(product);
-            });
-        });
-        
-        
-    const totalPages = Math.ceil(allProducts.length / 10);
-
-    const handleArrowClick = (direction: string, clickedPage: any) => {
-        if (direction === 'previous') {
-            setCurrentPage(currentPage - 1);
-        } else {
-            setCurrentPage(currentPage + 1);
-        }
-        handleClick(clickedPage);
-    };
-
-    const handleClick = (pageNumber: number) => {
-     if (pageNumber === currentPage) {
-        return;
-        }
-        setCurrentPage(pageNumber);
-    };
-
-
+   
 
   return (
     < >
@@ -202,11 +156,12 @@ const ProductPage: NextPage<Props> = ({  products }) => {
             <div className="container">
               <div  className="row flex-row">
                 <div className="col-12 flex-row flex-wrap justify-content-around">
-                  {allProducts.length > 0 ? (
-                    allProducts.map((product, productIndex) => {
+                  {searchedProductsData.length > 0 ? (
+                    searchedProductsData?.map((product, productIndex) => {
                     let columnSize = "col-5 product-img-small";
                     let columnText = "product-text-a"
-                    if (productIndex === 2 || productIndex === 7) {columnSize = "col-11"; columnText = "product-text"}
+                    for (let i = 2; i < searchedProductsData.length; i += 5) {
+                    if (productIndex === i ) {columnSize = "col-11"; columnText = "product-text"}}
                         return (
                             <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
                             <ProductItem   id={product.id} title={product.title} img={product.img} price={product.price}/>
@@ -222,39 +177,9 @@ const ProductPage: NextPage<Props> = ({  products }) => {
             </div>
           </div>
         </div>
+        {/* pagination  */}
+        <Pagination products={searchedProductsData}/>
 
-        <div className="text-center mb-5" style={{letterSpacing: "3px"}}>
-            {[...Array(totalPages)].map((_, i) => {
-            const pageNumber = i + 1;
-
-            // const handleArrowClick = (clickedPage: any) => {
-            //     handleClick(clickedPage);
-            // };
-            const isActive = (pageNumber === currentPage) ? "text-danger" : "text-dark";
-            return (
-                <>
-                    {i === 0 ? (
-                        <>
-                        <button className="bg-transparent border-0 font-weight-bold" >
-                        <Link href={`/products?page=${currentPage -1}`} onClick={() => handleArrowClick('previous', currentPage)}>
-                            {"<"}
-                        </Link>
-                        </button>
-                        <button className={`bg-transparent border-0 font-weight-bold ${isActive}`} onClick={() => handleClick(pageNumber)}>{pageNumber}</button>
-                        </>
-                    ) : (
-                        <button className={`bg-transparent border-0 font-weight-bold ${isActive}`} onClick={() => handleClick(pageNumber)}> • {pageNumber} </button>
-                    )}
-
-                    {i === totalPages - 1 ? (
-                        <Link href={`/products?page=${currentPage + 1}`} onClick={() => handleClick(currentPage + 1)}>
-                            {">"}
-                        </Link>
-                    ) : null}
-                </>
-                );
-            })}
-        </div>
     </>
   ); 
 };
@@ -267,15 +192,41 @@ export default ProductPage;
      
      const page = parseInt(query.page as string, 10) || 1;
      
-     const response = await fetch(`http://localhost:5001/products?&page=${page}`); 
-     const products: DataType["products"] = await response.json();
+     const response = await fetch(`http://localhost:5001/products?_page=${page}`); 
+     const products: ProductType[] = await response.json();
 
     
+    let resSearchedProducts: Response;
+
+    if (query.category && query.subcategory) {
+        resSearchedProducts = await fetch(
+        `http://localhost:5001/products?category_like=${query.category}&q=${query.subcategory}`
+        );
+    } else if (query.category) {
+        resSearchedProducts = await fetch(
+        `http://localhost:5001/products?category_like=${query.category}`
+        );
+    // } 
+    // else if (query.subcategory) {
+    //     resSearchedProducts = await fetch(
+    //     `http://localhost:5001/products?subcategory_like=${query.subcategory}?_page=${page}`
+    //     );
+
+    } else if (query.subcategory) {
+        resSearchedProducts = await fetch(
+        `http://localhost:5001/products?q=${query.subcategory}`
+        );
+    }  else {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?_page=${page}`);
+    }
+
+    const searchedProductsData: ProductType[] = await resSearchedProducts.json();
 
 return { 
     props: { 
         products, 
-        page
+        page,
+        searchedProductsData
     },
     }
  }

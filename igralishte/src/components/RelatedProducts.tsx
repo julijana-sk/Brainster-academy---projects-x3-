@@ -7,15 +7,16 @@ interface Props {
 }
 
 const RelatedProducts: React.FC<Props> = ({products}) => {
+
   return (
       <div className="container-fluid">
         <div className="row flex-column">
           <h3 className="text-center my-4">Related Products</h3>
           <div className="row flex-row ">
-                {products?.map((product) => {
+                {products?.map((product, index) => {
                   return (
-                    <div className="col-5 p-0 mb-3 mr-2 product-img-small">
-                       <ProductItem key={product.id} {...product}/>
+                    <div key={index} className="col-5 p-0 mb-3 mr-2 product-img-small">
+                       <ProductItem {...product}/>
                     </div>
                   )
                 })}

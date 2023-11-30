@@ -1,15 +1,12 @@
 import { GetStaticProps, NextPage } from 'next'
 import Banner from '../components/Banner';
 import AnnouncementBar from '@/components/AnnouncementBar';
-import Carousel from '@/components/CarouselComponent';
-import { useContext } from 'react';
-import { UserContext } from '@/context/UserContext';
-import { DataType } from '@/types/types';
+import { DataType, ProductType } from '@/types/types';
 import CarouselComponent from '@/components/CarouselComponent';
 
 
 interface Props {
-  products: DataType["products"]
+  products: ProductType[]
 }
 
 const HomePage: NextPage<Props> = ({products}) => {
@@ -23,7 +20,7 @@ const HomePage: NextPage<Props> = ({products}) => {
               <span>Ново</span><img className="img2" src="../pictures/icons/Star-small.png" alt="golden star mini" />
             </div>
           </Banner>
-          <CarouselComponent vintageClothes={products.vintageClothes}/>
+          <CarouselComponent products={products}/>
           <Banner toPage="/products" classOfPicture='banner-picture2' offset={"col-11"} imageBanner='../pictures/product-banner.png' bgColor='btn-pink-circle btn-circle2' img="../pictures/icons/sparks-removebg.png" title='Козметика & аксесоари' description='Погледни ги свежите љубовни парчиња'/>
           <div className='relative'>
             <img src="../pictures/Rectangle-gift-banner.png" alt="star" className='rectangle-gift-banner'/>
@@ -41,12 +38,11 @@ export default HomePage;
 export const getStaticProps: GetStaticProps = async () => {
 
   const resProducts = await fetch("http://localhost:5001/products");
-  const products: DataType["products"] = await resProducts.json();
+  const products: ProductType[] = await resProducts.json();
 
  return {
     props: {
       products,  
-      // {username}
     },
  };
 };

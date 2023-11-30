@@ -12,7 +12,7 @@ const Slider: React.FC<Props> = ({ product }) => {
           <div className="slider-box">
             <div className="main-container">
               <div className="main-slider">
-                <input type="radio" id="box1" name='julijana'/>
+                <input type="radio" id="box1" name='julijana' checked/>
                 <label htmlFor="box1" ><img src={`${product.img}`} alt="---" /></label>
                   <img src={`${product.img}`} alt="---" />
                 <input type="radio" id="box2" name='julijana'/>

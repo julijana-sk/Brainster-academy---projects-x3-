@@ -1,8 +1,5 @@
 export interface DataType {
-    products: {
-        vintageClothes: VintageClothesType;
-        accessories: AccessoriesType;
-    }
+    products: ProductType[],
     brands: BrandType[];
     about: AboutType;
     FAQ: FAQType[];
@@ -10,21 +7,6 @@ export interface DataType {
     gifts: GiftType[];
     box: BoxComponentType[];
 }
-
-export interface VintageClothesType {
-        tops: ProductType[];
-        pants: ProductType[];
-        bottomsShorts: ProductType[];
-        dresses: ProductType[];
-        coatsAndJackets: ProductType[];
-        underwear: ProductType[];
-}
-
-export interface AccessoriesType {
-        purses: ProductType[];
-        jewelry: ProductType[];
-}
-
 
 export interface ProductType {
     id: string,
