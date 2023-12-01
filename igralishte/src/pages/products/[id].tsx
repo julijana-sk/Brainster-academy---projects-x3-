@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from 'next';
 import { BoxComponentType, ProductType } from '@/types/types';
 import Head from 'next/head';
-import AmountOfProduct from '@/components/AmountOfProduct';
 import BoxComponent from '@/components/BoxComponent';
-import PrimaryBtn from '@/components/PrimaryBtn';
 import RelatedProducts from '@/components/RelatedProducts';
 import Link from 'next/link';
 import Slider from '@/components/Slider';
@@ -23,48 +21,30 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
 
   const [expandedBox, setExpandedBox] = useState(null);
   
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(products.length / 10);
-  
   const [isFavorite, setIsFavorite] = useState(false);
   const [isAddToCard, setIsAddToCard] = useState(false);
   const [favorites, setFavorites] = useState<ProductType[]>([]);
-  const [addToCardProducts, setAddToCardProducts] = useState<ProductType[]>([]);
-  const [selectedProducts, setSelectedProducts] = useState<ProductType[]>([]);
+  const [addToCardProducts, setAddToCardProducts] = useState<ProductType[]>([]);  
+  const [currentProduct, setCurrentProduct] = useState<ProductType>(product);
 
+  
+  
+  useEffect(() => {
+    // localStorage.setItem('amount', JSON.stringify(currentProduct.amount));
+    const savedAmount = JSON.parse(localStorage.getItem('amount') || '0');
+    const savedIsFavorite = (localStorage.getItem('favorites') || '0');
+    const savedIsAddToCard = (localStorage.getItem('addToCardProducts') || '0');
+    setCurrentProduct((prevState) => ({ 
+        ...prevState, 
+        amount: savedAmount,      
+      }));
+    setFavorites(JSON.parse(savedIsFavorite));
+    setIsAddToCard(JSON.parse(savedIsAddToCard));
+  }, []);
 
-     useEffect(() => {
-        const indexOfLastProduct = currentPage * 10;
-        const indexOfFirstProduct = indexOfLastProduct - 10;
-        const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
-
-        setSelectedProducts(currentProducts);
-    }, [currentPage]);
-
- 
-    const handleBoxClick = (box: any) => {
-      setExpandedBox(box === expandedBox ? null : box);
-    }
-
-
-    const clickProduct = (prod: ProductType) => {
-    console.log("you clicked the product")
-      const updatedProducts = products.map((p) => {
-        if (p.id === prod.id) {
-          return {
-            ...p,
-            selected: !p.selected,
-            amount: p.selected ? 0 : 1,
-          };
-        }
-        return p;
-      });
-      setSelectedProducts(updatedProducts);
-    };
 
 
  const toggleFavorite = (id: any) => {
-    console.log("you clicked Favorites")
     const updatedFavorites = isFavorite
       ? favorites.filter((favId: any) => favId !== id)
       : [...favorites, id];
@@ -75,7 +55,6 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
 
 
   const toggleAddToCard = (id: any) => {
-    console.log("you clicked Add to Card")
     const updatedAddToCard = isAddToCard
       ? addToCardProducts.filter((favId: any) => favId !== id)
       : [...addToCardProducts, id];
@@ -85,63 +64,62 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
 };
 
 
-  const placeOrder = () => {
-    const updatedState = products.map((p) => {
-      return {
-        ...p,
-        selected: false,
-        amount: 0,
-      };
-    });
-    setSelectedProducts(updatedState);
-  };
-
-  const onAddItem = (prod: ProductType) => {
-    console.log("you clicked plus")
-    setSelectedProducts((prevState) => {
-      return prevState.map((p) => {
-        if (p.id === prod.id) {
+  function onRemoveItem() {
+    if (currentProduct.amount <= 0) {
+      setCurrentProduct((prevState) => {
           return {
-            ...p,
-            amount: p.amount + 1,
+            ...prevState,
+            amount: prevState.amount = 0,
           };
+        });
+        localStorage.setItem('amount', JSON.stringify(currentProduct.amount));
+      
+      } else {
+    if (product.amount >= 1) {
+      setCurrentProduct((prevState) => { 
+        return {
+          ...prevState, 
+          amount: prevState.amount - 1 ,
         }
-        console.log(p.amount)
-        return p;
       });
-    });
-  };
-
-  const onRemoveItem = (prod: ProductType) => {
-    console.log("you clicked minus")
-    if (prod.amount === 1) {
-      setSelectedProducts((prevState) => {
-        return prevState.map((p) => {
-          if (p.id === prod.id) {
-            return {
-              ...p,
-              selected: false,
-              amount: 0,
-            };
-          }
-          return p;
-        });
-      });
-    } else {
-      setSelectedProducts((prevState) => {
-        return prevState.map((p) => {
-          if (p.id === prod.id) {
-            return {
-              ...p,
-              amount: p.amount - 1,
-            };
-          }
-          return p;
-        });
-      });
+     }
+     localStorage.setItem('amount', JSON.stringify(currentProduct.amount - 1));
     }
-  };
+  }
+
+    function onAddItem() {
+      setCurrentProduct(prevState => ({
+        ...prevState, 
+        amount: prevState.amount + 1 
+      }));
+      localStorage.setItem('amount', JSON.stringify(currentProduct.amount + 1));
+  }
   
+    const placeOrder = () => {
+            const updatedProducts = products.map((prod) => {
+              if (prod.id === currentProduct.id) {
+                return {
+                  ...prod,
+                  selected: false,
+                  amount: 0
+                };
+              }
+              return prod;
+            });
+            setCurrentProduct({
+              ...currentProduct,
+              selected: false,
+              amount: 0
+            });
+            // Update the products array here
+          };
+
+
+    const handleBoxClick = (box: any) => {
+      setExpandedBox(box === expandedBox ? null : box);
+    }
+  
+
   return (
     <>
       <Head>
@@ -158,39 +136,58 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                 <h1 className='title' style={{textAlign: 'left'}}>{product.title}</h1>
                 <Slider product={product}/>
               </div>
-
-                
                 <div className='flex-column add-to-card-fixed'>
-                    <button className="menu-footer-button mb-3"
+                { isFavorite ? (
+                    <button className={`${isFavorite ? "d-flex" : "d-none"} bg-transparent border-0 menu-footer-button p-0 mb-3`}
                             onClick={(event: React.MouseEvent<HTMLElement>) => {
                                       event.preventDefault();
                                       toggleFavorite(product.id);
-                                      clickProduct(product);
                                     }}>
-                            <img src="../pictures/icons/heart-straight-thin.png" /></button>
-                    <button className="menu-footer-button"
+                            <img src="../pictures/icons/heart-full.png" /></button>
+                  ) : (  
+                    <button className={`${isFavorite ? "d-none" : "d-flex"} bg-transparent border-0 menu-footer-button p-0 mb-3`}
+                            onClick={(event: React.MouseEvent<HTMLElement>) => {
+                                      event.preventDefault();
+                                      toggleFavorite(product.id);
+                                    }}>
+                            <img src="../pictures/icons/heart-empty.png"/></button>
+                  ) }
+                  { isAddToCard ? (
+                    <button className={`${isAddToCard ? "d-flex" : "d-none"} p-0 menu-footer-button`}
                             onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault();
                                     toggleAddToCard(product.id);
-                                    clickProduct(product);
-                          }}
-                    ><img src="../pictures/icons/shopping cart.png" /></button>
+                            }}>
+                            <img src="../pictures/icons/Check-floating-icon.png" /></button>
+                  ) : (  
+                    <button className={`${isAddToCard ? "d-none" : "d-flex"} p-0 menu-footer-button`}
+                            onClick={(event: React.MouseEvent<HTMLElement>) => {
+                                    event.preventDefault();
+                                    toggleAddToCard(product.id);
+                                }}>
+                            <img src="../pictures/icons/shopping cart.png"/></button>
+                  ) }
                 </div>
                 <span className="title text-left">{product.price}  ден.</span>
                 <p className="text-left my-4">{product.description}</p>
-                <AmountOfProduct
-                      key={product.id}
-                      product={product}
-                      onMinusClick={onRemoveItem}
-                      onPlusClick={onAddItem}
-                    />
+                <div className="row flex-row title justify-content-start ml-auto mr-auto align-items-center text-left mb-2">
+                    <p className='mb-1'>Количина: </p>
+                    <div className="flex-row justify-content-left ml-3 align-items-center align-self-center">
+                    <div className="col-12 p-0">
+                      <button onClick={onRemoveItem} className='bg-transparent border-0'><img src='../pictures/icons/minus-amount.png' className='w-50 mb-1 mr-1' alt="alt" /></button>
+                      {currentProduct.amount}
+                      <button onClick={onAddItem} className='bg-transparent border-0'><img src='../pictures/icons/plus-amount.png' className='w-50 mb-1 ml-1' alt="alt" /></button>
+                      </div>
+                    </div>
+                </div>
                 <div className="flex-row justify-content-start align-items-center align-self-center">
                   { isAddToCard ? (
-                    <div className='col-7 text-left p-0' style={{marginRight: '10px'}}>
+                    <div className={`${isAddToCard ? "d-flex" : "d-none"} col-7 text-left p-0`} style={{marginRight: '10px'}}>
                       <button onClick={(event: React.MouseEvent<HTMLElement>) => {
                         event.preventDefault();
                         toggleAddToCard(product.id);
-                        clickProduct(product)}} 
+                        // clickProduct(product);
+                      }} 
                         className='bg-transparent p-0 border-0'>
                       <img src="../pictures/icons/gift-added.png" className='p-0 h-100 w-100' alt="added to card"/></button>
                       </div>
@@ -198,14 +195,14 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                     ( <button onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault();
                                     toggleAddToCard(product.id);
-                                    clickProduct(product)}} 
+                                    // clickProduct(product);
+                                  }} 
                           className='col-7 addToCardButton add'>Додај во кошничка</button>
                   ) }
                   <i onClick={(event: React.MouseEvent<HTMLElement>) => {
                               event.preventDefault();
                               toggleFavorite(product.id);
                     }}
-                    // className={isFavorite && selectedRestaurantId === product.id ? "fas fa-heart fa-3x" : "far fa-heart fa-3x"}
                     className={isFavorite ? "fas fa-heart fa-2x" : "far fa-heart fa-2x"}
                   ></i>
                 </div>

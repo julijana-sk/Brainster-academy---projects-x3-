@@ -326,13 +326,13 @@ return (
 
                   <div className="menu-footer my-5" onClick={handleToggleNav}>
                     <li className="nav-item">
-                      <Link href={"/"} className="nav-link d-flex flex-row justify-content-start">
-                        <button className="menu-footer-button"><img src="../pictures/icons/shopping cart.png" /> </button>
+                      <Link href={"/favorites"} className="nav-link d-flex flex-row justify-content-start">
+                        <button className="menu-footer-button menu-pink"><img src="../pictures/icons/shopping vehicle.png" /> </button>
                         <p>Кошничка</p>
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link href={"/"} className="nav-link d-flex flex-row justify-content-start">
+                      <Link href={"/favorites"} className="nav-link d-flex flex-row justify-content-start">
                         <button className="menu-footer-button"><img src="../pictures/icons/heart-straight-thin.png" /> </button>
                         <p>Омилени</p>
                       </Link>

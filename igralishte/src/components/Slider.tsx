@@ -15,7 +15,7 @@ const Slider: React.FC<Props> = ({ product }) => {
   };
 
   return (
-        <div className="container-fluid p-0 w-100" style={{height: '570px'}}>
+        <div className="container-fluid p-0" style={{height: '570px'}}>
           <div className="slider-box">
             <div className="main-container">
               <div className="main-slider">

@@ -217,18 +217,21 @@ ul li a {
     border-radius: 6.24px;
     border: 0.62px lightgray;
     box-shadow: 0px 0px 1.872483253479004px 0px #C2C2C2;
-    background: linear-gradient(0deg, #FFF7F7, #FFF7F7);
+    background-color: transparent;
     position: relative;
     align-self: center;
+    padding: 0;
 }
 .menu-footer img {
     width: 30px;
     height: 28px;
     top: 9px;
-    left: 6px;
+    left: 7px;
     position: absolute;
 }
-
+.menu-pink {
+    background: linear-gradient(0deg, #FFF7F7, #FFF7F7);
+}
 .dropdown1 .dropdown-toggle::after {
     margin-left: 200px;
 }
@@ -1147,7 +1150,7 @@ a {
 
  .addToCardButton {
     width: 50%;
-    height: 41px;
+    height: 43px;
     margin-right: 10px;
     background: linear-gradient(0deg, #FFDBDB, #FFDBDB);
     color: black;
