@@ -200,7 +200,7 @@ return (
                                 onClick={() => {
                                     router.replace({
                                     pathname: "/brands",
-                                    query: { brand: "pinkPartywear" },
+                                    query: { brand: "pincPartywear" },
                                     });
                                     }}>Pinc Partywear</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
