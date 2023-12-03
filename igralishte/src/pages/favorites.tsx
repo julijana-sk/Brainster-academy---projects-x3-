@@ -10,9 +10,11 @@ import ProductItem from '@/components/ProductItem';
 
 interface Props {
   products: ProductType[];
+  randomProducts: ProductType[];
+
 }
 
-const FavoritesPage: NextPage<Props> = ({ products }) => {
+const FavoritesPage: NextPage<Props> = ({ products, randomProducts }) => {
 
 
   const [favorites, setFavorites] = useState<ProductType[]>(JSON.parse(localStorage.getItem('favorites') || '[]'));
@@ -64,13 +66,30 @@ export default FavoritesPage;
  export const getServerSideProps: GetServerSideProps = async ({query}) => { 
      
      const page = parseInt(query.page as string, 10) || 1;
+     let randomNo: number | undefined;
      
      const response = await fetch(`http://localhost:5001/products?_page=${page}`); 
      const products: ProductType[] = await response.json();
+   
+    const resBoxItems = await fetch('http://localhost:5001/boxComponents');
+    const boxItemsData = await resBoxItems.json(); 
+    
+
+    products.map(() => {
+      if (products.length > 6) {
+        randomNo = Math.floor(Math.random() * (products.length - 6));
+      }
+    });
+    
+
+    const resRandomProducts = await fetch(`http://localhost:5001/products?_start=${randomNo}&_limit=6`);
+    const randomProducts: ProductType[] = await resRandomProducts.json();
+
 
 return { 
     props: { 
-        products
+        products,
+        randomProducts,
     },
     }
  }

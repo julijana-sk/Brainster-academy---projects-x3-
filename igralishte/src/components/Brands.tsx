@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRouter } from 'next/router';
 import { BrandType } from '@/types/types';
 import Link from 'next/link';
 import PageTitle from './PageTitle';

@@ -10,7 +10,7 @@ type ActiveView = "profile" | "profile-new";
 
 const ProfilePage = () => {
 
-  const { handleLogIn } = useContext(UserContext);
+  const { handleLogin } = useContext(UserContext);
 
   const [name, setName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
@@ -41,7 +41,7 @@ const ProfilePage = () => {
       <form className="d-flex flex-column justify-content-center"
           onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
           event.preventDefault();
-          handleLogIn(username, password);
+          handleLogin(username, password);
           }}>
 
           <div className='container-fluid mt-5 text-center'>
@@ -118,7 +118,7 @@ const ProfilePage = () => {
       {view === "profile-new" ? 
         
         <form className="flex-column justify-content-center"
-          onSubmit={() => {handleLogIn(username, password)}} >
+          onSubmit={() => {handleLogin(username, password)}} >
           <div className='container-fluid mt-5 text-center'>
             <div className='row flex-column justify-content-center'>
               <div className='col-11 mr-auto ml-auto mt-5'>

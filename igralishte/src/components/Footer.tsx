@@ -34,13 +34,13 @@ const Footer: React.FC = () => {
 					  <div className="row d-flex flex-column footer-link">
 						<div className="col-12">
 						<Link href={"https://www.instagram.com/igraliste.sk/"} className="link">
-							<div className="d-flex flex-row justify-content-left align-items-center align-self-center mb-2">
+							<div className="d-flex flex-row justify-content-start align-items-center align-self-center mb-2">
 								<img src="../pictures/icons/instagram.png" alt="instagram"className="mr-3" />
 								<p className="align-self-center m-0">igralishte.sk</p>
 							</div>
 							</Link>
 							<Link href={"https://www.tiktok.com/@igraliste.sk?lang=en"} className="link">
-							<div className="d-flex flex-row justify-content-left align-items-center align-self-center mb-5">
+							<div className="d-flex flex-row justify-content-start align-items-center align-self-center mb-5">
 								<img src="../pictures/icons/tik-tok.png" className="mr-3" alt="tik-tok" />
 								<p className="align-self-center m-0">igralishte.sk</p>
 							</div>

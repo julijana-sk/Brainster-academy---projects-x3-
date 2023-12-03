@@ -5,8 +5,8 @@ import ProductItem from '@/components/ProductItem';
 import { ProductType } from '@/types/types';
 import { useRouter } from 'next/router';
 import Pagination from '@/components/Pagination';
-import Link from 'next/link';
 import PrimaryBtn from '@/components/PrimaryBtn';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 
 
@@ -16,27 +16,27 @@ interface Props {
 }
 
 const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
-    
+
+    const links = ['Почетна', 'Сите'];
+    // const currentPage = 'Сите';
     
     const router = useRouter();
     const [toggleSearch, setToggleSearch] = useState(false);
-
-  const [searchState, setSearchState] = useState("");
-
-//   const handleSearchSubmit = (event: React.FormEvent) => {
-//       event.preventDefault();
-//       router.push({
-//         pathname: "/products",
-//         query: { query: searchState },
-//         });
-//       setSearchState("");
-//   }
+    const [sortedProducts, setSortedProducts] = useState<ProductType[]>(products);
+    const [color, setColor] = useState("#ffffff");
 
   const handleToggleSearch = () => {
     setToggleSearch(!toggleSearch);
   }
 
-   
+const handleSortByDate = () => {
+  const sortedData = [...products].sort((a, b) => {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    return dateB - dateA;
+  });
+  setSortedProducts(sortedData);
+};
 
   return (
     < >
@@ -47,31 +47,27 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className='col-12 p-0 search-navbar'>
-            <button onClick={handleToggleSearch} className='bg-transparent border-0 ml-4'>
-                <img src="../../pictures/icons/search-group.png"/>
-            </button>
             <div className={`${toggleSearch ? "activeSearch" : "search"} flex-column justify-content-start text-left`}>
-            <div className="col-11 p-0 my-5 mr-auto ml-auto">
-            <div className="col-11">
-            <div className="wrap-search-header flex-w p-l-15 align-items-center">
-                <div className="col-12 p-0 m-0 text-center mr-auto ml-auto">
-                    <input
-                        className="w-100 pl-3"
-                        style={{height: '34px'}}
-                        type="search"
-                        name="search-product"
-                        placeholder="Пребарувај ..."
-                        onChange={(event) => {
-                        event.preventDefault();
-                        router.push({
-                        pathname: "/products",
-                        query: {
-                            ...router.query,
-                            query: event.target.value,
-                            },
-                        });
-                    }}
-                        />
+            <div className="col-10 p-0 my-5 mr-auto ml-auto">
+                <div className="wrap-search-header flex-w p-l-15 align-items-center">
+                    <div className="col-12 p-0 m-0 text-center mr-auto ml-auto">
+                        <input
+                            className="w-100 pl-3"
+                            style={{height: '34px'}}
+                            type="search"
+                            name="search-product"
+                            placeholder="Пребарувај ..."
+                            onChange={(event) => {
+                            event.preventDefault();
+                            router.push({
+                            pathname: "/products",
+                            query: {
+                                ...router.query,
+                                query: event.target.value,
+                                },
+                            });
+                        }}
+                            />
                     <img src="../pictures/icons/search.png" className="btn-search btn-search-products" alt="search close btn" onClick={handleToggleSearch}/>
                     </div>
                 </div>
@@ -85,6 +81,7 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -92,13 +89,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             subcategory: "tops",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Блузи</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -106,13 +103,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             subcategory: "pants",
                                         }
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Панталони</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -120,13 +117,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             subcategory: "bottomsShorts",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Здолништа / шорцеви</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -134,13 +131,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             subcategory: "dresses",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Фустани</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -148,13 +145,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             subcategory: "coatsAndJackets",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Палта и јакни</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -162,20 +159,20 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             subcategory: "underwear",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Долна облека</p>
                         </div>                        
                     </div>
                     </li>
                     <li  className="flex-column justify-content-start">
-                    <p className="menu-list w-100 my-5">
+                    <p className="menu-list w-100 mt-5">
                         Брендови
                     </p>
                     <hr className='ml-0 mb-2 mt-3 w-50' style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 100%, #FDD292 100%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -183,13 +180,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "pincPartywear",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Pinc Partywear</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -197,13 +194,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "factoryGirl",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Factory Girl</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -211,13 +208,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "mainDays",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Main Days</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -225,13 +222,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "nezno",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Нежно</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -239,13 +236,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "red",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Ред</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -253,13 +250,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "nas",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Наш</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -267,13 +264,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "zsDaNe",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Зш да не</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -281,13 +278,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "fraeil",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Fraeil</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -295,13 +292,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "urma",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Urma</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -309,13 +306,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "candleNest",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Candle Nest</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -323,13 +320,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "beyondGreen",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Beyond Green</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/brands",
                                         query: {
@@ -337,19 +334,19 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             brand: "gatta",
                                             },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Gatta</p>
                         </div>
                     </li>
                     <li  className="flex-column justify-content-start">
-                    <p className="menu-list w-100 my-5">
+                    <p className="menu-list w-100 mt-5">
                         Аксесоари
                     </p>
                     <hr className='ml-0 mb-2 mt-3 w-50' style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 100%, #FDD292 100%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -357,13 +354,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             subcategory: "purses",
                                         }
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Ташни</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -371,19 +368,19 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             subcategory: "jewelry",
                                         }
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Накит</p>
                         </div>
                     </li>
                     <li  className="flex-column justify-content-start">
-                    <p className="menu-list w-100 my-5">
+                    <p className="menu-list w-100 mt-5">
                         Величина
                     </p>
                     <hr className='ml-0 mb-2 mt-3 w-50' style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 100%, #FDD292 100%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
                     <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -391,13 +388,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             size: "XL",
                                         }
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >XL</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -405,13 +402,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             size: "L",
                                         }
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >L</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -419,13 +416,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             size: "M",
                                         }
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >M</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -433,13 +430,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             size: "S",
                                         }
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >S</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -447,21 +444,21 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             size: "XS",
                                         }
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >XS</p>
                         </div>
                     </li>
                     <li  className="flex-column justify-content-start">
-                    <p className="menu-list w-100 my-5">
+                    <p className="menu-list w-100 mt-5">
                         Боја
                     </p>
                     <hr className='ml-0 mb-2 mt-3 w-25' style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF 0%, #EFC990 100%, #FDD292 100%)"}}/>
                     <div className="flex-row justify-content-start mt-3 mb-1">
                         <div className="input-group-text">
-                            <input type="color" value="#ff0000" aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#ff0000" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -469,13 +466,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             color: "red",
                                         },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#ffa500" aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#ffa500" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -483,13 +480,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             color: "orange",
                                         },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#ffff00" aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#ffff00" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -497,11 +494,10 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             color: "yellow",
                                         },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#008000" aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#008000" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
                                     router.push({
@@ -514,9 +510,10 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#0000ff" aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#0000ff" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -524,15 +521,15 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             color: "blue",
                                         },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                         </div>
                     </div>
                     <div className="flex-row justify-content-start">                       
                         <div className="input-group-text">
-                            <input type="color" value="#ffc0cb" aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#ffc0cb" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -540,13 +537,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             color: "pink",
                                         },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#ee82ee" aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#ee82ee" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -554,13 +551,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             color: "purple",
                                         },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#808080" aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#808080" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -568,13 +565,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             color: "grey",
                                         },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                         </div>
                         <div className="input-group-text" >
-                            <input type="color" value="#ffffff" aria-label="Checkbox for following text input" className="color-filter mr-2 border"
+                            <input type="color" value="#ffffff" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2 border"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -582,13 +579,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             color: "white",
                                         },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#000000" aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#000000" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -596,19 +593,19 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             color: "black",
                                         },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                         </div>
                         </div>
                     </li>
                     <li  className="flex-column justify-content-start">
-                    <p className="menu-list w-100 my-5">
+                    <p className="menu-list w-100 mt-5">
                         Цена
                     </p>
                     <hr className='ml-0 mb-2 mt-3 w-25' style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 100%, #FDD292 100%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
                     <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -616,13 +613,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             discount: "discount",
                                         }
                                     });
-                                    {handleToggleSearch};
                                 }} />
-                            <p className="p-0 ml-3" >На попуст*</p>
+                            <p className="p-0 ml-3" style={{color: "#FF5B29"}}>На попуст*</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -630,13 +627,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             price: "price",
                                         }
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >500 - 1000 ден.</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -644,13 +641,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             price: "price",
                                         },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >1500 - 2000 ден.</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -658,13 +655,13 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             price: "price",
                                         },
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >2000 - 2500 ден.</p>
                         </div>
                         <div className="input-group-text">
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
+                                    handleToggleSearch();
                                     router.push({
                                         pathname: "/products",
                                         query: {
@@ -672,32 +669,44 @@ const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
                                             price: "price",
                                         }
                                     });
-                                    {handleToggleSearch};
                                 }} />
                             <p className="p-0 ml-3" >Над 2500 ден.</p>
                         </div>
                     </li>
                    </ul>
-                </div>
-                    {/* <div className='row flex-column justify-content-center bottom-sticky'> */}
-                    <div className='col-11 p-0 text-center mb-4 mr-auto ml-auto bottom-sticky'>
-                        <PrimaryBtn title="Филтрирај" btnClass={"PrimaryBtn w-100 btn-gold btn-gold-text mb-3"} onClick={handleToggleSearch} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/>
-                        <button className='border-0 bg-transparent w-100' onClick={handleToggleSearch}><u>oткажи</u></button>
-                    </div>
-                </div>
-                </div>
+            </div>
+            <div className='col-11 p-0 text-center bottom-sticky mb-4 mr-auto ml-auto'>
+                <PrimaryBtn title="Филтрирај" btnClass={"PrimaryBtn w-100 btn-gold btn-gold-text mb-3"} onClick={handleToggleSearch} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/>
+                <button className='border-0 bg-transparent w-100' onClick={handleToggleSearch}><u>oткажи</u></button>
+            </div>
+            </div>
         </div>
         {/* SEARCH LAYER END */}
         <div className="container my-5">
           <div  className="row flex-column">
             <div className="container">
               <div  className="row flex-row">
+                <Breadcrumbs links={links} />
+                <div className='col-12 flex-row justify-content-between align-items-center mb-3'>
+                    <button onClick={handleToggleSearch} className='col-2 p-0 bg-transparent border-0'>
+                        <img src="../../pictures/icons/search-group.png"/>
+                    </button>
+                    <div className="col-8 form-group flex-row justify-content-end align-items-center mb-0">
+                        <div className="col-12 flex-row justify-content-end align-items-end align-self-center p-0">
+                        <label htmlFor="exampleFormControlSelect1" className='dropdown-sort align-self-center mb-0 mr-2'>Подреди според:</label>
+                            <select className="form-control w-50 px-2 py-1" id="exampleFormControlSelect1" style={{height: '5%'}}>
+                                <option className='dropdown-sort-select' onClick={handleSortByDate}>Најнови</option>
+                                <option className='dropdown-sort-select' onClick={handleSortByDate}>Најстари</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <div className="col-12 flex-row flex-wrap justify-content-around">
-                  {searchedProductsData.length > 0 ? (
-                    searchedProductsData?.map((product, productIndex) => {
+                  {sortedProducts.length > 0 ? (
+                    sortedProducts?.map((product, productIndex) => {
                     let columnSize = "col-5 product-img-small";
                     let columnText = "product-text-a"
-                    for (let i = 2; i < searchedProductsData.length; i += 5) {
+                    for (let i = 2; i < sortedProducts.length; i += 5) {
                     if (productIndex === i ) {columnSize = "col-11"; columnText = "product-text"}}
                         return (
                             <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
@@ -770,6 +779,40 @@ export default ProductPage;
     }
 
     const searchedProductsData: ProductType[] = await resSearchedProducts.json();
+
+
+    // export const getServerSideProps: GetServerSideProps = async ({query}) => {
+
+//  let resSearchedBlogsItems: Response;
+//  let resSearchedProductsItems: Response;
+//  let searchQuery = query.query || "";
+
+//  if (searchQuery) {
+//     [resSearchedBlogsItems, resSearchedProductsItems] = await Promise.all([
+//       fetch(`http://localhost:5001/blogs?q=${query.query}`),
+//       fetch(`http://localhost:5001/products?q=${query.query}`),
+//     ]);
+//  } else {
+//     [resSearchedBlogsItems, resSearchedProductsItems] = await Promise.all([
+//       fetch("http://localhost:5001/blogs"),
+//       fetch("http://localhost:5001/products"),
+//     ]);
+//  }
+
+//  const [searchedBlogsItemsData, searchedProductsItemsData ] = await Promise.all([
+//     resSearchedBlogsItems.json(),
+//     resSearchedProductsItems.json(),
+//   ]);
+   
+
+//  return {
+//   props: {
+//     searchedBlogsItemsData,
+//     searchedProductsItemsData,
+//     },
+//   };
+
+// };
 
 return { 
     props: { 

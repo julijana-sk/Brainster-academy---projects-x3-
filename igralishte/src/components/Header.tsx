@@ -61,7 +61,7 @@ return (
             </div>
           </div>
         </div>
-          <div className={toggleNav ? "activeSidenav px-4 py-3" : "sidenav px-4 py-3" }>
+          <div className={toggleNav ? "activeSidenav px-4 py-3" : "sidenav px-4 pt-3" }>
             <div className="container flex-row justify-content-between text-dark pl-2 pr-0">
               <button onClick={handleToggleNav} className="hamburger-btn" >
                 <p className={toggleNav ? "activeHamburger" : "hamburber"} />
@@ -94,7 +94,7 @@ return (
                 <li className="contact-text font-italic font-weight-bold text-left mb-3"><u>Ново</u></li>
                     <li className="dropdown dropdown1">
                       <p className="dropdown-toggle  menu-list w-100 mb-3" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Vintage Clothes
+                        Vintage облека
                       </p>
                       <div className={`dropdown-menu menu-list text-left {aria-expanded ? ".dropdown-menu.show " : "" }`}  onClick={handleToggleNav}>
                         <div className="d-flex flex-column mr-auto ">

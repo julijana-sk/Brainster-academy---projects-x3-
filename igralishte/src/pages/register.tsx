@@ -13,7 +13,7 @@ type ActiveView = "register" | "register-2" | "register-3";
 const RegisterPage: NextPage = () => {
 
 
-  const { handleLogIn } = useContext(UserContext);
+  const { handleLogin } = useContext(UserContext);
 
   const [view, setView] = useState<ActiveView>("register");
   const [name, setName] = useState<string>("");
@@ -73,7 +73,7 @@ const RegisterPage: NextPage = () => {
 
       <div className="container mt-5">
         <form className="d-flex flex-column justify-content-center mr-auto ml-auto"
-          onSubmit={() => handleLogIn(username, password)}>
+          onSubmit={() => handleLogin(username, password)}>
               <div className='col-12 text-center my-5'>
                 <Link href={"/"}><img src="../pictures/icons/Logo Igralishte final version.png" alt="logo-igralishte" /></Link>
               </div>
@@ -128,7 +128,7 @@ const RegisterPage: NextPage = () => {
 
         <form className="d-flex flex-column justify-content-center"
           onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
-          handleLogIn(username, password);
+          handleLogin(username, password);
           }}>
 
           <div className='container-fluid mt-5 text-center'>
@@ -161,7 +161,7 @@ const RegisterPage: NextPage = () => {
                     setBiography(event.target.value);
                     }}/>
               </div>
-              <Link href="/"><PrimaryBtn title="Заврши" onClick={() => {handleLogIn}} btnClass={"PrimaryBtn mt-5 w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/></Link>
+              <Link href="/"><PrimaryBtn title="Заврши" onClick={() => {handleLogin}} btnClass={"PrimaryBtn mt-5 w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/></Link>
               
               <Link href="/login"><p className="mt-3"><u>Прескокни</u></p></Link>
               </div>
