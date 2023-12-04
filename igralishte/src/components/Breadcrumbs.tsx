@@ -1,28 +1,28 @@
 import Link from 'next/link';
 import React from 'react'
 
-
 interface Props {
-    links: string[];
-    // currentPage: string;
+    breadcrumbs: any;
 }
-const Breadcrumbs: React.FC<Props> = ({links}) => {
 
-  return (
-     <div className="col-11 breadcrumbs">
-            {links.map((link, index) => (
-                <React.Fragment key={link}>
-                    <Link href={link}>
-                        <p>{link}</p>
-                    </Link>
-                    {index < links.length - 1 && <img src='../pictures/icons/arrow-small.png' className='p-1' alt='..'/>}
-                </React.Fragment>
-            ))}
-            {/* <span>{currentPage}</span> */}
-        </div>
-    
-  );
-}
+const Breadcrumbs: React.FC<Props> = ({ breadcrumbs }) => {
+
+ return (
+    <div className="breadcrumbs col-11 justify-content-start align-items-center align-self-center">
+      {breadcrumbs.map((breadcrumb: any, index: any) => {
+        const isLast = index === breadcrumbs.length - 1;
+        return (
+          <React.Fragment key={breadcrumb.url}>
+            <Link href={breadcrumb.url}>
+              <p>{breadcrumb.name}</p>
+            </Link>
+            {!isLast && <span className="breadcrumb-separator mx-2"><img src="../../pictures/icons/arrow-small.png" alt="arrow small" /></span>}
+          </React.Fragment>
+        );
+      })}
+   </div>
+ );
+};
 
 export default Breadcrumbs;
 
