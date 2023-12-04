@@ -19,6 +19,7 @@ export interface ProductType {
     img3: string,
     price: number,
     brand: ProductBrandType,
+    brand_name: string,
     model_size: string,
     size_description: string,
     color: ProductColorType,

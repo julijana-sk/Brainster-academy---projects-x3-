@@ -8,7 +8,7 @@ interface Props {
 const Breadcrumbs: React.FC<Props> = ({ breadcrumbs }) => {
 
  return (
-    <div className="breadcrumbs col-11 justify-content-start align-items-center align-self-center">
+    <div className="breadcrumbs col-12 justify-content-start p-0 align-items-center align-self-center">
       {breadcrumbs.map((breadcrumb: any, index: any) => {
         const isLast = index === breadcrumbs.length - 1;
         return (

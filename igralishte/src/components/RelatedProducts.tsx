@@ -12,7 +12,7 @@ const RelatedProducts: React.FC<Props> = ({products}) => {
       <div className="container-fluid">
         <div className="row flex-column">
           <h3 className="text-center my-4">Related Products</h3>
-          <div className="row flex-row ">
+          <div className="row flex-row">
                 {products?.map((product, index) => {
                   return (
                     <div key={index} className="col-5 p-0 mb-3 mr-2 product-img-small">

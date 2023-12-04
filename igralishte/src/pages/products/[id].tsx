@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from 'next';
 import { BoxComponentType, ProductType } from '@/types/types';
 import Head from 'next/head';
@@ -7,7 +7,7 @@ import RelatedProducts from '@/components/RelatedProducts';
 import Link from 'next/link';
 import Slider from '@/components/Slider';
 import PaginationId from '@/components/PaginationId';
-
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 
 interface Props {
@@ -19,6 +19,12 @@ interface Props {
 
 const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, randomProducts }) => {
 
+  const breadcrumbs = [
+      { name: 'Почетна', url: '/' },
+      { name: `${product.category}`, url: `/products?category_like=${product.category}`},
+      { name: `${product.subcategory}`, url: `/products?subcategory_like=${product.subcategory}}`}
+  ];
+
   const [expandedBox, setExpandedBox] = useState(null);
   
   const [isFavorite, setIsFavorite] = useState(false);
@@ -26,8 +32,6 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
   const [favorites, setFavorites] = useState<ProductType[]>([]);
   const [addToCardProducts, setAddToCardProducts] = useState<ProductType[]>([]);  
   const [currentProduct, setCurrentProduct] = useState<ProductType>(product);
-
-  
   
   // useEffect(() => {
   //   // localStorage.setItem('amount', JSON.stringify(currentProduct.amount));
@@ -132,6 +136,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
         <div className="container-fluid my-5">
           <div className="row flex-column justify-content-center">
             <div className="col-11 mb-5 mr-auto ml-auto">
+              <Breadcrumbs breadcrumbs={breadcrumbs} />
               <div>
                 <h1 className='title' style={{textAlign: 'left'}}>{product.title}</h1>
                 <Slider product={product}/>
@@ -252,7 +257,6 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
            {/* Other Related Product Items  */}
               <RelatedProducts products={randomProducts}/>
               <PaginationId id={product.id} products={randomProducts}/>
-
       </div>
     </div>
   </>
@@ -290,7 +294,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
   
   
   const resBoxItems = await fetch('http://localhost:5001/boxComponents');
-  const boxItemsData = await resBoxItems.json();
+  const boxItemsData: BoxComponentType[] = await resBoxItems.json();
 
   
   const response = await fetch('http://localhost:5001/products'); 

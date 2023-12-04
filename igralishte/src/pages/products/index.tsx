@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Head from 'next/head';
 import { GetServerSideProps, NextPage } from 'next';
 import ProductItem from '@/components/ProductItem';
@@ -10,12 +10,10 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 
 
 interface Props {
-//   products: ProductType[];
   searchedProductsData: ProductType[];
 }
 
 const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
-
 
     const breadcrumbs = [
         { name: 'Почетна', url: '/' },
@@ -23,16 +21,46 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
         ];
     
     const router = useRouter();
+    const [sortedProducts, setSortedProducts] = useState<ProductType[]>(searchedProductsData);
 
     const [toggleSearch, setToggleSearch] = useState(false);
-    // const [sortedProducts,setSortedProducts] = useState(searchedProductsData)
-
     const searchRef = useRef<HTMLInputElement>(null);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-
     const isQueryEmpty = Object.keys(router.query).length === 0;
 
-    const handleFilterBySubcategory = (subcategory: string) => {
+    const [currentPage, setCurrentPage] = useState<number>(1);
+
+
+    const totalPages = Math.ceil(searchedProductsData.length / 10);
+
+    const start = (currentPage - 1) * 10;
+    const end = start + 10;
+    const paginationProductsForDisplaying = searchedProductsData.slice(start, end);
+
+    const handlePageChange = (page: number) => {
+        if (page < 1 || page > totalPages) return;
+        setCurrentPage(page);
+    };
+
+    const renderPages = () => {
+        return Array.from({ length: totalPages }, (_, index) => (
+              <a
+                key={index}
+                className={`flex-c-m how-pagination1 trans-04 m-all-7 pointer font-weight-bold ${
+                  currentPage === index + 1
+                    ? "active-pagination1 text-danger"
+                    : ""
+                }`}
+                onClick={() => handlePageChange(index + 1)}>
+                {index + 1}
+              </a>
+        ));
+    };
+
+    const handleToggleSearch = () => {
+        setToggleSearch(!toggleSearch);
+    }
+
+     const handleFilterBySubcategory = (subcategory: string) => {
         router.push({
         pathname: "/products",
         query: {
@@ -69,40 +97,30 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
         setCurrentPage(1);
     };
 
-    const totalPages = Math.ceil(searchedProductsData.length / 10);
 
-    const start = (currentPage - 1) * 10;
-    const end = start + 10;
-    const paginationProductsForDisplaying = searchedProductsData.slice(start, end);
+    const useSortProducts = (searchedProductsData: ProductType[]) => {
 
-    const handlePage = (page: number) => {
-        setCurrentPage(page);
+        // const [sortedProducts, setSortedProducts] = useState<ProductType[]>([]);
+
+        useEffect(() => {
+            const sortProducts = (products: ProductType[]) => {
+            return products.sort((a: any, b: any) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return (dateA as any) - (dateB as any);
+            });
+            };
+
+            const getProducts = async () => {
+            const sortedProducts = sortProducts(searchedProductsData);
+            setSortedProducts(sortedProducts);
+            };
+
+            getProducts();
+        }, [searchedProductsData]);
+
+    return sortedProducts;
     };
-
-    // function isArray(value: any): value is any[] {
-    //     return value && typeof value === 'object' && value.constructor === Array;
-    // }
-
-    // const filteredProducts = products.filter((p) => {
-    //     if (!color) return true;
-
-    //     const productColors = p.color.split(', ');
-    //     return color.every((c) => productColors.includes(c));
-    // });
-
-
-    const handleToggleSearch = () => {
-        setToggleSearch(!toggleSearch);
-    }
-
-    // const handleSortByDate = () => {
-    // const sortedData = [...products].sort((a, b) => {
-    //     const dateA = new Date(a.date).getTime();
-    //     const dateB = new Date(b.date).getTime();
-    //     return dateB - dateA;
-    // });
-    //     setSortedProducts(sortedData);
-    // };
 
 
 
@@ -774,7 +792,7 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
           <div  className="row flex-column">
             <div className="container-fluid">
               <div  className="row flex-row">
-                <Breadcrumbs breadcrumbs={breadcrumbs} />
+                <div className='col-12 ml-5 px-2 flex-row justify-content-start'><Breadcrumbs breadcrumbs={breadcrumbs} /></div>
                 <div className='col-12 flex-row justify-content-between align-items-center mb-3'>
                     <button onClick={handleToggleSearch} className='col-2 p-0 bg-transparent border-0'>
                         <img src="../../pictures/icons/search-group.png"/>
@@ -783,8 +801,8 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
                         <div className="col-11 align-self-center flex-row justify-content-end mr-3 p-0">
                         <label htmlFor="exampleFormControlSelect1" className='dropdown-sort align-self-center mb-0 mr-2'>Подреди според:</label>
                             <select className="form-control mr-1 px-2 py-1" id="exampleFormControlSelect1" style={{height: '5%'}}>
-                                {/* <option className='dropdown-sort-select' onClick={handleSortByDate}>Најнови</option>
-                                <option className='dropdown-sort-select' onClick={handleSortByDate}>Најстари</option> */}
+                                <option className='dropdown-sort-select' onClick={() => useSortProducts}>Најнови</option>
+                                <option className='dropdown-sort-select' onClick={() => useSortProducts}>Најстари</option>
                             </select>
                         </div>
                     </div>
@@ -808,20 +826,16 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
                     )}
                   </div>
                    {/* pagination  */}
-                    <div className="flex-l-m flex-w w-full p-t-10 m-lr--7">
-                        {Array.from({ length: totalPages }, (undefined, index) => (
-                        <a
-                            key={index}
-                            className={`flex-c-m how-pagination1 trans-04 m-all-7 pointer ${
-                            currentPage === index + 1
-                                ? "active-pagination1 text-white"
-                                : ""
-                            }`}
-                            onClick={() => handlePage(index + 1)}>
-                            {index + 1}
-                        </a>
-                        ))}
+                   <div className="flex-l-m flex-w w-full p-t-10 m-lr--7" style={{ letterSpacing: "5px" }}>
+                        <button onClick={() => handlePageChange(currentPage - 1)} className='bg-transparent border-0 mr-1'>
+                            {"<"}
+                        </button>
+                        {renderPages()}
+                        <button onClick={() => handlePageChange(currentPage + 1)} className='bg-transparent border-0 ml-1'>
+                            {">"}
+                        </button>
                     </div>
+
                 </div>
               </div>
             </div>
@@ -836,48 +850,57 @@ export default ProductPage;
 
 
  export const getServerSideProps: GetServerSideProps = async ({query}) => { 
-     
-    //  const page = parseInt(query.page as string, 10) || 1;
-     
-     // export const getServerSideProps: GetServerSideProps = async ({query}) => {
 
-//  let resSearchedBlogsItems: Response;
-//  let resSearchedProductsItems: Response;
 //  let searchQuery = query.query || "";
 
-//  if (searchQuery) {
-//     [resSearchedBlogsItems, resSearchedProductsItems] = await Promise.all([
-//       fetch(`http://localhost:5001/blogs?q=${query.query}`),
-//       fetch(`http://localhost:5001/products?q=${query.query}`),
-//     ]);
-//  } else {
-//     [resSearchedBlogsItems, resSearchedProductsItems] = await Promise.all([
-//       fetch("http://localhost:5001/blogs"),
-//       fetch("http://localhost:5001/products"),
-//     ]);
-//  }
+    let resSearchedProducts: Response;
 
-//  const [searchedBlogsItemsData, searchedProductsItemsData ] = await Promise.all([
-//     resSearchedBlogsItems.json(),
-//     resSearchedProductsItems.json(),
-//   ]);
+    if (query.category && query.brand && query.subcategory && query.color && query.price && query.size && query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?category_like=${query.category}&q=${query.q}`);
 
-let resSearchedProducts: Response;
+    } else if (query.category && query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?category_like=${query.category}&q=${query.q}`);
 
-  if (query.category && query.q) {
-    resSearchedProducts = await fetch(
-      `http://localhost:5001/products?category_like=${query.category}&q=${query.q}`
-    );
-  } else if (query.category) {
-    resSearchedProducts = await fetch(
-      `http://localhost:5001/products?category_like=${query.category}`
-    );
-  } else if (query.q) {
-    resSearchedProducts = await fetch(`http://localhost:5001/products?q=${query.q}`);
-  } else {
-    resSearchedProducts = await fetch(`http://localhost:5001/products`);
-  }
-   
+    } else if (query.category) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?category_like=${query.category}`);
+
+    } else if (query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?q=${query.q}`);
+
+    } else if (query.brand && query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?brand_like=${query.brand}&q=${query.q}`);
+
+    }  else if (query.brand) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?brand_like=${query.brand}`);
+
+    } else if (query.subcategory && query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?subcategory_like=${query.subcategory}&q=${query.q}`);
+
+    } else if (query.subcategory) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?subcategory_like=${query.subcategory}`);
+
+    } else if (query.color && query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?color_like=${query.color}&q=${query.q}`);
+
+    } else if (query.color) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?color_like=${query.color}`);
+
+    } else if (query.size && query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?size_like=${query.size}&q=${query.q}`);
+
+    } else if (query.size) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?size_like=${query.size}`);
+
+    } else if (query.price && query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?price_like=${query.price}&q=${query.q}`);
+
+    } else if (query.price) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?price_like=${query.price}`);
+
+    } else {
+        resSearchedProducts = await fetch(`http://localhost:5001/products`);
+    }
+    
 
 
     // const constructUrl = (query: any, page: number) => {

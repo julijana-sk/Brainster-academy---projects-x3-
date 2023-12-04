@@ -1,11 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head';
 import { BrandType, ProductType } from '@/types/types';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import BrandItem from '@/components/BrandItem';
-import PaginationBrand from '@/components/PaginationBrand';
-import ProductItem from '@/components/ProductItem';
 import Link from 'next/link';
 
 interface Props {
@@ -14,10 +11,43 @@ interface Props {
 }
 
 const ProductPage: NextPage<Props> = ({ brands, products }) => {
+
+  const breadcrumbs = [
+        { name: 'Почетна', url: '/' },
+        { name: 'Сите', url: '/brands' },
+        ];
     
   const router = useRouter();
 
-  const filterProducts = products?.filter(product => product.category === "brands")   
+  const filterProducts = products?.filter(product => product.category === "brands")
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+
+    const totalPages = Math.ceil(brands.length / 10);
+
+    const start = (currentPage - 1) * 10;
+    const end = start + 10;
+    const paginationProductsForDisplaying = brands.slice(start, end);
+
+    const handlePageChange = (page: number) => {
+        if (page < 1 || page > totalPages) return;
+        setCurrentPage(page);
+    };
+
+    const renderPages = () => {
+        return Array.from({ length: totalPages }, (_, index) => (
+              <a
+                key={index}
+                className={`flex-c-m how-pagination1 trans-04 m-all-7 pointer font-weight-bold ${
+                  currentPage === index + 1
+                    ? "active-pagination1 text-danger"
+                    : ""
+                }`}
+                onClick={() => handlePageChange(index + 1)}>
+                {index + 1}
+              </a>
+        ));
+    };   
 
 
 return (
@@ -51,9 +81,16 @@ return (
               </div>
             </div>
        
-        {/* pagination  */}
-        <PaginationBrand brands={brands} />
-          
+         {/* pagination  */}
+          <div className="flex-l-m flex-w w-full p-t-10 m-lr--7" style={{ letterSpacing: "5px" }}>
+                <button onClick={() => handlePageChange(currentPage - 1)} className='bg-transparent border-0 mr-1'>
+                    {"<"}
+                </button>
+                {renderPages()}
+                <button onClick={() => handlePageChange(currentPage + 1)} className='bg-transparent border-0 ml-1'>
+                    {">"}
+                </button>
+            </div>
     </>
   ); 
 };

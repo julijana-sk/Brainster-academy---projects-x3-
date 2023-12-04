@@ -744,7 +744,7 @@ form label {
   width: 23%;
   height: 15%;
   border: 0.42px solid #666560;
-  margin-top: 26%;
+  margin-top: 17%;
   position: absolute;
   margin-left: auto;
   margin-right: auto;
@@ -1333,7 +1333,7 @@ a {
 .add-to-card-fixed {
   position: fixed;
   right: 25px;
-  bottom: 40%;
+  bottom: 34%;
   z-index: 1 !important;
 }
 .boxComponent {
@@ -1348,7 +1348,6 @@ a {
 .boxComponent img {
   background-image: url("../pictures/box/X.png");
 }
-
 .breadcrumbs {
   display: flex;
   flex-direction: row;

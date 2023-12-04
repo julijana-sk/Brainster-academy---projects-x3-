@@ -12,7 +12,7 @@ const Pagination: React.FC<Props> = ({ products, id }) => {
     const [displayAllPages, setDisplayAllPages] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [productsForPage, setProductsForPage] = useState<ProductType[]>([]);
-    const totalPages = Math.ceil((products.length));
+    const totalPages = Math.ceil((products?.length));
 
     
     useEffect(() => {
