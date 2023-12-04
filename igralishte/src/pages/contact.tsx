@@ -23,7 +23,7 @@ return (
 
       <div className="d-flex flex-row align-items-center align-self-center my-3 justify-content-center">
         <PageTitle title={contactData.title}/>
-        <img src="../pictures/icons/sparks-elements.png" alt="spakrs" className="ml-2"/>
+        <img src="../pictures/icons/sparks-removebg.png" alt="spakrs" className="ml-2"/>
       </div>
 
       <div className="container">

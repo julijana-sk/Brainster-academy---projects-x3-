@@ -7,6 +7,8 @@ interface UserContextType {
   } | null;
   handleLogin: (username: string, password: string) => void;
   handleLogout: () => void;
+  handleArrowClick: (direction: string, clickedPage: any) => void;
+  handleClick: (pageNumber: number) => void;
   data: DataType[];
   brands: BrandType[];
   addToCard: (prod: ProductType) => void;
@@ -16,6 +18,8 @@ export const UserContext = createContext<UserContextType>({
   user: null,
   handleLogin: () => {},
   handleLogout: () => {},
+  handleArrowClick: () => {},
+  handleClick: () => {},
   data: [],
   brands: [],
   addToCard: () => {},
@@ -33,6 +37,18 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [brands, setBrands] = useState<BrandType[]>([]);
   const [addItems, setAddedToCard] = useState<ProductType>();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(brands.length / 10);
+
+
+    // useEffect(() => {
+    //     const indexOfLastProduct = currentPage * 10;
+    //     const indexOfFirstProduct = indexOfLastProduct - 10;
+    //     const currentProducts = brands.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    //     setBrands(currentProducts);
+    // }, [currentPage]);
 
 
   useEffect(() => {
@@ -78,8 +94,7 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
 
   };
 
-  
-  
+    
   const handleLogin = (username: string, password: string) => {
     if (username === "igralishte" && password === "12345") {
         localStorage.setItem("username", username);
@@ -93,6 +108,22 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
     setUser(null);
   };
   
+  const handleArrowClick = (direction: string, clickedPage: any) => {
+        if (direction === 'previous') {
+            setCurrentPage(currentPage - 1);
+        } else {
+            setCurrentPage(currentPage + 1);
+        }
+        handleClick(clickedPage);
+    };
+
+    const handleClick = (pageNumber: number) => {
+     if (pageNumber === currentPage) {
+        return;
+        }
+        setCurrentPage(pageNumber);
+    };
+
 
 
   return (
@@ -102,7 +133,9 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
         handleLogout,
         data,
         brands,
-        addToCard
+        addToCard,
+        handleArrowClick,
+        handleClick,
       }}>
       {children}
     </UserContext.Provider>

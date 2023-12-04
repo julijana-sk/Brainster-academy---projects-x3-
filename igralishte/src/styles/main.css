@@ -71,8 +71,9 @@ p, a {
     margin-bottom: 15px;
 }
 
-.nav-link:hover, .nav-link a:hover {
+.nav-link:hover, .nav-link a:hover, .menu-ul li:hover, .menu-ul p:hover {
     color: #8A8328;
+    cursor: pointer;
 }
 
 .absolute-absolute {
@@ -172,6 +173,7 @@ p, a {
     position: fixed;
     width: 100%;
     height: 100%;
+    z-index: 2222222;
     background-color: white;
     transform: translateX(100%);
     transition: all 0.1s ease-in-out;
@@ -283,9 +285,7 @@ ul li a {
     letter-spacing: -0.011em;
     text-align: left;
     align-items: center;
-    position: fixed;
-    bottom: 0;
-}
+    bottom: 0;}
 
 .menu-footer p {
     margin-left: 15px;
@@ -618,6 +618,26 @@ form label {
 .carousel.carousel-slider .control-arrow:hover {
     background: transparent !important;
 }
+
+.control-arrow {
+    top: 290px !important;
+    color: black !important;
+    font-size: 100px !important;
+    bottom: -25% !important;
+    padding: 150px !important;
+    rotate: 360deg !important;
+    font-weight: bolder !important;
+}
+
+.carousel .control-prev.control-arrow::before{
+    border-right: 20px solid #030303 !important;
+    height: 20px;
+}
+.carousel .control-next.control-arrow::before{
+    border-left: 20px solid #030303 !important;
+    height: 20px;
+}
+
 .product-img {
     width: 100%;
     height: 100%;
@@ -694,9 +714,9 @@ form label {
 .main-slider label img {
     display: flex;
     width: 23%;
-    height: 16%;
+    height: 15%;
     border: 0.42px solid #666560;
-    margin-top: 27%;
+    margin-top: 26%;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
@@ -1149,8 +1169,8 @@ a {
 }
 .gift-star {
     background: 504E21;
-    width: 43.31px;
-    height: 43.31px;
+    width: 45px;
+    height: 45px;
 }
 .right-side .gift-star {
     order: 1;
@@ -1264,10 +1284,8 @@ a {
 .boxComponent {
     position: fixed;
     width: 100%;
-    /* height: 100vh; */
     transform: translateY(100%);
     transition: all 0.1s ease-in-out;
-    /* z-index: 2222222; */
     color: #666560;
     margin-top: 20px;
 }

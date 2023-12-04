@@ -89,8 +89,8 @@ return (
                 </div>
               </div>
             </div>
-            <ul className="flex-column justify-content-start text-left mx-3 my-5">
-              <div className="mb-5">
+            <ul className="flex-column justify-content-start text-left mx-3 my-5" style={{paddingBottom: '100%'}}>
+              <div className="menu-ul mb-5">
                 <li className="contact-text font-italic font-weight-bold text-left mb-3"><u>Ново</u></li>
                     <li className="dropdown dropdown1">
                       <p className="dropdown-toggle  menu-list w-100 mb-3" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -107,26 +107,28 @@ return (
                                     },
                               });
                               }}>
-                              <p className="dropdown-item pl-0 font-italic" style={{color: "#8A8328"}}><img src="../pictures/icons/sparks-elements.png" alt="stars" className="mr-1" /> Види ги сите</p>
+                              <p className="dropdown-item pl-0 font-italic" style={{color: "#8A8328"}}><img src="../pictures/icons/sparks-removebg.png" alt="stars" className="mr-1" /> Види ги сите</p>
                               </button>
                         <button  className="border-0 bg-transparent"
                                 onClick={() => {
-                                router.replace({
-                                pathname: "/products",
-                                query: {
-                                    ...router.query,
-                                    subcategory: "tops",
-                                    },
-                                    });
-                                }}>
+                                  const { category, ...rest } = router.query;
+                                  router.push({
+                                  pathname: "/products",
+                                  query: {
+                                      ...rest,
+                                      subcategory: "tops",
+                                      },
+                                      });
+                                  }}>
                                 <p className="dropdown-item dropdown-inside pl-5 pr-0" >Блузи</p>
                               </button >
                         <button  className="border-0 bg-transparent"
                                 onClick={() => {
-                                router.replace({
-                                pathname: "/products",
-                                query: {
-                                    ...router.query,
+                                  const { category, ...rest } = router.query;
+                                  router.push({
+                                  pathname: "/products",
+                                  query: {
+                                      ...rest,
                                     subcategory: "pants",
                                     },
                                     });
@@ -135,10 +137,11 @@ return (
                               </button >
                         <button  className="border-0 bg-transparent"
                                  onClick={() => {
-                                router.replace({
-                                pathname: "/products",
-                                query: {
-                                    ...router.query,
+                                  const { category, ...rest } = router.query;
+                                  router.push({
+                                  pathname: "/products",
+                                  query: {
+                                      ...rest,
                                     subcategory: "bottomsShorts",
                                     },
                                     });
@@ -147,10 +150,11 @@ return (
                               </button >
                         <button  className="border-0 bg-transparent"
                                 onClick={() => {
-                                  router.replace({
+                                  const { category, ...rest } = router.query;
+                                  router.push({
                                   pathname: "/products",
                                   query: {
-                                      ...router.query,
+                                      ...rest,
                                       subcategory: "dresses",
                                       },
                                       });
@@ -159,10 +163,11 @@ return (
                               </button >
                         <button  className="border-0 bg-transparent"
                                  onClick={() => {
-                                router.replace({
-                                pathname: "/products",
-                                query: {
-                                    ...router.query,
+                                  const { category, ...rest } = router.query;
+                                  router.push({
+                                  pathname: "/products",
+                                  query: {
+                                      ...rest,
                                     subcategory: "coatsAndJackets",
                                     },
                                     });
@@ -171,10 +176,11 @@ return (
                               </button >
                         <button  className="border-0 bg-transparent"
                                  onClick={() => {
-                                router.replace({
-                                pathname: "/products",
-                                query: {
-                                    ...router.query,
+                                  const { category, ...rest } = router.query;
+                                  router.push({
+                                  pathname: "/products",
+                                  query: {
+                                      ...rest,
                                     subcategory: "underwear",
                                     },
                                     });
@@ -195,91 +201,31 @@ return (
                                   pathname: "/brands",
                                   });
                                   }}>
-                                  <img src="../pictures/icons/sparks-elements.png" alt="stars" className="mr-2" /> Види ги сите</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                    router.replace({
-                                    pathname: "/brands",
-                                    query: { brand: "pincPartywear" },
-                                    });
-                                    }}>Pinc Partywear</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                            router.replace({
-                                            pathname: "/brands",
-                                            query: { brand: "factoryGirl" },
-                                            });
-                                    }}>Factory Girl</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                            router.replace({
-                                            pathname: "/brands",
-                                            query: { brand: "mainDays" },
-                                            });
-                                    }}>Main Days</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                            router.replace({
-                                            pathname: "/brands",
-                                            query: { brand: "nezno" },
-                                            });
-                                    }}>Нежно</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                            router.replace({
-                                            pathname: "/brands",
-                                            query: { brand: "red" },
-                                            });
-                                    }}>Ред</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                            router.replace({
-                                            pathname: "/brands",
-                                            query: { brand: "nas" },
-                                            });
-                                    }}>Наш</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                            router.replace({
-                                            pathname: "/brands",
-                                            query: { brand: "zsDaNe" },
-                                            });
-                                    }}>Зш да не</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                            router.replace({
-                                            pathname: "/brands",
-                                            query: { brand: "fraeil" },
-                                            });
-                                    }}>Fraeil</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                            router.replace({
-                                            pathname: "/brands",
-                                            query: { brand: "urma" },
-                                            });
-                                    }}>Urma</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                            router.replace({
-                                            pathname: "/brands",
-                                            query: { brand: "candleNest" },
-                                            });
-                                    }}>Candle Nest</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                            router.replace({
-                                            pathname: "/brands",
-                                            query: { brand: "beyondGreen" },
-                                            });
-                                    }}>Beyond Green</button>
-                        <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
-                                onClick={() => {
-                                            router.replace({
-                                            pathname: "/brands",
-                                            query: { brand: "gatta" },
-                                            });
-                                    }}>Gatta</button>
+                                  <img src="../pictures/icons/sparks-removebg.png" alt="stars" className="mr-2" /> Види ги сите</button>
+                        <Link href={'/brands/FF54325FCHT'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Pinc Partywear</Link>
+                        <Link href={'/brands/FF33345FVHT'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Factory Girl</Link>
+                        <Link href={'/brands/FF4673RRR7S'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Main Days</Link>
+                        <Link href={'/brands/FF537222THT'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Нежно</Link>
+                        <Link href={'/brands/FF598599YHT'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Ред</Link>
+                        <Link href={'/brands/FMJ7633FYHT'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Наш</Link>
+                        <Link href={'/brands/FF39487FYHT'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Зш да не</Link>
+                        <Link href={'/brands/FX73633FYHT'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Fraeil</Link>
+                        <Link href={'/brands/FF54345SWXD'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Urma</Link>
+                        <Link href={'/brands/FWQC553FYHT'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Candle Nest</Link>
+                        <Link href={'/brands/FF57ER8FIHT'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Beyond Green</Link>
+                        <Link href={'/brands/FF5463ISY6E'} 
+                              className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" >Gatta</Link>
                       </div>
                     </li>
                     <li className="dropdown dropdown3 flex-row justify-content-between">
@@ -296,7 +242,7 @@ return (
                                     },
                                     });
                                   }}>
-                                  <img src="../pictures/icons/sparks-elements.png" alt="stars" className="mr-2" /> Види ги сите</button>
+                                  <img src="../pictures/icons/sparks-removebg.png" alt="stars" className="mr-2" /> Види ги сите</button>
                         <button className="bg-transparent border-0 dropdown-item pl-5 pr-0 ml-3" 
                                 onClick={() => {
                                   router.replace({
@@ -319,25 +265,24 @@ return (
                                   }}>Накит</button>
                       </div>
                     </li>
-                    <li className="menu-list mb-3">Lifestyle</li>
-                    <Link href={"/gifts"}><li className="menu-list mb-3">Подари картичка*</li></Link>
-                    <li className="menu-list font-italic text-danger mb-5">Попуст</li>
-                  </div>
+                    <li className="menu-list mb-3" onClick={handleToggleNav}>Lifestyle</li>
+                    <Link href={"/gifts"} onClick={handleToggleNav}><li className="menu-list mb-3">Подари картичка*</li></Link>
+                    <li className="menu-list font-italic text-danger mb-5" onClick={handleToggleNav}>Попуст</li>
 
-                  <div className="menu-footer my-5" onClick={handleToggleNav}>
-                    <li className="nav-item">
-                      <Link href={"/favorites"} className="nav-link d-flex flex-row justify-content-start">
+                  <div className="menu-footer my-5">
+                    <li className="nav-item" onClick={handleToggleNav}>
+                      <Link href={"/favorites"} className="nav-link d-flex flex-row justify-content-start" >
                         <button className="menu-footer-button menu-pink"><img src="../pictures/icons/shopping vehicle.png" /> </button>
                         <p>Кошничка</p>
                       </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item" onClick={handleToggleNav}>
                       <Link href={"/favorites"} className="nav-link d-flex flex-row justify-content-start">
                         <button className="menu-footer-button"><img src="../pictures/icons/heart-straight-thin.png" /> </button>
                         <p>Омилени</p>
                       </Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item"  onClick={handleToggleNav}>
                       <div className="nav-link d-flex flex-row justify-content-start align-items-center" >
                         <button className="menu-footer-button"><img src="../pictures/icons/user-light.png" /></button>
                         {user ? (
@@ -358,7 +303,8 @@ return (
                       </div>
                     </li>
                   </div>
-                </ul>
+                </div>
+              </ul>
           </div>
         </div>
   );

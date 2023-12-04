@@ -27,7 +27,7 @@ const AboutPage: NextPage<Props> = ({aboutContentData}) => {
       </Head>
 
       <div className="d-flex flex-row align-items-center align-self-center my-3 justify-content-center">
-        <img src="../pictures/icons/sparks-elements.png" alt="spakrs" className="mr-2" />
+        <img src="../pictures/icons/sparks-removebg.png" alt="spakrs" className="mr-2" />
         <PageTitle title={aboutContentData.title}/>
       </div>
 

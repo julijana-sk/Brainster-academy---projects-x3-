@@ -29,18 +29,18 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
 
   
   
-  useEffect(() => {
-    // localStorage.setItem('amount', JSON.stringify(currentProduct.amount));
-    const savedAmount = JSON.parse(localStorage.getItem('amount') || '0');
-    const savedIsFavorite = (localStorage.getItem('favorites') || '0');
-    const savedIsAddToCard = (localStorage.getItem('addToCardProducts') || '0');
-    setCurrentProduct((prevState) => ({ 
-        ...prevState, 
-        amount: savedAmount,      
-      }));
-    setFavorites(JSON.parse(savedIsFavorite));
-    setIsAddToCard(JSON.parse(savedIsAddToCard));
-  }, []);
+  // useEffect(() => {
+  //   // localStorage.setItem('amount', JSON.stringify(currentProduct.amount));
+  //   const savedAmount = JSON.parse(localStorage.getItem('amount') || '0');
+  //   const savedIsFavorite = (localStorage.getItem('favorites') || '0');
+  //   const savedIsAddToCard = (localStorage.getItem('addToCardProducts') || '0');
+  //   setCurrentProduct((prevState) => ({ 
+  //       ...prevState, 
+  //       amount: savedAmount,      
+  //     }));
+  //   setFavorites(JSON.parse(savedIsFavorite));
+  //   setIsAddToCard(JSON.parse(savedIsAddToCard));
+  // }, []);
 
 
 

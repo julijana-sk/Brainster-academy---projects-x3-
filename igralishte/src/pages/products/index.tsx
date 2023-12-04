@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Head from 'next/head';
 import { GetServerSideProps, NextPage } from 'next';
 import ProductItem from '@/components/ProductItem';
-import { ProductType } from '@/types/types';
-import { useRouter } from 'next/router';
+import { ProductColorType, ProductType } from '@/types/types';
+import router, { useRouter } from 'next/router';
 import Pagination from '@/components/Pagination';
 import PrimaryBtn from '@/components/PrimaryBtn';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import Link from 'next/link';
+import { UserContext } from '@/context/UserContext';
 
 
 
@@ -17,26 +19,65 @@ interface Props {
 
 const ProductPage: NextPage<Props> = ({  products, searchedProductsData }) => {
 
+
     const links = ['Почетна', 'Сите'];
-    // const currentPage = 'Сите';
     
     const router = useRouter();
+
     const [toggleSearch, setToggleSearch] = useState(false);
-    const [sortedProducts, setSortedProducts] = useState<ProductType[]>(products);
-    const [color, setColor] = useState("#ffffff");
+    const [sortedProducts,setSortedProducts] = useState(searchedProductsData)
+    
+    const [color, setColor] = useState([])
 
-  const handleToggleSearch = () => {
-    setToggleSearch(!toggleSearch);
-  }
+    const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedColor = e.target.value;
+        handleColor(selectedColor);
+    };
+    
+    const handleColor = (c: any) => {
+    let selectedColors: any[] = [...color];
 
-const handleSortByDate = () => {
-  const sortedData = [...products].sort((a, b) => {
-    const dateA = new Date(a.date).getTime();
-    const dateB = new Date(b.date).getTime();
-    return dateB - dateA;
-  });
-  setSortedProducts(sortedData);
-};
+    if (selectedColors.includes(c)) {
+        selectedColors = selectedColors.filter((cc) => cc !== c);
+    } else {
+        selectedColors.push(c);
+    }
+
+    router.push({
+        pathname: '/products',
+        query: { 
+            ...router.query,
+            color: selectedColors.join('&') 
+        },
+    });
+    };
+
+    // function isArray(value: any): value is any[] {
+    //     return value && typeof value === 'object' && value.constructor === Array;
+    // }
+
+    // const filteredProducts = products.filter((p) => {
+    //     if (!color) return true;
+
+    //     const productColors = p.color.split(', ');
+    //     return color.every((c) => productColors.includes(c));
+    // });
+
+
+    const handleToggleSearch = () => {
+        setToggleSearch(!toggleSearch);
+    }
+
+    const handleSortByDate = () => {
+    const sortedData = [...products].sort((a, b) => {
+        const dateA = new Date(a.date).getTime();
+        const dateB = new Date(b.date).getTime();
+        return dateB - dateA;
+    });
+        setSortedProducts(sortedData);
+    };
+
+
 
   return (
     < >
@@ -174,7 +215,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "pincPartywear",
@@ -188,7 +229,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "factoryGirl",
@@ -202,7 +243,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "mainDays",
@@ -216,7 +257,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "nezno",
@@ -230,7 +271,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "red",
@@ -244,7 +285,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "nas",
@@ -258,7 +299,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "zsDaNe",
@@ -272,7 +313,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "fraeil",
@@ -286,7 +327,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "urma",
@@ -300,7 +341,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "candleNest",
@@ -314,7 +355,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "beyondGreen",
@@ -328,7 +369,7 @@ const handleSortByDate = () => {
                                 onClick={() => {
                                     handleToggleSearch();
                                     router.push({
-                                        pathname: "/brands",
+                                        pathname: "/products",
                                         query: {
                                             ...router.query,
                                             brand: "gatta",
@@ -347,12 +388,14 @@ const handleSortByDate = () => {
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
                                     handleToggleSearch();
-                                    router.push({
-                                        pathname: "/products",
-                                        query: {
-                                            ...router.query,
-                                            subcategory: "purses",
-                                        }
+                                    const { category, ...rest } = router.query;
+                                    router.replace({
+                                    pathname: "/products",
+                                    query: {
+                                        ...rest,
+                                        ...router.query,
+                                        subcategory: "purses",
+                                        },
                                     });
                                 }} />
                             <p className="p-0 ml-3" >Ташни</p>
@@ -361,12 +404,14 @@ const handleSortByDate = () => {
                             <input type="checkbox" aria-label="Checkbox for following text input"
                                 onClick={() => {
                                     handleToggleSearch();
-                                    router.push({
-                                        pathname: "/products",
-                                        query: {
-                                            ...router.query,
-                                            subcategory: "jewelry",
-                                        }
+                                    const { category, ...rest } = router.query;
+                                    router.replace({
+                                    pathname: "/products",
+                                    query: {
+                                        ...rest,
+                                        ...router.query,
+                                        subcategory: "jewelry",
+                                        },
                                     });
                                 }} />
                             <p className="p-0 ml-3" >Накит</p>
@@ -455,21 +500,24 @@ const handleSortByDate = () => {
                     <hr className='ml-0 mb-2 mt-3 w-25' style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF 0%, #EFC990 100%, #FDD292 100%)"}}/>
                     <div className="flex-row justify-content-start mt-3 mb-1">
                         <div className="input-group-text">
-                            <input type="color" value="#ff0000" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#ff0000" onChange={handleColorChange} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                                data-filter=".red"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
                                     handleToggleSearch();
-                                    router.push({
-                                        pathname: "/products",
-                                        query: {
-                                            ...router.query,
-                                            color: "red",
-                                        },
-                                    });
+                                    // router.push({
+                                    //     pathname: "/products",
+                                    //     query: {
+                                    //         ...router.query,
+                                    //         color: "red",
+                                    //     },
+                                    // });
+                                    handleColor("red")
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#ffa500" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#ffa500" onChange={handleColorChange} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                                data-filter=".orange"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
                                     handleToggleSearch();
@@ -483,7 +531,8 @@ const handleSortByDate = () => {
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#ffff00" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#ffff00" onChange={handleColorChange} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                                data-filter=".yellow"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
                                     handleToggleSearch();
@@ -497,7 +546,8 @@ const handleSortByDate = () => {
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#008000" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#008000" onChange={handleColorChange} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                                data-filter=".greenw"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
                                     router.push({
@@ -510,23 +560,25 @@ const handleSortByDate = () => {
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#0000ff" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#0000ff" onChange={handleColorChange} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                                data-filter=".blue"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
                                     handleToggleSearch();
-                                    router.push({
-                                        pathname: "/products",
-                                        query: {
-                                            ...router.query,
-                                            color: "blue",
-                                        },
-                                    });
+                                    // router.push({
+                                    //     pathname: "/products",
+                                    //     query: {
+                                    //         ...router.query,
+                                    //         color: "blue",
+                                    //     },
+                                    // });
+                                    handleColor("blue")
                                 }} />
                         </div>
                     </div>
                     <div className="flex-row justify-content-start">                       
                         <div className="input-group-text">
-                            <input type="color" value="#ffc0cb" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#ffc0cb" onChange={handleColorChange} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
                                     handleToggleSearch();
@@ -540,7 +592,7 @@ const handleSortByDate = () => {
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#ee82ee" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#ee82ee" onChange={handleColorChange} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
                                     handleToggleSearch();
@@ -554,7 +606,7 @@ const handleSortByDate = () => {
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#808080" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#808080" onChange={handleColorChange} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
                                     handleToggleSearch();
@@ -568,7 +620,7 @@ const handleSortByDate = () => {
                                 }} />
                         </div>
                         <div className="input-group-text" >
-                            <input type="color" value="#ffffff" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2 border"
+                            <input type="color" value="#ffffff" onChange={handleColorChange} aria-label="Checkbox for following text input" className="color-filter mr-2 border"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
                                     handleToggleSearch();
@@ -582,7 +634,7 @@ const handleSortByDate = () => {
                                 }} />
                         </div>
                         <div className="input-group-text">
-                            <input type="color" value="#000000" onChange={(event) => setColor(event.target.value)} aria-label="Checkbox for following text input" className="color-filter mr-2"
+                            <input type="color" value="#000000" onChange={handleColorChange} aria-label="Checkbox for following text input" className="color-filter mr-2"
                                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault()
                                     handleToggleSearch();
@@ -702,11 +754,11 @@ const handleSortByDate = () => {
                     </div>
                 </div>
                 <div className="col-12 flex-row flex-wrap justify-content-around">
-                  {sortedProducts.length > 0 ? (
-                    sortedProducts?.map((product, productIndex) => {
+                  {searchedProductsData.length > 0 ? (
+                    searchedProductsData?.map((product, productIndex) => {
                     let columnSize = "col-5 product-img-small";
                     let columnText = "product-text-a"
-                    for (let i = 2; i < sortedProducts.length; i += 5) {
+                    for (let i = 2; i < searchedProductsData.length; i += 5) {
                     if (productIndex === i ) {columnSize = "col-11"; columnText = "product-text"}}
                         return (
                             <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
@@ -724,8 +776,7 @@ const handleSortByDate = () => {
           </div>
         </div>
         {/* pagination  */}
-        <Pagination products={searchedProductsData}/>
-
+        <Pagination products={searchedProductsData} />
     </>
   ); 
 };
@@ -738,50 +789,7 @@ export default ProductPage;
      
      const page = parseInt(query.page as string, 10) || 1;
      
-     const response = await fetch(`http://localhost:5001/products?_page=${page}`); 
-     const products: ProductType[] = await response.json();
-
-    
-    let resSearchedProducts: Response;
-
-    // if (query.category && query.subcategory) {
-    //     resSearchedProducts = await fetch(
-    //     `http://localhost:5001/products?category_like=${query.category}&q=${query.subcategory}`
-    //     );
-    // } 
-    if (query.brand) {
-        resSearchedProducts = await fetch(
-            `http://localhost:5001/products?brand_like=${query.brand}`
-            );
-    } 
-    else if (query.subcategory) {
-        resSearchedProducts = await fetch(
-        `http://localhost:5001/products?subcategory_like=${query.subcategory}`
-        );
-    } 
-    else if (query.size) {
-        resSearchedProducts = await fetch(
-        `http://localhost:5001/products?size_like=${query.size}`
-        );
-    }
-    else if (query.color) {
-        resSearchedProducts = await fetch(
-        `http://localhost:5001/products?color_like=${query.color}`
-        );
-    } 
-    else if (query.price) {
-        resSearchedProducts = await fetch(
-        `http://localhost:5001/products?price_like=${query.price}`
-        );
-    }   
-    else {
-        resSearchedProducts = await fetch(`http://localhost:5001/products?_page=${page}`);
-    }
-
-    const searchedProductsData: ProductType[] = await resSearchedProducts.json();
-
-
-    // export const getServerSideProps: GetServerSideProps = async ({query}) => {
+     // export const getServerSideProps: GetServerSideProps = async ({query}) => {
 
 //  let resSearchedBlogsItems: Response;
 //  let resSearchedProductsItems: Response;
@@ -805,14 +813,26 @@ export default ProductPage;
 //   ]);
    
 
-//  return {
-//   props: {
-//     searchedBlogsItemsData,
-//     searchedProductsItemsData,
-//     },
-//   };
 
-// };
+    const constructUrl = (query: any, page: number) => {
+        let url = 'http://localhost:5001/products?';
+
+        for (const key in query) {
+            if (query[key]) {
+                url += `&${key}_like=${query[key]}&page=${page}`;
+            }
+        }
+
+        return url;
+    }
+
+    let products: ProductType[] = [];
+
+    const url = constructUrl(query, page);
+
+    const resSearchedProducts: Response = await fetch(url)
+    const searchedProductsData: ProductType[] = await resSearchedProducts.json();
+
 
 return { 
     props: { 
@@ -822,3 +842,5 @@ return {
     },
     }
  }
+
+
