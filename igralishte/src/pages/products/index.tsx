@@ -20,8 +20,10 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
         { name: 'Сите', url: '/products' },
         ];
     
+    
     const router = useRouter();
-    const [sortedProducts, setSortedProducts] = useState<ProductType[]>(searchedProductsData);
+    const [sortedProducts, setSortedProducts] = useState(searchedProductsData);
+    const [isSorted, setIsSorted] = useState(false);
 
     const [toggleSearch, setToggleSearch] = useState(false);
     const searchRef = useRef<HTMLInputElement>(null);
@@ -30,11 +32,18 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
     const [currentPage, setCurrentPage] = useState<number>(1);
 
 
-    const totalPages = Math.ceil(searchedProductsData.length / 10);
+    const totalPages = Math.ceil(sortedProducts.length / 10);
 
     const start = (currentPage - 1) * 10;
     const end = start + 10;
-    const paginationProductsForDisplaying = searchedProductsData.slice(start, end);
+    const paginationProductsForDisplaying = sortedProducts.slice(start, end);
+
+
+    useEffect(() => {
+        setSortedProducts(searchedProductsData);
+        setIsSorted(false);
+
+    })
 
     const handlePageChange = (page: number) => {
         if (page < 1 || page > totalPages) return;
@@ -58,6 +67,7 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
 
     const handleToggleSearch = () => {
         setToggleSearch(!toggleSearch);
+        setIsSorted(false);
     }
 
      const handleFilterBySubcategory = (subcategory: string) => {
@@ -98,26 +108,37 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
     };
 
 
-    const useSortProducts = (searchedProductsData: ProductType[]) => {
+    const useSortProductsByNewestDate = (products: ProductType[]) => {
 
-        // const [sortedProducts, setSortedProducts] = useState<ProductType[]>([]);
+        const sortProducts = (products: ProductType[]) => {
+            return products.sort((a, b) => {
+                const dateA = new Date(a.date).getTime();
+                const dateB = new Date(b.date).getTime();
+            return dateB - dateA;
+        });
+    };
+        const sortedProducts = sortProducts(products);
+        setSortedProducts(sortedProducts);
+        setIsSorted(true);
 
-        useEffect(() => {
-            const sortProducts = (products: ProductType[]) => {
-            return products.sort((a: any, b: any) => {
-                const dateA = new Date(a.date);
-                const dateB = new Date(b.date);
-                return (dateA as any) - (dateB as any);
+        return sortedProducts;
+    };
+
+    console.log(isSorted)
+
+    const useSortProductsByOldestDate = (products: ProductType[]) => {
+
+        const sortProducts = (products: ProductType[]) => {
+            return products.sort((a, b) => {
+                const dateA = new Date(a.date).getTime();
+                const dateB = new Date(b.date).getTime();
+                return dateA - dateB;
             });
-            };
+        };
 
-            const getProducts = async () => {
-            const sortedProducts = sortProducts(searchedProductsData);
-            setSortedProducts(sortedProducts);
-            };
-
-            getProducts();
-        }, [searchedProductsData]);
+        const sortedProducts = sortProducts(products);
+        setSortedProducts(sortedProducts);
+        setIsSorted(true);
 
     return sortedProducts;
     };
@@ -801,30 +822,50 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
                         <div className="col-11 align-self-center flex-row justify-content-end mr-3 p-0">
                         <label htmlFor="exampleFormControlSelect1" className='dropdown-sort align-self-center mb-0 mr-2'>Подреди според:</label>
                             <select className="form-control mr-1 px-2 py-1" id="exampleFormControlSelect1" style={{height: '5%'}}>
-                                <option className='dropdown-sort-select' onClick={() => useSortProducts}>Најнови</option>
-                                <option className='dropdown-sort-select' onClick={() => useSortProducts}>Најстари</option>
+                                <option className='dropdown-sort-select' onClick={() => useSortProductsByNewestDate(searchedProductsData)}>Најнови</option>
+                                <option className='dropdown-sort-select' onClick={() => useSortProductsByOldestDate(searchedProductsData)}>Најстари</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div className="col-12 flex-row flex-wrap justify-content-around">
                   <div className="row flex-row mr-auto ml-auto justify-content-around isotope-grid">
-                    {searchedProductsData.length < 1 ? (
-                    <p>There are no results for your search..</p>
-                    ) : (
-                        paginationProductsForDisplaying.map((product, productIndex) => {
-                            let columnSize = "col-5 product-img-small";
-                            let columnText = "product-text-a"
-                            for (let i = 2; i < searchedProductsData.length; i += 5) {
-                            if (productIndex === i ) {columnSize = "col-11"; columnText = "product-text"}}
-                            return (
-                                <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
-                                    <ProductItem key={product.id} {...product} />
-                                </div>
+                    {isSorted ? 
+                    (
+                      sortedProducts.length < 1 ? (
+                        <p>There are no results for your search..</p>
+                        ) : (
+                            paginationProductsForDisplaying.map((product, productIndex) => {
+                                let columnSize = "col-5 product-img-small";
+                                let columnText = "product-text-a"
+                                for (let i = 2; i < sortedProducts.length; i += 5) {
+                                if (productIndex === i ) {columnSize = "col-11"; columnText = "product-text"}}
+                                return (
+                                    <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
+                                        <ProductItem key={product.id} {...product} />
+                                    </div>
+                                   );
+                            })
+                            )
+                        ) : (
+                            searchedProductsData.length < 1 ? (
+                            <p>There are no results for your search.</p>
+                            ) : (
+                                paginationProductsForDisplaying.map((product, productIndex) => {
+                                    let columnSize = "col-5 product-img-small";
+                                    let columnText = "product-text-a"
+                                    for (let i = 2; i < sortedProducts.length; i += 5) {
+                                    if (productIndex === i ) {columnSize = "col-11"; columnText = "product-text"}}
+                                        return (
+                                            <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
+                                                <ProductItem key={product.id} {...product} />
+                                            </div>
+                                            );
+                                        })
                                 )
-                        })
-                    )}
-                  </div>
+                            )}
+                    </div>
+
                    {/* pagination  */}
                    <div className="flex-l-m flex-w w-full p-t-10 m-lr--7" style={{ letterSpacing: "5px" }}>
                         <button onClick={() => handlePageChange(currentPage - 1)} className='bg-transparent border-0 mr-1'>

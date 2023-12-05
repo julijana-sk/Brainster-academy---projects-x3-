@@ -11,7 +11,7 @@ const RelatedProducts: React.FC<Props> = ({products}) => {
   return (
       <div className="container-fluid">
         <div className="row flex-column">
-          <h3 className="text-center my-4">Related Products</h3>
+          <h3 className="text-left ml-3 my-4">Други парчиња:</h3>
           <div className="row flex-row">
                 {products?.map((product, index) => {
                   return (
