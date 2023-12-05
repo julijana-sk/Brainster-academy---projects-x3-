@@ -8,7 +8,6 @@ interface Props {
 const Slider: React.FC<Props> = ({ product }) => {
 
   const [isChecked, setIsChecked] = useState(true);
-
   
   const handleChange = () => {
       setIsChecked(!isChecked);

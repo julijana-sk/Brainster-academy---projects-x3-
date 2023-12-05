@@ -1,9 +1,8 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { ProductType } from '@/types/types';
 import ProductItem from './ProductItem';
-
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 interface Props {
   products: ProductType[];
@@ -21,8 +20,7 @@ const CarouselComponent: React.FC<Props> = ({ products }) => {
                 return (
                   <ProductItem key={product.id} {...product}/>
                 )
-              })
-              }
+              })}
             </Carousel>
         </div>
       </div>

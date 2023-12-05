@@ -24,7 +24,7 @@ const PrimaryBtn: React.FC<Props> = ({title, backgroundColor, color, fontSize, b
   );
 }
 
-export default PrimaryBtn
+export default PrimaryBtn;
 
 
 

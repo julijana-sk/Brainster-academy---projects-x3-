@@ -7,8 +7,6 @@ import { useRouter } from 'next/router';
 import PrimaryBtn from '@/components/PrimaryBtn';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
-
-
 interface Props {
   searchedProductsData: ProductType[];
 }
@@ -18,7 +16,7 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
     const breadcrumbs = [
         { name: 'Почетна', url: '/' },
         { name: 'Сите', url: '/products' },
-        ];
+    ];
     
     
     const router = useRouter();
@@ -30,10 +28,7 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
     const isQueryEmpty = Object.keys(router.query).length === 0;
 
     const [currentPage, setCurrentPage] = useState<number>(1);
-
-
     const totalPages = Math.ceil(sortedProducts.length / 10);
-
     const start = (currentPage - 1) * 10;
     const end = start + 10;
     const paginationProductsForDisplaying = sortedProducts.slice(start, end);

@@ -6,7 +6,6 @@ interface Props {
   index: number
 }
 
-
 const GiftCard: React.FC<Props> = ({gift, index}) => {
   return (
     <div className="relative mb-4">
