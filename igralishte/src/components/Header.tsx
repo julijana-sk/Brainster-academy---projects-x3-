@@ -103,7 +103,7 @@ return (
                               router.push({
                               pathname: "/products",
                               query: {
-                                    category: "vintageClothes",
+                                    category: "vintage",
                                     },
                               });
                               }}>
@@ -116,7 +116,7 @@ return (
                                   pathname: "/products",
                                   query: {
                                       ...rest,
-                                      subcategory: "tops",
+                                      subcategory: "блузи",
                                       },
                                       });
                                   }}>
@@ -129,7 +129,7 @@ return (
                                   pathname: "/products",
                                   query: {
                                       ...rest,
-                                    subcategory: "pants",
+                                    subcategory: "панталони",
                                     },
                                     });
                                 }}>
@@ -142,7 +142,7 @@ return (
                                   pathname: "/products",
                                   query: {
                                       ...rest,
-                                    subcategory: "bottomsShorts",
+                                    subcategory: "здолништа-шорцеви",
                                     },
                                     });
                                 }}>
@@ -155,7 +155,7 @@ return (
                                   pathname: "/products",
                                   query: {
                                       ...rest,
-                                      subcategory: "dresses",
+                                      subcategory: "фустани",
                                       },
                                       });
                                   }}>
@@ -168,7 +168,7 @@ return (
                                   pathname: "/products",
                                   query: {
                                       ...rest,
-                                    subcategory: "coatsAndJackets",
+                                    subcategory: "палта-јакни",
                                     },
                                     });
                                 }}>
@@ -181,7 +181,7 @@ return (
                                   pathname: "/products",
                                   query: {
                                       ...rest,
-                                    subcategory: "underwear",
+                                    subcategory: "долна-облека",
                                     },
                                     });
                                 }}>
@@ -249,7 +249,7 @@ return (
                                   pathname: "/products",
                                   query: {
                                       ...router.query,
-                                      subcategory: "purses",
+                                      subcategory: "ташни",
                                       },
                                       });
                                   }}>Ташни</button>
@@ -259,7 +259,7 @@ return (
                                   pathname: "/products",
                                   query: {
                                       ...router.query,
-                                      subcategory: "jewelry",
+                                      subcategory: "накит",
                                       },
                                       });
                                   }}>Накит</button>
@@ -271,7 +271,7 @@ return (
 
                   <div className="menu-footer my-5">
                     <li className="nav-item" onClick={handleToggleNav}>
-                      <Link href={"/favorites"} className="nav-link d-flex flex-row justify-content-start" >
+                      <Link href={"/order"} className="nav-link d-flex flex-row justify-content-start" >
                         <button className="menu-footer-button menu-pink"><img src="../pictures/icons/shopping vehicle.png" /> </button>
                         <p>Кошничка</p>
                       </Link>
@@ -295,7 +295,7 @@ return (
                                 pathname: "/login",
                                  });
                                 handleLogout;
-                                }}>Logout</button>
+                                }}>Одлогирај се</button>
                            </div>
                           ) : (
                             <Link href="/login">Регистрирај се / Логирај се</Link>

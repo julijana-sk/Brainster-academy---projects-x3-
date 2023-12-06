@@ -714,7 +714,7 @@ form label {
   display: flex;
   flex-direction: row;
   justify-content: left;
-  padding-top: 100%;
+  padding-top: 116%;
   padding-bottom: 0px;
   padding-left: 5px;
   padding-right: 0;
@@ -725,7 +725,7 @@ form label {
   left: 0;
   top: 0;
   transition: all 0.6s;
-  height: 80%;
+  height: 50vh;
   width: 100%;
 }
 .main-slider input[name="julijana"] {
@@ -747,9 +747,8 @@ form label {
 .main-slider label img {
   display: flex;
   width: 23%;
-  height: 15%;
+  height: 18%;
   border: 0.42px solid #666560;
-  margin-top: 17%;
   position: absolute;
   margin-left: auto;
   margin-right: auto;

@@ -6,7 +6,10 @@ import BoxComponent from '@/components/BoxComponent';
 import RelatedProducts from '@/components/RelatedProducts';
 import { BoxComponentType, ProductType } from '@/types/types';
 import PrimaryBtn from '@/components/PrimaryBtn';
-import OrderForm from '@/components/OrderForm';
+import { ToggleBtn } from '@/components/ToggleBtn';
+import Favorites from '@/components/Favorites';
+import PaginationId from '@/components/PaginationId';
+import ProductItem from '@/components/ProductItem';
 
 
 interface Props {
@@ -15,52 +18,45 @@ interface Props {
   boxItemsData: BoxComponentType[];
 }
 
+type ActiveView = "addToCard" | "favorites";
+
 const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) => {
 
+  const [view, setView] = useState<ActiveView>("addToCard");
 
 
-//   const router = useRouter();  
-//   const [expandedBox, setExpandedBox] = useState(null);
-//   const [orderProducts, setOrderProducts] = useState<ProductType[]>([]);const [currentPage, setCurrentPage] = useState<number>(1);
+  const router = useRouter();  
+  const [expandedBox, setExpandedBox] = useState(null);
+  const [favorites, setFavorites] = useState<ProductType[]>([]);
+  const [addToCardProducts, setAddToCardProducts] = useState<ProductType[]>([]);  
+  const [productAmounts, setProductAmounts] = useState({});
+  const [orderProducts, setOrderProducts] = useState<ProductType[]>([]);
 
 
-//     const totalPages = Math.ceil(searchedProductsData.length / 10);
+  useEffect(() => {
 
-//     const start = (currentPage - 1) * 10;
-//     const end = start + 10;
-//     const paginationProductsForDisplaying = searchedProductsData.slice(start, end);
+      const savedFavorites = localStorage.getItem('favorites');
+      const savedAddToCardProducts = localStorage.getItem('addToCardProducts');
+      const savedProductAmounts = localStorage.getItem('productAmounts');
+      
+        if (savedFavorites) {
+          setFavorites(JSON.parse(savedFavorites));
+        }
+        
+        if (savedAddToCardProducts) {
+          setAddToCardProducts(JSON.parse(savedAddToCardProducts));
+        }
+        
+        if (savedProductAmounts) {
+          setProductAmounts(JSON.parse(savedProductAmounts));
+          // tuka moze da pravi problem koi produkti gi stavam za render, dali so amount ili samo addToCard ??
+        }
 
+        if (savedAddToCardProducts) {
+          setOrderProducts(JSON.parse(savedAddToCardProducts));
+        }
 
-//   useEffect(() => {
-//     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-//     const addToCardProducts = JSON.parse(localStorage.getItem('favorites') || '[]');
-
-
-//       if (orderProducts) {
-//         setOrderProducts(orderProducts);
-//       }
-// }, [orderProducts]);
-  
-
-//     const handlePageChange = (page: number) => {
-//         if (page < 1 || page > totalPages) return;
-//         setCurrentPage(page);
-//     };
-
-//     const renderPages = () => {
-//         return Array.from({ length: totalPages }, (_, index) => (
-//               <a
-//                 key={index}
-//                 className={`flex-c-m how-pagination1 trans-04 m-all-7 pointer font-weight-bold ${
-//                   currentPage === index + 1
-//                     ? "active-pagination1 text-danger"
-//                     : ""
-//                 }`}
-//                 onClick={() => handlePageChange(index + 1)}>
-//                 {index + 1}
-//               </a>
-//         ));
-//     };
+}, [orderProducts]);
 
   
 //   const calcPrice = () => {
@@ -101,10 +97,25 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
 //     });
 //     setProducts(updatedState);
 //   };
-  
-//    const handleBoxClick = (box: any) => {
-//     setExpandedBox(box === expandedBox ? null : box);
-//   }
+
+    // const emptyBasket = (product: any, amount: number) => {
+
+    //   const updatedAddToCardProducts = addToCardProducts.filter((item) => item !== product);
+    //   const updatedProductAmounts = {
+    //     ...productAmounts,
+    //     [product]: 0,
+    //   };
+
+    //   setAddToCardProducts(updatedAddToCardProducts);
+    //   setProductAmounts(updatedProductAmounts);
+    //   setOrderProducts([]);
+    //     localStorage.setItem('addToCardProducts', JSON.stringify(updatedAddToCardProducts));
+    //     localStorage.setItem('productAmounts', JSON.stringify(updatedProductAmounts));
+    // }
+        
+    const handleBoxClick = (box: any) => {
+      setExpandedBox(box === expandedBox ? null : box);
+    }
   
   
   return (
@@ -115,65 +126,70 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <OrderForm />
+      <div className="container">
+          <div className="row d-flex flex-column justify-content-center mr-auto ml-auto">
+            <div className="col-11 p-0  mr-auto ml-auto">
+          <div className="row d-flex flex-row justify-content-center mt-5 mb-3">
+              <div className="col-12 p-0 flex-row">
+                <div className='col-5 align-items-center p-0 text-center mr-2'><img src="../pictures/icons/shopping vehicle.png" /><ToggleBtn title="Кошничка" onClick={() => setView("addToCard")} /></div>
+                <div className='col-5 align-items-center text-center p-0'><img src="../pictures/icons/heart-straight-thin.png" /><ToggleBtn title="Омилени" onClick={() => setView("favorites")} /></div>
+              </div>
+          </div>
+          {view === "addToCard" ? 
 
-         {/* <div className="container-fluid my-5">
-           <div className="row d-flex flex-column justify-content-center">
-             <div className="col-11 mb-5"> */}
-                 {/* renderiraj gi stavenite vo card to shop produkti */}
-             {/* </div> */}
-
-           {/* kopcinjata za dodavanje/odzemanje quantity, presmetka i sumiranje vkupna suma  */}
-             {/* <div className="col-11"> */}
-               {/* <button className="btn btn-outline-primary" onClick={goBack}>
-                 Go To Product List
-               </button> */}
-               {/* <div style={{ textAlign: "center" }}>
-                 <div className="basket"> */}
-                   {/* {selectedProducts?.map((prod, i) => (
-                     <AmountOfProduct
-                       key={i}
-                       product={prod}
-                       onMinusClick={onRemoveItem}
-                       onPlusClick={onAddItem}
-                     />
-                   ))} */}
-                 {/* </div>
-                 <p>Вкупно: {totalPrice} ден.</p>
+          <div className="container p-0 mr-auto ml-auto">
+              <div className="col-11">
+                {orderProducts.map((product) => (
+                  <ProductItem key={product.id} {...product} />
+                ))}
+              </div> 
+              {/* kopcinjata za dodavanje/odzemanje quantity, presmetka i sumiranje vkupna suma   */}
+              <div className="col-11"> 
+                {/* <button className="btn btn-outline-primary" onClick={goBack}>
+                Go To Product List
+              </button>  */}
+                {/* <div className="basket"> 
+                    {selectedProducts?.map((prod, i) => (
+                    <AmountOfProduct
+                      key={i}
+                      product={prod}
+                      onMinusClick={onRemoveItem}
+                      onPlusClick={onAddItem}
+                    />
+                  ))}  */}
+              </div>
+                {/* <p>Вкупно: {totalPrice} ден.</p> */}
               
-                 <PrimaryBtn onClick={placeOrder} title="Продолжи" btnClass={"PrimaryBtn w-75"} backgroundColor={"btn-gold"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/>
-                 */}
-                 {/* dodadi funcija so koja dokolku se klikne na ova slikicka, da se isprazni seta niza od produkti !!!  */}
-                 {/* <img src="../../pictures/icons/Basket.png" alt="empty" /> */}
-                 {/* {selectedProducts.length === 0 && (
-                   <p>EMPTY BASKET</p>
-                   )} */}
+              <div>
+                {/* <PrimaryBtn onClick={placeOrder} title="Продолжи" btnClass={"PrimaryBtn w-75"} backgroundColor={"btn-gold"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/> */}
+                <PrimaryBtn title="Продолжи" btnClass={"PrimaryBtn w-75"} backgroundColor={"btn-gold"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/>
+                {/* <div onClick={() => emptyBasket(orderProducts, 0)}>
+                   <img src="../../pictures/icons/Basket.png" alt="empty" /> 
+                </div> */}
                 
-               {/* </div>
-             </div> */}
+                {orderProducts.length === 0 && (
+                  <p>EMPTY BASKET</p>
+                  )}   
+              </div> 
 
-           {/* Box Component Item  */}
-           {/* {boxItemsData.map((boxItem, index) => {
-             return (
-               <BoxComponent key={index} boxItem={boxItem} onClick={() => handleBoxClick(boxItem)} expanded={boxItem === expandedBox}/>
-             )
-           })} */}
+              {/* Box Component Item   */}
+              {boxItemsData.map((boxItem, index) => {
+                  return (
+                    <BoxComponent key={index} boxItem={boxItem} onClick={() => handleBoxClick(boxItem)} expanded={boxItem === expandedBox}/>
+                  )
+                })} 
 
-            {/* Other Related Product Items  */}
-               {/* <RelatedProducts  products={randomProducts}/> */}
+          </div>  : null }
 
-            {/* pagination  */}
-               {/* <div className="flex-l-m flex-w w-full p-t-10 m-lr--7" style={{ letterSpacing: "5px" }}>
-                   <button onClick={() => handlePageChange(currentPage - 1)} className='bg-transparent border-0 mr-1'>
-                       {"<"}
-                   </button>
-                   {renderPages()}
-                   <button onClick={() => handlePageChange(currentPage + 1)} className='bg-transparent border-0 ml-1'>
-                       {">"}
-                   </button>
-               </div> */}
-       {/* </div>
-     </div> */}
+          {view === "favorites" ? <Favorites products={products}/> : null}
+            
+          {/* Other Related Product Items  */}
+          <RelatedProducts products={randomProducts}/>
+          <PaginationId id='' products={randomProducts}/>
+          
+        </div>
+      </div>
+     </div>
    </>
    );
  };

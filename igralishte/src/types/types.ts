@@ -10,8 +10,8 @@ export interface DataType {
 
 export interface ProductType {
     id: string,
-    category: string,
-    subcategory: string,
+    category: ProductCategoryType,
+    subcategory: ProductSubcategoryType,
     title: string,
     img: string,
     img1: string,
@@ -20,7 +20,7 @@ export interface ProductType {
     price: number,
     brand: ProductBrandType,
     brand_name: string,
-    model_size: string,
+    model_size: ProductSizeType,
     size_description: string,
     color: ProductColorType,
     material: string,
@@ -35,14 +35,13 @@ export interface ProductType {
     selected: boolean
 }
 
-// export type ProductSubcategoryType = 'red' | 'orange'| 'yellow' | 'green' | 'blue' | 'pink' | 'purple' | 'grey' | 'white' | 'black' ;
+export type ProductSizeType = 'XL' | 'L'| 'M' | 'S' | 'XS' ;
 
-// export type ProductPriceType = 'red' | 'orange'| 'yellow' | 'green' | 'blue' | 'pink' | 'purple' | 'grey' | 'white' | 'black' ;
+export type ProductCategoryType = "vintage" | "accessories" | "brands";
 
-// export type ProductSizeType = 'red' | 'orange'| 'yellow' | 'green' | 'blue' | 'pink' | 'purple' | 'grey' | 'white' | 'black' ;
+export type ProductSubcategoryType = "блузи" | "панталони" | "здолништа-шорцеви" | "фустани" | "палта-јакни" | "долна-облека" | "ташни" | "јакни" | 'zsDaNe' | 'factoryGirl'| 'mainDays' | 'nezno' | 'red' | 'nas' | 'pincPartywear' | 'fraeil' | 'urma' | 'candleNest' | 'beyondGreen' |'gatta' ;
 
-
-export type ProductColorType = 'red' | 'orange'| 'yellow' | 'green' | 'blue' | 'pink' | 'purple' | 'grey' | 'white' | 'black' ;
+export type ProductColorType = 'црвена' | 'портокалова'| 'жолта' | 'зелена' | 'сина' | 'розева' | 'виолетова' | 'сива' | 'бела' | 'црна' ;
 
 export type ProductBrandType = 'zsDaNe' | 'factoryGirl'| 'mainDays' | 'nezno' | 'red' | 'nas' | 'pincPartywear' | 'fraeil' | 'urma' | 'candleNest' | 'beyondGreen' |'gatta' ;
 

@@ -21,13 +21,13 @@ const Slider: React.FC<Props> = ({ product }) => {
                 <input type="radio" id="box1" name='julijana' checked={isChecked} onChange={handleChange} />
                 <label htmlFor="box1" ><img src={`${product.img}`} alt="---" /></label>
                   <img src={`${product.img}`} alt="---" />
-                <input type="radio" id="box2" name='julijana'/>
+                <input type="radio" id="box2" name='julijana' checked={isChecked} onChange={handleChange} />
                 <label htmlFor="box2" ><img src={`${product.img1}`} alt="---" /></label>
                   <img src={`${product.img1}`} alt="---" />
-                <input type="radio" id="box3" name='julijana'/>
+                <input type="radio" id="box3" name='julijana' checked={isChecked} onChange={handleChange} />
                 <label htmlFor="box3" ><img src={`${product.img2}`} alt="---" /></label>
                   <img src={`${product.img2}`} alt="---" />
-                <input type="radio" id="box4" name='julijana'/>
+                <input type="radio" id="box4" name='julijana' checked={isChecked} onChange={handleChange} />
                 <label htmlFor="box4" ><img src={`${product.img3}`} alt="---" /></label>
                   <img src={`${product.img3}`} alt="---" />
               </div>

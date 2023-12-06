@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from 'next';
 import { BoxComponentType, ProductType } from '@/types/types';
 import Head from 'next/head';
@@ -32,20 +32,38 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
   const [favorites, setFavorites] = useState<ProductType[]>([]);
   const [addToCardProducts, setAddToCardProducts] = useState<ProductType[]>([]);  
   const [currentProduct, setCurrentProduct] = useState<ProductType>(product);
-  
-  // useEffect(() => {
-  //   // localStorage.setItem('amount', JSON.stringify(currentProduct.amount));
-  //   const savedAmount = JSON.parse(localStorage.getItem('amount') || '0');
-  //   const savedIsFavorite = (localStorage.getItem('favorites') || '0');
-  //   const savedIsAddToCard = (localStorage.getItem('addToCardProducts') || '0');
-  //   setCurrentProduct((prevState) => ({ 
-  //       ...prevState, 
-  //       amount: savedAmount,      
-  //     }));
-  //   setFavorites(JSON.parse(savedIsFavorite));
-  //   setIsAddToCard(JSON.parse(savedIsAddToCard));
-  // }, []);
+  const [productAmounts, setProductAmounts] = useState({});
 
+
+  useEffect(() => {
+
+    if (product.id !== currentProduct.id) {
+        localStorage.setItem('amount', JSON.stringify(product.amount));
+        currentProduct.amount = product.amount;
+          setCurrentProduct(product);
+          setIsAddToCard(false);
+          setIsFavorite(false);
+
+      }
+    
+      const savedFavorites = localStorage.getItem('favorites');
+      const savedAddToCardProducts = localStorage.getItem('addToCardProducts');
+      const savedProductAmounts = localStorage.getItem('productAmounts');
+      
+        if (savedFavorites) {
+          setFavorites(JSON.parse(savedFavorites));
+          setIsFavorite(savedFavorites.includes(product.id));
+        }
+        
+        if (savedAddToCardProducts) {
+          setAddToCardProducts(JSON.parse(savedAddToCardProducts));
+          setIsAddToCard(savedAddToCardProducts.includes(product.id));
+        }
+        if (savedProductAmounts) {
+            setProductAmounts(JSON.parse(savedProductAmounts));
+          }
+
+  }, [product.id]);
 
 
  const toggleFavorite = (id: any) => {
@@ -54,6 +72,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
       : [...favorites, id];
     localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
     setFavorites(updatedFavorites);
+
     setIsFavorite(!isFavorite);
 };
 
@@ -63,42 +82,58 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
       ? addToCardProducts.filter((favId: any) => favId !== id)
       : [...addToCardProducts, id];
     localStorage.setItem('addToCardProducts', JSON.stringify(updatedAddToCard));
+
     setAddToCardProducts(updatedAddToCard);
     setIsAddToCard(!isAddToCard);
 };
 
+// Kolicina na produkt
+  const updateProductAmount = (productId: any, amount: number) => {
+    if (isAddToCard) {
+      const updatedProductAmounts = {
+        ...productAmounts,
+        [productId]: amount,
+      };
 
-  function onRemoveItem() {
-    if (currentProduct.amount <= 0) {
-      setCurrentProduct((prevState) => {
-          return {
-            ...prevState,
-            amount: prevState.amount = 0,
-          };
-        });
-        localStorage.setItem('amount', JSON.stringify(currentProduct.amount));
-      
-      } else {
-    if (product.amount >= 1) {
-      setCurrentProduct((prevState) => { 
-        return {
-          ...prevState, 
-          amount: prevState.amount - 1 ,
-        }
-      });
-     }
-     localStorage.setItem('amount', JSON.stringify(currentProduct.amount - 1));
+      setProductAmounts(updatedProductAmounts);
+      localStorage.setItem('productAmounts', JSON.stringify(updatedProductAmounts));
     }
-  }
+  };
 
-    function onAddItem() {
-      setCurrentProduct(prevState => ({
-        ...prevState, 
-        amount: prevState.amount + 1 
-      }));
-      localStorage.setItem('amount', JSON.stringify(currentProduct.amount + 1));
-  }
-  
+      function onRemoveItem() {
+        if (currentProduct.amount <= 0) {
+          setCurrentProduct((prevState) => {
+              return {
+                ...prevState,
+                amount: prevState.amount = 0,
+              };
+            });
+        updateProductAmount(currentProduct.id, currentProduct.amount - 1);
+
+          
+          } else {
+        if (product.amount >= 1) {
+          setCurrentProduct((prevState) => { 
+            return {
+              ...prevState, 
+              amount: prevState.amount - 1 ,
+            }
+          });
+        }
+        updateProductAmount(currentProduct.id, currentProduct.amount - 1);
+
+        }
+      }
+
+
+        function onAddItem() {
+          setCurrentProduct(prevState => ({
+            ...prevState, 
+            amount: prevState.amount + 1 
+          }));
+          updateProductAmount(currentProduct.id, currentProduct.amount + 1);
+      }
+    
     const placeOrder = () => {
             const updatedProducts = products.map((prod) => {
               if (prod.id === currentProduct.id) {
@@ -173,6 +208,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                             <img src="../pictures/icons/shopping cart.png"/></button>
                   ) }
                 </div>
+                <div className="mt-4">
                 <span className="title text-left">{product.price}  ден.</span>
                 <p className="text-left my-4">{product.description}</p>
                 <div className="row flex-row title justify-content-start ml-auto mr-auto align-items-center text-left mb-2">
@@ -184,6 +220,7 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                       <button onClick={onAddItem} className='bg-transparent border-0'><img src='../pictures/icons/plus-amount.png' className='w-50 mb-1 ml-1' alt="alt" /></button>
                       </div>
                     </div>
+                </div>
                 </div>
                 <div className="flex-row justify-content-start align-items-center align-self-center">
                   { isAddToCard ? (
@@ -204,12 +241,11 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                                   }} 
                           className='col-7 addToCardButton add'>Додај во кошничка</button>
                   ) }
-                  <i onClick={(event: React.MouseEvent<HTMLElement>) => {
+                  <i className={isFavorite ? "fas fa-heart fa-2x" : "far fa-heart fa-2x"}
+                      onClick={(event: React.MouseEvent<HTMLElement>) => {
                               event.preventDefault();
                               toggleFavorite(product.id);
-                    }}
-                    className={isFavorite ? "fas fa-heart fa-2x" : "far fa-heart fa-2x"}
-                  ></i>
+                    }}></i>
                 </div>
                 <hr style={{paddingTop: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
                 <div className='flex-row my-4 justify-content-start align-items-center text-left '>
@@ -243,7 +279,6 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                   <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{product.subcategory}</Link>
                   <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{product.category}</Link>
                   <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 mr-1 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{product.material}</Link>
-                  <Link href="#" className="badge badge-pill badge-light mb-2 py-2 px-3 border-2" style={{boxShadow: "0px 0px 2.3195877075195312px 0px #C2C2C2"}}>{product.color}</Link>
                 </div>
             </div>
 

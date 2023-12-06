@@ -12,7 +12,7 @@ const BoxComponent: React.FC<Props> = ({boxItem, onClick, expanded}) => {
   return (
       <div className='container-fluid mb-3' onClick={onClick}>
         <div className="row flex-row align-items-center">
-          <div className="col-11 p-3 border" style={{borderRadius: "4px"}}>
+          <div className="col-10 p-3 border" style={{borderRadius: "4px"}}>
             <div className="flex-row align-items-center justify-content-start">
               <div className="col-12 p-0 flex-row justify-content-between">
                   <img src={`${boxItem.img}`} alt="box-icon-picture" style={{width: '29px', height: '29px'}}/>
