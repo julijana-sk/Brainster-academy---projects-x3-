@@ -76,17 +76,6 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
     setIsFavorite(!isFavorite);
 };
 
-
-  const toggleAddToCard = (id: any) => {
-    const updatedAddToCard = isAddToCard
-      ? addToCardProducts.filter((favId: any) => favId !== id)
-      : [...addToCardProducts, id];
-    localStorage.setItem('addToCardProducts', JSON.stringify(updatedAddToCard));
-
-    setAddToCardProducts(updatedAddToCard);
-    setIsAddToCard(!isAddToCard);
-};
-
 // Kolicina na produkt
   const updateProductAmount = (productId: any, amount: number) => {
     if (isAddToCard) {
@@ -97,8 +86,46 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
 
       setProductAmounts(updatedProductAmounts);
       localStorage.setItem('productAmounts', JSON.stringify(updatedProductAmounts));
+    } else {
+      const updatedProductAmounts = {
+        ...productAmounts
+      };
+
+      setProductAmounts(updatedProductAmounts);
+      localStorage.setItem('productAmounts', JSON.stringify(updatedProductAmounts));
     }
-  };
+
+  }
+
+ const toggleAddToCard = (id: any) => { 
+    const updatedAddToCard = isAddToCard 
+    ? addToCardProducts.filter((favId: any) => favId !== id) 
+    : [...addToCardProducts, id]; 
+    localStorage.setItem('addToCardProducts', JSON.stringify(updatedAddToCard));
+
+      setAddToCardProducts(updatedAddToCard); 
+      setIsAddToCard(!isAddToCard);
+
+      let amount = product.amount
+      if (isAddToCard) {
+            const updatedProductAmounts = {
+              ...productAmounts,
+              [id]: amount,
+            };
+          } else {
+            const updatedProductAmounts = {
+              ...productAmounts,
+              [id]: 1,
+            };
+          }
+    };
+
+
+
+
+
+
+
 
       function onRemoveItem() {
         if (currentProduct.amount <= 0) {

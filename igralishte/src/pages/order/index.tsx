@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, NextPage } from 'next';
@@ -31,6 +31,7 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
   const [addToCardProducts, setAddToCardProducts] = useState<ProductType[]>([]);  
   const [productAmounts, setProductAmounts] = useState({});
   const [orderProducts, setOrderProducts] = useState<ProductType[]>([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
 
   useEffect(() => {
@@ -43,34 +44,70 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
           setFavorites(JSON.parse(savedFavorites));
         }
         
-        if (savedAddToCardProducts) {
-          setAddToCardProducts(JSON.parse(savedAddToCardProducts));
-        }
-        
-        if (savedProductAmounts) {
-          setProductAmounts(JSON.parse(savedProductAmounts));
-          // tuka moze da pravi problem koi produkti gi stavam za render, dali so amount ili samo addToCard ??
-        }
+        // if (savedProductAmounts) {
+        //   // tuka moze da pravi problem koi produkti gi stavam za render, dali so amount ili samo addToCard ??
+        //    const addToCardProductIds = (JSON.parse(savedProductAmounts));
+        //    const orderedProducts = products.filter((product) => addToCardProductIds.includes(product.id));
+           
+        //    setOrderProducts(orderedProducts);
+        // }
 
-        if (savedAddToCardProducts) {
-          setOrderProducts(JSON.parse(savedAddToCardProducts));
-        }
+      if (savedAddToCardProducts) {
+          const addToCardProductIds = JSON.parse(savedAddToCardProducts);
+          const orderedProducts = products.filter((product) => addToCardProductIds.includes(product.id));
 
-}, [orderProducts]);
+          setAddToCardProducts(orderedProducts);
+          setOrderProducts(orderedProducts);
+
+        }
+}, []);
+
+
 
   
-//   const calcPrice = () => {
-//     let price = 0;
-//     selectedProducts.forEach((p) => {
-//       price += p.price * p.amount;
+  const calcPrice = () => {
+    let price = 0;
+    addToCardProducts.forEach((p) => {
+      price += p.price * p.amount;
+    });
+
+    setTotalPrice(price);
+  };
+
+  const calcDiscount = () => {
+    let totalDiscount = 0;
+      addToCardProducts.forEach((orderedProduct) => {
+      if(orderedProduct.discount) {
+          totalDiscount += orderedProduct.price * orderedProduct.discount - orderedProduct.price;
+      }
+      });
+  }
+
+  useEffect(() => {
+    calcPrice();
+  }, [addToCardProducts]);
+
+
+//    const renderDiscount = useCallback((discount: any, orderedProducts: any) => {
+//     let productsWithDiscounts = 0;
+//     let totalDiscountedPrice = 0;
+
+//     orderedProducts.forEach((orderedProduct: any) => {
+//         if (orderedProduct.discount === discount) {
+//             productsWithDiscounts++;
+//             totalDiscountedPrice += ((orderedProduct.price * orderedProduct.discount) / 100);
+//         }
 //     });
 
-//     setTotalPrice(price);
-//   };
+//     return (
+//         <div className="flex-row justify-content-between address-text mr-auto ml-auto mb-2 text-danger">
+//             <p>{productsWithDiscounts} x - {discount} % попуст</p>
+//             <p>- {totalDiscountedPrice} ден.</p>
+//         </div>
+//     )
+// }, []);
 
-//   useEffect(() => {
-//     calcPrice();
-//   }, [selectedProducts]);
+ 
 
 //   const addToCard = (prod: ProductType) => {
 //     console.log("you clicked ADD TO CARD")
@@ -116,6 +153,27 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
     const handleBoxClick = (box: any) => {
       setExpandedBox(box === expandedBox ? null : box);
     }
+
+    
+
+//     const renderDiscount = (discount: any, orderedProducts: any) => {
+//  let productsWithDiscounts = 0;
+//  let totalDiscountedPrice = 0;
+
+//  orderedProducts.forEach((orderedProduct: any) => {
+//     if (orderedProduct.discount === discount) {
+//       productsWithDiscounts++;
+//       totalDiscountedPrice += ((orderedProduct.price * orderedProduct.discount) / 100);
+//     }
+//  });
+
+//  return (
+//     <div className="flex-row justify-content-between address-text mr-auto ml-auto mb-2 text-danger">
+//       <p>{productsWithDiscounts} x - {discount} % попуст</p>
+//       <p>- {totalDiscountedPrice} ден.</p>
+//     </div>
+//  )
+// }
   
   
   return (
@@ -139,27 +197,89 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
 
           <div className="container p-0 mr-auto ml-auto">
               <div className="col-11">
-                {orderProducts.map((product) => (
-                  <ProductItem key={product.id} {...product} />
+               {addToCardProducts.map((orderedProduct) => (
+                  <div key={orderedProduct.id}>
+                    <ProductItem {...orderedProduct} />
+                  </div>
                 ))}
-              </div> 
+              </div>
+
               {/* kopcinjata za dodavanje/odzemanje quantity, presmetka i sumiranje vkupna suma   */}
               <div className="col-11"> 
                 {/* <button className="btn btn-outline-primary" onClick={goBack}>
                 Go To Product List
               </button>  */}
-                {/* <div className="basket"> 
-                    {selectedProducts?.map((prod, i) => (
-                    <AmountOfProduct
-                      key={i}
-                      product={prod}
-                      onMinusClick={onRemoveItem}
-                      onPlusClick={onAddItem}
-                    />
-                  ))}  */}
-              </div>
-                {/* <p>Вкупно: {totalPrice} ден.</p> */}
-              
+                 {addToCardProducts.map((orderedProduct) => (
+                  <div key={orderedProduct.id} className='flex-row justify-content-between address-text mr-auto ml-auto mb-3' style={{color: 'darkgrey'}}>
+                    <p className='mb-2'>{orderedProduct.title}</p>
+                      <p>{orderedProduct.price} ден.</p>
+                  </div>
+                ))}
+                
+                <div className='flex-row justify-content-between address-text mr-auto ml-auto mb-2'style={{color:'#8a8328'}}>
+                    <p>+  достава до адреса</p>
+                    <p>150 ден.</p>
+                </div>
+                {addToCardProducts.map((orderedProduct) => {
+
+                  const renderDiscount = (discount: any, orderedProducts: any) => {
+                        let productsWithDiscounts = 0;
+                        let totalDiscountedPrice = 0;
+
+                        orderedProducts.forEach((orderedProduct: any) => {
+                            if (orderedProduct.discount === discount) {
+                              productsWithDiscounts++;
+                              totalDiscountedPrice += ((orderedProduct.price * orderedProduct.discount) / 100);
+                            }
+                        });
+
+                        return (
+                            <div className="flex-row justify-content-between address-text mr-auto ml-auto mb-2 text-danger">
+                              <p>{productsWithDiscounts} x - {discount} % попуст</p>
+                              <p>- {totalDiscountedPrice} ден.</p>
+                            </div>
+                        )
+                        }
+                    let discounts: any = [];
+
+                    addToCardProducts.forEach((item) => {
+                        if (!discounts.includes(item.discount) && item.discount !== 0) {
+                          discounts.push(item.discount);
+                        }
+                    });
+
+                    return discounts.map((discount: any) => {
+                        return renderDiscount(discount, addToCardProducts);
+                    });
+                    })}
+
+
+                {/* {addToCardProducts.map((item) => {
+                      let discounts: any = [];
+                      let productsWithDiscounts = 0;
+                      let totalDiscountedPrice = 0;
+
+                      if (!discounts.includes(item.discount) && item.discount !== 0) {
+                          discounts.push(item.discount);
+                      }
+
+                      if (item.discount !== 0) {
+                          productsWithDiscounts++;
+                          totalDiscountedPrice += (item.price * item.discount) / 100;
+                      }
+                        
+                      return (
+                          <div key={item.discount}>
+                            {productsWithDiscounts} x - {item.discount}% попуст - {totalDiscountedPrice} ден.
+                          </div>
+                      );
+                })} */}
+
+
+                <div className='flex-row justify-content-between mr-auto ml-auto my-4'>
+                    <h2 className='title'>Вкупно: </h2>
+                    <h2><strong>{totalPrice} ден.</strong></h2>
+                </div>
               <div>
                 {/* <PrimaryBtn onClick={placeOrder} title="Продолжи" btnClass={"PrimaryBtn w-75"} backgroundColor={"btn-gold"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/> */}
                 <PrimaryBtn title="Продолжи" btnClass={"PrimaryBtn w-75"} backgroundColor={"btn-gold"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/>
@@ -167,7 +287,7 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
                    <img src="../../pictures/icons/Basket.png" alt="empty" /> 
                 </div> */}
                 
-                {orderProducts.length === 0 && (
+                {addToCardProducts.length === 0 && (
                   <p>EMPTY BASKET</p>
                   )}   
               </div> 
@@ -179,6 +299,7 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
                   )
                 })} 
 
+          </div>
           </div>  : null }
 
           {view === "favorites" ? <Favorites products={products}/> : null}
@@ -188,8 +309,8 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
           <PaginationId id='' products={randomProducts}/>
           
         </div>
+        </div>
       </div>
-     </div>
    </>
    );
  };
