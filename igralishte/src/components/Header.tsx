@@ -286,16 +286,15 @@ return (
                       <div className="nav-link d-flex flex-row justify-content-start align-items-center" >
                         <button className="menu-footer-button"><img src="../pictures/icons/user-light.png" /></button>
                         {user ? (
-                          <div className="ml-3 d-flex flex-row justify-content-between">
-                            <Link href={"/profile"}> Мој профил</Link>
-                            <p className="pl-3 pr-4">/</p>
-                            <button className='bg-transparent text-left px-3 rounded-circle text-center'
+                          <div className="ml-3 d-flex flex-row flex-wrap justify-content-between">
+                            <Link href={"/profile"}> Мој профил / </Link>  
+                            <button className='bg-transparent text-left px-2 ml-2 rounded-circle text-center'
                             onClick={() => {
                                 router.push({
                                 pathname: "/login",
                                  });
                                 handleLogout;
-                                }}>Одлогирај се</button>
+                                }}>  Одлогирај се</button>
                            </div>
                           ) : (
                             <Link href="/login">Регистрирај се / Логирај се</Link>

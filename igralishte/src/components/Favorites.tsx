@@ -4,16 +4,22 @@ import ProductItem from './ProductItem';
 
 interface Props {
     products: ProductType[];
+    onClick?: () => void;
 }
-const Favorites: React.FC<Props> = ({products}) => {
+const Favorites: React.FC<Props> = ({products, onClick}) => {
     
   return (
-    <div className="container-fluid my-5">
-           <div className="row d-flex flex-column justify-content-center">
-             <div className="col-11 mb-5"> 
+    <div className="container-fluid mb-5">
+           <div className="row flex-column">
+             <div className="col-11 mr-auto ml-auto"> 
                   {products?.map((product) => {
                     return (
+                      <div >
                         <ProductItem key={product.id} {...product} />
+                        <div onClick={onClick}  className='btn-delete'>
+                          <img src="../../pictures/icons/Basket.png" alt="empty" /> 
+                        </div>
+                      </div>
                     )
                 })}
              </div> 

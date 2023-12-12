@@ -35,35 +35,33 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
   const [productAmounts, setProductAmounts] = useState({});
 
 
-  useEffect(() => {
+useEffect(() => {
 
-    if (product.id !== currentProduct.id) {
-        localStorage.setItem('amount', JSON.stringify(product.amount));
-        currentProduct.amount = product.amount;
-          setCurrentProduct(product);
-          setIsAddToCard(false);
-          setIsFavorite(false);
-
-      }
+  if (product.id !== currentProduct.id) {
+      localStorage.setItem('amount', JSON.stringify(product.amount));
+      currentProduct.amount = product.amount;
+        setCurrentProduct(product);
+        setIsAddToCard(false);
+        setIsFavorite(false);
+    }
+    const savedFavorites = localStorage.getItem('favorites');
+    const savedAddToCardProducts = localStorage.getItem('addToCardProducts');
+    const savedProductAmounts = localStorage.getItem('productAmounts');
     
-      const savedFavorites = localStorage.getItem('favorites');
-      const savedAddToCardProducts = localStorage.getItem('addToCardProducts');
-      const savedProductAmounts = localStorage.getItem('productAmounts');
+      if (savedFavorites) {
+        setFavorites(JSON.parse(savedFavorites));
+        setIsFavorite(savedFavorites.includes(product.id));
+      }
       
-        if (savedFavorites) {
-          setFavorites(JSON.parse(savedFavorites));
-          setIsFavorite(savedFavorites.includes(product.id));
-        }
-        
-        if (savedAddToCardProducts) {
-          setAddToCardProducts(JSON.parse(savedAddToCardProducts));
-          setIsAddToCard(savedAddToCardProducts.includes(product.id));
-        }
-        if (savedProductAmounts) {
-            setProductAmounts(JSON.parse(savedProductAmounts));
-          }
+      if (savedAddToCardProducts) {
+        setAddToCardProducts(JSON.parse(savedAddToCardProducts));
+        setIsAddToCard(savedAddToCardProducts.includes(product.id));
+      }
 
-  }, [product.id]);
+      if (savedProductAmounts) {
+          setProductAmounts(JSON.parse(savedProductAmounts));
+      }
+}, [product.id]);
 
 
  const toggleFavorite = (id: any) => {
@@ -106,84 +104,55 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
       setAddToCardProducts(updatedAddToCard); 
       setIsAddToCard(!isAddToCard);
 
-      let amount = product.amount
-      if (isAddToCard) {
-            const updatedProductAmounts = {
-              ...productAmounts,
-              [id]: amount,
-            };
-          } else {
-            const updatedProductAmounts = {
-              ...productAmounts,
-              [id]: 1,
-            };
-          }
-    };
-
-
-
-
-
-
-
-
-      function onRemoveItem() {
-        if (currentProduct.amount <= 0) {
-          setCurrentProduct((prevState) => {
-              return {
-                ...prevState,
-                amount: prevState.amount = 0,
-              };
-            });
-        updateProductAmount(currentProduct.id, currentProduct.amount - 1);
-
-          
-          } else {
-        if (product.amount >= 1) {
-          setCurrentProduct((prevState) => { 
-            return {
-              ...prevState, 
-              amount: prevState.amount - 1 ,
-            }
-          });
-        }
-        updateProductAmount(currentProduct.id, currentProduct.amount - 1);
-
-        }
-      }
-
-
-        function onAddItem() {
-          setCurrentProduct(prevState => ({
-            ...prevState, 
-            amount: prevState.amount + 1 
-          }));
-          updateProductAmount(currentProduct.id, currentProduct.amount + 1);
-      }
-    
-    const placeOrder = () => {
-            const updatedProducts = products.map((prod) => {
-              if (prod.id === currentProduct.id) {
-                return {
-                  ...prod,
-                  selected: false,
-                  amount: 0
-                };
-              }
-              return prod;
-            });
-            setCurrentProduct({
-              ...currentProduct,
-              selected: false,
-              amount: 0
-            });
-            // Update the products array here
+    let amount = product.amount
+    if (isAddToCard) {
+          const updatedProductAmounts = {
+            ...productAmounts,
+            [id]: amount,
           };
+        } else {
+          const updatedProductAmounts = {
+            ...productAmounts,
+            [id]: 1,
+          };
+        }
+  };
 
 
-    const handleBoxClick = (box: any) => {
-      setExpandedBox(box === expandedBox ? null : box);
-    }
+  function onRemoveItem() {
+      if (currentProduct.amount <= 0) {
+        setCurrentProduct((prevState) => {
+            return {
+              ...prevState,
+              amount: prevState.amount = 0,
+            };
+          });
+      updateProductAmount(currentProduct.id, currentProduct.amount - 1);
+
+        } else {
+      if (product.amount >= 1) {
+        setCurrentProduct((prevState) => { 
+          return {
+            ...prevState, 
+            amount: prevState.amount - 1 ,
+          }
+        });
+      }
+      updateProductAmount(currentProduct.id, currentProduct.amount - 1);
+  }}
+
+
+  function onAddItem() {
+      setCurrentProduct(prevState => ({
+        ...prevState, 
+        amount: prevState.amount + 1 
+      }));
+      updateProductAmount(currentProduct.id, currentProduct.amount + 1);
+  }
+
+  const handleBoxClick = (box: any) => {
+    setExpandedBox(box === expandedBox ? null : box);
+  }
   
 
   return (
@@ -193,7 +162,6 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
         <meta name="description" content="Generated by create next app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
 
         <div className="container-fluid my-5">
           <div className="row flex-column justify-content-center">
@@ -255,7 +223,6 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                       <button onClick={(event: React.MouseEvent<HTMLElement>) => {
                         event.preventDefault();
                         toggleAddToCard(product.id);
-                        // clickProduct(product);
                       }} 
                         className='bg-transparent p-0 border-0'>
                       <img src="../pictures/icons/gift-added.png" className='p-0 h-100 w-100' alt="added to card"/></button>
@@ -264,7 +231,6 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                     ( <button onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault();
                                     toggleAddToCard(product.id);
-                                    // clickProduct(product);
                                   }} 
                           className='col-7 addToCardButton add'>Додај во кошничка</button>
                   ) }
@@ -309,16 +275,14 @@ const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, r
                 </div>
             </div>
 
-          {/* Box Component Item  */}
           {boxItemsData.map((boxItem, index) => {
             return (
               <BoxComponent key={index} boxItem={boxItem} onClick={() => handleBoxClick(boxItem)} expanded={boxItem === expandedBox}/>
             )
           })}
 
-           {/* Other Related Product Items  */}
-              <RelatedProducts products={randomProducts}/>
-              <PaginationId id={product.id} products={randomProducts}/>
+          <RelatedProducts products={randomProducts}/>
+          <PaginationId id={product.id} products={randomProducts}/>
       </div>
     </div>
   </>

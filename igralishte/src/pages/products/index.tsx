@@ -18,7 +18,6 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
         { name: 'Сите', url: '/products' },
     ];
     
-    
     const router = useRouter();
     const [sortedProducts, setSortedProducts] = useState(searchedProductsData);
     const [isSorted, setIsSorted] = useState(false);
@@ -34,113 +33,110 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
     const paginationProductsForDisplaying = sortedProducts.slice(start, end);
 
 
-    useEffect(() => {
-        setSortedProducts(searchedProductsData);
-        setIsSorted(false);
+useEffect(() => {
+    setSortedProducts(searchedProductsData);
+    setIsSorted(false);
 
     })
 
-    const handlePageChange = (page: number) => {
-        if (page < 1 || page > totalPages) return;
-        setCurrentPage(page);
-    };
 
-    const renderPages = () => {
-        return Array.from({ length: totalPages }, (_, index) => (
-              <a
-                key={index}
-                className={`flex-c-m how-pagination1 trans-04 m-all-7 pointer font-weight-bold ${
-                  currentPage === index + 1
-                    ? "active-pagination1 text-danger"
-                    : ""
-                }`}
-                onClick={() => handlePageChange(index + 1)}>
-                {index + 1}
-              </a>
-        ));
-    };
+const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+};
 
-    const handleToggleSearch = () => {
-        setToggleSearch(!toggleSearch);
-        setIsSorted(false);
-    }
+const renderPages = () => {
+    return Array.from({ length: totalPages }, (_, index) => (
+            <a
+            key={index}
+            className={`flex-c-m how-pagination1 trans-04 m-all-7 pointer font-weight-bold ${
+                currentPage === index + 1
+                ? "active-pagination1 text-danger"
+                : ""
+            }`}
+            onClick={() => handlePageChange(index + 1)}>
+            {index + 1}
+            </a>
+    ));
+};
 
-     const handleFilterBySubcategory = (subcategory: string) => {
-        router.push({
+const handleToggleSearch = () => {
+    setToggleSearch(!toggleSearch);
+    setIsSorted(false);
+}
+
+const handleFilterBySubcategory = (subcategory: string) => {
+    router.push({
+    pathname: "/products",
+    query: {
+        ...router.query,
+        subcategory: subcategory,
+    },
+    });
+    setCurrentPage(1);
+};
+
+const handleFilterByQ = (q: string) => {
+    router.push({
+    pathname: "/products",
+    query: {
+        ...router.query,
+        q: q,
+    },
+    });
+    setCurrentPage(1);
+};
+
+const filteringBySearchRefValue = (value: string | undefined) => {
+    searchRef.current?.value === ""
+    ? router.push({
+        pathname: "/products",
+        })
+    : router.push({
         pathname: "/products",
         query: {
             ...router.query,
-            subcategory: subcategory,
+            q: value,
         },
         });
-        setCurrentPage(1);
-    };
-
-    const handleFilterByQ = (q: string) => {
-        router.push({
-        pathname: "/products",
-        query: {
-            ...router.query,
-            q: q,
-        },
-        });
-        setCurrentPage(1);
-    };
-
-    const filteringBySearchRefValue = (value: string | undefined) => {
-        searchRef.current?.value === ""
-        ? router.push({
-            pathname: "/products",
-            })
-        : router.push({
-            pathname: "/products",
-            query: {
-                ...router.query,
-                q: value,
-            },
-            });
-        setCurrentPage(1);
-    };
+    setCurrentPage(1);
+};
 
 
-    const useSortProductsByNewestDate = (products: ProductType[]) => {
+const useSortProductsByNewestDate = (products: ProductType[]) => {
 
-        const sortProducts = (products: ProductType[]) => {
-            return products.sort((a, b) => {
-                const dateA = new Date(a.date).getTime();
-                const dateB = new Date(b.date).getTime();
-            return dateB - dateA;
+    const sortProducts = (products: ProductType[]) => {
+        return products.sort((a, b) => {
+            const dateA = new Date(a.date).getTime();
+            const dateB = new Date(b.date).getTime();
+        return dateB - dateA;
         });
     };
-        const sortedProducts = sortProducts(products);
-        setSortedProducts(sortedProducts);
-        setIsSorted(true);
+    const sortedProducts = sortProducts(products);
+    setSortedProducts(sortedProducts);
+    setIsSorted(true);
+    return sortedProducts;
+};
 
-        return sortedProducts;
+
+const useSortProductsByOldestDate = (products: ProductType[]) => {
+
+    const sortProducts = (products: ProductType[]) => {
+        return products.sort((a, b) => {
+            const dateA = new Date(a.date).getTime();
+            const dateB = new Date(b.date).getTime();
+            return dateA - dateB;
+        });
     };
-
-    console.log(isSorted)
-
-    const useSortProductsByOldestDate = (products: ProductType[]) => {
-
-        const sortProducts = (products: ProductType[]) => {
-            return products.sort((a, b) => {
-                const dateA = new Date(a.date).getTime();
-                const dateB = new Date(b.date).getTime();
-                return dateA - dateB;
-            });
-        };
-
-        const sortedProducts = sortProducts(products);
-        setSortedProducts(sortedProducts);
-        setIsSorted(true);
+    const sortedProducts = sortProducts(products);
+    setSortedProducts(sortedProducts);
+    setIsSorted(true);
 
     return sortedProducts;
-    };
+};
 
 
-
-  return (
+return (
     <>
       <Head>
         <title>Igralishte-Product</title>
@@ -826,7 +822,7 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
             </div>
             </div>
         </div>
-        {/* SEARCH LAYER END */}
+        
         <div className="container-fluid my-5">
           <div  className="row flex-column">
             <div className="container-fluid">
@@ -854,15 +850,15 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
                         <p>There are no results for your search..</p>
                         ) : (
                             paginationProductsForDisplaying.map((product, productIndex) => {
-                                let columnSize = "col-5 product-img-small";
-                                let columnText = "product-text-a"
-                                for (let i = 2; i < sortedProducts.length; i += 5) {
-                                if (productIndex === i ) {columnSize = "col-11"; columnText = "product-text"}}
-                                return (
-                                    <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
-                                        <ProductItem key={product.id} {...product} />
-                                    </div>
-                                   );
+                            let columnSize = "col-5 product-img-small";
+                            let columnText = "product-text-a"
+                            for (let i = 2; i < sortedProducts.length; i += 5) {
+                            if (productIndex === i ) {columnSize = "col-11"; columnText = "product-text"}}
+                            return (
+                                <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
+                                    <ProductItem key={product.id} {...product} />
+                                </div>
+                                );
                             })
                             )
                         ) : (
@@ -870,31 +866,30 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
                             <p>There are no results for your search.</p>
                             ) : (
                                 paginationProductsForDisplaying.map((product, productIndex) => {
-                                    let columnSize = "col-5 product-img-small";
-                                    let columnText = "product-text-a"
-                                    for (let i = 2; i < sortedProducts.length; i += 5) {
-                                    if (productIndex === i ) {columnSize = "col-11"; columnText = "product-text"}}
-                                        return (
-                                            <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
-                                                <ProductItem key={product.id} {...product} />
-                                            </div>
-                                            );
-                                        })
+                                let columnSize = "col-5 product-img-small";
+                                let columnText = "product-text-a"
+                                for (let i = 2; i < sortedProducts.length; i += 5) {
+                                if (productIndex === i ) {columnSize = "col-11"; columnText = "product-text"}}
+                                    return (
+                                        <div key={productIndex} className={`${columnSize} ${columnText} p-0 mb-2`}>
+                                            <ProductItem key={product.id} {...product} />
+                                        </div>
+                                        );
+                                    })
                                 )
                             )}
                     </div>
 
-                   {/* pagination  */}
-                   <div className="flex-l-m flex-w w-full p-t-10 m-lr--7" style={{ letterSpacing: "5px" }}>
-                        <button onClick={() => handlePageChange(currentPage - 1)} className='bg-transparent border-0 mr-1'>
-                            {"<"}
-                        </button>
-                        {renderPages()}
-                        <button onClick={() => handlePageChange(currentPage + 1)} className='bg-transparent border-0 ml-1'>
-                            {">"}
-                        </button>
-                    </div>
-
+                {/* pagination  */}
+                <div className="flex-l-m flex-w w-full p-t-10 m-lr--7" style={{ letterSpacing: "5px" }}>
+                    <button onClick={() => handlePageChange(currentPage - 1)} className='bg-transparent border-0 mr-1'>
+                        {"<"}
+                    </button>
+                    {renderPages()}
+                    <button onClick={() => handlePageChange(currentPage + 1)} className='bg-transparent border-0 ml-1'>
+                        {">"}
+                    </button>
+                </div>
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, NextPage } from 'next';
@@ -29,153 +29,115 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
   const [expandedBox, setExpandedBox] = useState(null);
   const [favorites, setFavorites] = useState<ProductType[]>([]);
   const [addToCardProducts, setAddToCardProducts] = useState<ProductType[]>([]);  
-  const [productAmounts, setProductAmounts] = useState({});
+  // const [productAmounts, setProductAmounts] = useState({});
   const [orderProducts, setOrderProducts] = useState<ProductType[]>([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [totalDiscount, setTotalDiscount] = useState<number>(0);
 
 
+   useEffect(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    const savedAddToCardProducts = localStorage.getItem('addToCardProducts');
+
+    if (savedFavorites) {
+      const favoritesIds = JSON.parse(savedFavorites);
+      const favoritesProducts = products.filter((product) => favoritesIds.includes(product.id));
+      setFavorites(favoritesProducts);
+    }
+
+    if (savedAddToCardProducts) {
+      const addToCardProductIds = JSON.parse(savedAddToCardProducts);
+      const productsToOrder = products.filter((product) => addToCardProductIds.includes(product.id));
+
+      setAddToCardProducts(productsToOrder);
+      setOrderProducts(productsToOrder);
+    }
+  }, [products]);
+
+
+  // --- Цени и пресметки за попуст --- 
   useEffect(() => {
-
-      const savedFavorites = localStorage.getItem('favorites');
-      const savedAddToCardProducts = localStorage.getItem('addToCardProducts');
-      const savedProductAmounts = localStorage.getItem('productAmounts');
-      
-        if (savedFavorites) {
-          setFavorites(JSON.parse(savedFavorites));
-        }
-        
-        // if (savedProductAmounts) {
-        //   // tuka moze da pravi problem koi produkti gi stavam za render, dali so amount ili samo addToCard ??
-        //    const addToCardProductIds = (JSON.parse(savedProductAmounts));
-        //    const orderedProducts = products.filter((product) => addToCardProductIds.includes(product.id));
-           
-        //    setOrderProducts(orderedProducts);
-        // }
-
-      if (savedAddToCardProducts) {
-          const addToCardProductIds = JSON.parse(savedAddToCardProducts);
-          const orderedProducts = products.filter((product) => addToCardProductIds.includes(product.id));
-
-          setAddToCardProducts(orderedProducts);
-          setOrderProducts(orderedProducts);
-
-        }
-}, []);
-
-
-
-  
-  const calcPrice = () => {
+    let priceProducts = 0;
     let price = 0;
-    addToCardProducts.forEach((p) => {
-      price += p.price * p.amount;
+      addToCardProducts.forEach((p) => {
+        priceProducts += p.price * p.amount;
+        price = 150 + priceProducts;
+      });
+
+      setTotalPrice(price);
+    }, [addToCardProducts]);
+
+       
+    useEffect(() => {
+    let discounts: any = [];
+
+    addToCardProducts.forEach((item) => {
+      if (!discounts.includes(item.discount) && item.discount !== 0) {
+        discounts.push(item.discount);
+      }
     });
 
-    setTotalPrice(price);
-  };
+    let totalDiscountedPrice = 0;
+    discounts.forEach((discount: any) => {
+      const productsWithDiscounts = addToCardProducts.filter((p) => p.discount === discount);
+      const discountAmount = productsWithDiscounts.length;
+      const discountValue = (productsWithDiscounts[0].price * discount) / 100;
+      totalDiscountedPrice += discountValue * discountAmount;
+    });
 
-  const calcDiscount = () => {
-    let totalDiscount = 0;
-      addToCardProducts.forEach((orderedProduct) => {
-      if(orderedProduct.discount) {
-          totalDiscount += orderedProduct.price * orderedProduct.discount - orderedProduct.price;
-      }
-      });
-  }
-
-  useEffect(() => {
-    calcPrice();
+    setTotalDiscount(totalDiscountedPrice);
   }, [addToCardProducts]);
 
 
-//    const renderDiscount = useCallback((discount: any, orderedProducts: any) => {
-//     let productsWithDiscounts = 0;
-//     let totalDiscountedPrice = 0;
-
-//     orderedProducts.forEach((orderedProduct: any) => {
-//         if (orderedProduct.discount === discount) {
-//             productsWithDiscounts++;
-//             totalDiscountedPrice += ((orderedProduct.price * orderedProduct.discount) / 100);
-//         }
-//     });
-
-//     return (
-//         <div className="flex-row justify-content-between address-text mr-auto ml-auto mb-2 text-danger">
-//             <p>{productsWithDiscounts} x - {discount} % попуст</p>
-//             <p>- {totalDiscountedPrice} ден.</p>
-//         </div>
-//     )
-// }, []);
-
- 
-
-//   const addToCard = (prod: ProductType) => {
-//     console.log("you clicked ADD TO CARD")
-//     const updatedAllProducts = products.map((p) => {
-//       if (p.id === prod.id) {
-//         return {
-//           ...p,
-//           selected: !p.selected,
-//           amount: p.selected ? 0 : 1,
-//         };
-//       }
-//       return p;
-//     });
-//     setSelectedProducts(updatedAllProducts);
-//   };
-
-//    const placeOrder = () => {
-//     const updatedState = products.map((p) => {
-//       return {
-//         ...p,
-//         selected: false,
-//         amount: 0,
-//       };
-//     });
-//     setProducts(updatedState);
-//   };
-
-    // const emptyBasket = (product: any, amount: number) => {
-
-    //   const updatedAddToCardProducts = addToCardProducts.filter((item) => item !== product);
-    //   const updatedProductAmounts = {
-    //     ...productAmounts,
-    //     [product]: 0,
-    //   };
-
-    //   setAddToCardProducts(updatedAddToCardProducts);
-    //   setProductAmounts(updatedProductAmounts);
-    //   setOrderProducts([]);
-    //     localStorage.setItem('addToCardProducts', JSON.stringify(updatedAddToCardProducts));
-    //     localStorage.setItem('productAmounts', JSON.stringify(updatedProductAmounts));
-    // }
         
-    const handleBoxClick = (box: any) => {
-      setExpandedBox(box === expandedBox ? null : box);
+  const renderDiscount = (discount: any, orderedProducts: any) => {
+    let productsWithDiscounts = 0;
+    let totalDiscountedPrice = 0;
+
+    orderedProducts.forEach((orderedProduct: any) => {
+        if (orderedProduct.discount === discount) {
+          productsWithDiscounts++;
+          totalDiscountedPrice += (orderedProduct.price * orderedProduct.discount) / 100;
+        }
+    });
+
+    return { productsWithDiscounts, totalDiscountedPrice };
+  };
+
+  // --------- //
+
+
+  const handleBoxClick = (box: any) => {
+    setExpandedBox(box === expandedBox ? null : box);
+  };
+
+
+  const emptyBasket = () => {
+    setAddToCardProducts([]);
+    setOrderProducts([]);
+    localStorage.removeItem('addToCardProducts');
+    localStorage.removeItem('productAmounts');
+  };
+
+
+  function removeAddToCard (id: string) {
+      const itemsAddToCard = localStorage.getItem('addToCardProducts');
+      const itemsAddToCardIds = JSON.parse(itemsAddToCard as string);
+      const updatedItemsAddToCardProducts = itemsAddToCardIds.filter((item: any) => item.id !== id );
+    localStorage.setItem('addToCardProducts', JSON.stringify(updatedItemsAddToCardProducts));
+  }
+
+  function removeFavorites (id: string) {
+      const itemsFavorite = (localStorage.getItem('favorites'));
+      const itemsFavoriteIds = JSON.parse(itemsFavorite as string);
+        const updatedItemsFavorites = itemsFavoriteIds.filter(function(item: any) {
+            return item.id !== id;
+        });
+      localStorage.setItem('favorites', JSON.stringify(updatedItemsFavorites));
     }
 
-    
 
-//     const renderDiscount = (discount: any, orderedProducts: any) => {
-//  let productsWithDiscounts = 0;
-//  let totalDiscountedPrice = 0;
 
-//  orderedProducts.forEach((orderedProduct: any) => {
-//     if (orderedProduct.discount === discount) {
-//       productsWithDiscounts++;
-//       totalDiscountedPrice += ((orderedProduct.price * orderedProduct.discount) / 100);
-//     }
-//  });
-
-//  return (
-//     <div className="flex-row justify-content-between address-text mr-auto ml-auto mb-2 text-danger">
-//       <p>{productsWithDiscounts} x - {discount} % попуст</p>
-//       <p>- {totalDiscountedPrice} ден.</p>
-//     </div>
-//  )
-// }
-  
-  
   return (
     <>
       <Head>
@@ -183,134 +145,98 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
         <meta name="description" content="Generated by create next app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <div className="container">
-          <div className="row d-flex flex-column justify-content-center mr-auto ml-auto">
-            <div className="col-11 p-0  mr-auto ml-auto">
-          <div className="row d-flex flex-row justify-content-center mt-5 mb-3">
-              <div className="col-12 p-0 flex-row">
-                <div className='col-5 align-items-center p-0 text-center mr-2'><img src="../pictures/icons/shopping vehicle.png" /><ToggleBtn title="Кошничка" onClick={() => setView("addToCard")} /></div>
-                <div className='col-5 align-items-center text-center p-0'><img src="../pictures/icons/heart-straight-thin.png" /><ToggleBtn title="Омилени" onClick={() => setView("favorites")} /></div>
-              </div>
+
+        <div className="row d-flex flex-row justify-content-center mt-5">
+            <div className="col-12 p-0 flex-row">
+              <div className='col-5 align-items-center p-0 text-center mr-2'><img src="../pictures/icons/shopping vehicle.png" /><ToggleBtn title="Кошничка" onClick={() => setView("addToCard")} /></div>
+              <div className='col-5 align-items-center text-center p-0'><img src="../pictures/icons/heart-straight-thin.png" /><ToggleBtn title="Омилени" onClick={() => setView("favorites")} /></div>
+            </div>
+            <div className="col-10 mt-3">
+            <hr style={{marginTop: '0', paddingTop: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
+            </div>
           </div>
+
           {view === "addToCard" ? 
-
-          <div className="container p-0 mr-auto ml-auto">
-              <div className="col-11">
-               {addToCardProducts.map((orderedProduct) => (
-                  <div key={orderedProduct.id}>
-                    <ProductItem {...orderedProduct} />
+           <div className="container mr-auto ml-auto">
+            <div className="row flex-column">
+             <div className="col-11 mr-auto ml-auto">
+              <div className="col-12 mr-auto ml-auto"></div>
+               {addToCardProducts.map((item) => (
+                  <div key={item.id} style={{position: 'relative'}}>
+                    <ProductItem {...item} />
+                    <div onClick={() => removeAddToCard(item.id)}  className='btn-delete'>
+                      <img src="../../pictures/icons/Basket.png" alt="empty" /> 
+                    </div>
                   </div>
                 ))}
+
+                {addToCardProducts.map((orderedProduct) => (
+                  <div key={orderedProduct.id} className='flex-row justify-content-between address-text mr-auto ml-auto mb-2' style={{color: 'darkgrey'}}>
+                      <div className='mb-2'>{orderedProduct.title}</div>
+                      <div>{orderedProduct.price} ден.</div>  </div>
+                ))}
+
+                {addToCardProducts.length === 0 ? (
+                  <p className='title text-center text-red'>Празна кошничка</p>
+                  ) : (
+                    <div className='flex-row justify-content-between address-text mr-auto ml-auto mb-2'style={{color:'#8a8328'}}>
+                      <p>+  достава до адреса</p>
+                      <p>150 ден.</p>
+                  </div> ) 
+              }  
+
+              <div className='address-text text-red' >
+                {(() => {
+                  let uniqueDiscounts: any = [];
+                  addToCardProducts.forEach((item) => {
+                    if (!uniqueDiscounts.includes(item.discount) && item.discount !== 0) {
+                      uniqueDiscounts.push(item.discount);
+                    }
+                  });
+
+                  return uniqueDiscounts.map((discount: any) => {
+                    const { productsWithDiscounts, totalDiscountedPrice } = renderDiscount(discount, addToCardProducts);
+
+                    return (
+                      <div key={discount} className='flex-row justify-content-between mb-2 align-items-center align-self-center'>
+                        <p>{productsWithDiscounts}x  - {discount}% попуст!</p>
+                        <p> - {totalDiscountedPrice} ден.</p>
+                      </div>
+                    );
+                  }); 
+                })()}
               </div>
 
-              {/* kopcinjata za dodavanje/odzemanje quantity, presmetka i sumiranje vkupna suma   */}
-              <div className="col-11"> 
-                {/* <button className="btn btn-outline-primary" onClick={goBack}>
-                Go To Product List
-              </button>  */}
-                 {addToCardProducts.map((orderedProduct) => (
-                  <div key={orderedProduct.id} className='flex-row justify-content-between address-text mr-auto ml-auto mb-3' style={{color: 'darkgrey'}}>
-                    <p className='mb-2'>{orderedProduct.title}</p>
-                      <p>{orderedProduct.price} ден.</p>
+                <div className='flex-column my-3'>
+                  <div className="col-12 p-0  mr-auto ml-auto">
+                    <hr style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
+                    <div className='flex-row justify-content-between my-4 align-items-center align-self-center'>
+                        <h2 className='title'>Вкупно: </h2>
+                        <h2><strong>{totalPrice - totalDiscount} ден.</strong></h2>
+                    </div>
+                    <hr style={{paddingTop: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
                   </div>
-                ))}
-                
-                <div className='flex-row justify-content-between address-text mr-auto ml-auto mb-2'style={{color:'#8a8328'}}>
-                    <p>+  достава до адреса</p>
-                    <p>150 ден.</p>
-                </div>
-                {addToCardProducts.map((orderedProduct) => {
-
-                  const renderDiscount = (discount: any, orderedProducts: any) => {
-                        let productsWithDiscounts = 0;
-                        let totalDiscountedPrice = 0;
-
-                        orderedProducts.forEach((orderedProduct: any) => {
-                            if (orderedProduct.discount === discount) {
-                              productsWithDiscounts++;
-                              totalDiscountedPrice += ((orderedProduct.price * orderedProduct.discount) / 100);
-                            }
-                        });
-
-                        return (
-                            <div className="flex-row justify-content-between address-text mr-auto ml-auto mb-2 text-danger">
-                              <p>{productsWithDiscounts} x - {discount} % попуст</p>
-                              <p>- {totalDiscountedPrice} ден.</p>
-                            </div>
-                        )
-                        }
-                    let discounts: any = [];
-
-                    addToCardProducts.forEach((item) => {
-                        if (!discounts.includes(item.discount) && item.discount !== 0) {
-                          discounts.push(item.discount);
-                        }
-                    });
-
-                    return discounts.map((discount: any) => {
-                        return renderDiscount(discount, addToCardProducts);
-                    });
-                    })}
-
-
-                {/* {addToCardProducts.map((item) => {
-                      let discounts: any = [];
-                      let productsWithDiscounts = 0;
-                      let totalDiscountedPrice = 0;
-
-                      if (!discounts.includes(item.discount) && item.discount !== 0) {
-                          discounts.push(item.discount);
-                      }
-
-                      if (item.discount !== 0) {
-                          productsWithDiscounts++;
-                          totalDiscountedPrice += (item.price * item.discount) / 100;
-                      }
-                        
-                      return (
-                          <div key={item.discount}>
-                            {productsWithDiscounts} x - {item.discount}% попуст - {totalDiscountedPrice} ден.
-                          </div>
-                      );
-                })} */}
-
-
-                <div className='flex-row justify-content-between mr-auto ml-auto my-4'>
-                    <h2 className='title'>Вкупно: </h2>
-                    <h2><strong>{totalPrice} ден.</strong></h2>
-                </div>
-              <div>
-                {/* <PrimaryBtn onClick={placeOrder} title="Продолжи" btnClass={"PrimaryBtn w-75"} backgroundColor={"btn-gold"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/> */}
-                <PrimaryBtn title="Продолжи" btnClass={"PrimaryBtn w-75"} backgroundColor={"btn-gold"} color='black' height={"41px"} border='1.8px solid #C2C2C2'/>
-                {/* <div onClick={() => emptyBasket(orderProducts, 0)}>
+              </div>
+              <div className='flex-row justify-content-start mb-5 align-items-center align-self-center'>
+                <PrimaryBtn title="Продолжи" btnClass={"PrimaryBtn w-75 mr-3 btn-gold btn-gold-text"} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/>
+                <div onClick={emptyBasket} style={{cursor: 'pointer'}}>
                    <img src="../../pictures/icons/Basket.png" alt="empty" /> 
-                </div> */}
-                
-                {addToCardProducts.length === 0 && (
-                  <p>EMPTY BASKET</p>
-                  )}   
+                </div>
               </div> 
+            </div> 
+          </div> 
 
-              {/* Box Component Item   */}
-              {boxItemsData.map((boxItem, index) => {
-                  return (
-                    <BoxComponent key={index} boxItem={boxItem} onClick={() => handleBoxClick(boxItem)} expanded={boxItem === expandedBox}/>
-                  )
-                })} 
+          {boxItemsData.map((boxItem, index) => {
+            return (
+                <BoxComponent key={index} boxItem={boxItem} onClick={() => handleBoxClick(boxItem)} expanded={boxItem === expandedBox} padding='0px'/>
+              )
+            })} 
+        </div> : null }
 
-          </div>
-          </div>  : null }
+        {view === "favorites" ? <Favorites products={favorites} onClick={() => removeFavorites}/> : null}
 
-          {view === "favorites" ? <Favorites products={products}/> : null}
-            
-          {/* Other Related Product Items  */}
-          <RelatedProducts products={randomProducts}/>
-          <PaginationId id='' products={randomProducts}/>
-          
-        </div>
-        </div>
-      </div>
+        <RelatedProducts products={randomProducts}/>
+        <PaginationId id='' products={randomProducts}/> 
    </>
    );
  };
@@ -324,7 +250,7 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
     const page = parseInt(query.page as string, 10) || 1;
     let randomNo: number | undefined;
      
-    const response = await fetch(`http://localhost:5001/products?_page=${page}`); 
+    const response = await fetch('http://localhost:5001/products'); 
     const products: ProductType[] = await response.json();
    
     const resBoxItems = await fetch('http://localhost:5001/boxComponents');
