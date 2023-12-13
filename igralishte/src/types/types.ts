@@ -23,6 +23,7 @@ export interface ProductType {
     model_size: ProductSizeType,
     size_description: string,
     color: ProductColorType,
+    color_name: string,
     material: string,
     composition: string,
     condition: string,

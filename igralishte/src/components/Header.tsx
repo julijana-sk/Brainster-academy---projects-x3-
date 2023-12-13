@@ -267,7 +267,7 @@ return (
                     </li>
                     <li className="menu-list mb-3" onClick={handleToggleNav}>Lifestyle</li>
                     <Link href={"/gifts"} onClick={handleToggleNav}><li className="menu-list mb-3">Подари картичка*</li></Link>
-                    <li className="menu-list font-italic text-danger mb-5" onClick={handleToggleNav}>Попуст</li>
+                    <li className="menu-list font-italic text-red mb-5" onClick={handleToggleNav}>Попуст</li>
 
                   <div className="menu-footer my-5">
                     <li className="nav-item" onClick={handleToggleNav}>

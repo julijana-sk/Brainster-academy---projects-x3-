@@ -61,6 +61,7 @@ useEffect(() => {
       if (savedProductAmounts) {
           setProductAmounts(JSON.parse(savedProductAmounts));
       }
+      
 }, [product.id]);
 
 
@@ -74,49 +75,56 @@ useEffect(() => {
     setIsFavorite(!isFavorite);
 };
 
-// Kolicina na produkt
+
   const updateProductAmount = (productId: any, amount: number) => {
-    if (isAddToCard) {
       const updatedProductAmounts = {
         ...productAmounts,
         [productId]: amount,
       };
 
       setProductAmounts(updatedProductAmounts);
-      localStorage.setItem('productAmounts', JSON.stringify(updatedProductAmounts));
-    } else {
-      const updatedProductAmounts = {
-        ...productAmounts
+      localStorage.setItem('amount', JSON.stringify(amount));
+      localStorage.setItem('productAmounts', JSON.stringify(updatedProductAmounts)); 
+    }
+    
+const toggleAddToCard = (id: any, selectedAmount: number) => { 
+  // Produktite vo koshnicka kako niza, zaradi presmetki na cena, popust...
+  const updatedAddToCard = isAddToCard
+      ? addToCardProducts.filter((favId: any) => favId !== id)
+      : [...addToCardProducts, id];
+    localStorage.setItem('addToCardProducts', JSON.stringify(updatedAddToCard));
+    setAddToCardProducts(updatedAddToCard);
+
+  // Podesuvanje selektirana kolicina
+  const updatedProductAmounts = {
+        ...productAmounts,
+        [id]: selectedAmount,
       };
 
       setProductAmounts(updatedProductAmounts);
-      localStorage.setItem('productAmounts', JSON.stringify(updatedProductAmounts));
-    }
+      localStorage.setItem('amount', JSON.stringify(selectedAmount));
+      localStorage.setItem('productAmounts', JSON.stringify(updatedProductAmounts)); 
 
-  }
+  if (isAddToCard === false) { 
+    const updatedProductAmounts = { 
+      ...productAmounts, 
+      [id]: 0 }; 
+      setProductAmounts(updatedProductAmounts); 
+      localStorage.setItem('productAmounts', JSON.stringify(updatedProductAmounts)); 
 
- const toggleAddToCard = (id: any) => { 
-    const updatedAddToCard = isAddToCard 
-    ? addToCardProducts.filter((favId: any) => favId !== id) 
-    : [...addToCardProducts, id]; 
-    localStorage.setItem('addToCardProducts', JSON.stringify(updatedAddToCard));
+    } else { 
+      const updatedProductAmounts = { 
+        ...productAmounts, 
+        [id]: selectedAmount 
+      }; 
+        setProductAmounts(updatedProductAmounts); 
+        localStorage.setItem('productAmounts', JSON.stringify(updatedProductAmounts)); 
+      } 
 
-      setAddToCardProducts(updatedAddToCard); 
-      setIsAddToCard(!isAddToCard);
+    setIsAddToCard(!isAddToCard); 
+    updateProductAmount(id, isAddToCard ? 0 : currentProduct.amount); 
 
-    let amount = product.amount
-    if (isAddToCard) {
-          const updatedProductAmounts = {
-            ...productAmounts,
-            [id]: amount,
-          };
-        } else {
-          const updatedProductAmounts = {
-            ...productAmounts,
-            [id]: 1,
-          };
-        }
-  };
+}
 
 
   function onRemoveItem() {
@@ -127,8 +135,6 @@ useEffect(() => {
               amount: prevState.amount = 0,
             };
           });
-      updateProductAmount(currentProduct.id, currentProduct.amount - 1);
-
         } else {
       if (product.amount >= 1) {
         setCurrentProduct((prevState) => { 
@@ -138,7 +144,6 @@ useEffect(() => {
           }
         });
       }
-      updateProductAmount(currentProduct.id, currentProduct.amount - 1);
   }}
 
 
@@ -147,8 +152,9 @@ useEffect(() => {
         ...prevState, 
         amount: prevState.amount + 1 
       }));
-      updateProductAmount(currentProduct.id, currentProduct.amount + 1);
   }
+
+
 
   const handleBoxClick = (box: any) => {
     setExpandedBox(box === expandedBox ? null : box);
@@ -191,14 +197,14 @@ useEffect(() => {
                     <button className={`${isAddToCard ? "d-flex" : "d-none"} p-0 menu-footer-button`}
                             onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault();
-                                    toggleAddToCard(product.id);
+                                    toggleAddToCard(product.id, product.amount);
                             }}>
                             <img src="../pictures/icons/Check-floating-icon.png" /></button>
                   ) : (  
                     <button className={`${isAddToCard ? "d-none" : "d-flex"} p-0 menu-footer-button`}
                             onClick={(event: React.MouseEvent<HTMLElement>) => {
                                     event.preventDefault();
-                                    toggleAddToCard(product.id);
+                                    toggleAddToCard(product.id, product.amount);
                                 }}>
                             <img src="../pictures/icons/shopping cart.png"/></button>
                   ) }
@@ -221,24 +227,23 @@ useEffect(() => {
                   { isAddToCard ? (
                     <div className={`${isAddToCard ? "d-flex" : "d-none"} col-7 text-left p-0`} style={{marginRight: '10px'}}>
                       <button onClick={(event: React.MouseEvent<HTMLElement>) => {
-                        event.preventDefault();
-                        toggleAddToCard(product.id);
-                      }} 
-                        className='bg-transparent p-0 border-0'>
+                              event.preventDefault();
+                              toggleAddToCard(product.id, product.amount);
+                            }} 
+                            className='bg-transparent p-0 border-0'>
                       <img src="../pictures/icons/gift-added.png" className='p-0 h-100 w-100' alt="added to card"/></button>
                       </div>
                   ) : 
                     ( <button onClick={(event: React.MouseEvent<HTMLElement>) => {
-                                    event.preventDefault();
-                                    toggleAddToCard(product.id);
-                                  }} 
+                              event.preventDefault();
+                              toggleAddToCard(product.id, product.amount);
+                            }} 
                           className='col-7 addToCardButton add'>Додај во кошничка</button>
                   ) }
                   <i className={isFavorite ? "fas fa-heart fa-2x" : "far fa-heart fa-2x"}
                       onClick={(event: React.MouseEvent<HTMLElement>) => {
                               event.preventDefault();
-                              toggleFavorite(product.id);
-                    }}></i>
+                              toggleFavorite(product.id);}}></i>
                 </div>
                 <hr style={{paddingTop: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
                 <div className='flex-row my-4 justify-content-start align-items-center text-left '>
@@ -251,7 +256,7 @@ useEffect(() => {
                 <hr style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 150%, #D4AF37 0%)"}}/>
                 <div className='flex-row my-4 title justify-content-start align-items-center text-left '>
                   <p>Боја: </p>
-                  <div className="border mx-2 p-2" style={{background: `${product.color}`, borderRadius: '4px'}} />
+                  <div className="border mx-2 p-2" style={{background: `${product.color_name}`, borderRadius: '4px'}} />
                   <p className='about-text text-dark'>{product.color}</p>
                 </div>
                 <p className='title text-left'>Материјал: </p>

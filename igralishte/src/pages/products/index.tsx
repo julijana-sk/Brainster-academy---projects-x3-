@@ -24,8 +24,6 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
 
     const [toggleSearch, setToggleSearch] = useState(false);
     const searchRef = useRef<HTMLInputElement>(null);
-    const isQueryEmpty = Object.keys(router.query).length === 0;
-
     const [currentPage, setCurrentPage] = useState<number>(1);
     const totalPages = Math.ceil(sortedProducts.length / 10);
     const start = (currentPage - 1) * 10;

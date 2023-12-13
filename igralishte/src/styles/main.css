@@ -106,6 +106,19 @@ a:hover {
 .relative {
   position: relative;
 }
+.btn-delete {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
+}
+
+.close-btn {
+  position: absolute;
+  right: 5%;
+  top: -10%;
+  cursor: pointer;
+}
 
 /* Hamburger menu */
 
@@ -338,14 +351,13 @@ ul li a {
   background: linear-gradient(0deg, #fff7f7, #fff7f7);
 }
 .dropdown1 .dropdown-toggle::after {
-  margin-left: 207px;
-  border: 1px solid;
+  margin-left: 107px;
 }
 .dropdown2 .dropdown-toggle::after {
-  margin-left: 250px;
+  margin-left: 150px;
 }
 .dropdown3 .dropdown-toggle::after {
-  margin-left: 239px;
+  margin-left: 139px;
 }
 .dropdown-menu {
   margin-top: 0;
@@ -1366,11 +1378,4 @@ a {
 
 .breadcrumbs a {
   color: black;
-}
-
-.btn-delete {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  cursor: pointer;
 }

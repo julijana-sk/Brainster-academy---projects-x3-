@@ -13,6 +13,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isLoginPage = router.route === '/login';
   const isProfilePage = router.route === '/profile';
   const isRegisterPage = router.route === '/register';
+  const isOrderFormPage = router.route === '/order/orderForm';
+
+
 
 
 
@@ -20,9 +23,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <div>
       <UserContextConstructor>
         <Authentication>
-           {(!isLoginPage && !isProfilePage && !isRegisterPage) && <Header />}
+           {(!isLoginPage && !isProfilePage && !isRegisterPage && !isOrderFormPage) && <Header />}
           <Component {...pageProps} />
-           {(!isLoginPage && !isProfilePage && !isRegisterPage) && <Footer />}
+           {(!isLoginPage && !isProfilePage && !isRegisterPage && !isOrderFormPage) && <Footer />}
         </Authentication>
       </UserContextConstructor>
     </div>

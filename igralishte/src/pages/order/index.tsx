@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { GetServerSideProps, NextPage } from 'next';
 import BoxComponent from '@/components/BoxComponent';
 import RelatedProducts from '@/components/RelatedProducts';
@@ -10,6 +9,7 @@ import { ToggleBtn } from '@/components/ToggleBtn';
 import Favorites from '@/components/Favorites';
 import PaginationId from '@/components/PaginationId';
 import ProductItem from '@/components/ProductItem';
+import Link from 'next/link';
 
 
 interface Props {
@@ -24,12 +24,10 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
 
   const [view, setView] = useState<ActiveView>("addToCard");
 
-
-  const router = useRouter();  
   const [expandedBox, setExpandedBox] = useState(null);
   const [favorites, setFavorites] = useState<ProductType[]>([]);
   const [addToCardProducts, setAddToCardProducts] = useState<ProductType[]>([]);  
-  // const [productAmounts, setProductAmounts] = useState({});
+  const [productAmounts, setProductAmounts] = useState([]);
   const [orderProducts, setOrderProducts] = useState<ProductType[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [totalDiscount, setTotalDiscount] = useState<number>(0);
@@ -38,6 +36,8 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
    useEffect(() => {
     const savedFavorites = localStorage.getItem('favorites');
     const savedAddToCardProducts = localStorage.getItem('addToCardProducts');
+    const savedProductAmounts = localStorage.getItem('productAmounts');
+
 
     if (savedFavorites) {
       const favoritesIds = JSON.parse(savedFavorites);
@@ -52,6 +52,10 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
       setAddToCardProducts(productsToOrder);
       setOrderProducts(productsToOrder);
     }
+    if (savedProductAmounts) {
+      const productAmountsData = JSON.parse(savedProductAmounts);
+      setProductAmounts(productAmountsData);
+    }
   }, [products]);
 
 
@@ -59,8 +63,8 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
   useEffect(() => {
     let priceProducts = 0;
     let price = 0;
-      addToCardProducts.forEach((p) => {
-        priceProducts += p.price * p.amount;
+    addToCardProducts.forEach((p) => {
+        priceProducts += p.price * (getAmountOfProduct(productAmounts, products)[p.id]);
         price = 150 + priceProducts;
       });
 
@@ -103,13 +107,7 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
 
     return { productsWithDiscounts, totalDiscountedPrice };
   };
-
   // --------- //
-
-
-  const handleBoxClick = (box: any) => {
-    setExpandedBox(box === expandedBox ? null : box);
-  };
 
 
   const emptyBasket = () => {
@@ -136,6 +134,26 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
       localStorage.setItem('favorites', JSON.stringify(updatedItemsFavorites));
     }
 
+  // Povlekuvanje podatok za selektirana kolicina na produktot
+  const getAmountOfProduct = (productAmounts: { [productId: string] : any }, products: ProductType[]): { [productId: string]: number } => {
+      const amountOfProduct: { [productId: string]: number } = {};
+
+      Object.keys(productAmounts).map((productId: any) => {
+        const product = products.filter((p) => p.id === productId);
+        const amount: number = productAmounts[productId];
+
+        product.map((item: ProductType) => {
+          amountOfProduct[item.id] = amount;
+        });
+      });
+
+      return amountOfProduct;
+    };
+  
+    
+  const handleBoxClick = (box: any) => {
+    setExpandedBox(box === expandedBox ? null : box);
+  };
 
 
   return (
@@ -160,21 +178,35 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
            <div className="container mr-auto ml-auto">
             <div className="row flex-column">
              <div className="col-11 mr-auto ml-auto">
-              <div className="col-12 mr-auto ml-auto"></div>
-               {addToCardProducts.map((item) => (
-                  <div key={item.id} style={{position: 'relative'}}>
-                    <ProductItem {...item} />
-                    <div onClick={() => removeAddToCard(item.id)}  className='btn-delete'>
-                      <img src="../../pictures/icons/Basket.png" alt="empty" /> 
-                    </div>
-                  </div>
-                ))}
+               {addToCardProducts.map((item) => {
+                const amountOfProduct = getAmountOfProduct(productAmounts, products)[item.id];
+                  if (amountOfProduct > 0) {
+                    return (
+                        <div key={item.id} style={{position: 'relative'}}>
+                          <ProductItem {...item} />
+                          <div onClick={() => removeAddToCard(item.id)}  className='btn-delete'>
+                            <img src="../../pictures/icons/Basket.png" alt="empty" /> 
+                          </div>
+                        </div>
+                        )
+                      }
+                      return null;
+                  })}
 
-                {addToCardProducts.map((orderedProduct) => (
-                  <div key={orderedProduct.id} className='flex-row justify-content-between address-text mr-auto ml-auto mb-2' style={{color: 'darkgrey'}}>
-                      <div className='mb-2'>{orderedProduct.title}</div>
-                      <div>{orderedProduct.price} ден.</div>  </div>
-                ))}
+                {addToCardProducts.map((orderedProduct) => {
+                  const amountOfProduct = getAmountOfProduct(productAmounts, products)[orderedProduct.id];
+                    if (amountOfProduct > 0) {
+                      return (
+                        <>                  
+                          <div key={orderedProduct.id} className='flex-row justify-content-between address-text mr-auto ml-auto mb-2' style={{color: 'darkgrey'}}>
+                          <div className='mb-2'>{orderedProduct.title} (х{getAmountOfProduct(productAmounts, products)[orderedProduct.id]})</div>
+                          <div>{orderedProduct.price} ден.</div>  
+                          </div>
+                        </>
+                      )
+                    }
+                    return null;
+                })}
 
                 {addToCardProducts.length === 0 ? (
                   <p className='title text-center text-red'>Празна кошничка</p>
@@ -212,15 +244,15 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
                     <hr style={{paddingBottom: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
                     <div className='flex-row justify-content-between my-4 align-items-center align-self-center'>
                         <h2 className='title'>Вкупно: </h2>
-                        <h2><strong>{totalPrice - totalDiscount} ден.</strong></h2>
+                        <h2><strong>{totalPrice - totalDiscount} ден.</strong></h2>                       
                     </div>
                     <hr style={{paddingTop: '0.5px', background: "linear-gradient(99.4deg, #FFF0BF -10.68%, #EFC990 18.14%, #FDD292 43.87%, rgba(240, 199, 73, 0.42) 81.17%, #D4AF37 100%)"}}/>
                   </div>
               </div>
               <div className='flex-row justify-content-start mb-5 align-items-center align-self-center'>
-                <PrimaryBtn title="Продолжи" btnClass={"PrimaryBtn w-75 mr-3 btn-gold btn-gold-text"} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/>
+                <Link href={'/order/orderForm'} className='w-75 border-0 bg-transparent mr-3'><PrimaryBtn title="Продолжи" btnClass={"PrimaryBtn w-100 btn-gold btn-gold-text"} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/></Link>
                 <div onClick={emptyBasket} style={{cursor: 'pointer'}}>
-                   <img src="../../pictures/icons/Basket.png" alt="empty" /> 
+                   <img src="../../pictures/icons/Basket.png" alt="empty"/> 
                 </div>
               </div> 
             </div> 
