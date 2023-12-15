@@ -3,8 +3,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import LoginForm from '@/components/LoginForm';
 
-const LoginPage = () => {
 
+const LoginPage = () => {
+  
   return (
     <>
       <Head>
@@ -27,4 +28,4 @@ const LoginPage = () => {
   );
 }
 
-export default LoginPage
+export default LoginPage;

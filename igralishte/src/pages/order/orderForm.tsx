@@ -1,34 +1,43 @@
 import Link from 'next/link';
-import React, { useContext, useState } from 'react'
-import { UserContext } from '@/context/UserContext';
+import React, { useState } from 'react'
 import PrimaryBtn from '@/components/PrimaryBtn';
 import { useRouter } from 'next/router';
+import OrderAlert from '@/components/OrderAlert';
 
 
 const OrderForm = () => {
 
-    const { handleLogin } = useContext(UserContext);
 
-    const router = useRouter();
-    const [name, setName] = useState<string>("");
-    const [surname, setSurname] = useState<string>("");
-    const [username, setUsername] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [address, setAddress] = useState<string>("");
-    const [phone, setPhone] = useState<string>("");
+  const router = useRouter();
+  const [name, setName] = useState<string>("");
+  const [surname, setSurname] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
+  const [confirmationPopUp, setConfirmationPopUp] = useState('d-none');
+  const [isConfirmationVisible, setisConfirmationVisible] = useState<boolean>(false);
 
-    function handleCloseBtn () {
-        router.push({
-        pathname: "/order",
-        });
+  function handleOrderConfirmation() {
+        setisConfirmationVisible(!isConfirmationVisible);
+        setConfirmationPopUp('d-flex');
+    }
+   
+
+
+  function handleCloseBtn () {
+      router.push({
+      pathname: "/order",
+      });
     }
 
 return (
     <div>
+      {isConfirmationVisible && ( <OrderAlert /> ) }
         <form className="d-flex flex-column justify-content-center"
           onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
           event.preventDefault();
-          handleLogin(username, password);
+          handleOrderConfirmation()
           }}>
 
           <div className='container-fluid mt-5 text-center'>
@@ -80,11 +89,10 @@ return (
                     <p style={{color: 'darkgrey'}} className="about-text p-0 align-self-center">сакам да добивам новости за идни попусти, нови колекции и промоции на мојата емаил адреса.</p>
                   </div>
                 </div>
-                <div className="flex-flex justify-content-start align-items-center my-5">
-                <div className='col-11 p-0'>
-                    <Link href={"/"}>
-                    <PrimaryBtn title="Нарачај" btnClass={"PrimaryBtn w-75 mr-4 btn-gold btn-gold-text"} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/></Link>
-                    <Link href={"/order"} className='border-0 bg-transparent w-50'><u>Откажи</u></Link>
+                <div className="flex-row justify-content-start align-items-center my-5">
+                <div className='col-12 p-0'>
+                  <PrimaryBtn title="Нарачај" onClick={handleOrderConfirmation} btnClass={"PrimaryBtn w-75 mr-2 btn-gold btn-gold-text"} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/>
+                   <Link href={'/order'} className='border-0 bg-transparent w-50'><u>Откажи</u></Link>
                 </div>  
               </div>
             </div>

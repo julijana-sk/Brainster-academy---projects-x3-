@@ -4,6 +4,7 @@ import { BrandType, ProductType } from '@/types/types';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 interface Props {
   brands: BrandType[];
@@ -17,17 +18,9 @@ const ProductPage: NextPage<Props> = ({ brands, products }) => {
         { name: 'Сите', url: '/brands' },
         ];
     
-  const router = useRouter();
-
   const filterProducts = products?.filter(product => product.category === "brands")
   const [currentPage, setCurrentPage] = useState<number>(1);
-
-
-    const totalPages = Math.ceil(brands.length / 10);
-
-    const start = (currentPage - 1) * 10;
-    const end = start + 10;
-    const paginationProductsForDisplaying = brands.slice(start, end);
+  const totalPages = Math.ceil(brands.length / 10);
 
     const handlePageChange = (page: number) => {
         if (page < 1 || page > totalPages) return;
@@ -36,11 +29,9 @@ const ProductPage: NextPage<Props> = ({ brands, products }) => {
 
     const renderPages = () => {
         return Array.from({ length: totalPages }, (_, index) => (
-              <a
-                key={index}
-                className={`flex-c-m how-pagination1 trans-04 m-all-7 pointer font-weight-bold ${
+              <a key={index} className={`flex-c-m how-pagination1 trans-04 m-all-7 pointer text-center font-weight-bold ${
                   currentPage === index + 1
-                    ? "active-pagination1 text-danger"
+                    ? "active-pagination1 text-red"
                     : ""
                 }`}
                 onClick={() => handlePageChange(index + 1)}>
@@ -50,7 +41,7 @@ const ProductPage: NextPage<Props> = ({ brands, products }) => {
     };   
 
 
-return (
+    return (
     < >
         <Head>
             <title>Igralishte-Brand</title>
@@ -59,6 +50,7 @@ return (
         </Head>
         <div className="container">
           <div className="row d-flex flex-column justify-content-center">
+             <div className='col-11 ml-3 my-3 flex-row justify-content-start'><Breadcrumbs breadcrumbs={breadcrumbs} /></div>
             <div className="col-12 flex-row flex-wrap justify-content-around">
                 {filterProducts?.map((product, productIndex) => {
                     let columnSize = "col-5 product-img-small";
@@ -80,9 +72,7 @@ return (
                 </div>
               </div>
             </div>
-       
-         {/* pagination  */}
-          <div className="flex-l-m flex-w w-full p-t-10 m-lr--7" style={{ letterSpacing: "5px" }}>
+          <div className="flex-l-m flex-w w-full p-t-10 m-lr--7 text-center" style={{ letterSpacing: "5px" }}>
                 <button onClick={() => handlePageChange(currentPage - 1)} className='bg-transparent border-0 mr-1'>
                     {"<"}
                 </button>
@@ -107,26 +97,6 @@ export default ProductPage;
 
     const responseProducts = await fetch(`http://localhost:5001/products?&page=${page}`); 
     const products: ProductType[] = await responseProducts.json();
-
-//  let searchQuery = query.query || "";
-
-//  if (searchQuery) {
-//     [resSearchedBlogsItems, resSearchedProductsItems] = await Promise.all([
-//       fetch(`http://localhost:5001/blogs?q=${query.query}`),
-//       fetch(`http://localhost:5001/products?q=${query.query}`),
-//     ]);
-//  } else {
-//     [resSearchedBlogsItems, resSearchedProductsItems] = await Promise.all([
-//       fetch("http://localhost:5001/blogs"),
-//       fetch("http://localhost:5001/products"),
-//     ]);
-//  }
-
-//  const [searchedBlogsItemsData, searchedProductsItemsData ] = await Promise.all([
-//     resSearchedBlogsItems.json(),
-//     resSearchedProductsItems.json(),
-//   ]);
-   
 
  return {
     props: {

@@ -51,7 +51,7 @@ const Pagination: React.FC<Props> = ({ products, id }) => {
     const displayPageNumbers = () => {
         let pageNumbers = [];
         for (let i = 1; i <= totalPages; i++) {
-            const isActive = (i === currentPage) ? "text-danger" : "text-dark";
+            const isActive = (i === currentPage) ? "text-red" : "text-dark";
             if (displayAllPages) {
                 pageNumbers.push(
                     <Link href={`/products/${id}?page=${i}`} key={i} className={`bg-transparent border-0 font-weight-bold ${isActive}`} onClick={() => handleClick(i)}> {i} </Link>

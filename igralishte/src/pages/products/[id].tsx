@@ -123,9 +123,7 @@ const toggleAddToCard = (id: any, selectedAmount: number) => {
 
     setIsAddToCard(!isAddToCard); 
     updateProductAmount(id, isAddToCard ? 0 : currentProduct.amount); 
-
-}
-
+  }
 
   function onRemoveItem() {
       if (currentProduct.amount <= 0) {
@@ -146,15 +144,12 @@ const toggleAddToCard = (id: any, selectedAmount: number) => {
       }
   }}
 
-
   function onAddItem() {
       setCurrentProduct(prevState => ({
         ...prevState, 
         amount: prevState.amount + 1 
       }));
   }
-
-
 
   const handleBoxClick = (box: any) => {
     setExpandedBox(box === expandedBox ? null : box);
@@ -169,9 +164,9 @@ const toggleAddToCard = (id: any, selectedAmount: number) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-        <div className="container-fluid my-5">
+        <div className="container-fluid mb-5">
           <div className="row flex-column justify-content-center">
-            <div className="col-11 mb-5 mr-auto ml-auto">
+            <div className="col-11 my-3 mr-auto ml-auto">
               <Breadcrumbs breadcrumbs={breadcrumbs} />
               <div>
                 <h1 className='title' style={{textAlign: 'left'}}>{product.title}</h1>

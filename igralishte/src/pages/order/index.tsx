@@ -118,21 +118,21 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
   };
 
 
-  function removeAddToCard (id: string) {
-      const itemsAddToCard = localStorage.getItem('addToCardProducts');
-      const itemsAddToCardIds = JSON.parse(itemsAddToCard as string);
-      const updatedItemsAddToCardProducts = itemsAddToCardIds.filter((item: any) => item.id !== id );
-    localStorage.setItem('addToCardProducts', JSON.stringify(updatedItemsAddToCardProducts));
-  }
+  // function removeAddToCard (id: string) {
+  //     const itemsAddToCard = localStorage.getItem('addToCardProducts');
+  //     const itemsAddToCardIds = JSON.parse(itemsAddToCard as string);
+  //     const updatedItemsAddToCardProducts = itemsAddToCardIds.filter((item: any) => item.id !== id );
+  //   localStorage.setItem('addToCardProducts', JSON.stringify(updatedItemsAddToCardProducts));
+  // }
 
-  function removeFavorites (id: string) {
-      const itemsFavorite = (localStorage.getItem('favorites'));
-      const itemsFavoriteIds = JSON.parse(itemsFavorite as string);
-        const updatedItemsFavorites = itemsFavoriteIds.filter(function(item: any) {
-            return item.id !== id;
-        });
-      localStorage.setItem('favorites', JSON.stringify(updatedItemsFavorites));
-    }
+  // function removeFavorites (id: string) {
+  //     const itemsFavorite = (localStorage.getItem('favorites'));
+  //     const itemsFavoriteIds = JSON.parse(itemsFavorite as string);
+  //       const updatedItemsFavorites = itemsFavoriteIds.filter(function(item: any) {
+  //           return item.id !== id;
+  //       });
+  //     localStorage.setItem('favorites', JSON.stringify(updatedItemsFavorites));
+  //   }
 
   // Povlekuvanje podatok za selektirana kolicina na produktot
   const getAmountOfProduct = (productAmounts: { [productId: string] : any }, products: ProductType[]): { [productId: string]: number } => {
@@ -184,9 +184,6 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
                     return (
                         <div key={item.id} style={{position: 'relative'}}>
                           <ProductItem {...item} />
-                          <div onClick={() => removeAddToCard(item.id)}  className='btn-delete'>
-                            <img src="../../pictures/icons/Basket.png" alt="empty" /> 
-                          </div>
                         </div>
                         )
                       }
@@ -197,12 +194,12 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
                   const amountOfProduct = getAmountOfProduct(productAmounts, products)[orderedProduct.id];
                     if (amountOfProduct > 0) {
                       return (
-                        <>                  
-                          <div key={orderedProduct.id} className='flex-row justify-content-between address-text mr-auto ml-auto mb-2' style={{color: 'darkgrey'}}>
+                        <div key={orderedProduct.id}>                  
+                          <div className='flex-row justify-content-between address-text mr-auto ml-auto mb-2' style={{color: 'darkgrey'}}>
                           <div className='mb-2'>{orderedProduct.title} (х{getAmountOfProduct(productAmounts, products)[orderedProduct.id]})</div>
                           <div>{orderedProduct.price} ден.</div>  
                           </div>
-                        </>
+                        </div>
                       )
                     }
                     return null;
@@ -265,7 +262,7 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
             })} 
         </div> : null }
 
-        {view === "favorites" ? <Favorites products={favorites} onClick={() => removeFavorites}/> : null}
+        {view === "favorites" ? <Favorites products={favorites} /> : null}
 
         <RelatedProducts products={randomProducts}/>
         <PaginationId id='' products={randomProducts}/> 

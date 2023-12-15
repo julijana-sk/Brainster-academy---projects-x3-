@@ -50,10 +50,10 @@ return (
             <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="container">
-          <Breadcrumbs breadcrumbs={breadcrumbs} />
           <div className="row d-flex flex-column justify-content-center">
+          <div className='col-11 ml-3 mt-3 flex-row justify-content-start align-self-center'><Breadcrumbs breadcrumbs={breadcrumbs} /></div>
           {product ? (
-              <div className='col-11 mr-auto ml-auto my-5'>
+              <div className='col-11 mr-auto ml-auto mb-5'>
                 <div className="d-flex flex-row align-items-center align-self-center my-3 justify-content-start text-capitalize">
                   <img src="../pictures/icons/sparks-removebg.png" alt="spakrs" className="mr-2" />
                   <PageTitle title={product.brand_name}/>
@@ -72,8 +72,8 @@ return (
                       <div className="row flex-row">
                         {filteredProducts?.map((product) => {
                           return (
-                              <div className="col-5 p-0 mb-3 mr-2 product-img-small">
-                                <ProductItem key={product.id} {...product}/>
+                              <div key={product.id} className="col-5 p-0 mb-3 mr-2 product-img-small">
+                                <ProductItem {...product}/>
                               </div>
                               )
                             })} 

@@ -7,6 +7,7 @@ interface Props {
 }
 
 const GiftCard: React.FC<Props> = ({gift, index}) => {
+  
   return (
     <div className="relative mb-4">
         <img src={`${gift.img}`} alt="gift banner img" className='w-100'/>

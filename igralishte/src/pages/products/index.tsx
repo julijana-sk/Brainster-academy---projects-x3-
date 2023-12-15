@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Head from 'next/head';
 import { GetServerSideProps, NextPage } from 'next';
 import ProductItem from '@/components/ProductItem';
@@ -6,6 +6,7 @@ import { ProductType } from '@/types/types';
 import { useRouter } from 'next/router';
 import PrimaryBtn from '@/components/PrimaryBtn';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { UserContext } from '@/context/UserContext';
 
 interface Props {
   searchedProductsData: ProductType[];
@@ -17,7 +18,9 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
         { name: 'Почетна', url: '/' },
         { name: 'Сите', url: '/products' },
     ];
-    
+
+    const { useSortProductsByNewestDate, useSortProductsByOldestDate } = useContext(UserContext);
+
     const router = useRouter();
     const [sortedProducts, setSortedProducts] = useState(searchedProductsData);
     const [isSorted, setIsSorted] = useState(false);
@@ -31,107 +34,86 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
     const paginationProductsForDisplaying = sortedProducts.slice(start, end);
 
 
-useEffect(() => {
-    setSortedProducts(searchedProductsData);
+    useEffect(() => {
+    if (router.query.category === 'vintage' || router.query.category === 'accessories') {
+        setIsSorted(false);
+    } else {
+        useSortProductsByNewestDate(searchedProductsData);
+    }
+    }, []);
+
+
+    const onClickSortByNewestDate = () => {
     setIsSorted(false);
-
-    })
-
-
-const handlePageChange = (page: number) => {
-    if (page < 1 || page > totalPages) return;
-    setCurrentPage(page);
-};
-
-const renderPages = () => {
-    return Array.from({ length: totalPages }, (_, index) => (
-            <a
-            key={index}
-            className={`flex-c-m how-pagination1 trans-04 m-all-7 pointer font-weight-bold ${
-                currentPage === index + 1
-                ? "active-pagination1 text-danger"
-                : ""
-            }`}
-            onClick={() => handlePageChange(index + 1)}>
-            {index + 1}
-            </a>
-    ));
-};
-
-const handleToggleSearch = () => {
-    setToggleSearch(!toggleSearch);
+    useSortProductsByNewestDate(searchedProductsData);
+    };
+    const onClickSortByOldestDate = () => {
     setIsSorted(false);
-}
+    useSortProductsByOldestDate(searchedProductsData);
+    };
 
-const handleFilterBySubcategory = (subcategory: string) => {
-    router.push({
-    pathname: "/products",
-    query: {
-        ...router.query,
-        subcategory: subcategory,
-    },
-    });
-    setCurrentPage(1);
-};
 
-const handleFilterByQ = (q: string) => {
-    router.push({
-    pathname: "/products",
-    query: {
-        ...router.query,
-        q: q,
-    },
-    });
-    setCurrentPage(1);
-};
+    const handlePageChange = (page: number) => {
+        if (page < 1 || page > totalPages) return;
+        setCurrentPage(page);
+    };
 
-const filteringBySearchRefValue = (value: string | undefined) => {
-    searchRef.current?.value === ""
-    ? router.push({
-        pathname: "/products",
-        })
-    : router.push({
+    const renderPages = () => {
+        return Array.from({ length: totalPages }, (_, index) => (
+                <a
+                key={index}
+                className={`flex-c-m how-pagination1 trans-04 m-all-7 pointer font-weight-bold ${
+                    currentPage === index + 1
+                    ? "active-pagination1 text-danger"
+                    : ""
+                }`}
+                onClick={() => handlePageChange(index + 1)}>
+                {index + 1}
+                </a>
+        ));
+    };
+
+    const handleToggleSearch = () => {
+        setToggleSearch(!toggleSearch);
+        setIsSorted(false);
+    }
+
+    const handleFilterBySubcategory = (subcategory: string) => {
+        router.push({
         pathname: "/products",
         query: {
             ...router.query,
-            q: value,
+            subcategory: subcategory,
         },
         });
-    setCurrentPage(1);
-};
-
-
-const useSortProductsByNewestDate = (products: ProductType[]) => {
-
-    const sortProducts = (products: ProductType[]) => {
-        return products.sort((a, b) => {
-            const dateA = new Date(a.date).getTime();
-            const dateB = new Date(b.date).getTime();
-        return dateB - dateA;
-        });
+        setCurrentPage(1);
     };
-    const sortedProducts = sortProducts(products);
-    setSortedProducts(sortedProducts);
-    setIsSorted(true);
-    return sortedProducts;
-};
 
-
-const useSortProductsByOldestDate = (products: ProductType[]) => {
-
-    const sortProducts = (products: ProductType[]) => {
-        return products.sort((a, b) => {
-            const dateA = new Date(a.date).getTime();
-            const dateB = new Date(b.date).getTime();
-            return dateA - dateB;
+    const handleFilterByQ = (q: string) => {
+        router.push({
+        pathname: "/products",
+        query: {
+            ...router.query,
+            q: q,
+        },
         });
+        setCurrentPage(1);
     };
-    const sortedProducts = sortProducts(products);
-    setSortedProducts(sortedProducts);
-    setIsSorted(true);
 
-    return sortedProducts;
-};
+    const filteringBySearchRefValue = (value: string | undefined) => {
+        searchRef.current?.value === ""
+        ? router.push({
+            pathname: "/products",
+            })
+        : router.push({
+            pathname: "/products",
+            query: {
+                ...router.query,
+                q: value,
+            },
+            });
+        setCurrentPage(1);
+    };
 
 
 return (
@@ -814,18 +796,18 @@ return (
                     </li>
                    </ul>
             </div>
-            <div className='col-11 p-0 text-center bottom-sticky mb-4 mr-auto ml-auto'>
+            <div className='col-11 text-center bottom-sticky mb-4 mr-auto ml-auto'>
                 <PrimaryBtn title="Филтрирај" btnClass={"PrimaryBtn w-100 btn-gold btn-gold-text mb-3"} onClick={handleToggleSearch} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/>
                 <button className='border-0 bg-transparent w-100' onClick={handleToggleSearch}><u>oткажи</u></button>
             </div>
             </div>
         </div>
         
-        <div className="container-fluid my-5">
+        <div className="container-fluid mb-5">
           <div  className="row flex-column">
             <div className="container-fluid">
               <div  className="row flex-row">
-                <div className='col-12 ml-5 px-2 flex-row justify-content-start'><Breadcrumbs breadcrumbs={breadcrumbs} /></div>
+                <div className='col-12 ml-5 my-3 px-2 flex-row justify-content-start'><Breadcrumbs breadcrumbs={breadcrumbs} /></div>
                 <div className='col-12 flex-row justify-content-between align-items-center mb-3'>
                     <button onClick={handleToggleSearch} className='col-2 p-0 bg-transparent border-0'>
                         <img src="../../pictures/icons/search-group.png"/>
@@ -834,8 +816,8 @@ return (
                         <div className="col-11 align-self-center flex-row justify-content-end mr-3 p-0">
                         <label htmlFor="exampleFormControlSelect1" className='dropdown-sort align-self-center mb-0 mr-2'>Подреди според:</label>
                             <select className="form-control mr-1 px-2 py-1" id="exampleFormControlSelect1" style={{height: '5%'}}>
-                                <option className='dropdown-sort-select' onClick={() => useSortProductsByNewestDate(searchedProductsData)}>Најнови</option>
-                                <option className='dropdown-sort-select' onClick={() => useSortProductsByOldestDate(searchedProductsData)}>Најстари</option>
+                                <option className='dropdown-sort-select' onClick={onClickSortByNewestDate}>Најнови</option>
+                                <option className='dropdown-sort-select' onClick={onClickSortByOldestDate}>Најстари</option>
                             </select>
                         </div>
                     </div>
@@ -877,8 +859,6 @@ return (
                                 )
                             )}
                     </div>
-
-                {/* pagination  */}
                 <div className="flex-l-m flex-w w-full p-t-10 m-lr--7" style={{ letterSpacing: "5px" }}>
                     <button onClick={() => handlePageChange(currentPage - 1)} className='bg-transparent border-0 mr-1'>
                         {"<"}

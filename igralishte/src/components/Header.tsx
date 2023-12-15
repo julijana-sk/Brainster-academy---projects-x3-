@@ -6,13 +6,15 @@ import Link from "next/link";
 
 const Header: React.FC = () => {
 
-  const {  user, handleLogout} = useContext(UserContext);
+  const {  user, data, handleLogout, useSortProductsByNewestDate} = useContext(UserContext);
  
   const router = useRouter();
   const [toggleSearch, setToggleSearch] = useState(false);
   const [toggleNav, setToggleNav] = useState(false);
 
   const [searchState, setSearchState] = useState("");
+
+  const products = (data.map((dataItem) => dataItem.products)).flat();
 
   const handleSearchSubmit = (event: React.FormEvent) => {
       event.preventDefault();
@@ -91,7 +93,7 @@ return (
             </div>
             <ul className="flex-column justify-content-start text-left mx-3 my-5" style={{paddingBottom: '100%'}}>
               <div className="menu-ul mb-5">
-                <li className="contact-text font-italic font-weight-bold text-left mb-3"><u>Ново</u></li>
+                <Link href={'/products'}><li className='contact-text font-italic font-weight-bold text-left mb-3' onClick={() => {useSortProductsByNewestDate(products); handleToggleNav}}><u>Ново</u></li></Link>
                     <li className="dropdown dropdown1">
                       <p className="dropdown-toggle  menu-list w-100 mb-3" role="button" data-toggle="dropdown" aria-expanded="false">
                         Vintage облека
@@ -287,17 +289,17 @@ return (
                         <button className="menu-footer-button"><img src="../pictures/icons/user-light.png" /></button>
                         {user ? (
                           <div className="ml-3 d-flex flex-row flex-wrap justify-content-between">
-                            <Link href={"/profile"}> Мој профил / </Link>  
+                            <Link href={"/profile"}> Мој профил /</Link>  
                             <button className='bg-transparent text-left px-2 ml-2 rounded-circle text-center'
                             onClick={() => {
                                 router.push({
                                 pathname: "/login",
                                  });
                                 handleLogout;
-                                }}>  Одлогирај се</button>
+                                }}>Logout</button>
                            </div>
                           ) : (
-                            <Link href="/login">Регистрирај се / Логирај се</Link>
+                            <Link href="/login">Регистрирај се/Логирај се</Link>
                           )}
                       </div>
                     </li>
