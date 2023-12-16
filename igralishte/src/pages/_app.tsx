@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import UserContextConstructor from '../context/UserContext';
 import { useRouter } from 'next/router';
-import Authentication from '@/components/Authentication';
 
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -15,18 +14,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isRegisterPage = router.route === '/register';
   const isOrderFormPage = router.route === '/order/orderForm';
 
-
-
-
-
   return (
     <div>
       <UserContextConstructor>
-        <Authentication>
            {(!isLoginPage && !isProfilePage && !isRegisterPage && !isOrderFormPage) && <Header />}
           <Component {...pageProps} />
            {(!isLoginPage && !isProfilePage && !isRegisterPage && !isOrderFormPage) && <Footer />}
-        </Authentication>
       </UserContextConstructor>
     </div>
   );

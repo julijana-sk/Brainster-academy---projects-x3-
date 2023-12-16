@@ -13,13 +13,15 @@ type ActiveView = "register" | "register-2" | "register-3";
 const RegisterPage: NextPage = () => {
 
 
-  const { handleLogin } = useContext(UserContext);
+  const { handleChange } = useContext(UserContext);
 
   const [view, setView] = useState<ActiveView>("register");
+  const [userValue, setUserValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
   const [name, setName] = useState<string>("");
   const [surname, setSurname] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  // const [username, setUsername] = useState<string>("");
+  // const [password, setPassword] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [biography, setBiography] = useState<string>("");
@@ -34,9 +36,18 @@ const RegisterPage: NextPage = () => {
   };
  
 
-  useEffect(() => {
-    console.log('View changed to:', view);
- }, [view]);
+ const handleLogin = () => {
+      localStorage.setItem("userValue", userValue);
+      localStorage.setItem("passwordValue", passwordValue);
+
+      if (userValue === "igralishte@hotmail.com" && passwordValue === "12345") {
+        localStorage.setItem("userValue", userValue);
+        localStorage.setItem("passwordValue", passwordValue);
+        // setUser({ username: username, password: passwordValue });
+      } else {
+        alert('Incorrect username or password. Please try again.');
+      }
+    };
 
 
   return (
@@ -73,7 +84,7 @@ const RegisterPage: NextPage = () => {
 
       <div className="container mt-5">
         <form className="d-flex flex-column justify-content-center mr-auto ml-auto"
-          onSubmit={() => handleLogin(username, password)}>
+          onSubmit={() => handleChange}>
               <div className='col-12 text-center my-5'>
                 <Link href={"/"}><img src="../pictures/icons/Logo Igralishte final version.png" alt="logo-igralishte" /></Link>
               </div>
@@ -93,19 +104,19 @@ const RegisterPage: NextPage = () => {
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="username">Email адреса</label>
                 <input type="email" id="username" className="PrimaryBtn form-input" placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setUsername(event.target.value);
+                  setUserValue(event.target.value);
                   }}/>
               </div>
                <div className='d-flex flex-column justify-content-left'>
               <label htmlFor="password">Лозинка</label>
               <input type="password" id="password" className="PrimaryBtn form-input" placeholder="********" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setPassword(event.target.value);
+                  setPasswordValue(event.target.value);
                   }} /> 
               </div>
               <div className='d-flex flex-column justify-content-left'>
               <label htmlFor="conf-password">Повтори лозинка</label>
               <input type="password" id="conf-password" className="PrimaryBtn form-input" placeholder="********" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setPassword(event.target.value);
+                  setPasswordValue(event.target.value);
                   }} /> 
               </div>
               <div className="input-group my-3">
@@ -128,7 +139,7 @@ const RegisterPage: NextPage = () => {
 
         <form className="d-flex flex-column justify-content-center"
           onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
-          handleLogin(username, password);
+          handleLogin;
           }}>
 
           <div className='container-fluid mt-5 text-center'>

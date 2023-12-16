@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -6,13 +6,13 @@ import Link from "next/link";
 
 const Header: React.FC = () => {
 
-  const {  user, data, handleLogout, useSortProductsByNewestDate} = useContext(UserContext);
+  const { data, useSortProductsByNewestDate } = useContext(UserContext);
  
   const router = useRouter();
   const [toggleSearch, setToggleSearch] = useState(false);
   const [toggleNav, setToggleNav] = useState(false);
-
   const [searchState, setSearchState] = useState("");
+  const [userValue, setUserValue] = useState("");
 
   const products = (data.map((dataItem) => dataItem.products)).flat();
 
@@ -33,6 +33,19 @@ const Header: React.FC = () => {
   const handleToggleNav = () => {
     setToggleNav(!toggleNav);
   }
+
+  useEffect(() => {
+      const userValueInput = localStorage.getItem("userValue");
+      if (userValueInput) {
+        setUserValue(userValueInput);
+      }
+  }, []);
+
+  const handleLogout = () => {
+      localStorage.removeItem("userValue");
+      localStorage.removeItem("passwordValue");
+      router.push("/login");
+  };
 
 return (
     <div className="px-4 py-3">
@@ -287,18 +300,13 @@ return (
                     <li className="nav-item"  onClick={handleToggleNav}>
                       <div className="nav-link d-flex flex-row justify-content-start align-items-center" >
                         <button className="menu-footer-button"><img src="../pictures/icons/user-light.png" /></button>
-                        {user ? (
+                        {userValue ? (
                           <div className="ml-3 d-flex flex-row flex-wrap justify-content-between">
                             <Link href={"/profile"}> Мој профил /</Link>  
                             <button className='bg-transparent text-left px-2 ml-2 rounded-circle text-center'
-                            onClick={() => {
-                                router.push({
-                                pathname: "/login",
-                                 });
-                                handleLogout;
-                                }}>Logout</button>
-                           </div>
-                          ) : (
+                                    onClick={handleLogout}>Logout</button>
+                            </div>
+                            ) : (
                             <Link href="/login">Регистрирај се/Логирај се</Link>
                           )}
                       </div>
