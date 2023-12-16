@@ -9,7 +9,7 @@ import { ToggleBtn } from '@/components/ToggleBtn';
 import Favorites from '@/components/Favorites';
 import PaginationId from '@/components/PaginationId';
 import ProductItem from '@/components/ProductItem';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 
 interface Props {
@@ -24,6 +24,7 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
 
   const [view, setView] = useState<ActiveView>("addToCard");
 
+  const router = useRouter();
   const [expandedBox, setExpandedBox] = useState(null);
   const [favorites, setFavorites] = useState<ProductType[]>([]);
   const [addToCardProducts, setAddToCardProducts] = useState<ProductType[]>([]);  
@@ -117,23 +118,6 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
     localStorage.removeItem('productAmounts');
   };
 
-
-  // function removeAddToCard (id: string) {
-  //     const itemsAddToCard = localStorage.getItem('addToCardProducts');
-  //     const itemsAddToCardIds = JSON.parse(itemsAddToCard as string);
-  //     const updatedItemsAddToCardProducts = itemsAddToCardIds.filter((item: any) => item.id !== id );
-  //   localStorage.setItem('addToCardProducts', JSON.stringify(updatedItemsAddToCardProducts));
-  // }
-
-  // function removeFavorites (id: string) {
-  //     const itemsFavorite = (localStorage.getItem('favorites'));
-  //     const itemsFavoriteIds = JSON.parse(itemsFavorite as string);
-  //       const updatedItemsFavorites = itemsFavoriteIds.filter(function(item: any) {
-  //           return item.id !== id;
-  //       });
-  //     localStorage.setItem('favorites', JSON.stringify(updatedItemsFavorites));
-  //   }
-
   // Povlekuvanje podatok za selektirana kolicina na produktot
   const getAmountOfProduct = (productAmounts: { [productId: string] : any }, products: ProductType[]): { [productId: string]: number } => {
       const amountOfProduct: { [productId: string]: number } = {};
@@ -150,7 +134,17 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
       return amountOfProduct;
     };
   
-    
+ function continueOrder() {
+    const orderedProducts = localStorage.getItem('addToCardProducts');
+    if (!orderedProducts) {
+      alert('Кошничката е празна, Ве молиме изберете продукти')
+    } else {
+      router.push({
+      pathname: "/order/orderForm",
+      });
+    }
+  }
+
   const handleBoxClick = (box: any) => {
     setExpandedBox(box === expandedBox ? null : box);
   };
@@ -247,7 +241,8 @@ const OrderPage: NextPage<Props> = ({ products, boxItemsData, randomProducts }) 
                   </div>
               </div>
               <div className='flex-row justify-content-start mb-5 align-items-center align-self-center'>
-                <Link href={'/order/orderForm'} className='w-75 border-0 bg-transparent mr-3'><PrimaryBtn title="Продолжи" btnClass={"PrimaryBtn w-100 btn-gold btn-gold-text"} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/></Link>
+                <li onClick={continueOrder} className='w-75 border-0 bg-transparent mr-3' style={{textDecoration: 'none', listStyle: 'none'}}>
+                  <PrimaryBtn title="Продолжи" btnClass={"PrimaryBtn w-100 btn-gold btn-gold-text"} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/></li>
                 <div onClick={emptyBasket} style={{cursor: 'pointer'}}>
                    <img src="../../pictures/icons/Basket.png" alt="empty"/> 
                 </div>

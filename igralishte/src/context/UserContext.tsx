@@ -8,7 +8,6 @@ interface UserContextType {
   addToCard: (prod: ProductType) => void;
   useSortProductsByNewestDate: (products: ProductType[]) => void;
   useSortProductsByOldestDate: (products: ProductType[]) => void;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const UserContext = createContext<UserContextType>({
@@ -17,7 +16,6 @@ export const UserContext = createContext<UserContextType>({
   addToCard: () => {},
   useSortProductsByNewestDate: () => {},
   useSortProductsByOldestDate: () => {},
-  handleChange: () => {},
 });
 
 interface Props {
@@ -25,20 +23,13 @@ interface Props {
 }
 
 const UserContextConstructor: React.FC<Props> = ({ children }) => {
+
     const [data, setData] = useState<DataType[]>([]);
     const [products, setProducts] = useState<ProductType[]>([]);
     const [brands, setBrands] = useState<BrandType[]>([]);
     const [addedToCard, setAddedToCard] = useState<ProductType>();
     const [sortedProducts, setSortedProducts] = useState<ProductType[]>([]);
     const [isSorted, setIsSorted] = useState(false);
-    const [userValue, setUserValue] = useState("");
-    const [passwordValue, setPasswordValue] = useState("");
-    const [name, setName] = useState<string>("");
-    const [surname, setSurname] = useState<string>("");;
-    const [address, setAddress] = useState<string>("");
-    const [phone, setPhone] = useState<string>("");
-    const [biography, setBiography] = useState<string>("");
-
 
     useEffect(() => {
       fetch("http://localhost:5001/")
@@ -71,6 +62,16 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
       setAddedToCard(prod);
     };
 
+    const discountProducts = (prod: ProductType) => {
+      const updatedProducts = products.map((p) => p)
+        return (
+          updatedProducts.map((itemWithDiscount) => {
+          return ( 
+             itemWithDiscount
+          )})
+        )
+    };
+
 
     const useSortProductsByNewestDate = (products: ProductType[]) => {
       const sortProducts = (products: ProductType[]) => {
@@ -100,18 +101,6 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
       return sortedProducts;
     };
 
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserValue(event.target.value);
-    setPasswordValue(event.target.value);
-    setName(event.target.value);
-    setSurname(event.target.value);
-    setAddress(event.target.value);
-    setPhone(event.target.value);
-    setBiography(event.target.value);
-  };
-
-
   return (
       <UserContext.Provider value={{ 
           data,
@@ -119,7 +108,6 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
           addToCard,
           useSortProductsByNewestDate,
           useSortProductsByOldestDate,
-          handleChange
         }}>
         {children}
       </UserContext.Provider>

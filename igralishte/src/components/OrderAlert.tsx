@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PrimaryBtn from './PrimaryBtn'
 import Link from 'next/link'
 
 const OrderAlert = () => {
-
-    
 
   return (
     <div className='confirmation-message-bg flex-column justify-content-start'>

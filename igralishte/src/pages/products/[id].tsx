@@ -17,7 +17,7 @@ interface Props {
   boxItemsData: BoxComponentType[];
 }
 
-const ProductDetailPage: NextPage<Props> = ({ product, products, boxItemsData, randomProducts }) => {
+const ProductDetailPage: NextPage<Props> = ({ product, boxItemsData, randomProducts }) => {
 
   const breadcrumbs = [
       { name: 'Почетна', url: '/' },

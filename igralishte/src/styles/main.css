@@ -202,8 +202,7 @@ a:hover {
 .sidenav {
   position: absolute;
   width: 100%;
-  height: 100%;
-  min-height: 100vh;
+  height: 100vh;
   background-color: white;
   transform: translateX(100%);
   transition: all 0.1s ease-in-out;
@@ -667,21 +666,20 @@ form label {
 }
 
 .control-arrow {
-  top: 290px !important;
+  top: 250px !important;
   color: black !important;
   font-size: 100px !important;
   bottom: -25% !important;
-  padding: 35% !important;
   font-weight: bolder !important;
 }
 
 .carousel .control-prev.control-arrow::before {
   border-right: 20px solid #030303 !important;
-  height: 20px;
+  padding-right: 100px;
 }
 .carousel .control-next.control-arrow::before {
   border-left: 20px solid #030303 !important;
-  height: 20px;
+  padding-left: 100px;
 }
 
 .product-img {
@@ -1348,9 +1346,9 @@ a {
 
 .add-to-card-fixed {
   position: fixed;
-  right: 25px;
   bottom: 40%;
-  z-index: 1 !important;
+  right: 7%;
+  z-index: 100;
 }
 .boxComponent {
   position: fixed;

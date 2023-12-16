@@ -52,7 +52,7 @@ const LoginPage: NextPage = () => {
               <input type="email" id="username" className="SecondaryBtn" style={{fontWeight: "lighter"}} placeholder="igralishte@hotmail.com" value={userValue} onChange={handleChangeUser} />
               <label htmlFor="password">Лозинка</label>
               <input type="password" id="password" className="SecondaryBtn mb-3" style={{fontWeight: "lighter"}} placeholder="12345" value={passwordValue} onChange={handleChangePassword}  />
-              <Link href="/login"><p style={{color: "#8A8328", textDecoration: "underline", marginBottom: '20px'}}>Ја заборави лозинката?</p></Link>
+              <Link href="/register"><p style={{color: "#8A8328", textDecoration: "underline", marginBottom: '20px'}}>Ја заборави лозинката?</p></Link>
 
               <div className='text-center mb-5'>
                 <PrimaryBtn title="Најави се" onClick={handleLogin} btnClass={"PrimaryBtn w-100"} backgroundColor={"black"} color='white' border='none' height='40px' />

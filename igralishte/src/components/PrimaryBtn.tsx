@@ -9,7 +9,7 @@ interface Props {
   img?: string;
   btnClass: string;
   height: string;
-  onClick?: () => void 
+  onClick?: () => void;
 }
 
 const PrimaryBtn: React.FC<Props> = ({title, backgroundColor, color, fontSize, border, img, height, btnClass, onClick}) => {

@@ -35,28 +35,29 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
 
 
     useEffect(() => {
-    if (router.query.category === 'vintage' || router.query.category === 'accessories') {
-        setIsSorted(false);
-    } else {
-        useSortProductsByNewestDate(searchedProductsData);
-    }
+        if (router.query.category === 'vintage' || router.query.category === 'accessories') {
+            setIsSorted(false);
+        } else {
+            useSortProductsByNewestDate(searchedProductsData);
+        }
     }, []);
 
 
     const onClickSortByNewestDate = () => {
-    setIsSorted(false);
-    useSortProductsByNewestDate(searchedProductsData);
-    };
-    const onClickSortByOldestDate = () => {
-    setIsSorted(false);
-    useSortProductsByOldestDate(searchedProductsData);
-    };
+        setIsSorted(false);
+        useSortProductsByNewestDate(searchedProductsData);
+      };
+    
+      const onClickSortByOldestDate = () => {
+        setIsSorted(false);
+        useSortProductsByOldestDate(searchedProductsData);
+      };
 
 
     const handlePageChange = (page: number) => {
         if (page < 1 || page > totalPages) return;
         setCurrentPage(page);
-    };
+     };
 
     const renderPages = () => {
         return Array.from({ length: totalPages }, (_, index) => (

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 
-const Header: React.FC = () => {
+const Header = () => {
 
   const { data, useSortProductsByNewestDate } = useContext(UserContext);
  

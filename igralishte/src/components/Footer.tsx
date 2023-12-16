@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PrimaryBtn from "./PrimaryBtn";
 import Link from "next/link";
 
-const Footer: React.FC = () => {
+const Footer = () => {
 
  const [username, setUsername] = useState<string>("");
  

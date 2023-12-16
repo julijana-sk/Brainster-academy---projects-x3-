@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import PrimaryBtn from "@/components/PrimaryBtn";
 import Link from "next/link";
-import { UserContext } from "@/context/UserContext";
 
 
 type ActiveView = "register" | "register-2" | "register-3";
@@ -12,43 +11,53 @@ type ActiveView = "register" | "register-2" | "register-3";
 
 const RegisterPage: NextPage = () => {
 
-
-  const { handleChange } = useContext(UserContext);
-
   const [view, setView] = useState<ActiveView>("register");
   const [userValue, setUserValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  const [name, setName] = useState<string>("");
-  const [surname, setSurname] = useState<string>("");
-  // const [username, setUsername] = useState<string>("");
-  // const [password, setPassword] = useState<string>("");
-  const [address, setAddress] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [biography, setBiography] = useState<string>("");
+  const [nameValue, setNameValue] = useState<string>("");
+  const [surnameValue, setSurnameValue] = useState<string>("");;
+  const [addressValue, setAddressValue] = useState<string>("");
+  const [phoneValue, setPhoneValue] = useState<string>("");
 
 
   const handleChangeView1 = () => {
     setView(view === 'register' ? 'register-2' : "register");
   };
-
   const handleChangeView2 = () => {
     setView(view === 'register-2' ? 'register-3' : 'register');
   };
  
+  
+  const handleChangeUser = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserValue(event.target.value);
+    localStorage.setItem("userValue", event.target.value) ;
+  };
 
- const handleLogin = () => {
-      localStorage.setItem("userValue", userValue);
-      localStorage.setItem("passwordValue", passwordValue);
+  const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPasswordValue(event.target.value);
+    localStorage.setItem("passwordValue", event.target.value) ;
+  };
 
-      if (userValue === "igralishte@hotmail.com" && passwordValue === "12345") {
-        localStorage.setItem("userValue", userValue);
-        localStorage.setItem("passwordValue", passwordValue);
-        // setUser({ username: username, password: passwordValue });
-      } else {
-        alert('Incorrect username or password. Please try again.');
-      }
-    };
-
+  const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNameValue(event.target.value);
+    localStorage.setItem("nameValue", event.target.value) ;
+  };
+  
+  const handleChangeSurname = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSurnameValue(event.target.value);
+    localStorage.setItem("surnameValue", event.target.value) ;
+  };
+  
+  const handleChangeAddress = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAddressValue(event.target.value);
+    localStorage.setItem("addressValue", event.target.value) ;
+  };
+  
+  const handleChangePhone = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneValue(event.target.value);
+    localStorage.setItem("phoneValue", event.target.value) ;
+  };
+  
 
   return (
     <>
@@ -67,13 +76,14 @@ const RegisterPage: NextPage = () => {
             <form className="d-flex flex-column justify-content-center">
             <div className='col-11 text-center p-0 mr-auto ml-auto'>
               <div className="mt-5 w-100" onClick={handleChangeView1} >
-                <PrimaryBtn btnClass={"SecondaryBtn w-100"}  title="Регистрирај се со емаил адреса" backgroundColor={"transparent"} color='black' height="40px" border='3px solid #FFDBDB'/> </div>           
+                <PrimaryBtn btnClass={"SecondaryBtn w-100"}  title="Регистрирај се со емаил адреса" backgroundColor={"transparent"} color='black' height="40px" border='3px solid #FFDBDB'/>          
                 <p className='text-center my-4'>или</p>
                 <PrimaryBtn btnClass={"SecondaryBtn w-100"} img="../pictures/icons/google.png" title="Најави се преку Google" backgroundColor={"transparent"} color='black' height="40px" border='3px solid #FFDBDB'/>
                 <PrimaryBtn btnClass={"SecondaryBtn w-100"}  img="../pictures/icons/facebook.png" title="Најави се преку Facebook" backgroundColor={"transparent"} color='black' height="40px" border='3px solid #FFDBDB'/>
                 <Link href="/login"><p className='mr-2 mt-4 mb-5 text-dark font-weight-bold'>Веќе имаш профил? <span style={{color: "#8A8328", textDecoration: "underline"}}> Логирај се</span></p></Link>
                 <div className='p-0 note text-center'>Сите права задржани @ Игралиште Скопје</div>
               </div>
+            </div>
             </form>
         </div>
         </div>
@@ -83,41 +93,30 @@ const RegisterPage: NextPage = () => {
       {view === "register-2" ? 
 
       <div className="container mt-5">
-        <form className="d-flex flex-column justify-content-center mr-auto ml-auto"
-          onSubmit={() => handleChange}>
+        <form className="d-flex flex-column justify-content-center mr-auto ml-auto">
               <div className='col-12 text-center my-5'>
                 <Link href={"/"}><img src="../pictures/icons/Logo Igralishte final version.png" alt="logo-igralishte" /></Link>
               </div>
               <div className='mb-3 col-11 px-4 text-left mr-auto ml-auto'>
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="name">Име</label>
-                <input type="text" id="name" className="PrimaryBtn form-input" placeholder="Ивана" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setName(event.target.value);
-                    }}/>
+                <input type="text" id="name" className="PrimaryBtn form-input" placeholder="Ивана" value={nameValue}  onChange={handleChangeName}/>
               </div>
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="surname">Презиме</label>
-                <input type="text" id="surname" className="PrimaryBtn form-input" placeholder="Голабоска" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setSurname(event.target.value);
-                    }}/>
+                <input type="text" id="surname" className="PrimaryBtn form-input" placeholder="Голабоска" value={surnameValue}  onChange={handleChangeSurname}/>
               </div>
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="username">Email адреса</label>
-                <input type="email" id="username" className="PrimaryBtn form-input" placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setUserValue(event.target.value);
-                  }}/>
+                <input type="email" id="username" className="PrimaryBtn form-input" placeholder="example@example.com" value={userValue} onChange={handleChangeUser}/>
               </div>
                <div className='d-flex flex-column justify-content-left'>
               <label htmlFor="password">Лозинка</label>
-              <input type="password" id="password" className="PrimaryBtn form-input" placeholder="********" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setPasswordValue(event.target.value);
-                  }} /> 
+              <input type="password" id="password" className="PrimaryBtn form-input" placeholder="********" value={passwordValue} onChange={handleChangePassword} /> 
               </div>
               <div className='d-flex flex-column justify-content-left'>
               <label htmlFor="conf-password">Повтори лозинка</label>
-              <input type="password" id="conf-password" className="PrimaryBtn form-input" placeholder="********" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setPasswordValue(event.target.value);
-                  }} /> 
+              <input type="password" id="conf-password" className="PrimaryBtn form-input" placeholder="********" value={passwordValue} onChange={handleChangePassword} /> 
               </div>
               <div className="input-group my-3">
                   <div className="input-group-prepend d-flex justify-content-between align-items-center">
@@ -137,11 +136,7 @@ const RegisterPage: NextPage = () => {
 
         {view === "register-3" ? 
 
-        <form className="d-flex flex-column justify-content-center"
-          onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
-          handleLogin;
-          }}>
-
+        <form className="d-flex flex-column justify-content-center">
           <div className='container-fluid mt-5 text-center'>
             <div className='row d-flex flex-column justify-content-center'>
               <div className='col-12 mt-5'>
@@ -156,23 +151,17 @@ const RegisterPage: NextPage = () => {
               <div className='mb-3 col-11 px-4 text-left mr-auto ml-auto'>
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="address">Адреса</label>
-                <input type="text" id="address" className="PrimaryBtn form-input" placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setAddress(event.target.value);
-                    }}/>
+                <input type="text" id="address" className="PrimaryBtn form-input" placeholder="example@example.com" value={addressValue} onChange={handleChangeAddress}/>
               </div>
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="phone">Телефонски број</label>
-                <input type="text" id="phone" className="PrimaryBtn form-input" placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setPhone(event.target.value);
-                    }}/>
+                <input type="text" id="phone" className="PrimaryBtn form-input" placeholder="example@example.com" value={phoneValue} onChange={handleChangePhone}/>
               </div>
               <div className='d-flex flex-column justify-content-left'>
                 <label htmlFor="biography">Биографија</label>
-                <input type="textarea" id="biography" className="PrimaryBtn w-100 p-3 text-left" style={{fontWeight: "lighter", height: "80px" }} placeholder="example@example.com" onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setBiography(event.target.value);
-                    }}/>
+                <input type="textarea" id="biography" className="PrimaryBtn w-100 p-3 text-left" style={{fontWeight: "lighter", height: "80px" }} placeholder="example@example.com"/>
               </div>
-              <Link href="/"><PrimaryBtn title="Заврши" onClick={() => {handleLogin}} btnClass={"PrimaryBtn mt-5 w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/></Link>
+              <Link href="/"><PrimaryBtn title="Заврши" btnClass={"PrimaryBtn mt-5 w-75"} backgroundColor={"black"} color='white' height={"40px"} border='none'/></Link>
               
               <Link href="/login"><p className="mt-3"><u>Прескокни</u></p></Link>
               </div>
