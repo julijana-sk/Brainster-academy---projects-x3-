@@ -2,9 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { ProductType } from "@/types/types";
+import ProductItem from "./ProductItem";
 
-
-const Header = () => {
+interface Props {
+  products: ProductType[]
+}
+const Header: React.FC<Props> = ({ products }: { products: ProductType[] }) => {
 
   const { data, useSortProductsByNewestDate } = useContext(UserContext);
  
@@ -13,18 +17,23 @@ const Header = () => {
   const [toggleNav, setToggleNav] = useState(false);
   const [searchState, setSearchState] = useState("");
   const [userValue, setUserValue] = useState("");
+  const [searchedProducts, setSearchedProducts] = useState<ProductType[]>([]);
 
-  const products = (data.map((dataItem) => dataItem.products)).flat();
+  const productsNew = (data.map((dataItem) => dataItem.products)).flat();
 
   const handleSearchSubmit = (event: React.FormEvent) => {
       event.preventDefault();
-      router.push({
-        pathname: "/search",
+      router.replace({
+        pathname: "/",
         query: { query: searchState },
         });
+      const filteredProducts: ProductType[] = products.filter(product =>
+        product.category.toLowerCase().includes(searchState.toLowerCase())
+      );
+      setSearchedProducts(filteredProducts);
       setSearchState("");
       setToggleSearch(false);
-  }
+ }
 
   const toggleSearchForm = () => {
       setToggleSearch(!toggleSearch);
@@ -47,6 +56,7 @@ const Header = () => {
       router.push("/login");
   };
 
+ 
 return (
     <div className="px-4 py-3">
       <div className="container flex-row justify-content-between text-dark pl-2 pr-0">
@@ -73,6 +83,13 @@ return (
                 <img src="../pictures/icons/fluent_search-48-regular.png" alt="search close btn" />
               </button>
               </form>
+              {searchedProducts.length > 0 && (
+                  <div>
+                    {searchedProducts?.map(product => (
+                      <div key={product.id}><ProductItem {...product} /> </div>
+                    ))}
+                  </div>
+              )}
             </div>
           </div>
         </div>
@@ -96,7 +113,17 @@ return (
                     <button className="btn-search px-3" type="submit">
                       <i className="fas fa-chevron-left fa-1x" style={{color: "lightgrey"}}/>
                     </button>
-                    <input className="plh3 p-2" type="search" value={searchState} onChange={event => setSearchState(event.target.value)} name="search" placeholder="Пребарувај..." />
+                    <input className="plh3 p-2" type="text" value={searchState} 
+                            onChange={(event) => {setSearchState(event.target.value);
+                            router.push({
+                              pathname: "/",
+                              query: {
+                                ...router.query,
+                                query: event.target.value,
+                                },
+                            });
+                          }}
+                          name="search" placeholder="Пребарувај..." />
                     <button className="btn-search flex-c-m btn-hide-modal-search trans-04 p-0" onClick={toggleSearchForm}>
                     <img src="../pictures/icons/fluent_search-48-regular.png" alt="search close btn" />
                   </button>
@@ -106,7 +133,7 @@ return (
             </div>
             <ul className="flex-column justify-content-start text-left mx-3 my-5" style={{paddingBottom: '100%'}}>
               <div className="menu-ul mb-5">
-                <Link href={'/products'}><li className='contact-text font-italic font-weight-bold text-left mb-3' onClick={() => {useSortProductsByNewestDate(products); handleToggleNav}}><u>Ново</u></li></Link>
+                <Link href={'/products'}><li className='contact-text font-italic font-weight-bold text-left mb-3' onClick={() => {useSortProductsByNewestDate(productsNew); handleToggleNav}}><u>Ново</u></li></Link>
                     <li className="dropdown dropdown1">
                       <p className="dropdown-toggle  menu-list w-100 mb-3" role="button" data-toggle="dropdown" aria-expanded="false">
                         Vintage облека
@@ -282,8 +309,15 @@ return (
                     </li>
                     <li className="menu-list mb-3" onClick={handleToggleNav}>Lifestyle</li>
                     <Link href={"/gifts"} onClick={handleToggleNav}><li className="menu-list mb-3">Подари картичка*</li></Link>
-                    <li className="menu-list font-italic text-red mb-5" onClick={handleToggleNav}>Попуст</li>
-
+                    <li className="menu-list font-italic text-red mb-5"  onClick={() => {
+                            router.push({
+                              pathname: "/products",
+                              query: {
+                                ...router.query,
+                                query: "discount",
+                              },
+                            });
+                            handleToggleNav}}>Попуст</li>
                   <div className="menu-footer my-5">
                     <li className="nav-item" onClick={handleToggleNav}>
                       <Link href={"/order"} className="nav-link d-flex flex-row justify-content-start" >

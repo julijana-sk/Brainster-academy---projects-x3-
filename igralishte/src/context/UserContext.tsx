@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import { BrandType, DataType, ProductType } from "@/types/types";
-import { useRouter } from "next/router";
 
 interface UserContextType {
   data: DataType[];
@@ -23,7 +22,7 @@ interface Props {
 }
 
 const UserContextConstructor: React.FC<Props> = ({ children }) => {
-
+  
     const [data, setData] = useState<DataType[]>([]);
     const [products, setProducts] = useState<ProductType[]>([]);
     const [brands, setBrands] = useState<BrandType[]>([]);
@@ -61,17 +60,6 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
       setProducts(updatedProducts);
       setAddedToCard(prod);
     };
-
-    const discountProducts = (prod: ProductType) => {
-      const updatedProducts = products.map((p) => p)
-        return (
-          updatedProducts.map((itemWithDiscount) => {
-          return ( 
-             itemWithDiscount
-          )})
-        )
-    };
-
 
     const useSortProductsByNewestDate = (products: ProductType[]) => {
       const sortProducts = (products: ProductType[]) => {

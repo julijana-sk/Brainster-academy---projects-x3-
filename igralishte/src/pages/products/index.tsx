@@ -33,10 +33,24 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
     const end = start + 10;
     const paginationProductsForDisplaying = sortedProducts.slice(start, end);
 
+    
+  useEffect(() => {
+    setSortedProducts(searchedProductsData);
+  }, [router.query, searchedProductsData, sortedProducts]);
+
+
+    let someArray: ProductType[] = []
+    searchedProductsData.map((item: ProductType) => {
+        if (item.discount > 0) {
+            someArray.push(item)
+        }
+    })
 
     useEffect(() => {
         if (router.query.category === 'vintage' || router.query.category === 'accessories') {
             setIsSorted(false);
+        } else if (router.query.query === 'discount') {
+            setSortedProducts(someArray)
         } else {
             useSortProductsByNewestDate(searchedProductsData);
         }
@@ -106,14 +120,15 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
         ? router.push({
             pathname: "/products",
             })
-        : router.push({
+        : router.replace({
             pathname: "/products",
             query: {
                 ...router.query,
-                q: value,
+                query: searchRef.current?.value,
             },
             });
         setCurrentPage(1);
+        setSortedProducts(searchedProductsData)
     };
 
 
@@ -132,7 +147,6 @@ return (
                         <input
                             className="w-100 pl-3"
                             style={{height: '34px'}}
-                            // type="search"
                             type="text"
                             name="search-product"
                             placeholder="Пребарувај ..."
@@ -140,17 +154,6 @@ return (
                             onChange={() => {
                             filteringBySearchRefValue(searchRef.current?.value);
                             }}/>
-                             {/* onChange={(event) => {
-                             event.preventDefault();
-                             router.push({
-                             pathname: "/products",
-                             query: {
-                                 ...router.query,
-                                 query: event.target.value,
-                                 },
-                             });
-                         }} */}
-                            
                     <img src="../pictures/icons/search.png" className="btn-search btn-search-products" alt="search close btn" onClick={handleToggleSearch}/>
                     </div>
                 </div>
@@ -797,8 +800,8 @@ return (
                     </li>
                    </ul>
             </div>
-            <div className='col-11 text-center bottom-sticky mb-4 mr-auto ml-auto'>
-                <PrimaryBtn title="Филтрирај" btnClass={"PrimaryBtn w-100 btn-gold btn-gold-text mb-3"} onClick={handleToggleSearch} backgroundColor={"btn-gold"} color='black' border='none' height="51px"/>
+            <div className='col-11 text-center bottom-sticky mb-4 mr-auto ml-auto' onClick={handleToggleSearch}>
+                <PrimaryBtn title="Филтрирај" btnClass={"PrimaryBtn w-100 btn-gold btn-gold-text mb-3"}  backgroundColor={"btn-gold"} color='black' border='none' height="51px"/>
                 <button className='border-0 bg-transparent w-100' onClick={handleToggleSearch}><u>oткажи</u></button>
             </div>
             </div>
@@ -884,8 +887,6 @@ export default ProductPage;
 
  export const getServerSideProps: GetServerSideProps = async ({query}) => { 
 
-//  let searchQuery = query.query || "";
-
     let resSearchedProducts: Response;
 
     if (query.category && query.brand && query.subcategory && query.color && query.price && query.size && query.q) {
@@ -894,38 +895,42 @@ export default ProductPage;
     } else if (query.category && query.q) {
         resSearchedProducts = await fetch(`http://localhost:5001/products?category_like=${query.category}&q=${query.q}`);
 
-    } else if (query.category) {
-        resSearchedProducts = await fetch(`http://localhost:5001/products?category_like=${query.category}`);
-
-    } else if (query.q) {
-        resSearchedProducts = await fetch(`http://localhost:5001/products?q=${query.q}`);
-
-    } else if (query.brand && query.q) {
-        resSearchedProducts = await fetch(`http://localhost:5001/products?brand_like=${query.brand}&q=${query.q}`);
-
-    }  else if (query.brand) {
-        resSearchedProducts = await fetch(`http://localhost:5001/products?brand_like=${query.brand}`);
+    } else if (query.color && query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?color_like=${query.color}&q=${query.q}`);
 
     } else if (query.subcategory && query.q) {
         resSearchedProducts = await fetch(`http://localhost:5001/products?subcategory_like=${query.subcategory}&q=${query.q}`);
 
+    } else if (query.size && query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?size_like=${query.size}&q=${query.q}`);
+        
+    } else if (query.price && query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?price_like=${query.price}&q=${query.q}`);
+
+    } else if (query.brand && query.q) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?brand_like=${query.brand}&q=${query.q}`);
+        
+    } else if (query.category) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?category_like=${query.category}`);
+
+    } else if (query.query) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?q=${query.query}`);
+
+    }  else if (query.brand) {
+        resSearchedProducts = await fetch(`http://localhost:5001/products?brand_like=${query.brand}`);
+
+
     } else if (query.subcategory) {
         resSearchedProducts = await fetch(`http://localhost:5001/products?subcategory_like=${query.subcategory}`);
 
-    } else if (query.color && query.q) {
-        resSearchedProducts = await fetch(`http://localhost:5001/products?color_like=${query.color}&q=${query.q}`);
 
     } else if (query.color) {
         resSearchedProducts = await fetch(`http://localhost:5001/products?color_like=${query.color}`);
 
-    } else if (query.size && query.q) {
-        resSearchedProducts = await fetch(`http://localhost:5001/products?size_like=${query.size}&q=${query.q}`);
 
     } else if (query.size) {
         resSearchedProducts = await fetch(`http://localhost:5001/products?size_like=${query.size}`);
 
-    } else if (query.price && query.q) {
-        resSearchedProducts = await fetch(`http://localhost:5001/products?price_like=${query.price}&q=${query.q}`);
 
     } else if (query.price) {
         resSearchedProducts = await fetch(`http://localhost:5001/products?price_like=${query.price}`);
@@ -934,25 +939,6 @@ export default ProductPage;
         resSearchedProducts = await fetch(`http://localhost:5001/products`);
     }
     
-
-
-    // const constructUrl = (query: any, page: number) => {
-    //     let url = 'http://localhost:5001/products?';
-
-    //     for (const key in query) {
-    //         if (query[key]) {
-    //             url += `&${key}_like=${query[key]}&page=${page}`;
-    //         }
-    //     }
-
-    //     return url;
-    // }
-
-    // let products: ProductType[] = [];
-
-    // const url = constructUrl(query, page);
-
-    // const resSearchedProducts: Response = await fetch(url)
     const searchedProductsData: ProductType[] = await resSearchedProducts.json();
 
 
