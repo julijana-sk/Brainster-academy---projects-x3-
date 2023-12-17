@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Head from 'next/head';
 import { BrandType, ProductType } from '@/types/types';
 import { GetServerSideProps, NextPage } from 'next';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
 

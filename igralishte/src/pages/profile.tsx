@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import PrimaryBtn from '@/components/PrimaryBtn';
+import { NextPage } from 'next';
 
 
 type ActiveView = "profile" | "profile-new"; 
 
 
-const ProfilePage = () => {
+const ProfilePage: NextPage = () => {
   
   const [view, setView] = useState<ActiveView>("profile");
   const [userValue, setUserValue] = useState("");

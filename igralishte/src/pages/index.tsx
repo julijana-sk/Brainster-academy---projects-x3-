@@ -1,7 +1,7 @@
 import { GetStaticProps, NextPage } from 'next'
 import Banner from '../components/Banner';
 import AnnouncementBar from '@/components/AnnouncementBar';
-import { DataType, ProductType } from '@/types/types';
+import { ProductType } from '@/types/types';
 import CarouselComponent from '@/components/CarouselComponent';
 
 

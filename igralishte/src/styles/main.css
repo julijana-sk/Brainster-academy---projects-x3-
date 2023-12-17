@@ -44,7 +44,7 @@ a:hover {
 
 .bottom-sticky {
   position: sticky;
-  bottom: 38%;
+  bottom: 46%;
   align-self: flex-end;
   z-index: 100;
 }

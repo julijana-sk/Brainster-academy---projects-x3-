@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 import PrimaryBtn from '@/components/PrimaryBtn';
 import { useRouter } from 'next/router';
 import OrderAlert from '@/components/OrderAlert';
+import { NextPage } from 'next';
 
 
-const OrderForm = () => {
+const OrderForm: NextPage = () => {
 
   const router = useRouter();
   const [userValue, setUserValue] = useState<string>("");

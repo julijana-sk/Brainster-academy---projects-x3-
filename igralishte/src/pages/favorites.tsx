@@ -13,7 +13,7 @@ interface Props {
 
 }
 
-const FavoritesPage: NextPage<Props> = ({ products, randomProducts }) => {
+const FavoritesPage: NextPage<Props> = ({ randomProducts }) => {
 
     const [favorites, setFavorites] = useState<ProductType[]>([]);
    

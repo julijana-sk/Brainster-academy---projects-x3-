@@ -5,7 +5,7 @@ interface Props {
     onClick: () => void;
 }
 
-export const ToggleBtn = ({title, onClick}: Props) => {
+export const ToggleBtn: React.FC<Props> = ({title, onClick}) => {
   return (
     <button className="toggle-about-text w-50 text-center bg-transparent" onClick={onClick}>{title}</button>
   )

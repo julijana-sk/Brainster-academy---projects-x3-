@@ -8,7 +8,7 @@ import ProductItem from "./ProductItem";
 
 const Header = () => {
 
-  const { data, products, useSortProductsByNewestDate } = useContext(UserContext);
+  const { products, useSortProductsByNewestDate } = useContext(UserContext);
  
   const router = useRouter();
   const [toggleSearch, setToggleSearch] = useState(false);
