@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Head from 'next/head';
 import { GetServerSideProps, NextPage } from 'next';
 import ProductItem from '@/components/ProductItem';
@@ -6,7 +6,6 @@ import { ProductType } from '@/types/types';
 import { useRouter } from 'next/router';
 import PrimaryBtn from '@/components/PrimaryBtn';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { UserContext } from '@/context/UserContext';
 
 interface Props {
   searchedProductsData: ProductType[];
@@ -18,8 +17,6 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
         { name: 'Почетна', url: '/' },
         { name: 'Сите', url: '/products?' },
     ];
-
-    const { useSortProductsByNewestDate, useSortProductsByOldestDate } = useContext(UserContext);
 
     const router = useRouter();
     const [sortedProducts, setSortedProducts] = useState(searchedProductsData);
@@ -52,20 +49,9 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
         } else if (router.query.query === 'discount') {
             setSortedProducts(someArray)
         } else {
-            useSortProductsByNewestDate(searchedProductsData);
+            setSortedProducts(searchedProductsData);
         }
     }, []);
-
-
-    function onClickSortByNewestDate () {
-        setIsSorted(false);
-        useSortProductsByNewestDate(searchedProductsData);
-      };
-    
-      const onClickSortByOldestDate = () => {
-        setIsSorted(false);
-        useSortProductsByOldestDate(searchedProductsData);
-      };
 
 
     const handlePageChange = (page: number) => {
@@ -92,6 +78,36 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
         setToggleSearch(!toggleSearch);
         setIsSorted(false);
     }
+
+
+    function useSortProductsByNewestDate () {
+      const sortProducts = (products: ProductType[]) => {
+        return products.sort((a, b) => {
+          const dateA = new Date(a.date).getTime();
+          const dateB = new Date(b.date).getTime();
+          return dateB - dateA;
+        });
+      };
+      const sortedProducts = sortProducts(searchedProductsData);
+      setSortedProducts(sortedProducts);
+      setIsSorted(true);
+      return sortedProducts;
+    };
+
+    function useSortProductsByOldestDate () {
+      const sortProducts = (products: ProductType[]) => {
+        return products.sort((a, b) => {
+          const dateA = new Date(a.date).getTime();
+          const dateB = new Date(b.date).getTime();
+          return dateA - dateB;
+        });
+      };
+      const sortedProducts = sortProducts(searchedProductsData);
+      setSortedProducts(sortedProducts);
+      setIsSorted(true);
+      return sortedProducts;
+    };
+
 
     const handleFilterBySubcategory = (selectedSubcategories: string[]) => {
         const updatedQuery = {
@@ -683,8 +699,8 @@ return (
                         <div className="col-11 align-self-center flex-row justify-content-end mr-3 p-0">
                         <label htmlFor="exampleFormControlSelect1" className='dropdown-sort align-self-center mb-0 mr-2'>Подреди според:</label>
                             <select className="form-control mr-1 px-2 py-1" id="exampleFormControlSelect1" style={{height: '5%'}}>
-                                <option className='dropdown-sort-select' onClick={onClickSortByNewestDate}>Најнови</option>
-                                <option className='dropdown-sort-select' onClick={onClickSortByOldestDate}>Најстари</option>
+                                <option className='dropdown-sort-select' onClick={useSortProductsByNewestDate}>Најнови</option>
+                                <option className='dropdown-sort-select' onClick={useSortProductsByOldestDate}>Најстари</option>
                             </select>
                         </div>
                     </div>

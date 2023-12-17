@@ -8,7 +8,7 @@ import ProductItem from "./ProductItem";
 
 const Header = () => {
 
-  const { products, useSortProductsByNewestDate } = useContext(UserContext);
+  const { products } = useContext(UserContext);
  
   const router = useRouter();
   const [toggleSearch, setToggleSearch] = useState(false);
@@ -16,8 +16,8 @@ const Header = () => {
   const [searchState, setSearchState] = useState("");
   const [userValue, setUserValue] = useState("");
   const [searchedProducts, setSearchedProducts] = useState<ProductType[]>([]);
-
-  const productsNew = products;
+  const [sortedProducts, setSortedProducts] = useState<ProductType[]>([]);
+  const [isSorted, setIsSorted] = useState(false);
 
 
   const handleSearchSubmit = (event: React.FormEvent) => {
@@ -60,6 +60,19 @@ const Header = () => {
       router.push("/login");
   };
 
+  function useSortProductsByNewestDate () {
+      const sortProducts = (products: ProductType[]) => {
+        return products.sort((a, b) => {
+          const dateA = new Date(a.date).getTime();
+          const dateB = new Date(b.date).getTime();
+          return dateB - dateA;
+        });
+      };
+      const sortedProducts = sortProducts(products);
+      setSortedProducts(products);
+      setIsSorted(true);
+      return sortedProducts;
+    };
  
 return (
     <div className="px-4 py-3">
@@ -92,7 +105,7 @@ return (
                     {searchedProducts.length > 0 && (
                       <div className="flex-row justify-content-around">
                       {searchedProducts?.map(product => (
-                          <div className="col-5 mr-2 p-0">
+                          <div key={product.id} className="col-5 mr-2 p-0">
                           <div key={product.id}>
                             <ProductItem {...product} />
                           </div>
@@ -146,7 +159,7 @@ return (
                     {searchedProducts.length > 0 && (
                       <div className="flex-row justify-content-around">
                       {searchedProducts?.map(product => (
-                          <div className="col-5 mr-2 p-0">
+                          <div key={product.id} className="col-5 mr-2 p-0">
                           <div key={product.id}>
                             <ProductItem {...product} />
                           </div>
@@ -162,7 +175,7 @@ return (
             </div>
             <ul className="flex-column justify-content-start text-left mx-3 my-5" style={{paddingBottom: '100%'}}>
               <div className="menu-ul mb-5">
-                <Link href={'/products'}  onClick={handleToggleNav}><li className='contact-text font-italic font-weight-bold text-left mb-3' onClick={() => useSortProductsByNewestDate(productsNew)}><u>Ново</u></li></Link>
+                <Link href={'/products'}  onClick={handleToggleNav}><li className='contact-text font-italic font-weight-bold text-left mb-3' onClick={useSortProductsByNewestDate}><u>Ново</u></li></Link>
                     <li className="dropdown dropdown1">
                       <p className="dropdown-toggle  menu-list w-100 mb-3" role="button" data-toggle="dropdown" aria-expanded="false">
                         Vintage облека
