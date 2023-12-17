@@ -2,15 +2,13 @@ import '../styles/main.css'
 import type { AppProps } from 'next/app'
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import UserContextConstructor, { UserContext } from '../context/UserContext';
-import { useContext } from 'react';
+import UserContextConstructor from '../context/UserContext';
 import { useRouter } from 'next/router';
 
 
 function MyApp({ Component, pageProps }: AppProps) {
 
   const router = useRouter();
-  const { data } = useContext(UserContext);
   const isLoginPage = router.route === '/login';
   const isProfilePage = router.route === '/profile';
   const isRegisterPage = router.route === '/register';
@@ -19,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div>
       <UserContextConstructor>
-           {(!isLoginPage && !isProfilePage && !isRegisterPage && !isOrderFormPage) && <Header products={(data.map((dataItem) => dataItem.products)).flat()} />}
+           {(!isLoginPage && !isProfilePage && !isRegisterPage && !isOrderFormPage) && <Header />}
           <Component {...pageProps} />
            {(!isLoginPage && !isProfilePage && !isRegisterPage && !isOrderFormPage) && <Footer />}
       </UserContextConstructor>

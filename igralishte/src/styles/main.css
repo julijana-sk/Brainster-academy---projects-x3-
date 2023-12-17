@@ -395,17 +395,14 @@ ul li a {
 
 /*[ Modal search ]*/
 .modal-search-header {
-  position: fixed;
-  z-index: 2000;
+  position: absolute;
+  z-index: 999998;
   width: 100%;
-  height: 100%;
-  bottom: 101%;
+  min-height: 440%;
   left: 0;
   background-color: rgba(255, 255, 255, 0.9);
 }
-.show-modal-search {
-  bottom: 0;
-}
+
 .container-search-header {
   width: auto;
   max-width: 100%;
@@ -417,7 +414,6 @@ ul li a {
 .btn-hide-modal-search {
   position: absolute;
   right: 20px;
-  bottom: 0px;
   opacity: 0.8;
 }
 
@@ -503,6 +499,13 @@ ul li a {
 .show-filter:hover:after {
   background-color: #717fe0;
   border-color: #717fe0;
+}
+
+.show-search-results {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: #fff;
 }
 
 /*---------------------------------------------*/

@@ -5,12 +5,10 @@ import Link from "next/link";
 import { ProductType } from "@/types/types";
 import ProductItem from "./ProductItem";
 
-interface Props {
-  products: ProductType[]
-}
-const Header: React.FC<Props> = ({ products }: { products: ProductType[] }) => {
 
-  const { data, useSortProductsByNewestDate } = useContext(UserContext);
+const Header = () => {
+
+  const { data, products, useSortProductsByNewestDate } = useContext(UserContext);
  
   const router = useRouter();
   const [toggleSearch, setToggleSearch] = useState(false);
@@ -19,25 +17,31 @@ const Header: React.FC<Props> = ({ products }: { products: ProductType[] }) => {
   const [userValue, setUserValue] = useState("");
   const [searchedProducts, setSearchedProducts] = useState<ProductType[]>([]);
 
-  const productsNew = (data.map((dataItem) => dataItem.products)).flat();
+  const productsNew = products;
+
 
   const handleSearchSubmit = (event: React.FormEvent) => {
-      event.preventDefault();
-      router.replace({
-        pathname: "/",
-        query: { query: searchState },
-        });
-      const filteredProducts: ProductType[] = products.filter(product =>
-        product.category.toLowerCase().includes(searchState.toLowerCase())
-      );
-      setSearchedProducts(filteredProducts);
-      setSearchState("");
-      setToggleSearch(false);
- }
+    event.preventDefault();
+    router.push({
+      pathname: '/',
+      query: { query: searchState },
+    });
+    const filteredProducts: ProductType[] = products.filter((product) =>
+      product?.subcategory?.includes(searchState.toLowerCase())
+    );
+    setSearchedProducts(filteredProducts);
+    setSearchState('');
+  };
 
   const toggleSearchForm = () => {
-      setToggleSearch(!toggleSearch);
+    setSearchState('');
+    setToggleSearch(!toggleSearch);
   };
+
+  const handleToggleSearch = () => {
+    setToggleSearch(!toggleSearch);
+    router.replace("/");
+  }
 
   const handleToggleNav = () => {
     setToggleNav(!toggleNav);
@@ -72,27 +76,35 @@ return (
             <img src="../pictures/icons/fluent_search-48-regular.png" alt="search icon" />
           </button>
 
-          <div className={`${toggleSearch ? "show-modal-search" : "" } modal-search-header flex-c-m trans-04 js-hide-modal-search pt-3`}>
+          <div className={`${toggleSearch ? "show-modal-search" : "d-none " } modal-search-header flex-c-m trans-04 js-hide-modal-search`}>
             <div className="container-search-header">
               <form className="wrap-search-header flex-w p-l-15 align-items-center" onSubmit={handleSearchSubmit}>
-                <button className="btn-search px-3" type="submit">
+                <button className="btn-search px-3" onClick={handleToggleSearch}>
                   <i className="fas fa-chevron-left fa-1x" style={{color: "lightgrey"}}/>
                 </button>
                 <input className="plh3 p-2" type="search" value={searchState} onChange={event => setSearchState(event.target.value)} name="search" placeholder="Пребарувај..." />
-                <button className="btn-search flex-c-m btn-hide-modal-search trans-04 p-0" onClick={toggleSearchForm}>
+                <button className="btn-search flex-c-m btn-hide-modal-search trans-04 p-0">
                 <img src="../pictures/icons/fluent_search-48-regular.png" alt="search close btn" />
               </button>
               </form>
-              {searchedProducts.length > 0 && (
-                  <div>
-                    {searchedProducts?.map(product => (
-                      <div key={product.id}><ProductItem {...product} /> </div>
-                    ))}
-                  </div>
-              )}
+               <div className="row flex-row justify-content-between mt-5 ml-3">
+                    <div className="col-12 mr-auto ml-auto">
+                    {searchedProducts.length > 0 && (
+                      <div className="flex-row justify-content-around">
+                      {searchedProducts?.map(product => (
+                          <div className="col-5 mr-2 p-0">
+                          <div key={product.id}>
+                            <ProductItem {...product} />
+                          </div>
+                            </div>
+                        ))}
+                        </div>
+                      )}
+                    </div>
+                </div>
             </div>
           </div>
-        </div>
+        
           <div className={toggleNav ? "activeSidenav px-4 py-3" : "sidenav px-4 pt-3" }>
             <div className="container flex-row justify-content-between text-dark pl-2 pr-0">
               <button onClick={handleToggleNav} className="hamburger-btn" >
@@ -100,18 +112,18 @@ return (
                 <p className={toggleNav ? "activeHamburger-top" : "hamburber-top"} />
                 <p className={toggleNav ? "activeHamburger-bottom" : "hamburber-bottom"} />
               </button>
-              <Link href={"/"} className="navbar-brand m-0 text-center"  onClick={handleToggleNav}>
+              <Link href={"/"} className="navbar-brand m-0 text-center" onClick={handleToggleNav}>
               <img src="../pictures/icons/Logo Igralishte final version 1.png" alt="logo"/>
               </Link>
               <button className="btn-search p-0" onClick={toggleSearchForm}>
                 <img src="../pictures/icons/fluent_search-48-regular.png" alt="search icon" />
               </button>
 
-              <div className={`${toggleSearch ? "show-modal-search" : "" } modal-search-header flex-c-m trans-04 js-hide-modal-search pt-3`}>
+              <div className={`${toggleSearch ? "show-modal-search" : "d-none" } modal-search-header flex-c-m trans-04 js-hide-modal-search`}>
                 <div className="container-search-header">
                   <form className="wrap-search-header flex-w p-l-15 align-items-center" onSubmit={handleSearchSubmit}>
-                    <button className="btn-search px-3" type="submit">
-                      <i className="fas fa-chevron-left fa-1x" style={{color: "lightgrey"}}/>
+                    <button className="btn-search px-3" onClick={handleToggleSearch}>
+                      <i className="fas fa-chevron-left fa-1x" style={{color: "lightgrey"}} />
                     </button>
                     <input className="plh3 p-2" type="text" value={searchState} 
                             onChange={(event) => {setSearchState(event.target.value);
@@ -124,16 +136,33 @@ return (
                             });
                           }}
                           name="search" placeholder="Пребарувај..." />
-                    <button className="btn-search flex-c-m btn-hide-modal-search trans-04 p-0" onClick={toggleSearchForm}>
+                    <button className="btn-search flex-c-m btn-hide-modal-search trans-04 p-0">
                     <img src="../pictures/icons/fluent_search-48-regular.png" alt="search close btn" />
                   </button>
                   </form>
+                  <div className={`${toggleSearch && searchedProducts.length > 0 ? "show-search-results" : ""} modal-search-header flex-c-m trans-04 js-hide-modal-search`}>
+                  <div className="row flex-row justify-content-between mt-5 ml-3">
+                    <div className="col-12 mr-auto ml-auto">
+                    {searchedProducts.length > 0 && (
+                      <div className="flex-row justify-content-around">
+                      {searchedProducts?.map(product => (
+                          <div className="col-5 mr-2 p-0">
+                          <div key={product.id}>
+                            <ProductItem {...product} />
+                          </div>
+                            </div>
+                        ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
+               </div>
               </div>
             </div>
             <ul className="flex-column justify-content-start text-left mx-3 my-5" style={{paddingBottom: '100%'}}>
               <div className="menu-ul mb-5">
-                <Link href={'/products'}><li className='contact-text font-italic font-weight-bold text-left mb-3' onClick={() => {useSortProductsByNewestDate(productsNew); handleToggleNav}}><u>Ново</u></li></Link>
+                <Link href={'/products'}  onClick={handleToggleNav}><li className='contact-text font-italic font-weight-bold text-left mb-3' onClick={() => useSortProductsByNewestDate(productsNew)}><u>Ново</u></li></Link>
                     <li className="dropdown dropdown1">
                       <p className="dropdown-toggle  menu-list w-100 mb-3" role="button" data-toggle="dropdown" aria-expanded="false">
                         Vintage облека
@@ -350,6 +379,7 @@ return (
               </ul>
           </div>
         </div>
+    </div>
   );
 };
 

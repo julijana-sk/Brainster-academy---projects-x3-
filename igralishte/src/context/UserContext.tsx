@@ -3,6 +3,7 @@ import { BrandType, DataType, ProductType } from "@/types/types";
 
 interface UserContextType {
   data: DataType[];
+  products: ProductType[];
   brands: BrandType[];
   addToCard: (prod: ProductType) => void;
   useSortProductsByNewestDate: (products: ProductType[]) => void;
@@ -11,6 +12,7 @@ interface UserContextType {
 
 export const UserContext = createContext<UserContextType>({
   data: [],
+  products: [],
   brands: [],
   addToCard: () => {},
   useSortProductsByNewestDate: () => {},
@@ -34,7 +36,15 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
       fetch("http://localhost:5001/")
         .then((res) => res.json())
         .then((data) => {
-          setProducts(data);
+          setData(data);
+        });
+    }, []);
+
+    useEffect(() => {
+      fetch("http://localhost:5001/products")
+        .then((res) => res.json())
+        .then((products) => {
+          setProducts(products);
         });
     }, []);
 
@@ -42,7 +52,7 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
       fetch("http://localhost:5001/brands")
         .then((res) => res.json())
         .then((brands) => {
-          setData(brands);
+          setBrands(brands);
         });
     }, []);
 
@@ -92,6 +102,7 @@ const UserContextConstructor: React.FC<Props> = ({ children }) => {
   return (
       <UserContext.Provider value={{ 
           data,
+          products,
           brands,
           addToCard,
           useSortProductsByNewestDate,
