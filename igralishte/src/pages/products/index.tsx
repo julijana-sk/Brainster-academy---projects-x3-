@@ -57,7 +57,7 @@ const ProductPage: NextPage<Props> = ({  searchedProductsData }) => {
     }, []);
 
 
-    const onClickSortByNewestDate = () => {
+    function onClickSortByNewestDate () {
         setIsSorted(false);
         useSortProductsByNewestDate(searchedProductsData);
       };
